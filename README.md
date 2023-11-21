@@ -1,75 +1,34 @@
-# Nuxt 3 Minimal Starter
+# learn.nuxt.com
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+> [!IMPORTANT]
+> This project is unfinished and heavily work in progress.
 
-## Setup
+An interactive Nuxt playground for learning Nuxt. Powered by [Nuxt](https://nuxt.com) and [WebContainers](https://webcontainers.io/).
 
-Make sure to install the dependencies:
+Inspired by [learn.svelte.dev](https://learn.svelte.dev).
+
+## Live Streaming
+
+Anthony Fu is doing regular live streaming on building this project from scratch. You can watch the recordings or join the live stream on [YouTube](https://www.youtube.com/playlist?list=PL4ETc_mXFfxUGiY852jH3ctljnI2e9Rax).
+
+## Development
+
+To run this project locally, you need to have [Node.js v20.0+](https://nodejs.org/en/) and [pnpm](https://pnpm.io/) installed.
+
+After cloning the repo, run the following commands to install dependencies:
 
 ```bash
-# npm
-npm install
-
-# pnpm
 pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+Then, run the following command to start the development server:
 
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
+pnpm dev
 ```
 
-## Production
+The development server will be running at [http://localhost:3000](http://localhost:3000).
 
-Build the application for production:
+## License
 
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+[MIT](./LICENSE)
