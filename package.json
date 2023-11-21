@@ -10,7 +10,11 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@nuxt/content": "^2.9.0",
     "@nuxt/devtools": "latest",
+    "@nuxtjs/color-mode": "^3.3.2",
+    "@unocss/nuxt": "^0.57.7",
+    "@vueuse/nuxt": "^10.6.1",
     "nuxt": "^3.8.2",
     "vue": "^3.3.8",
     "vue-router": "^4.2.5"
