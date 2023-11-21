@@ -8,6 +8,12 @@ devDependencies:
   '@antfu/eslint-config':
     specifier: ^2.0.0
     version: 2.0.0(eslint@8.54.0)(typescript@5.3.2)
+  '@iconify-json/logos':
+    specifier: ^1.1.38
+    version: 1.1.38
+  '@iconify/json':
+    specifier: ^2.2.144
+    version: 2.2.144
   '@nuxt/content':
     specifier: ^2.9.0
     version: 2.9.0(nuxt@3.8.2)(vue@3.3.8)
@@ -961,6 +967,19 @@ packages:
 
   /@humanwhocodes/object-schema@2.0.1:
     resolution: {integrity: sha512-dvuCeX5fC9dXgJn9t+X5atfmgQAzUOWqS1254Gh0m6i8wKd10ebXkfNKiRK+1GWi/yTvvLDHpoxLr0xxxeslWw==}
+    dev: true
+
+  /@iconify-json/logos@1.1.38:
+    resolution: {integrity: sha512-26sPSWn/Y3nY4Kx3kbHOPU8zzEFaDMeuStFhDbW2SpLy6grusqTAgf0o4r4irNAPkdI1gPF8kuSyGDKeSPFzZw==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify/json@2.2.144:
+    resolution: {integrity: sha512-R8JfNAFdp+jJqsdK/ANYFj2iTuWlSphtuHg0d0Ja+UVntXhPptDX1jMASEQrCFnUhLgifjQ7UoBa6sYAUvFUgw==}
+    dependencies:
+      '@iconify/types': 2.0.0
+      pathe: 1.1.1
     dev: true
 
   /@iconify/types@2.0.0:
