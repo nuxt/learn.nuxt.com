@@ -11,6 +11,9 @@
     "lint": "eslint .",
     "format": "eslint . --fix"
   },
+  "dependencies": {
+    "@webcontainer/api": "^1.1.8"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^2.0.0",
     "@iconify-json/logos": "^1.1.38",
@@ -25,8 +28,5 @@
     "vue": "^3.3.8",
     "vue-router": "^4.2.5",
     "xterm": "^5.3.0"
-  },
-  "dependencies": {
-    "@webcontainer/api": "^1.1.8"
   }
 }
