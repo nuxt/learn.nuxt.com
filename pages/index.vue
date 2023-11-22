@@ -1,12 +1,8 @@
 <script setup lang="ts">
 const { x, y } = useMouse()
-const color = useColorMode()
 
-function toggleDark() {
-  color.value = color.value === 'dark'
-    ? 'light'
-    : 'dark'
-}
+const color = useColorMode()
+const colorSchemes = ['light', 'dark', 'system']
 </script>
 
 <template>
@@ -16,9 +12,11 @@ function toggleDark() {
       <div class="text-red">
         Hello World {{ x }}, {{ y }}<br>
 
-        <button @click="toggleDark">
-          {{ color.value }}
-        </button>
+        <select v-model="color.preference">
+          <option v-for="scheme in colorSchemes" :key="scheme" :value="scheme">
+            {{ scheme }}
+          </option>
+        </select>
       </div>
     </div>
     <ThePlayground />
