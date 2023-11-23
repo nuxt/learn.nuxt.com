@@ -4,6 +4,7 @@
     "dev": "nuxt dev"
   },
   "dependencies": {
-    "nuxt": "latest"
+    "nuxt": "latest",
+    "vue": "^3.3.8"
   }
 }

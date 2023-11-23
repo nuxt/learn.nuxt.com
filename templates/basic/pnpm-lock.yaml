@@ -11,6 +11,9 @@ importers:
       nuxt:
         specifier: latest
         version: 3.8.2(vite@5.0.2)
+      vue:
+        specifier: ^3.3.8
+        version: 3.3.8
 
 packages:
 
