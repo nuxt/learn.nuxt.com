@@ -77,6 +77,6 @@ onMounted(startDevServer)
       <div i-svg-spinners-90-ring-with-bg />
       {{ status }}ing...
     </div>
-    <TerminalOutput :stream="stream" h="33%" />
+    <TerminalOutput :stream="stream" class="min-h-0" />
   </div>
 </template>
