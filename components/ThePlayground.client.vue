@@ -5,7 +5,6 @@ import { Pane, Splitpanes } from 'splitpanes'
 const iframe = ref<HTMLIFrameElement>()
 
 const isDragging = usePanelDragging()
-
 const panelSizeEditor = usePanelCookie('nuxt-playground-panel-editor', 30)
 const panelSizeFrame = usePanelCookie('nuxt-playground-panel-frame', 30)
 
