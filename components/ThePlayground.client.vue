@@ -33,7 +33,8 @@ async function startDevServer() {
   const wc = await useWebContainer()
 
   wc.on('server-ready', (port, url) => {
-    // prevent reloading iframe when nuxt server starting other target ports
+    // Nuxt listen to multiple ports, and 'server-ready' is emitted for each of them
+    // We need the main one
     if (port === 3000) {
       status.value = 'ready'
       wcUrl.value = url
