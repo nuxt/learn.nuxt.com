@@ -3,11 +3,12 @@
 import { Pane, Splitpanes } from 'splitpanes'
 
 const isDragging = usePanelDragging()
-const leftSize = useLocalStorage('nuxt-playground-panel-left', 30)
+const leftSize = usePanelCookie('nuxt-playground-panel-left', 30)
 
 function start() {
   isDragging.value = true
 }
+
 function end(e: { size: number }[]) {
   isDragging.value = false
   leftSize.value = e[0].size
