@@ -1,11 +1,43 @@
 .splitpanes--vertical > .splitpanes__splitter {
-  width: 4px;
-  --uno: border-x border-base;
+  width: 16px;
+  margin: 0 -8px;
+  background: transparent;
+  z-index: 10;
+  position: relative;
+  transition: background 0.2s ease;
+}
+.splitpanes--vertical > .splitpanes__splitter:hover {
+  background: #8882;
+}
+.splitpanes--vertical > .splitpanes__splitter:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 100%;
+  --uno: border-r border-base;
 }
 
-.splitpanes--horizontal>.splitpanes__splitter {
-  height: 4px;
-  --uno: border-y border-base;
+.splitpanes--horizontal > .splitpanes__splitter {
+  height: 16px;
+  margin: -8px 0;
+  background: transparent;
+  z-index: 10;
+  position: relative;
+  transition: background 0.2s ease;
+}
+.splitpanes--horizontal > .splitpanes__splitter:hover {
+  background: #8882;
+}
+.splitpanes--horizontal > .splitpanes__splitter:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  --uno: border-b border-base;
 }
 
 .splitpanes--vertical .splitpanes__pane {
