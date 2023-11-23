@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { FileSystemTree } from '@webcontainer/api'
+// @ts-expect-error missing type
+import { Pane, Splitpanes } from 'splitpanes'
 
 const iframe = ref<HTMLIFrameElement>()
 const wcUrl = ref<string>()
@@ -8,6 +9,10 @@ type Status = 'init' | 'mount' | 'install' | 'start' | 'ready' | 'error'
 
 const status = ref<Status>('init')
 const error = shallowRef<{ message: string }>()
+const isDragging = usePanelDragging()
+
+const panelSizeEditor = useLocalStorage('nuxt-playground-panel-editor', 30)
+const panelSizeFrame = useLocalStorage('nuxt-playground-panel-frame', 30)
 
 const stream = ref<ReadableStream>()
 
@@ -66,10 +71,13 @@ async function startDevServer() {
   }
 }
 
-function sendMessage() {
-  if (!iframe.value)
-    return
-  iframe.value.contentWindow!.postMessage('hello', '*')
+function startDragging() {
+  isDragging.value = true
+}
+function endDragging(e: { size: number }[]) {
+  isDragging.value = false
+  panelSizeEditor.value = e[0].size
+  panelSizeFrame.value = e[1].size
 }
 
 watchEffect(() => {
@@ -81,15 +89,27 @@ onMounted(startDevServer)
 </script>
 
 <template>
-  <div max-h-full w-full grid="~ rows-[2fr_1fr]" of-hidden relative>
-    <iframe v-show="status === 'ready'" ref="iframe" w-full h-full />
-    <div v-if="status !== 'ready'" flex="~ col items-center justify-center" capitalize text-lg>
-      <div i-svg-spinners-90-ring-with-bg />
-      {{ status }}ing...
-    </div>
-    <TerminalOutput :stream="stream" class="min-h-0" />
-    <button @click="sendMessage">
-      send
-    </button>
-  </div>
+  <Splitpanes
+    max-h-full w-full of-hidden relative horizontal
+    @resize="startDragging" @resized="endDragging"
+  >
+    <Pane :size="panelSizeEditor" min-size="10">
+      [This is the editor]
+    </Pane>
+    <Pane :size="panelSizeFrame" min-size="10">
+      <iframe
+        v-show="status === 'ready'" ref="iframe" w-full h-full
+        :class="{
+          'pointer-events-none': isDragging,
+        }"
+      />
+      <div v-if="status !== 'ready'" flex="~ col items-center justify-center" h-full capitalize text-lg>
+        <div i-svg-spinners-90-ring-with-bg />
+        {{ status }}ing...
+      </div>
+    </Pane>
+    <Pane>
+      <TerminalOutput :stream="stream" class="min-h-0" />
+    </Pane>
+  </Splitpanes>
 </template>
