@@ -1,11 +1,21 @@
 .splitpanes--vertical > .splitpanes__splitter {
   width: 4px;
   --uno: border-x border-base;
+  transition: border-color 0.05s ease-in-out;
+
+  &:hover {
+    --uno: border-active;
+  }
 }
 
 .splitpanes--horizontal>.splitpanes__splitter {
   height: 4px;
   --uno: border-y border-base;
+  transition: border-color 0.05s ease-in-out;
+
+  &:hover {
+    --uno: border-active;
+  }
 }
 
 .splitpanes--vertical .splitpanes__pane {
