@@ -1,5 +1,7 @@
 <script setup>
 import '@unocss/reset/tailwind.css'
+import 'splitpanes/dist/splitpanes.css'
+import './styles/overrides.css'
 </script>
 
 <template>

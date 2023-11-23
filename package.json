@@ -12,7 +12,8 @@
     "format": "eslint . --fix"
   },
   "dependencies": {
-    "@webcontainer/api": "^1.1.8"
+    "@webcontainer/api": "^1.1.8",
+    "splitpanes": "^3.1.5"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.0.0",

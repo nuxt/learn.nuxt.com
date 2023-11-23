@@ -1,12 +1,28 @@
 <script setup lang="ts">
+// @ts-expect-error missing type
+import { Pane, Splitpanes } from 'splitpanes'
 
+const isDragging = usePanelDragging()
+const leftSize = useLocalStorage('nuxt-playground-panel-left', 30)
+
+function start() {
+  isDragging.value = true
+}
+function end(e: { size: number }[]) {
+  isDragging.value = false
+  leftSize.value = e[0].size
+}
 </script>
 
 <template>
-  <div class="grid grid-cols-[1fr_2fr] h-full of-hidden max-h-full">
-    <article class="border-r border-base p4 prose">
-      <ContentDoc />
-    </article>
-    <ThePlayground />
-  </div>
+  <Splitpanes class="h-full of-hidden" @resize="start" @resized="end">
+    <Pane :size="leftSize" min-size="10">
+      <article class="p4 prose">
+        <ContentDoc />
+      </article>
+    </Pane>
+    <Pane>
+      <ThePlayground />
+    </Pane>
+  </Splitpanes>
 </template>

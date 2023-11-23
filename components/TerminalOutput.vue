@@ -3,7 +3,6 @@ import 'xterm/css/xterm.css'
 import { Terminal } from 'xterm'
 import { FitAddon } from 'xterm-addon-fit'
 
-
 const props = defineProps<{
   stream?: ReadableStream
 }>()
@@ -31,6 +30,8 @@ watch(
   { flush: 'sync', immediate: true },
 )
 
+useResizeObserver(root, useDebounceFn(() => fitAddon.fit(), 200))
+
 onMounted(() => {
   terminal.open(root.value!)
   fitAddon.fit()
@@ -38,5 +39,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <div ref="root" />
+  <div ref="root" class="w-full h-full" />
 </template>
