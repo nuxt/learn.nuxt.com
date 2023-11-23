@@ -11,3 +11,7 @@
 .splitpanes--vertical .splitpanes__pane {
   transition: none;
 }
+
+.terminal.xterm {
+  height: 100%;
+} 
