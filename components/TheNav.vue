@@ -3,6 +3,7 @@
     <div i-logos-nuxt-icon text-4xl />
     <span text-2xl>learn.nuxt.com</span>
     <div flex-auto />
+    <ColorSchemeToggle />
     <NuxtLink
       p2 rounded
       hover="bg-active"

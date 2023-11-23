@@ -1,8 +1,5 @@
 <script setup lang="ts">
 const { x, y } = useMouse()
-
-const color = useColorMode()
-const colorSchemes = ['light', 'dark', 'system']
 </script>
 
 <template>
@@ -11,12 +8,6 @@ const colorSchemes = ['light', 'dark', 'system']
       Content
       <div class="text-red">
         Hello World {{ x }}, {{ y }}<br>
-
-        <select v-model="color.preference">
-          <option v-for="scheme in colorSchemes" :key="scheme" :value="scheme">
-            {{ scheme }}
-          </option>
-        </select>
       </div>
     </div>
     <ThePlayground />
