@@ -9,6 +9,6 @@ if (process.client) {
 
 <template>
   <div>
-    Hello
+    <NuxtWelcome />
   </div>
 </template>

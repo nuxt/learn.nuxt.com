@@ -29,7 +29,10 @@ async function startDevServer() {
 
   wc.on('server-ready', (port, url) => {
     status.value = 'ready'
-    wcUrl.value = url
+
+    // FIX: check to use first server ready, there is error after Vite server warmed up => there a new url which is not load css
+    if (!wcUrl.value)
+      wcUrl.value = url
   })
 
   wc.on('error', (err) => {
@@ -72,17 +75,12 @@ function sendMessage() {
   iframe.value.contentWindow!.postMessage('hello', '*')
 }
 
-watchEffect(() => {
-  if (iframe.value && wcUrl.value)
-    iframe.value.src = wcUrl.value
-})
-
 onMounted(startDevServer)
 </script>
 
 <template>
   <div max-h-full w-full grid="~ rows-[2fr_1fr]" of-hidden relative>
-    <iframe v-show="status === 'ready'" ref="iframe" w-full h-full />
+    <iframe v-if="!!wcUrl" :src="wcUrl" class="w-full h-full" allow="geolocation; microphone; camera; payment; autoplay; serial; cross-origin-isolated" />
     <div v-if="status !== 'ready'" flex="~ col items-center justify-center" capitalize text-lg>
       <div i-svg-spinners-90-ring-with-bg />
       {{ status }}ing...
