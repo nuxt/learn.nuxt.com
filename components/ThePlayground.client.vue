@@ -36,9 +36,13 @@ onMounted(async () => {
     @resize="startDragging" @resized="endDragging"
   >
     <Pane :size="panelSizeEditor" min-size="10">
-      [This is the editor]
+      <PanelEditor />
     </Pane>
     <Pane :size="panelSizeFrame" min-size="10">
+      <div flex="~ gap-2 items-center" px4 py2 border="b base dashed" bg-faded>
+        <div i-ph-globe-duotone />
+        <span text-sm>Preview</span>
+      </div>
       <iframe
         v-if="!!webcontainerUrl"
         ref="iframe"
@@ -53,7 +57,7 @@ onMounted(async () => {
       </div>
     </Pane>
     <Pane>
-      <TerminalOutput :stream="stream" />
+      <PanelTerminal :stream="stream" />
     </Pane>
   </Splitpanes>
 </template>

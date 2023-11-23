@@ -8,7 +8,10 @@ const props = defineProps<{
 }>()
 
 const root = ref<HTMLDivElement>()
-const terminal = new Terminal()
+const terminal = new Terminal({
+  customGlyphs: true,
+  lineHeight: 0.9,
+})
 const fitAddon = new FitAddon()
 terminal.loadAddon(fitAddon)
 
@@ -34,10 +37,17 @@ useResizeObserver(root, useDebounceFn(() => fitAddon.fit(), 200))
 
 onMounted(() => {
   terminal.open(root.value!)
+  terminal.write('\n')
   fitAddon.fit()
 })
 </script>
 
 <template>
-  <div ref="root" class="w-full h-full" />
+  <div h-full grid="~ rows-[min-content_1fr]">
+    <div flex="~ gap-2 items-center" px4 py2 border="b base dashed" bg-faded>
+      <div i-ph-terminal-window-duotone />
+      <span text-sm>Terminal</span>
+    </div>
+    <div ref="root" class="w-full h-full" />
+  </div>
 </template>
