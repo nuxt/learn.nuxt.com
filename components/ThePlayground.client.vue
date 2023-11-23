@@ -21,9 +21,7 @@ async function startDevServer() {
     '../templates/basic/',
     import.meta.glob([
       '../templates/basic/**/*.*',
-      '../templates/basic/**/.*',
-      '!../.DS_Store',
-      '!**/node_modules/**',
+      '../templates/basic/**/.npmrc',
     ], {
       as: 'raw',
       eager: true,
@@ -107,7 +105,7 @@ onMounted(startDevServer)
         ref="iframe"
         :src="wcUrl"
         :class="{ 'pointer-events-none': isDragging }"
-        w-full h-full
+        w-full h-full bg-transparent
         allow="geolocation; microphone; camera; payment; autoplay; serial; cross-origin-isolated"
       />
       <div v-if="status !== 'ready'" flex="~ col items-center justify-center" h-full capitalize text-lg>

@@ -1,7 +1,9 @@
 {
   "private": true,
+  "packageManager": "pnpm@8.10.5",
   "scripts": {
-    "dev": "nuxt dev"
+    "dev": "nuxt dev",
+    "prepare": "nuxt prepare"
   },
   "devDependencies": {
     "nuxt": "latest",
