@@ -9,10 +9,10 @@ type Status = 'init' | 'mount' | 'install' | 'start' | 'ready' | 'error'
 
 const status = ref<Status>('init')
 const error = shallowRef<{ message: string }>()
-const isDragging = usePanelDragging()
 
-const panelSizeEditor = useLocalStorage('nuxt-playground-panel-editor', 30)
-const panelSizeFrame = useLocalStorage('nuxt-playground-panel-frame', 30)
+const isDragging = usePanelDragging()
+const panelSizeEditor = usePanelCookie('nuxt-playground-panel-editor', 30)
+const panelSizeFrame = usePanelCookie('nuxt-playground-panel-frame', 30)
 
 const stream = ref<ReadableStream>()
 
@@ -86,11 +86,6 @@ function endDragging(e: { size: number }[]) {
   panelSizeFrame.value = e[1].size
 }
 
-watchEffect(() => {
-  if (iframe.value && wcUrl.value)
-    iframe.value.src = wcUrl.value
-})
-
 onMounted(startDevServer)
 </script>
 
@@ -108,10 +103,12 @@ onMounted(startDevServer)
         <span text-sm>Preview</span>
       </div>
       <iframe
-        v-show="status === 'ready'" ref="iframe" w-full h-full
-        :class="{
-          'pointer-events-none': isDragging,
-        }"
+        v-if="wcUrl"
+        ref="iframe"
+        :src="wcUrl"
+        :class="{ 'pointer-events-none': isDragging }"
+        w-full h-full
+        allow="geolocation; microphone; camera; payment; autoplay; serial; cross-origin-isolated"
       />
       <div v-if="status !== 'ready'" flex="~ col items-center justify-center" h-full capitalize text-lg>
         <div i-svg-spinners-90-ring-with-bg />
