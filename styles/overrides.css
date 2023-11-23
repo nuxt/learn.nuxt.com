@@ -1,11 +1,11 @@
 .splitpanes--vertical > .splitpanes__splitter {
   width: 4px;
-  --uno: border border-base;
+  --uno: border-x border-base;
 }
 
 .splitpanes--horizontal>.splitpanes__splitter {
   height: 4px;
-  --uno: border border-base;
+  --uno: border-y border-base;
 }
 
 .splitpanes--vertical .splitpanes__pane {
