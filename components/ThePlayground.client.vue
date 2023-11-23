@@ -109,7 +109,7 @@ onMounted(startDevServer)
       </div>
     </Pane>
     <Pane>
-      <TerminalOutput :stream="stream" class="min-h-0" />
+      <TerminalOutput :stream="stream" />
     </Pane>
   </Splitpanes>
 </template>
