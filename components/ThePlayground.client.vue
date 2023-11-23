@@ -33,8 +33,11 @@ async function startDevServer() {
   const wc = await useWebContainer()
 
   wc.on('server-ready', (port, url) => {
-    status.value = 'ready'
-    wcUrl.value = url
+    // XXX: This is a hack to avoid the iframe to be reloaded when the nuxt server restarts
+    if (status.value !== 'ready') {
+      status.value = 'ready'
+      wcUrl.value = url
+    }
   })
 
   wc.on('error', (err) => {
