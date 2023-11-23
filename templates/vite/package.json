@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "vite dev"
+  },
+  "dependencies": {
+    "vite": "latest"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "nitro dev"
+  },
+  "dependencies": {
+    "nitropack": "latest"
+  }
+}
