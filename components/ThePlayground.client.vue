@@ -86,11 +86,6 @@ function endDragging(e: { size: number }[]) {
   panelSizeFrame.value = e[1].size
 }
 
-watchEffect(() => {
-  if (iframe.value && wcUrl.value)
-    iframe.value.src = wcUrl.value
-})
-
 onMounted(startDevServer)
 </script>
 
@@ -104,10 +99,12 @@ onMounted(startDevServer)
     </Pane>
     <Pane :size="panelSizeFrame" min-size="10">
       <iframe
-        v-show="status === 'ready'" ref="iframe" w-full h-full
-        :class="{
-          'pointer-events-none': isDragging,
-        }"
+        v-if="wcUrl"
+        ref="iframe"
+        :src="wcUrl"
+        :class="{ 'pointer-events-none': isDragging }"
+        w-full h-full
+        allow="geolocation; microphone; camera; payment; autoplay; serial; cross-origin-isolated"
       />
       <div v-if="status !== 'ready'" flex="~ col items-center justify-center" h-full capitalize text-lg>
         <div i-svg-spinners-90-ring-with-bg />
