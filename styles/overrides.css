@@ -14,4 +14,9 @@
 
 .terminal.xterm {
   height: 100%;
-} 
+  padding: 0 1.5em;
+}
+
+.terminal.xterm .xterm-rows {
+  --uno: font-mono;
+}

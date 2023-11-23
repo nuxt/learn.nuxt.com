@@ -14,6 +14,13 @@ export default defineConfig({
     'bg-active': 'bg-gray:10',
     'bg-base': 'bg-white dark:bg-[#020420]',
   },
+  theme: {
+    colors: {
+      primary: {
+        DEFAULT: '#00DC82',
+      },
+    },
+  },
   presets: [
     presetUno(),
     presetIcons(),

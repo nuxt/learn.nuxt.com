@@ -17,9 +17,7 @@ function end(e: { size: number }[]) {
 <template>
   <Splitpanes class="h-full of-hidden" @resize="start" @resized="end">
     <Pane :size="leftSize" min-size="10">
-      <article class="p4 prose">
-        <ContentDoc />
-      </article>
+      <PanelGuide />
     </Pane>
     <Pane>
       <ThePlayground />

@@ -8,7 +8,10 @@ const props = defineProps<{
 }>()
 
 const root = ref<HTMLDivElement>()
-const terminal = new Terminal()
+const terminal = new Terminal({
+  customGlyphs: true,
+  lineHeight: 0.9,
+})
 const fitAddon = new FitAddon()
 terminal.loadAddon(fitAddon)
 
@@ -34,6 +37,7 @@ useResizeObserver(root, useDebounceFn(() => fitAddon.fit(), 200))
 
 onMounted(() => {
   terminal.open(root.value!)
+  terminal.write('\n')
   fitAddon.fit()
 })
 </script>
