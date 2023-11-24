@@ -6,8 +6,6 @@
     "prepare": "nuxt prepare"
   },
   "devDependencies": {
-    "@nuxtjs/color-mode": "^3.3.2",
-    "@unocss/nuxt": "^0.57.7",
     "nuxt": "latest",
     "vue": "^3.3.8"
   }
