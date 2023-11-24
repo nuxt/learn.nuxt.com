@@ -1,12 +1,16 @@
 <script setup lang="ts">
+const isDragging = usePanelDragging()
+const playground = useGlobalPlayground()
+
+playground.value = createPlayground()
+
 const {
   mount,
   previewLocation,
   previewUrl,
   status,
-} = usePlayground()
+} = playground.value
 
-const isDragging = usePanelDragging()
 const iframe = ref<HTMLIFrameElement>()
 const inputUrl = ref<string>('')
 

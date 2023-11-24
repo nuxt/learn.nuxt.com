@@ -8,7 +8,8 @@ So that we can discuss about the directions and plans, to avoid wasted efforts. 
 import { Pane, Splitpanes } from 'splitpanes'
 
 const isDragging = usePanelDragging()
-const stream = useTerminalStream()
+const playground = useGlobalPlayground()
+
 const panelSizeEditor = usePanelCookie('nuxt-playground-panel-editor', 30)
 const panelSizeFrame = usePanelCookie('nuxt-playground-panel-frame', 30)
 const panelSizeGuide = usePanelCookie('nuxt-playground-panel-guide', 30)
@@ -45,13 +46,13 @@ function endDraggingHorizontal(e: { size: number }[]) {
         @resized="endDraggingHorizontal"
       >
         <Pane :size="panelSizeEditor" min-size="10">
-          <PanelEditor />
+          <PanelEditor :files="playground?.files" />
         </Pane>
         <Pane :size="panelSizeFrame" min-size="10">
           <PanelPreview />
         </Pane>
         <Pane :size="100 - panelSizeEditor - panelSizeFrame">
-          <PanelTerminal :stream="stream" />
+          <PanelTerminal :stream="playground?.stream?.value" />
         </Pane>
       </Splitpanes>
     </Pane>
