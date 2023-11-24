@@ -33,7 +33,7 @@ function endDraggingHorizontal(e: { size: number }[]) {
     @resized="endDraggingVertical"
   >
     <Pane :size="ui.panelDocs" min-size="10">
-      <PanelGuide />
+      <PanelDocs />
     </Pane>
     <Pane :size="100 - ui.panelDocs">
       <Splitpanes
