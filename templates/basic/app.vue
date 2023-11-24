@@ -5,7 +5,19 @@ if (process.client) {
     console.log('got message', e)
   })
 
+  const message = useReadPostMessage()
   const route = useRoute()
+
+  watch(message, (newMessage) => {
+    switch (newMessage.type) {
+      case 'update:color-mode':
+        toggleColorModeClass(String(newMessage.value))
+        break
+      default:
+        break
+    }
+  })
+
   watch(
     () => route.fullPath,
     (newFullPath) => {
@@ -20,7 +32,9 @@ if (process.client) {
 </script>
 
 <template>
-  <NuxtPage />
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
 
 <style>
