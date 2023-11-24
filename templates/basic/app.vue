@@ -8,7 +8,5 @@ if (process.client) {
 </script>
 
 <template>
-  <div>
-    Hello
-  </div>
+  <NuxtPage />
 </template>
