@@ -45,6 +45,19 @@ const stop = watch(
     stop()
   },
 )
+function hiddenTerminal() {
+  const panelSizeEditor = usePanelCookie('nuxt-playground-panel-editor', 30)
+  const panelSizeFrame = usePanelCookie('nuxt-playground-panel-frame', 30)
+  const panelSizeTerminal = usePanelCookie('nuxt-playground-panel-terminal', 40)
+  panelSizeTerminal.value = 0
+  panelSizeFrame.value = 100 - panelSizeEditor.value!
+}
+
+onMounted(() => {
+  terminal.open(root.value!)
+  terminal.write('\n')
+  fitAddon.fit()
+})
 </script>
 
 <template>
@@ -52,6 +65,7 @@ const stop = watch(
     <div flex="~ gap-2 items-center" px4 py2 border="b base dashed" bg-faded>
       <div i-ph-terminal-window-duotone />
       <span text-sm>Terminal</span>
+      <div ml-auto i-ep-arrow-down-bold cursor-pointer @click="hiddenTerminal" />
     </div>
     <div ref="root" w-full h-full of-hidden />
   </div>
