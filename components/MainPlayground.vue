@@ -41,13 +41,13 @@ function endDraggingHorizontal(e: { size: number }[]) {
         @resize="startDragging"
         @resized="endDraggingHorizontal"
       >
-        <Pane :size="ui.panelEditor" min-size="10">
+        <Pane :size="ui.panelEditor" min-size="4.5">
           <PanelEditor :files="play?.files" />
         </Pane>
-        <Pane :size="ui.panelDocs" min-size="10">
+        <Pane :size="ui.panelPreview" min-size="4.5">
           <PanelPreview />
         </Pane>
-        <Pane :size="100 - ui.panelEditor - ui.panelDocs">
+        <Pane :size="100 - ui.panelPreview - ui.panelEditor" min-size="4.5" class="hover:cursor-pointer" @click="ui.collapseTerminalPanel()">
           <PanelTerminal :stream="play?.stream" />
         </Pane>
       </Splitpanes>
