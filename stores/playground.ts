@@ -1,38 +1,39 @@
 import { defineStore } from 'pinia'
-import type { File } from '../structures/File'
+import type { ShallowRef, UnwrapNestedRefs } from 'vue'
+import type { WebContainer } from '@webcontainer/api'
+import type { VirtualFile } from '../structures/VirtualFile'
 
 export type PlaygroundStatus = 'init' | 'mount' | 'install' | 'start' | 'ready' | 'error'
 
-export interface PlaygroundState {
-  files: File[]
+export interface PlaygroundStateRaw {
+  files: ShallowRef<VirtualFile[]>
   status: PlaygroundStatus
   error: { message: string } | undefined
   stream: ReadableStream | undefined
-  previewUrl: string
+  webcontainer: ShallowRef<WebContainer | undefined>
+  previewUrl: ComputedRef<string>
   previewLocation: {
     origin: string
     fullPath: string
   }
 }
 
-export const usePlaygroundStore = defineStore<'playground', PlaygroundState>('playground', () => {
-  const status = ref<PlaygroundStatus>('init')
-  const error = shallowRef<{ message: string }>()
-  const stream = ref<ReadableStream | undefined>()
+export type PlaygroundState = UnwrapNestedRefs<PlaygroundStateRaw>
 
-  const previewLocation = ref({
+export const usePlaygroundStore = defineStore('playground', (): PlaygroundStateRaw => {
+  const previewLocation = reactive({
     origin: '',
     fullPath: '',
   })
-  const previewUrl = computed(() => previewLocation.value.origin + previewLocation.value.fullPath)
+  const previewUrl = computed(() => previewLocation.origin + previewLocation.fullPath)
 
-  return reactive({
-    files: shallowRef<File[]>([]),
-    status,
-    error,
-    stream,
+  return {
+    status: 'init',
+    error: undefined,
+    stream: undefined,
+    files: shallowRef([]),
+    webcontainer: shallowRef(undefined),
     previewUrl,
     previewLocation,
-  })
-  // TODO: find a way to type this
-}) as unknown as () => PlaygroundState
+  }
+})

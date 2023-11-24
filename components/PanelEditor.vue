@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import type { File } from '~/structures/File'
+import type { VirtualFile } from '~/structures/VirtualFile'
 
 // TODO: replace with Monaco with a real file tree.
 
 withDefaults(
   defineProps<{
-    files: File[]
+    files: VirtualFile[]
   }>(),
   {
     files: () => [],
   },
 )
 
-const selectedFile = ref<File>()
+const selectedFile = ref<VirtualFile>()
 
 const input = ref<string>()
 
-function selectFile(file: File) {
+function selectFile(file: VirtualFile) {
   selectedFile.value = file
   input.value = file.read()
 }
