@@ -84,6 +84,11 @@ function endDragging(e: { size: number }[]) {
   panelSizeFrame.value = e[1].size
 }
 
+function refreshIframe() {
+  if (wcUrl.value && iframe.value)
+    iframe.value.src = wcUrl.value
+}
+
 onMounted(startDevServer)
 </script>
 
@@ -99,6 +104,10 @@ onMounted(startDevServer)
       <div flex="~ gap-2 items-center" px4 py2 border="b base dashed" bg-faded>
         <div i-ph-globe-duotone />
         <span text-sm>Preview</span>
+        <div flex-auto />
+        <button v-if="wcUrl" class="op-75 hover:op-100" @click="refreshIframe">
+          <div i-ph-arrow-clockwise-duotone />
+        </button>
       </div>
       <iframe
         v-if="wcUrl"
