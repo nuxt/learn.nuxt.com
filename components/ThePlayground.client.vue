@@ -17,7 +17,7 @@ const { iframeLocation, wcUrl } = usePlayground()
 
 // auto update inputUrl when location value changed
 const inputUrl = ref<string>('')
-syncRef(computed(() => iframeLocation.value.fullPath, inputUrl), { direction: 'ltr' })
+syncRef(computed(() => iframeLocation.value.fullPath), inputUrl, { direction: 'ltr' })
 
 const stream = ref<ReadableStream>()
 
