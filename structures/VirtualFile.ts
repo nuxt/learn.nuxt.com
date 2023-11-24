@@ -1,6 +1,6 @@
 import type { FileNode, WebContainer } from '@webcontainer/api'
 
-export class File {
+export class VirtualFile {
   constructor(
     public readonly filepath: string,
     private _content: string,

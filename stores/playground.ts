@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia'
-import type { File } from '../structures/File'
+import type { VirtualFile } from '../structures/VirtualFile'
 
 export type PlaygroundStatus = 'init' | 'mount' | 'install' | 'start' | 'ready' | 'error'
 
 export interface PlaygroundState {
-  files: File[]
+  files: VirtualFile[]
   status: PlaygroundStatus
   error: { message: string } | undefined
   stream: ReadableStream | undefined
@@ -27,7 +27,7 @@ export const usePlaygroundStore = defineStore<'playground', PlaygroundState>('pl
   const previewUrl = computed(() => previewLocation.value.origin + previewLocation.value.fullPath)
 
   return reactive({
-    files: shallowRef<File[]>([]),
+    files: shallowRef<VirtualFile[]>([]),
     status,
     error,
     stream,

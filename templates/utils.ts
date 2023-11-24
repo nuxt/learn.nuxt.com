@@ -1,8 +1,8 @@
 import type { FileSystemTree } from '@webcontainer/api'
-import type { File } from '../structures/File'
+import type { VirtualFile } from '../structures/VirtualFile'
 
 export function filesToWebContainerFs(
-  files: File[],
+  files: VirtualFile[],
 ) {
   const tree: FileSystemTree = {}
 
