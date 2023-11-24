@@ -34,11 +34,17 @@ watch(
 
 useResizeObserver(root, useDebounceFn(() => fitAddon.fit(), 200))
 
-onMounted(() => {
-  terminal.open(root.value!)
-  terminal.write('\n')
-  fitAddon.fit()
-})
+const stop = watch(
+  () => root.value,
+  (el) => {
+    if (!el)
+      return
+    terminal.open(el)
+    terminal.write('\n')
+    fitAddon.fit()
+    stop()
+  },
+)
 </script>
 
 <template>

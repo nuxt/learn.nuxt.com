@@ -38,6 +38,16 @@ pnpm dev
 
 The development server will be running at [http://localhost:3000](http://localhost:3000).
 
+## Todolist
+
+- [ ] A basic editor
+- [ ] Refactor logic from Vue SFC to composables
+- [ ] Refactor to add Pinia
+- [ ] Monaco editor
+- [ ] Frame-to-parent communication
+- [ ] Sync the basic style
+- [ ] Buttons to restart server
+
 ## License
 
 [MIT](./LICENSE)
