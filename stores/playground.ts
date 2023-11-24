@@ -26,13 +26,13 @@ export const usePlaygroundStore = defineStore<'playground', PlaygroundState>('pl
   })
   const previewUrl = computed(() => previewLocation.value.origin + previewLocation.value.fullPath)
 
-  return reactive({
+  return {
     files: shallowRef<File[]>([]),
     status,
     error,
     stream,
     previewUrl,
     previewLocation,
-  })
+  }
   // TODO: find a way to type this
 }) as unknown as () => PlaygroundState
