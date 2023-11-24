@@ -1,0 +1,3 @@
+<template>
+  <MainPlayground />
+</template>
