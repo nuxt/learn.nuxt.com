@@ -126,16 +126,13 @@ onMounted(startDevServer)
         </div>
         <div flex px-2 py1.5>
           <div
-            flex="~ items-center justify-center" mx-auto w-full max-w-100 bg-faded rounded text-sm border="base 1 hover:gray-500/30"
+            flex="~ items-center justify-center" mx-auto w-full px2 max-w-100 bg-faded rounded text-sm border="base 1 hover:gray-500/30"
             :class="{
               'pointer-events-none': !wcUrl,
             }"
           >
-            <div flex="~ items-center justify-end">
-              <div v-if="wcUrl" mx1 i-ph-lock-simple-duotone text-green text-sm />
-            </div>
             <form w-full @submit.prevent="navigate">
-              <input v-model="inputUrl" w-full type="text" bg-transparent text-center flex-1 focus:outline-none>
+              <input v-model="inputUrl" w-full type="text" bg-transparent flex-1 focus:outline-none>
             </form>
             <div flex="~ items-center justify-end">
               <button v-if="wcUrl" mx1 op-75 hover:op-100 @click="refreshIframe">
