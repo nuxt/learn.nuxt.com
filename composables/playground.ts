@@ -4,6 +4,8 @@ export function usePlayground() {
     fullPath: '',
   })
 
+  const wcUrl = computed(() => location.value.origin + location.value.fullPath)
+
   window.addEventListener('message', (event) => {
     if (event.origin !== location.value.origin)
       return
@@ -19,5 +21,5 @@ export function usePlayground() {
     }
   })
 
-  return { location }
+  return { wcUrl, location }
 }

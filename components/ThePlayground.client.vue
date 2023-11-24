@@ -3,7 +3,6 @@
 import { Pane, Splitpanes } from 'splitpanes'
 
 const iframe = ref<HTMLIFrameElement>()
-const wcUrl = ref<string>()
 
 type Status = 'init' | 'mount' | 'install' | 'start' | 'ready' | 'error'
 
@@ -14,7 +13,11 @@ const isDragging = usePanelDragging()
 const panelSizeEditor = usePanelCookie('nuxt-playground-panel-editor', 30)
 const panelSizeFrame = usePanelCookie('nuxt-playground-panel-frame', 30)
 
-const { location } = usePlayground()
+const { location, wcUrl } = usePlayground()
+
+// auto update inputUrl when location value changed
+const inputUrl = ref<string>('')
+syncRef(inputUrl, computed(() => location.value.fullPath), { direction: 'rtl' })
 
 const stream = ref<ReadableStream>()
 
@@ -43,7 +46,6 @@ async function startDevServer() {
         origin: url,
         fullPath: '/',
       }
-      wcUrl.value = url
     }
   })
 
@@ -91,8 +93,18 @@ function endDragging(e: { size: number }[]) {
 }
 
 function refreshIframe() {
-  if (wcUrl.value && iframe.value)
+  if (wcUrl.value && iframe.value) {
     iframe.value.src = wcUrl.value
+    inputUrl.value = location.value.fullPath
+  }
+}
+
+function navigate() {
+  location.value.fullPath = inputUrl.value
+
+  const activeElement = document.activeElement
+  if (activeElement instanceof HTMLElement)
+    activeElement.blur()
 }
 
 onMounted(startDevServer)
@@ -113,13 +125,18 @@ onMounted(startDevServer)
           <span text-sm>Preview</span>
         </div>
         <div flex px-2 py1.5>
-          <div flex="~ items-center justify-center" mx-auto w-full max-w-100 text-center bg-faded rounded text-sm border="base 1">
+          <div
+            flex="~ items-center justify-center" mx-auto w-full max-w-100 bg-faded rounded text-sm border="base 1 hover:gray-500/30"
+            :class="{
+              'pointer-events-none': !wcUrl,
+            }"
+          >
             <div flex="~ items-center justify-end">
               <div v-if="wcUrl" mx1 i-ph-lock-simple-duotone text-green text-sm />
             </div>
-            <div flex-1>
-              {{ location.fullPath }}
-            </div>
+            <form w-full @submit.prevent="navigate">
+              <input v-model="inputUrl" w-full type="text" bg-transparent text-center flex-1 focus:outline-none>
+            </form>
             <div flex="~ items-center justify-end">
               <button v-if="wcUrl" mx1 op-75 hover:op-100 @click="refreshIframe">
                 <div i-ph-arrow-clockwise-duotone text-sm />
