@@ -1,31 +1,22 @@
 <script setup lang="ts">
-const isDragging = usePanelDragging()
-const playground = useGlobalPlayground()
-
-playground.value = createPlayground()
-
-const {
-  mount,
-  previewLocation,
-  previewUrl,
-  status,
-} = playground.value
+const ui = useUiState()
+const play = usePlaygroundStore()
 
 const iframe = ref<HTMLIFrameElement>()
 const inputUrl = ref<string>('')
 
 // auto update inputUrl when location value changed
-syncRef(computed(() => previewLocation.value.fullPath), inputUrl, { direction: 'ltr' })
+syncRef(computed(() => play.previewLocation.fullPath), inputUrl, { direction: 'ltr' })
 
 function refreshIframe() {
-  if (previewUrl.value && iframe.value) {
-    iframe.value.src = previewUrl.value
-    inputUrl.value = previewLocation.value.fullPath
+  if (play.previewUrl && iframe.value) {
+    iframe.value.src = play.previewUrl
+    inputUrl.value = play.previewLocation.fullPath
   }
 }
 
 function navigate() {
-  previewLocation.value.fullPath = inputUrl.value
+  play.previewLocation.fullPath = inputUrl.value
 
   const activeElement = document.activeElement
   if (activeElement instanceof HTMLElement)
@@ -33,7 +24,7 @@ function navigate() {
 }
 
 onMounted(() => {
-  mount()
+  mountPlayground(play)
 })
 </script>
 
@@ -48,7 +39,7 @@ onMounted(() => {
         flex="~ items-center justify-center"
         mx-auto w-full px2 max-w-100 bg-faded rounded text-sm border="base 1 hover:gray-500/30"
         :class="{
-          'pointer-events-none': !previewUrl,
+          'pointer-events-none': !play.previewUrl,
         }"
       >
         <form w-full @submit.prevent="navigate">
@@ -56,7 +47,7 @@ onMounted(() => {
         </form>
         <div flex="~ items-center justify-end">
           <button
-            v-if="previewUrl" mx1 op-75 hover:op-100
+            v-if="play.previewUrl" mx1 op-75 hover:op-100
             @click="refreshIframe"
           >
             <div i-ph-arrow-clockwise-duotone text-sm />
@@ -66,15 +57,15 @@ onMounted(() => {
     </div>
   </div>
   <iframe
-    v-if="previewUrl"
+    v-if="play.previewUrl"
     ref="iframe"
-    :src="previewUrl"
-    :class="{ 'pointer-events-none': isDragging }"
+    :src="play.previewUrl"
+    :class="{ 'pointer-events-none': ui.isPanelDragging }"
     w-full h-full bg-transparent
     allow="geolocation; microphone; camera; payment; autoplay; serial; cross-origin-isolated"
   />
-  <div v-if="status !== 'ready'" flex="~ col items-center justify-center" h-full capitalize text-lg>
+  <div v-if="play.status !== 'ready'" flex="~ col items-center justify-center" h-full capitalize text-lg>
     <div i-svg-spinners-90-ring-with-bg />
-    {{ status }}ing...
+    {{ play.status }}ing...
   </div>
 </template>

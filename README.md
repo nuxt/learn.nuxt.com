@@ -40,8 +40,8 @@ The development server will be running at [http://localhost:3000](http://localho
 
 ## Todolist
 
-- [ ] A basic editor
-- [ ] Refactor logic from Vue SFC to composables
+- [x] A basic editor
+- [x] Refactor logic from Vue SFC to composables
 - [ ] Refactor to add Pinia
 - [ ] Monaco editor
 - [ ] Frame-to-parent communication
