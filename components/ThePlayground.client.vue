@@ -14,6 +14,8 @@ const isDragging = usePanelDragging()
 const panelSizeEditor = usePanelCookie('nuxt-playground-panel-editor', 30)
 const panelSizeFrame = usePanelCookie('nuxt-playground-panel-frame', 30)
 
+const { location } = usePlayground()
+
 const stream = ref<ReadableStream>()
 
 async function startDevServer() {
@@ -37,6 +39,10 @@ async function startDevServer() {
     // We need the main one
     if (port === 3000) {
       status.value = 'ready'
+      location.value = {
+        origin: url,
+        fullPath: '/',
+      }
       wcUrl.value = url
     }
   })
@@ -101,13 +107,26 @@ onMounted(startDevServer)
       <PanelEditor />
     </Pane>
     <Pane :size="panelSizeFrame" min-size="10">
-      <div flex="~ gap-2 items-center" px4 py2 border="b base dashed" bg-faded>
-        <div i-ph-globe-duotone />
-        <span text-sm>Preview</span>
-        <div flex-auto />
-        <button v-if="wcUrl" class="op-75 hover:op-100" @click="refreshIframe">
-          <div i-ph-arrow-clockwise-duotone />
-        </button>
+      <div grid="~ cols-[80px_1fr_80px]" px4 border="b base dashed" bg-faded>
+        <div flex="~ gap-2 items-center" py2>
+          <div i-ph-globe-duotone />
+          <span text-sm>Preview</span>
+        </div>
+        <div flex px-2 py1.5>
+          <div flex="~ items-center justify-center" mx-auto w-full max-w-100 text-center bg-faded rounded text-sm border="base 1">
+            <div flex="~ items-center justify-end">
+              <div v-if="wcUrl" mx1 i-ph-lock-simple-duotone text-green text-sm />
+            </div>
+            <div flex-1>
+              {{ location.fullPath }}
+            </div>
+            <div flex="~ items-center justify-end">
+              <button v-if="wcUrl" mx1 op-75 hover:op-100 @click="refreshIframe">
+                <div i-ph-arrow-clockwise-duotone text-sm />
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
       <iframe
         v-if="wcUrl"
