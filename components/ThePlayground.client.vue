@@ -13,11 +13,11 @@ const isDragging = usePanelDragging()
 const panelSizeEditor = usePanelCookie('nuxt-playground-panel-editor', 30)
 const panelSizeFrame = usePanelCookie('nuxt-playground-panel-frame', 30)
 
-const { location, wcUrl } = usePlayground()
+const { iframeLocation, wcUrl } = usePlayground()
 
 // auto update inputUrl when location value changed
 const inputUrl = ref<string>('')
-syncRef(inputUrl, computed(() => location.value.fullPath), { direction: 'rtl' })
+syncRef(inputUrl, computed(() => iframeLocation.value.fullPath), { direction: 'rtl' })
 
 const stream = ref<ReadableStream>()
 
@@ -42,7 +42,7 @@ async function startDevServer() {
     // We need the main one
     if (port === 3000) {
       status.value = 'ready'
-      location.value = {
+      iframeLocation.value = {
         origin: url,
         fullPath: '/',
       }
@@ -95,12 +95,12 @@ function endDragging(e: { size: number }[]) {
 function refreshIframe() {
   if (wcUrl.value && iframe.value) {
     iframe.value.src = wcUrl.value
-    inputUrl.value = location.value.fullPath
+    inputUrl.value = iframeLocation.value.fullPath
   }
 }
 
 function navigate() {
-  location.value.fullPath = inputUrl.value
+  iframeLocation.value.fullPath = inputUrl.value
 
   const activeElement = document.activeElement
   if (activeElement instanceof HTMLElement)
