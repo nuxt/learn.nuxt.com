@@ -1,14 +1,10 @@
 <script setup lang="ts">
-if (process.client) {
-  console.log('Client Init')
-  window.addEventListener('message', (e) => {
-    console.log('got message', e)
-  })
-}
+import '@unocss/reset/tailwind.css'
+import './styles/base.css'
 </script>
 
 <template>
-  <div>
-    Hello
-  </div>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>

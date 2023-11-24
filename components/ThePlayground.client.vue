@@ -11,8 +11,8 @@ const status = ref<Status>('init')
 const error = shallowRef<{ message: string }>()
 
 const isDragging = usePanelDragging()
-const panelSizeEditor = usePanelCookie('nuxt-playground-panel-editor', 30)
-const panelSizeFrame = usePanelCookie('nuxt-playground-panel-frame', 30)
+const panelSizeEditor = usePlaygroundCookie('nuxt-playground-panel-editor', 30)
+const panelSizeFrame = usePlaygroundCookie('nuxt-playground-panel-frame', 30)
 
 const stream = ref<ReadableStream>()
 
