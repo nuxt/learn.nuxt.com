@@ -12,20 +12,20 @@ export interface PlaygroundStateRaw {
   stream: ReadableStream | undefined
   webcontainer: ShallowRef<WebContainer | undefined>
   previewUrl: ComputedRef<string>
-  previewLocation: {
+  previewLocation: Ref<{
     origin: string
     fullPath: string
-  }
+  }>
 }
 
 export type PlaygroundState = UnwrapNestedRefs<PlaygroundStateRaw>
 
 export const usePlaygroundStore = defineStore('playground', (): PlaygroundStateRaw => {
-  const previewLocation = reactive({
+  const previewLocation = ref({
     origin: '',
     fullPath: '',
   })
-  const previewUrl = computed(() => previewLocation.origin + previewLocation.fullPath)
+  const previewUrl = computed(() => previewLocation.value.origin + previewLocation.value.fullPath)
 
   return {
     status: 'init',
