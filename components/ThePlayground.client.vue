@@ -1,9 +1,13 @@
+<!--
+Please create an issue first before submiting PRs.
+So that we can discuss about the directions and plans, to avoid wasted efforts. Thank you!
+-->
+
 <script setup lang="ts">
 // @ts-expect-error missing type
 import { Pane, Splitpanes } from 'splitpanes'
 
 const iframe = ref<HTMLIFrameElement>()
-const wcUrl = ref<string>()
 
 type Status = 'init' | 'mount' | 'install' | 'start' | 'ready' | 'error'
 
@@ -13,6 +17,12 @@ const error = shallowRef<{ message: string }>()
 const isDragging = usePanelDragging()
 const panelSizeEditor = usePlaygroundCookie('nuxt-playground-panel-editor', 30)
 const panelSizeFrame = usePlaygroundCookie('nuxt-playground-panel-frame', 30)
+
+const { iframeLocation, wcUrl } = usePlayground()
+
+// auto update inputUrl when location value changed
+const inputUrl = ref<string>('')
+syncRef(computed(() => iframeLocation.value.fullPath), inputUrl, { direction: 'ltr' })
 
 const stream = ref<ReadableStream>()
 
@@ -37,7 +47,10 @@ async function startDevServer() {
     // We need the main one
     if (port === 3000) {
       status.value = 'ready'
-      wcUrl.value = url
+      iframeLocation.value = {
+        origin: url,
+        fullPath: '/',
+      }
     }
   })
 
@@ -84,6 +97,21 @@ function endDragging(e: { size: number }[]) {
   panelSizeFrame.value = e[1].size
 }
 
+function refreshIframe() {
+  if (wcUrl.value && iframe.value) {
+    iframe.value.src = wcUrl.value
+    inputUrl.value = iframeLocation.value.fullPath
+  }
+}
+
+function navigate() {
+  iframeLocation.value.fullPath = inputUrl.value
+
+  const activeElement = document.activeElement
+  if (activeElement instanceof HTMLElement)
+    activeElement.blur()
+}
+
 onMounted(startDevServer)
 </script>
 
@@ -96,9 +124,28 @@ onMounted(startDevServer)
       <PanelEditor />
     </Pane>
     <Pane :size="panelSizeFrame" min-size="10">
-      <div flex="~ gap-2 items-center" px4 py2 border="b base dashed" bg-faded>
-        <div i-ph-globe-duotone />
-        <span text-sm>Preview</span>
+      <div grid="~ cols-[80px_1fr_80px]" px4 border="b base dashed" bg-faded>
+        <div flex="~ gap-2 items-center" py2>
+          <div i-ph-globe-duotone />
+          <span text-sm>Preview</span>
+        </div>
+        <div flex px-2 py1.5>
+          <div
+            flex="~ items-center justify-center" mx-auto w-full px2 max-w-100 bg-faded rounded text-sm border="base 1 hover:gray-500/30"
+            :class="{
+              'pointer-events-none': !wcUrl,
+            }"
+          >
+            <form w-full @submit.prevent="navigate">
+              <input v-model="inputUrl" w-full type="text" bg-transparent flex-1 focus:outline-none>
+            </form>
+            <div flex="~ items-center justify-end">
+              <button v-if="wcUrl" mx1 op-75 hover:op-100 @click="refreshIframe">
+                <div i-ph-arrow-clockwise-duotone text-sm />
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
       <iframe
         v-if="wcUrl"

@@ -1,4 +1,10 @@
-import { type FileSystemTree, WebContainer } from '@webcontainer/api'
+/**
+ * Please create an issue first before submiting PRs.
+ * So that we can discuss about the directions and plans, to avoid wasted efforts. Thank you!
+ */
+
+import type { FileSystemTree } from '@webcontainer/api'
+import { WebContainer } from '@webcontainer/api'
 
 let _webContainerPromise: Promise<WebContainer>
 
