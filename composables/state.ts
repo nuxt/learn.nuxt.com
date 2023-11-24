@@ -9,9 +9,9 @@ export function usePlaygroundCookie(name: string, value: number | string | boole
   )
 }
 
-export function usePostMessage(value: unknown) {
+export function usePostMessage(type: string, value: string | number | boolean) {
   const iframe = document.querySelector('iframe')
 
   if (iframe && iframe.contentWindow)
-    iframe.contentWindow.postMessage(value, '*')
+    iframe.contentWindow.postMessage({ type, value }, '*')
 }

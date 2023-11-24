@@ -1,10 +1,19 @@
-<script setup lang="ts">
-import '@unocss/reset/tailwind.css'
-import './styles/base.css'
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
 </template>
+
+<style>
+.dark {
+    color-scheme: dark;
+    color: white;
+}
+
+.light {
+    color-scheme: light;
+    color: black;
+}
+</style>

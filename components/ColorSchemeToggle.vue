@@ -3,7 +3,7 @@ const colorMode = useColorMode()
 
 function toggleMode() {
   colorMode.preference = colorMode.preference === 'light' ? 'dark' : 'light'
-  usePostMessage({ colorMode: colorMode.preference })
+  usePostMessage('update:color-mode', colorMode.preference)
 }
 </script>
 
