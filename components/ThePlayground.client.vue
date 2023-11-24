@@ -96,10 +96,7 @@ onMounted(startDevServer)
       <PanelEditor />
     </Pane>
     <Pane :size="panelSizeFrame" min-size="10">
-      <div flex="~ gap-2 items-center" px4 py2 border="b base dashed" bg-faded>
-        <div i-ph-globe-duotone />
-        <span text-sm>Preview</span>
-      </div>
+      <PanelHeader title="Preview" icon-class="i-ph-globe-duotone" />
       <iframe
         v-if="wcUrl"
         ref="iframe"
