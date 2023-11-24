@@ -1,13 +1,7 @@
-interface PanelPersistState {
-  panelDocs: number
-  panelEditor: number
-  panelPreview: number
-}
-
 export const useUiState = defineStore('ui', () => {
   const isPanelDragging = ref<boolean>(false)
 
-  const persistState = reactive<PanelPersistState>({
+  const persistState = reactive({
     panelDocs: 30,
     panelEditor: 30,
     panelPreview: 40,
