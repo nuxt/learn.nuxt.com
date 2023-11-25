@@ -24,4 +24,10 @@ export default defineNuxtConfig({
       },
     },
   },
+  vite: {
+    build: {
+      minify: 'esbuild',
+      cssMinify: 'esbuild',
+    },
+  },
 })
