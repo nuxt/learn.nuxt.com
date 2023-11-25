@@ -31,6 +31,7 @@
     "@unocss/nuxt": "^0.57.7",
     "@vueuse/nuxt": "^10.6.1",
     "eslint": "^8.54.0",
-    "nuxt": "^3.8.2"
+    "nuxt": "^3.8.2",
+    "theme-vitesse": "^0.7.5"
   }
 }

@@ -1,16 +1,43 @@
 <script setup lang="ts">
 import 'xterm/css/xterm.css'
+import type { ITheme } from 'xterm'
 import { Terminal } from 'xterm'
 import { FitAddon } from 'xterm-addon-fit'
+import themeLight from 'theme-vitesse/extra/xterm-vitesse-light.json'
+import themeDark from 'theme-vitesse/extra/xterm-vitesse-dark.json'
 
 const props = defineProps<{
   stream?: ReadableStream
 }>()
 
+const colorMode = useColorMode()
+const theme = computed<ITheme>(() => {
+  return colorMode.value === 'dark'
+    ? {
+        ...themeDark,
+        background: '#00000000',
+      }
+    : {
+        ...themeLight,
+        background: '#00000000',
+      }
+})
+
 const root = ref<HTMLDivElement>()
 const terminal = new Terminal({
   customGlyphs: true,
+  allowTransparency: true,
+  theme: theme.value,
+  fontFamily: 'DM Mono, monospace',
 })
+
+watch(
+  () => theme.value,
+  (t) => {
+    terminal.options.theme = t
+  },
+)
+
 const fitAddon = new FitAddon()
 terminal.loadAddon(fitAddon)
 
@@ -19,15 +46,20 @@ watch(
   (s) => {
     if (!s)
       return
-    const reader = s.getReader()
-    function read() {
-      reader.read().then(({ done, value }) => {
-        terminal.write(value)
-        if (!done)
-          read()
-      })
+    try {
+      const reader = s.getReader()
+      function read() {
+        reader.read().then(({ done, value }) => {
+          terminal.write(value)
+          if (!done)
+            read()
+        })
+      }
+      read()
     }
-    read()
+    catch (e) {
+      console.error(e)
+    }
   },
   { flush: 'sync', immediate: true },
 )
