@@ -3,7 +3,7 @@ import type { VirtualFile } from '~/structures/VirtualFile'
 
 // TODO: replace with Monaco with a real file tree.
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     files: VirtualFile[]
   }>(),
@@ -12,7 +12,23 @@ withDefaults(
   },
 )
 
+const INGORE_FILES = [
+  'pnpm-lock.yaml',
+  'pnpm-workspace.yaml',
+  '.npmrc',
+  'tsconfig.json',
+  'server/tsconfig.json',
+]
+
+const files = computed(() => props.files.filter(file => !INGORE_FILES.includes(file.filepath)))
+
 const selectedFile = ref<VirtualFile>()
+
+// Select the first file by default.
+watchEffect(() => {
+  if (selectedFile.value == null && files.value.length > 0)
+    selectFile(files.value[0])
+})
 
 const input = ref<string>()
 
