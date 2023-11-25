@@ -44,10 +44,10 @@ function endDraggingHorizontal(e: { size: number }[]) {
         <Pane :size="ui.panelEditor" min-size="10">
           <PanelEditor :files="play?.files" />
         </Pane>
-        <Pane :size="ui.panelDocs" min-size="10">
+        <Pane :size="ui.panelPreview" min-size="10">
           <PanelPreview />
         </Pane>
-        <Pane :size="100 - ui.panelEditor - ui.panelDocs">
+        <Pane :size="100 - ui.panelEditor - ui.panelPreview">
           <PanelTerminal :stream="play?.stream" />
         </Pane>
       </Splitpanes>
