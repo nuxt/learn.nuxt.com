@@ -2,7 +2,7 @@
  * Please create an issue first before submiting PRs.
  * So that we can discuss about the directions and plans, to avoid wasted efforts. Thank you!
  */
-
+import { createBirpc } from 'birpc'
 import { WebContainer } from '@webcontainer/api'
 import type { PlaygroundState } from '../stores/playground'
 import { templates } from '~/templates'
@@ -21,13 +21,28 @@ export async function useWebContainer() {
 export async function mountPlayground(play: PlaygroundState) {
   const { files, tree } = await templates.basic()
 
-  window.addEventListener('message', (event) => {
+  const rpcFunctions = {
+    hello(name: string) {
+      console.log('hello', name)
+      return `Hello, ${name}!`
+    },
+  }
+
+  window.addEventListener('message', async (event) => {
     if (event.origin !== play.previewLocation.origin)
       return
 
-    console.log('event', event)
-
     switch (event.data.type) {
+      case 'port':
+        {
+          event.ports[0].start()
+          const rpc = createBirpc<typeof rpcFunctions, typeof rpcFunctions>(rpcFunctions, {
+            post: data => event.ports[0].postMessage(data),
+            on: data => event.ports[0].addEventListener('message', e => data(e.data)),
+          })
+          await rpc.hello('Template')
+        }
+        break
       case 'update:path':
         play.previewLocation.fullPath = event.data.path
         break

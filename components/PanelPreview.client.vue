@@ -23,8 +23,8 @@ function navigate() {
     activeElement.blur()
 }
 
-onMounted(() => {
-  mountPlayground(play)
+onMounted(async () => {
+  await mountPlayground(play)
 })
 </script>
 
