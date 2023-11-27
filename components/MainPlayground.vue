@@ -24,6 +24,24 @@ function endDraggingHorizontal(e: { size: number }[]) {
   ui.panelEditor = e[0].size
   ui.panelPreview = e[1].size
 }
+
+// For panes size initialization on SSR
+const isMounted = useMounted()
+const panelInitDocs = computed(() => isMounted.value || {
+  width: `${ui.panelDocs}%`,
+})
+const panelInitRight = computed(() => isMounted.value || {
+  width: `${100 - ui.panelDocs}%`,
+})
+const panelInitEditor = computed(() => isMounted.value || {
+  height: `${ui.panelEditor}%`,
+})
+const panelInitPreview = computed(() => isMounted.value || {
+  height: `${ui.panelPreview}%`,
+})
+const panelInitTerminal = computed(() => isMounted.value || {
+  height: `${100 - ui.panelEditor - ui.panelPreview}%`,
+})
 </script>
 
 <template>
@@ -32,22 +50,31 @@ function endDraggingHorizontal(e: { size: number }[]) {
     @resize="startDragging"
     @resized="endDraggingVertical"
   >
-    <Pane :size="ui.panelDocs" min-size="10">
+    <Pane
+      :size="ui.panelDocs" min-size="10"
+      :style="panelInitDocs"
+    >
       <PanelDocs />
     </Pane>
-    <Pane :size="100 - ui.panelDocs">
+    <PaneSplitter />
+    <Pane
+      :size="100 - ui.panelDocs"
+      :style="panelInitRight"
+    >
       <Splitpanes
         horizontal relative max-h-full w-full of-hidden
         @resize="startDragging"
         @resized="endDraggingHorizontal"
       >
-        <Pane :size="ui.panelEditor" min-size="10">
+        <Pane :size="ui.panelEditor" min-size="10" :style="panelInitEditor">
           <PanelEditor :files="play?.files" />
         </Pane>
-        <Pane :size="ui.panelPreview" min-size="10">
+        <PaneSplitter />
+        <Pane :size="ui.panelPreview" min-size="10" :style="panelInitPreview">
           <PanelPreview />
         </Pane>
-        <Pane :size="100 - ui.panelEditor - ui.panelPreview">
+        <PaneSplitter />
+        <Pane :size="100 - ui.panelEditor - ui.panelPreview" :style="panelInitTerminal">
           <PanelTerminal :stream="play?.stream" />
         </Pane>
       </Splitpanes>

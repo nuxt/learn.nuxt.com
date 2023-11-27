@@ -6,9 +6,7 @@ import { FitAddon } from 'xterm-addon-fit'
 import themeLight from 'theme-vitesse/extra/xterm-vitesse-light.json'
 import themeDark from 'theme-vitesse/extra/xterm-vitesse-dark.json'
 
-const props = defineProps<{
-  stream?: ReadableStream
-}>()
+const play = usePlaygroundStore()
 
 const colorMode = useColorMode()
 const theme = computed<ITheme>(() => {
@@ -42,7 +40,7 @@ const fitAddon = new FitAddon()
 terminal.loadAddon(fitAddon)
 
 watch(
-  () => props.stream,
+  () => play.stream,
   (s) => {
     if (!s)
       return
@@ -80,15 +78,5 @@ const stop = watch(
 </script>
 
 <template>
-  <div h-full grid="~ rows-[min-content_1fr]">
-    <div
-      flex="~ gap-2 items-center"
-      border="b base dashed"
-      bg-faded px4 py2
-    >
-      <div i-ph-terminal-window-duotone />
-      <span text-sm>Terminal</span>
-    </div>
-    <div ref="root" h-full w-full of-hidden />
-  </div>
+  <div ref="root" h-full w-full of-hidden />
 </template>

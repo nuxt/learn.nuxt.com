@@ -1,16 +1,15 @@
 <script setup lang="ts">
-const ui = useUiState()
 const play = usePlaygroundStore()
 
-const iframe = ref<HTMLIFrameElement>()
 const inputUrl = ref<string>('')
+const inner = ref<{ iframe?: Ref<HTMLIFrameElement | undefined> }>()
 
 // auto update inputUrl when location value changed
 syncRef(computed(() => play.previewLocation.fullPath), inputUrl, { direction: 'ltr' })
 
 function refreshIframe() {
-  if (play.previewUrl && iframe.value) {
-    iframe.value.src = play.previewUrl
+  if (play.previewUrl && inner.value?.iframe?.value) {
+    inner.value.iframe.value.src = play.previewUrl
     inputUrl.value = play.previewLocation.fullPath
   }
 }
@@ -22,10 +21,6 @@ function navigate() {
   if (activeElement instanceof HTMLElement)
     activeElement.blur()
 }
-
-onMounted(() => {
-  mountPlayground(play)
-})
 </script>
 
 <template>
@@ -64,20 +59,5 @@ onMounted(() => {
       </div>
     </div>
   </div>
-  <iframe
-    v-if="play.previewUrl"
-    ref="iframe"
-    :src="play.previewUrl"
-    :class="{ 'pointer-events-none': ui.isPanelDragging }"
-    h-full w-full bg-transparent
-    allow="geolocation; microphone; camera; payment; autoplay; serial; cross-origin-isolated"
-  />
-  <div
-    v-if="play.status !== 'ready'"
-    flex="~ col items-center justify-center"
-    h-full text-lg capitalize
-  >
-    <div i-svg-spinners-90-ring-with-bg />
-    {{ play.status }}ing...
-  </div>
+  <PanelPreviewClient ref="inner" />
 </template>
