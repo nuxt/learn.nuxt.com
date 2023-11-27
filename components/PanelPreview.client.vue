@@ -29,7 +29,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <div grid="~ cols-[80px_1fr_80px]" px4 border="b base dashed" bg-faded>
+  <div
+    grid="~ cols-[80px_1fr_80px]"
+    border="b base dashed" bg-faded px4
+  >
     <div flex="~ gap-2 items-center" py2>
       <div i-ph-globe-duotone />
       <span text-sm>Preview</span>
@@ -37,17 +40,22 @@ onMounted(() => {
     <div flex px-2 py1.5>
       <div
         flex="~ items-center justify-center"
-        mx-auto w-full px2 max-w-100 bg-faded rounded text-sm border="base 1 hover:gray-500/30"
+        mx-auto max-w-100 w-full rounded bg-faded px2 text-sm
+        border="base 1 hover:gray-500/30"
         :class="{
           'pointer-events-none': !play.previewUrl,
         }"
       >
         <form w-full @submit.prevent="navigate">
-          <input v-model="inputUrl" w-full type="text" bg-transparent flex-1 focus:outline-none>
+          <input
+            v-model="inputUrl" type="text"
+            w-full flex-1 bg-transparent focus:outline-none
+          >
         </form>
         <div flex="~ items-center justify-end">
           <button
-            v-if="play.previewUrl" mx1 op-75 hover:op-100
+            v-if="play.previewUrl"
+            mx1 op-75 hover:op-100
             @click="refreshIframe"
           >
             <div i-ph-arrow-clockwise-duotone text-sm />
@@ -61,10 +69,14 @@ onMounted(() => {
     ref="iframe"
     :src="play.previewUrl"
     :class="{ 'pointer-events-none': ui.isPanelDragging }"
-    w-full h-full bg-transparent
+    h-full w-full bg-transparent
     allow="geolocation; microphone; camera; payment; autoplay; serial; cross-origin-isolated"
   />
-  <div v-if="play.status !== 'ready'" flex="~ col items-center justify-center" h-full capitalize text-lg>
+  <div
+    v-if="play.status !== 'ready'"
+    flex="~ col items-center justify-center"
+    h-full text-lg capitalize
+  >
     <div i-svg-spinners-90-ring-with-bg />
     {{ play.status }}ing...
   </div>

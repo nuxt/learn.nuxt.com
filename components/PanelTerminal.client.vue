@@ -81,10 +81,14 @@ const stop = watch(
 
 <template>
   <div h-full grid="~ rows-[min-content_1fr]">
-    <div flex="~ gap-2 items-center" px4 py2 border="b base dashed" bg-faded>
+    <div
+      flex="~ gap-2 items-center"
+      border="b base dashed"
+      bg-faded px4 py2
+    >
       <div i-ph-terminal-window-duotone />
       <span text-sm>Terminal</span>
     </div>
-    <div ref="root" w-full h-full of-hidden />
+    <div ref="root" h-full w-full of-hidden />
   </div>
 </template>

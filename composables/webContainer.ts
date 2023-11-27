@@ -25,8 +25,6 @@ export async function mountPlayground(play: PlaygroundState) {
     if (event.origin !== play.previewLocation.origin)
       return
 
-    console.log('event', event)
-
     switch (event.data.type) {
       case 'update:path':
         play.previewLocation.fullPath = event.data.path

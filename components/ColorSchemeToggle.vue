@@ -8,9 +8,10 @@ function toggleMode() {
 
 <template>
   <button
-    class="p-2 rounded hover:bg-active"
+    rounded p-2
+    hover="bg-active"
     @click="toggleMode"
   >
-    <div class="i-ph-sun-dim-duotone dark:i-ph-moon-stars-duotone text-2xl" />
+    <div i-ph-sun-dim-duotone dark:i-ph-moon-stars-duotone text-2xl />
   </button>
 </template>

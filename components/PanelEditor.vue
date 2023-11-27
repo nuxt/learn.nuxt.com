@@ -46,7 +46,11 @@ function onTextInput() {
 
 <template>
   <div h-full grid="~ rows-[min-content_1fr]">
-    <div flex="~ gap-2 items-center" px4 py2 border="b base dashed" bg-faded>
+    <div
+      flex="~ gap-2 items-center"
+      border="b base dashed"
+      bg-faded px4 py2
+    >
       <div i-ph-text-t-duotone />
       <span text-sm>Editor</span>
     </div>
@@ -66,8 +70,8 @@ function onTextInput() {
       <textarea
         v-model="input"
         border="l base"
-        bg-transparent
-        w-full h-full p4 font-mono
+
+        h-full w-full bg-transparent p4 font-mono
         @input="onTextInput"
       />
     </div>

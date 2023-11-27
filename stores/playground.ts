@@ -1,16 +1,16 @@
 import { defineStore } from 'pinia'
-import type { ShallowRef, UnwrapNestedRefs } from 'vue'
+import type { Raw, ShallowRef, UnwrapNestedRefs } from 'vue'
 import type { WebContainer } from '@webcontainer/api'
 import type { VirtualFile } from '../structures/VirtualFile'
 
 export type PlaygroundStatus = 'init' | 'mount' | 'install' | 'start' | 'ready' | 'error'
 
 export interface PlaygroundStateRaw {
-  files: ShallowRef<VirtualFile[]>
+  files: ShallowRef<Raw<VirtualFile[]>>
   status: PlaygroundStatus
   error: { message: string } | undefined
   stream: ReadableStream | undefined
-  webcontainer: ShallowRef<WebContainer | undefined>
+  webcontainer: ShallowRef<Raw<WebContainer> | undefined>
   previewUrl: ComputedRef<string>
   previewLocation: Ref<{
     origin: string
