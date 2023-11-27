@@ -18,12 +18,4 @@ onMounted(() => {
     h-full w-full bg-transparent
     allow="geolocation; microphone; camera; payment; autoplay; serial; cross-origin-isolated"
   />
-  <div
-    v-if="play.status !== 'ready'"
-    flex="~ col items-center justify-center"
-    h-full text-lg capitalize
-  >
-    <div i-svg-spinners-90-ring-with-bg />
-    {{ play.status }}ing...
-  </div>
 </template>

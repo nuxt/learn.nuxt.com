@@ -3,7 +3,15 @@ import type { Raw, ShallowRef, UnwrapNestedRefs } from 'vue'
 import type { WebContainer } from '@webcontainer/api'
 import type { VirtualFile } from '../structures/VirtualFile'
 
-export type PlaygroundStatus = 'init' | 'mount' | 'install' | 'start' | 'ready' | 'error'
+export const PlaygroundStatusOrder = [
+  'init',
+  'mount',
+  'install',
+  'start',
+  'ready',
+] as const
+
+export type PlaygroundStatus = typeof PlaygroundStatusOrder[number] | 'error'
 
 export interface PlaygroundStateRaw {
   files: ShallowRef<Raw<VirtualFile[]>>
