@@ -18,8 +18,20 @@ export async function useWebContainer() {
   return await _webContainerPromise
 }
 
-export async function mountPlayground(play: PlaygroundState) {
+export async function mountPlayground(
+  play: PlaygroundState,
+  colorMode: string,
+) {
   const { files, tree } = await templates.basic()
+
+  // Inject .nuxtrc so that we can have the color mode on initial load
+  if (colorMode === 'dark') {
+    tree['.nuxtrc'] = {
+      file: {
+        contents: `app.head.htmlAttrs.class=dark`,
+      },
+    }
+  }
 
   window.addEventListener('message', (event) => {
     if (event.origin !== play.previewLocation.origin)

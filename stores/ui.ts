@@ -22,3 +22,6 @@ export const useUiState = defineStore('ui', () => {
     ...toRefs(persistState),
   }
 })
+
+if (import.meta.hot)
+  import.meta.hot.accept(acceptHMRUpdate(useUiState, import.meta.hot))

@@ -8,4 +8,18 @@ export default defineNuxtPlugin(() => {
       path: to.fullPath,
     }, '*')
   })
+
+  window.addEventListener('message', (event) => {
+    console.log('message to iframe', event.data)
+    switch (event.data.type) {
+      case 'color-mode':
+        document.documentElement.classList.toggle(
+          'dark',
+          event.data.mode === 'dark',
+        )
+        break
+      default:
+        break
+    }
+  })
 })

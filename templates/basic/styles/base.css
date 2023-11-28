@@ -1,0 +1,10 @@
+@import url(https://fonts.bunny.net/css?family=dm-sans:400);
+
+html {
+  font-family: 'DM Sans', sans-serif;
+}
+
+html.dark {
+  color-scheme: dark;
+  background: #020420;
+}

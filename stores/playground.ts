@@ -45,3 +45,6 @@ export const usePlaygroundStore = defineStore('playground', (): PlaygroundStateR
     previewLocation,
   }
 })
+
+if (import.meta.hot)
+  import.meta.hot.accept(acceptHMRUpdate(usePlaygroundStore, import.meta.hot))
