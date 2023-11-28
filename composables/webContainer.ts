@@ -4,10 +4,8 @@
  */
 
 import { WebContainer } from '@webcontainer/api'
-import { createBirpc } from 'birpc'
 import type { PlaygroundState } from '../stores/playground'
 import { templates } from '~/templates'
-import type { FrameFunctions, ParentFunctions } from '~/types/rpc'
 
 if (import.meta.server)
   throw new Error('WebContainer cannot be mounted on server')

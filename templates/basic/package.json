@@ -5,11 +5,11 @@
     "dev": "nuxt dev --no-qr",
     "prepare": "nuxt prepare"
   },
+  "dependencies": {
+    "birpc": "^0.2.14"
+  },
   "devDependencies": {
     "nuxt": "latest",
     "vue": "^3.3.8"
-  },
-  "dependencies": {
-    "birpc": "^0.2.14"
   }
 }
