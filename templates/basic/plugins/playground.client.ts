@@ -9,6 +9,10 @@ export default defineNuxtPlugin(() => {
     }, '*')
   })
 
+  window.parent.postMessage({
+    type: 'ready',
+  }, '*')
+
   window.addEventListener('message', (event) => {
     console.log('message to iframe', event.data)
     switch (event.data.type) {
