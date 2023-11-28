@@ -8,5 +8,8 @@
   "devDependencies": {
     "nuxt": "latest",
     "vue": "^3.3.8"
+  },
+  "dependencies": {
+    "birpc": "^0.2.14"
   }
 }
