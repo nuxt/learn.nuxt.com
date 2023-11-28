@@ -1,0 +1,19 @@
+:root {
+  --un-prose-links: #00DC82;
+}
+
+.prose a {
+  text-decoration: none;
+}
+
+.prose a:hover {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+
+.prose :where(h1 a,h2 a,h3 a,h4 a) {
+  border-bottom: none !important;
+  text-decoration: none !important;
+  color: inherit;
+  font-weight: inherit;
+}

@@ -52,6 +52,8 @@ The development server will be running at [http://localhost:3000](http://localho
 - [ ] Monaco editor
 - [ ] File tree
 - [ ] Verification for tutorial tasks
+- [ ] Download the project as zip
+- [ ] Show Nuxt and Vue version from the container
 
 ## License
 

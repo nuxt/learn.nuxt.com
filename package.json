@@ -31,10 +31,12 @@
     "@nuxtjs/color-mode": "^3.3.2",
     "@pinia/nuxt": "^0.5.1",
     "@unocss/eslint-plugin": "^0.57.7",
+    "@unocss/extractor-mdc": "^0.57.7",
     "@unocss/nuxt": "^0.57.7",
     "@vueuse/nuxt": "^10.6.1",
     "eslint": "^8.54.0",
     "nuxt": "^3.8.2",
+    "remark-external-links": "^9.0.1",
     "theme-vitesse": "^0.7.5",
     "vue-tsc": "^1.8.22"
   }

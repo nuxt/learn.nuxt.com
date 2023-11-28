@@ -30,4 +30,17 @@ export default defineNuxtConfig({
       cssMinify: 'esbuild',
     },
   },
+  content: {
+    highlight: {
+      theme: {
+        default: 'vitesse-light',
+        dark: 'vitesse-dark',
+      },
+    },
+    markdown: {
+      remarkPlugins: [
+        'remark-external-links',
+      ],
+    },
+  },
 })

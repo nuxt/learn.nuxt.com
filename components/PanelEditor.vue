@@ -21,16 +21,14 @@ const INGORE_FILES = [
 ]
 
 const files = computed(() => props.files.filter(file => !INGORE_FILES.includes(file.filepath)))
-
 const selectedFile = ref<VirtualFile>()
+const input = ref<string>()
 
 // Select the first file by default.
 watchEffect(() => {
   if (selectedFile.value == null && files.value.length > 0)
     selectFile(files.value[0])
 })
-
-const input = ref<string>()
 
 function selectFile(file: VirtualFile) {
   selectedFile.value = file

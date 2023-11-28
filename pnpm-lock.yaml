@@ -52,6 +52,9 @@ devDependencies:
   '@unocss/eslint-plugin':
     specifier: ^0.57.7
     version: 0.57.7(eslint@8.54.0)(typescript@5.3.2)
+  '@unocss/extractor-mdc':
+    specifier: ^0.57.7
+    version: 0.57.7
   '@unocss/nuxt':
     specifier: ^0.57.7
     version: 0.57.7(postcss@8.4.31)(vite@4.5.0)(webpack@5.89.0)
@@ -64,6 +67,9 @@ devDependencies:
   nuxt:
     specifier: ^3.8.2
     version: 3.8.2(eslint@8.54.0)(typescript@5.3.2)(vite@4.5.0)(vue-tsc@1.8.22)
+  remark-external-links:
+    specifier: ^9.0.1
+    version: 9.0.1
   theme-vitesse:
     specifier: ^0.7.5
     version: 0.7.5
@@ -2456,6 +2462,10 @@ packages:
     resolution: {integrity: sha512-JdyhPlsgS0x4zoF8WYXDcusPcpU4ysE6Rkkit4a9+xUZEvg7vy7InH6PQ8dL8B9oY7pbxF7G6eFguUDpv9xx4Q==}
     dependencies:
       '@unocss/core': 0.57.7
+    dev: true
+
+  /@unocss/extractor-mdc@0.57.7:
+    resolution: {integrity: sha512-OJUCmFYvDUfrwv8NCE1KguYlhevOKx/BW34VukUSkf9Q4sRetKlkVt7pwZAaVoWjyIqkSzpD+b73TjqGHeSMxg==}
     dev: true
 
   /@unocss/inspector@0.57.7:
@@ -8153,6 +8163,19 @@ packages:
       mdast-util-find-and-replace: 3.0.1
       node-emoji: 2.1.3
       unified: 11.0.4
+    dev: true
+
+  /remark-external-links@9.0.1:
+    resolution: {integrity: sha512-EYw+p8Zqy5oT5+W8iSKzInfRLY+zeKWHCf0ut+Q5SwnaSIDGXd2zzvp4SWqyAuVbinNmZ0zjMrDKaExWZnTYqQ==}
+    dependencies:
+      '@types/hast': 2.3.8
+      '@types/mdast': 3.0.15
+      extend: 3.0.2
+      is-absolute-url: 4.0.1
+      mdast-util-definitions: 5.1.2
+      space-separated-tokens: 2.0.2
+      unified: 10.1.2
+      unist-util-visit: 4.1.2
     dev: true
 
   /remark-gfm@3.0.1:
