@@ -42,11 +42,16 @@ The development server will be running at [http://localhost:3000](http://localho
 
 - [x] A basic editor
 - [x] Refactor logic from Vue SFC to composables
-- [ ] Refactor to add Pinia
-- [ ] Monaco editor
-- [ ] Frame-to-parent communication
-- [ ] Sync the basic style
+- [x] Refactor to add Pinia
+- [x] Frame-to-parent communication
+- [x] Sync the basic style
 - [ ] Buttons to restart server
+- [ ] Open/close terminal panel
+- [ ] Extract "playground injected" utils
+- [ ] Switch playgrounds on different guides
+- [ ] Monaco editor
+- [ ] File tree
+- [ ] Verification for tutorial tasks
 
 ## License
 
