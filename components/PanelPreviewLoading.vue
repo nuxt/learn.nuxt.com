@@ -33,7 +33,7 @@ function getTextClass(status: PlaygroundStatus) {
     case 'error':
       return 'text-red'
     case 'current':
-      return ''
+      return 'animate-pulse'
     case 'done':
       return 'text-primary'
     case 'todo':
