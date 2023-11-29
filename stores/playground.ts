@@ -24,6 +24,11 @@ export interface PlaygroundStateRaw {
     origin: string
     fullPath: string
   }>
+  actions: PlaygroundActions
+}
+
+export interface PlaygroundActions {
+  restartServer(): Promise<void>
 }
 
 export type PlaygroundState = UnwrapNestedRefs<PlaygroundStateRaw>
@@ -35,6 +40,11 @@ export const usePlaygroundStore = defineStore('playground', (): PlaygroundStateR
   })
   const previewUrl = computed(() => previewLocation.value.origin + previewLocation.value.fullPath)
 
+  // Actions that will be replaced later on
+  const actions: PlaygroundActions = {
+    async restartServer() {},
+  }
+
   return {
     status: 'init',
     error: undefined,
@@ -43,6 +53,7 @@ export const usePlaygroundStore = defineStore('playground', (): PlaygroundStateR
     webcontainer: shallowRef(undefined),
     previewUrl,
     previewLocation,
+    actions,
   }
 })
 
