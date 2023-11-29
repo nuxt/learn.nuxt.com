@@ -73,7 +73,7 @@ const panelInitTerminal = computed(() => isMounted.value || {
           <PanelPreview />
         </Pane>
         <PaneSplitter />
-        <Pane :size="100 - ui.panelEditor - ui.panelPreview" :style="panelInitTerminal">
+        <Pane :size="100 - ui.panelEditor - ui.panelPreview" min-size="10" :style="panelInitTerminal">
           <PanelTerminal :stream="play?.stream" />
         </Pane>
       </Splitpanes>
