@@ -45,9 +45,9 @@ The development server will be running at [http://localhost:3000](http://localho
 - [x] Refactor to add Pinia
 - [x] Frame-to-parent communication
 - [x] Sync the basic style
-- [ ] Buttons to restart server
-- [ ] Open/close terminal panel
-- [ ] Extract "playground injected" utils
+- [x] Buttons to restart server
+- [x] Open/close terminal panel
+- [x] Extract "playground injected" utils
 - [ ] Switch playgrounds on different guides
 - [ ] Monaco editor
 - [ ] File tree

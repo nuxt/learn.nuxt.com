@@ -1,7 +1,3 @@
 {
-  // https://v3.nuxtjs.org/concepts/typescript
-  "extends": "./.nuxt/tsconfig.json",
-  "compilerOptions": {
-    "composite": true
-  }
+  "extends": "./.nuxt/tsconfig.json"
 }

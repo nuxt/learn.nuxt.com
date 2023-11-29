@@ -1,3 +1,5 @@
+import type { TemplateOptions } from './types'
+
 export const templates = {
-  basic: () => import('./basic').then(m => m.default()),
+  basic: (options?: TemplateOptions) => import('./basic').then(m => m.default(options)),
 }
