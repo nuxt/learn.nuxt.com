@@ -35,6 +35,7 @@
     "@unocss/nuxt": "^0.57.7",
     "@vueuse/nuxt": "^10.6.1",
     "eslint": "^8.54.0",
+    "jszip": "^3.10.1",
     "nuxt": "^3.8.2",
     "remark-external-links": "^9.0.1",
     "theme-vitesse": "^0.7.5",

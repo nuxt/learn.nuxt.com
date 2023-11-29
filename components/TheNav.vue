@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const ui = useUiState()
+const play = usePlaygroundStore()
 </script>
 
 <template>
@@ -9,7 +10,17 @@ const ui = useUiState()
     </NuxtLink>
     <div flex-auto />
     <button
+      v-if="play.status === 'ready'"
       rounded p2
+      hover="bg-active"
+      title="Download as ZIP"
+      @click="play.actions.downloadZip()"
+    >
+      <div i-ph-download-duotone text-2xl />
+    </button>
+    <button
+      rounded p2
+      title="Toggle terminal"
       hover="bg-active"
       :class="ui.showTerminal ? '' : 'op50'"
       @click="ui.toggleTerminal()"
@@ -19,6 +30,7 @@ const ui = useUiState()
     <ColorSchemeToggle />
     <NuxtLink
       rounded p2
+      title="GitHub"
       hover="bg-active"
       href="https://github.com/nuxt/learn.nuxt.com"
       target="_blank"

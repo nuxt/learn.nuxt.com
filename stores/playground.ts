@@ -29,6 +29,7 @@ export interface PlaygroundStateRaw {
 
 export interface PlaygroundActions {
   restartServer(): Promise<void>
+  downloadZip(): Promise<void>
 }
 
 export type PlaygroundState = UnwrapNestedRefs<PlaygroundStateRaw>
@@ -43,6 +44,7 @@ export const usePlaygroundStore = defineStore('playground', (): PlaygroundStateR
   // Actions that will be replaced later on
   const actions: PlaygroundActions = {
     async restartServer() {},
+    async downloadZip() {},
   }
 
   return {
