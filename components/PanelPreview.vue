@@ -1,4 +1,8 @@
 <script setup lang="ts">
+defineProps<{
+  collapsed: boolean
+}>()
+
 const play = usePlaygroundStore()
 
 const inputUrl = ref<string>('')
@@ -60,6 +64,8 @@ function navigate() {
           </div>
         </div>
       </div>
+      <div flex-1 />
+      <div i-ph-caret-right transition-transform :class="collapsed ? '' : 'rotate-90'" />
     </div>
     <div relative h-full w-full>
       <PanelPreviewLoading />

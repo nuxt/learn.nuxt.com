@@ -6,6 +6,7 @@ import type { VirtualFile } from '~/structures/VirtualFile'
 const props = withDefaults(
   defineProps<{
     files: VirtualFile[]
+    collapsed: boolean
   }>(),
   {
     files: () => [],
@@ -51,6 +52,8 @@ function onTextInput() {
     >
       <div i-ph-text-t-duotone />
       <span text-sm>Editor</span>
+      <div flex-1 />
+      <div i-ph-caret-right transition-transform :class="collapsed ? '' : 'rotate-90'" />
     </div>
     <div grid="~ cols-[1fr_2fr]">
       <div flex="~ col" h-full of-auto>

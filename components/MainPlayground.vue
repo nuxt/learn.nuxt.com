@@ -41,6 +41,15 @@ const panelInitPreview = computed(() => isMounted.value || {
 const panelInitTerminal = computed(() => isMounted.value || {
   height: `${100 - ui.panelEditor - ui.panelPreview}%`,
 })
+
+const panelRightEl = ref()
+const TITLE_HEIGHT = 36
+const { height: vh } = useElementSize(panelRightEl)
+const titleHeightPercent = computed(() => {
+  if (!vh.value)
+    return 10
+  return TITLE_HEIGHT / vh.value * 100
+})
 </script>
 
 <template>
@@ -57,6 +66,7 @@ const panelInitTerminal = computed(() => isMounted.value || {
     </Pane>
     <PaneSplitter />
     <Pane
+      ref="panelRightEl"
       :size="100 - ui.panelDocs"
       :style="panelInitRight"
     >
@@ -65,16 +75,16 @@ const panelInitTerminal = computed(() => isMounted.value || {
         @resize="startDragging"
         @resized="endDraggingHorizontal"
       >
-        <Pane :size="ui.panelEditor" min-size="10" :style="panelInitEditor">
-          <PanelEditor :files="play?.files" />
+        <Pane :size="ui.panelEditor" :min-size="titleHeightPercent" :style="panelInitEditor">
+          <PanelEditor :files="play?.files" :collapsed="ui.panelEditor <= titleHeightPercent" />
         </Pane>
         <PaneSplitter />
-        <Pane :size="ui.panelPreview" min-size="10" :style="panelInitPreview">
-          <PanelPreview />
+        <Pane :size="ui.panelPreview" :min-size="titleHeightPercent" :style="panelInitPreview">
+          <PanelPreview :collapsed="ui.panelPreview <= titleHeightPercent" />
         </Pane>
         <PaneSplitter />
-        <Pane :size="100 - ui.panelEditor - ui.panelPreview" min-size="10" :style="panelInitTerminal">
-          <PanelTerminal :stream="play?.stream" />
+        <Pane :size="100 - ui.panelEditor - ui.panelPreview" :min-size="titleHeightPercent" :style="panelInitTerminal">
+          <PanelTerminal :stream="play?.stream" :collapsed="(100 - ui.panelEditor - ui.panelPreview) <= titleHeightPercent" />
         </Pane>
       </Splitpanes>
     </Pane>
