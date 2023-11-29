@@ -24,6 +24,20 @@ function endDraggingHorizontal(e: { size: number }[]) {
   ui.panelPreview = e[1].size
 }
 
+const terminalPaneProps = computed(() => {
+  if (ui.showTerminal) {
+    return {
+      size: 100 - ui.panelEditor - ui.panelPreview,
+    }
+  }
+  else {
+    return {
+      size: 0,
+      maxSize: 0,
+    }
+  }
+})
+
 // For panes size initialization on SSR
 const isMounted = useMounted()
 const panelInitDocs = computed(() => isMounted.value || {
@@ -73,7 +87,10 @@ const panelInitTerminal = computed(() => isMounted.value || {
           <PanelPreview />
         </Pane>
         <PaneSplitter />
-        <Pane :size="100 - ui.panelEditor - ui.panelPreview" :style="panelInitTerminal">
+        <Pane
+          v-bind="terminalPaneProps" :style="panelInitTerminal"
+          :class="ui.showTerminal ? '' : 'pane-hidden'"
+        >
           <PanelTerminal :stream="play?.stream" />
         </Pane>
       </Splitpanes>

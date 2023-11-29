@@ -1,9 +1,21 @@
+<script setup lang="ts">
+const ui = useUiState()
+</script>
+
 <template>
   <nav px4 py3 text-lg border="b base" flex="~ gap-1 items-center">
     <NuxtLink to="/" title="Nuxt Playground">
       <NuxtPlaygroundLogo h-2em />
     </NuxtLink>
     <div flex-auto />
+    <button
+      rounded p2
+      hover="bg-active"
+      :class="ui.showTerminal ? '' : 'op50'"
+      @click="ui.toggleTerminal()"
+    >
+      <div i-ph-terminal-window-duotone text-2xl />
+    </button>
     <ColorSchemeToggle />
     <NuxtLink
       rounded p2

@@ -8,7 +8,7 @@
       <div i-ph-book-duotone />
       <span text-sm>Guide</span>
     </div>
-    <article class="prose" p6>
+    <article class="prose" of-auto p6>
       <ContentDoc />
     </article>
   </div>
