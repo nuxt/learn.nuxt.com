@@ -1,5 +1,4 @@
-import { defineStore } from 'pinia'
-import type { Raw, ShallowRef, UnwrapNestedRefs } from 'vue'
+import type { Raw } from 'vue'
 import type { WebContainer } from '@webcontainer/api'
 import type { VirtualFile } from '../structures/VirtualFile'
 
@@ -13,28 +12,18 @@ export const PlaygroundStatusOrder = [
 
 export type PlaygroundStatus = typeof PlaygroundStatusOrder[number] | 'error'
 
-export interface PlaygroundStateRaw {
-  files: ShallowRef<Raw<VirtualFile[]>>
-  status: PlaygroundStatus
-  error: { message: string } | undefined
-  stream: ReadableStream | undefined
-  webcontainer: ShallowRef<Raw<WebContainer> | undefined>
-  previewUrl: ComputedRef<string>
-  previewLocation: Ref<{
-    origin: string
-    fullPath: string
-  }>
-  actions: PlaygroundActions
-}
-
 export interface PlaygroundActions {
   restartServer(): Promise<void>
   downloadZip(): Promise<void>
 }
 
-export type PlaygroundState = UnwrapNestedRefs<PlaygroundStateRaw>
+export const usePlaygroundStore = defineStore('playground', () => {
+  const status = ref<PlaygroundStatus>('init')
+  const error = shallowRef<{ message: string }>()
+  const stream = shallowRef<ReadableStream>()
+  const files = shallowRef<Raw<VirtualFile>[]>([])
+  const webcontainer = shallowRef<Raw<WebContainer>>()
 
-export const usePlaygroundStore = defineStore('playground', (): PlaygroundStateRaw => {
   const previewLocation = ref({
     origin: '',
     fullPath: '',
@@ -48,16 +37,18 @@ export const usePlaygroundStore = defineStore('playground', (): PlaygroundStateR
   }
 
   return {
-    status: 'init',
-    error: undefined,
-    stream: undefined,
-    files: shallowRef([]),
-    webcontainer: shallowRef(undefined),
+    status,
+    error,
+    stream,
+    files,
+    webcontainer,
     previewUrl,
     previewLocation,
     actions,
   }
 })
+
+export type PlaygroundStore = ReturnType<typeof usePlaygroundStore>
 
 if (import.meta.hot)
   import.meta.hot.accept(acceptHMRUpdate(usePlaygroundStore, import.meta.hot))
