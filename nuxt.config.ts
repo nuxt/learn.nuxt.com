@@ -1,6 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true },
   modules: [
     '@vueuse/nuxt',
     '@unocss/nuxt',
@@ -47,5 +46,10 @@ export default defineNuxtConfig({
     head: {
       titleTemplate: '%s - Nuxt Playground',
     },
+  },
+  devtools: {
+    // This does not work because it conflicts with WebContainer's headers requirement
+    // Disabled for now and will find a solution later
+    enabled: false,
   },
 })

@@ -2,7 +2,7 @@
   "private": true,
   "packageManager": "pnpm@8.10.5",
   "scripts": {
-    "dev": "nuxt dev --no-qr",
+    "dev": "nuxt dev",
     "prepare": "nuxt prepare"
   },
   "dependencies": {
