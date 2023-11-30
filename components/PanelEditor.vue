@@ -61,7 +61,7 @@ function onTextInput() {
         v-model="input"
         border="l base"
 
-        h-full w-full bg-transparent p4 font-mono
+        h-full w-full resize-none bg-transparent p4 font-mono
         @input="onTextInput"
       />
     </div>
