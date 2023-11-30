@@ -24,9 +24,9 @@ export default function load(options: TemplateOptions = {}) {
   // Merge .nuxtrc
   if (options.nuxtrc) {
     rawFiles['.nuxtrc'] = [
-      rawFiles['.nuxtrc'] || '',
+      ...(rawFiles['.nuxtrc'] || '').split(/\n/g),
       ...options.nuxtrc,
-    ].join('\n')
+    ].filter(Boolean).join('\n')
   }
 
   const files = Object.entries(rawFiles)
