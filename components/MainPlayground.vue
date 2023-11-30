@@ -80,7 +80,7 @@ const panelInitTerminal = computed(() => isMounted.value || {
         @resized="endDraggingHorizontal"
       >
         <Pane :size="ui.panelEditor" min-size="10" :style="panelInitEditor">
-          <PanelEditor :files="play?.files" />
+          <PanelEditor :files="play.files" />
         </Pane>
         <PaneSplitter />
         <Pane :size="ui.panelPreview" min-size="10" :style="panelInitPreview">
@@ -91,7 +91,7 @@ const panelInitTerminal = computed(() => isMounted.value || {
           v-bind="terminalPaneProps" :style="panelInitTerminal"
           :class="ui.showTerminal ? '' : 'pane-hidden'"
         >
-          <PanelTerminal :stream="play?.stream" />
+          <PanelTerminal :stream="play.stream" />
         </Pane>
       </Splitpanes>
     </Pane>
