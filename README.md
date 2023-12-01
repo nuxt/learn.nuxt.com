@@ -15,7 +15,7 @@ Anthony Fu is doing regular live streaming on building this project from scratch
 
 > [!IMPORTANT]
 >
-> **Please create an issue first before submiting PRs.**
+> **Please create an issue first before submitting PRs.**
 > So that we can discuss about the directions and plans, to avoid wasted efforts. Thank you!
 >
 > This project is progressed mainly on Live Stream. In general, we want to present the main progress on the stream so people can follow along the whole process. Contributions are still greatly welcome! For PR that makes refactors or big changes, we could review them on the stream as well.
