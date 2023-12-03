@@ -50,6 +50,10 @@ onMounted(async () => {
     colorMode.value,
   )
 })
+
+defineExpose({
+  iframe,
+})
 </script>
 
 <template>
