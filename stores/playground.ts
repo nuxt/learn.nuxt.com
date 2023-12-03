@@ -28,7 +28,7 @@ export const usePlaygroundStore = defineStore('playground', () => {
     origin: '',
     fullPath: '',
   })
-  const previewUrl = computed(() => previewLocation.value.origin + previewLocation.value.fullPath)
+  const previewUrl = computed(() => previewLocation.value.origin)
 
   // Actions that will be replaced later on
   const actions: PlaygroundActions = {
