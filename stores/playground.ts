@@ -28,7 +28,11 @@ export const usePlaygroundStore = defineStore('playground', () => {
     origin: '',
     fullPath: '',
   })
-  const previewUrl = computed(() => previewLocation.value.origin)
+  const previewUrl = ref('')
+
+  function updatePreviewUrl() {
+    previewUrl.value = previewLocation.value.origin + previewLocation.value.fullPath
+  }
 
   // Actions that will be replaced later on
   const actions: PlaygroundActions = {
@@ -43,6 +47,7 @@ export const usePlaygroundStore = defineStore('playground', () => {
     files,
     webcontainer,
     previewUrl,
+    updatePreviewUrl,
     previewLocation,
     actions,
   }

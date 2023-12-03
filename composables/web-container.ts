@@ -49,6 +49,7 @@ export async function mountPlayground(
         origin: url,
         fullPath: '/',
       }
+      play.updatePreviewUrl()
     }
   })
 
