@@ -29,6 +29,9 @@ export default defineNuxtConfig({
       cssMinify: 'esbuild',
     },
   },
+  vue: {
+    defineModel: true,
+  },
   content: {
     highlight: {
       theme: {

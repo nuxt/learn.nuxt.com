@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { VirtualFile } from '~/structures/VirtualFile'
+import { filesToVirtualFsTree } from '~/templates/utils'
 
 // TODO: replace with Monaco with a real file tree.
 
@@ -13,6 +14,8 @@ const props = withDefaults(
 )
 
 const files = computed(() => props.files.filter(file => !isFileIgnored(file.filepath)))
+const directory = computed(() => filesToVirtualFsTree(files.value))
+
 const selectedFile = ref<VirtualFile>()
 const input = ref<string>()
 
@@ -24,8 +27,11 @@ watchEffect(() => {
 
 function selectFile(file: VirtualFile) {
   selectedFile.value = file
-  input.value = file.read()
 }
+
+watch(selectedFile, (file) => {
+  input.value = file?.read()
+})
 
 function onTextInput() {
   // TODO: add throttle
@@ -46,16 +52,7 @@ function onTextInput() {
     </div>
     <div grid="~ cols-[1fr_2fr]">
       <div flex="~ col" h-full of-auto>
-        <button
-          v-for="file in files" :key="file.filepath"
-          px2 py1 hover="bg-active" text-left
-          :class="{
-            'text-primary': file.filepath === selectedFile?.filepath,
-          }"
-          @click="selectFile(file)"
-        >
-          {{ file.filepath }}
-        </button>
+        <PanelEditorFileSystemTree v-model="selectedFile" :directory="directory" :files="files" />
       </div>
       <textarea
         v-model="input"
