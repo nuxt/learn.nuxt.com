@@ -23,10 +23,6 @@ function handleClick() {
     selectedFile.value = props.file
 }
 
-const depthStyle = computed(() => ({
-  paddingLeft: `${8 * (props.depth)}px`,
-}))
-
 // put folders first and sort alphabetically
 const sortedDirectory = computed(() => props.directory && Object.fromEntries(
   Object.entries(props.directory).sort(([aName, a], [bName, b]) => {
@@ -41,9 +37,15 @@ const sortedDirectory = computed(() => props.directory && Object.fromEntries(
 
 <template>
   <div>
-    <div hover="bg-active" :style="depthStyle" @click="handleClick">
+    <div
+      v-if="name"
+      hover="bg-active"
+      :style="{
+        paddingLeft: `${0.5 * (props.depth)}rem`,
+      }"
+      @click="handleClick"
+    >
       <button
-        v-if="name"
         flex items-center gap-2 px2 py1 text-left :class="{
           'text-primary': isFileSelected,
         }"
