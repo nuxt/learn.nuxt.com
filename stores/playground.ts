@@ -82,7 +82,7 @@ export const usePlaygroundStore = defineStore('playground', () => {
       }
     }
 
-    /* #__PURE__ */ mount()
+    mount()
   }
 
   function killPreviousProcess() {

@@ -38,7 +38,7 @@
     "eslint": "^8.55.0",
     "eslint-plugin-format": "^0.1.0",
     "jszip": "^3.10.1",
-    "nuxt": "^3.8.2",
+    "nuxt": "npm:nuxt-nightly@latest",
     "remark-external-links": "^9.0.1",
     "theme-vitesse": "^0.7.5",
     "vue-tsc": "^1.8.24"
