@@ -3,6 +3,9 @@ import type { TemplateOptions } from './types'
 import { filesToWebContainerFs } from './utils'
 
 export default function load(options: TemplateOptions = {}) {
+  if (import.meta.server)
+    throw new Error('This template can only be used on the client')
+
   const rawInput = import.meta.glob([
     './basic/**/*.*',
     './basic/**/.layer-playground/**/*.*',
