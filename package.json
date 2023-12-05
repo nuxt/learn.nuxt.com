@@ -16,6 +16,7 @@
   "dependencies": {
     "@webcontainer/api": "^1.1.8",
     "birpc": "^0.2.14",
+    "monaco-editor": "^0.44.0",
     "splitpanes": "^3.1.5",
     "vue": "^3.3.10",
     "vue-router": "^4.2.5",
