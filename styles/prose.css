@@ -1,5 +1,5 @@
 :root {
-  --un-prose-links: #00DC82;
+  --un-prose-links: #00dc82;
 }
 
 .prose a {
@@ -11,7 +11,7 @@
   text-decoration-style: dotted;
 }
 
-.prose :where(h1 a,h2 a,h3 a,h4 a) {
+.prose :where(h1 a, h2 a, h3 a, h4 a) {
   border-bottom: none !important;
   text-decoration: none !important;
   color: inherit;
