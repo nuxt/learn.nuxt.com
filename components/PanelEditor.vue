@@ -52,7 +52,7 @@ function onTextInput() {
     </div>
     <div grid="~ cols-[1fr_2fr]">
       <div flex="~ col" h-full of-auto>
-        <PanelEditorFileSystemTree v-model="selectedFile" :directory="directory" :files="files" />
+        <PanelEditorFileSystemTree v-model="selectedFile" :directory="directory" :depth="-1" />
       </div>
       <textarea
         v-model="input"

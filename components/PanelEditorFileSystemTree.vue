@@ -6,6 +6,7 @@ const props = defineProps<{
   name?: string
   directory?: VirtualFileSystemTree
   file?: VirtualFile
+  depth: number
 }>()
 
 const selectedFile = defineModel<VirtualFile>()
@@ -21,28 +22,35 @@ function handleClick() {
   else if (props.file)
     selectedFile.value = props.file
 }
+
+const depthStyle = computed(() => ({
+  paddingLeft: `${8 * (props.depth)}px`,
+}))
 </script>
 
 <template>
   <div>
-    <button
-      v-if="name"
-      hover="bg-active" flex items-center gap-2 px2 py1 text-left :class="{
-        'text-primary': isFileSelected,
-      }" @click="handleClick"
-    >
-      <div v-if="directory && !isDirectoryOpen" i-ph:folder-duotone />
-      <div v-if="directory && isDirectoryOpen" i-ph:folder-open-duotone />
-      <div v-if="!directory" i-ph:file-duotone />
-      {{ name }}
-    </button>
-    <div v-if="directory" v-show="isDirectoryOpen" ml-2>
+    <div hover="bg-active" :style="depthStyle" @click="handleClick">
+      <button
+        v-if="name"
+        flex items-center gap-2 px2 py1 text-left :class="{
+          'text-primary': isFileSelected,
+        }"
+      >
+        <div v-if="directory && !isDirectoryOpen" i-ph:folder-duotone />
+        <div v-if="directory && isDirectoryOpen" i-ph:folder-open-duotone />
+        <div v-if="!directory" i-ph:file-duotone />
+        {{ name }}
+      </button>
+    </div>
+    <div v-if="directory" v-show="isDirectoryOpen">
       <PanelEditorFileSystemTree
         v-for="(child, chileName) in directory"
         :key="chileName"
         v-model="selectedFile"
         :name="chileName.toString()"
         v-bind="child"
+        :depth="depth + 1"
       />
     </div>
   </div>
