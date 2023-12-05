@@ -65,6 +65,7 @@ export const usePlaygroundStore = defineStore('playground', () => {
             origin: url,
             fullPath: '/',
           }
+          updatePreviewUrl()
         }
       })
 
