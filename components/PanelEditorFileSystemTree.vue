@@ -26,6 +26,17 @@ function handleClick() {
 const depthStyle = computed(() => ({
   paddingLeft: `${8 * (props.depth)}px`,
 }))
+
+// put folders first and sort alphabetically
+const sortedDirectory = computed(() => props.directory && Object.fromEntries(
+  Object.entries(props.directory).sort(([aName, a], [bName, b]) => {
+    if ('directory' in a && !('directory' in b))
+      return -1
+    if (!('directory' in a) && 'directory' in b)
+      return 1
+    return aName.localeCompare(bName)
+  }),
+))
 </script>
 
 <template>
@@ -45,7 +56,7 @@ const depthStyle = computed(() => ({
     </div>
     <div v-if="directory" v-show="isDirectoryOpen">
       <PanelEditorFileSystemTree
-        v-for="(child, chileName) in directory"
+        v-for="(child, chileName) in sortedDirectory"
         :key="chileName"
         v-model="selectedFile"
         :name="chileName.toString()"
