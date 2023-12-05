@@ -16,6 +16,7 @@
   "dependencies": {
     "@webcontainer/api": "^1.1.8",
     "birpc": "^0.2.14",
+    "monaco-editor": "^0.44.0",
     "splitpanes": "^3.1.5",
     "vue": "^3.3.10",
     "vue-router": "^4.2.5",
@@ -37,7 +38,7 @@
     "eslint": "^8.55.0",
     "eslint-plugin-format": "^0.1.0",
     "jszip": "^3.10.1",
-    "nuxt": "^3.8.2",
+    "nuxt": "npm:nuxt-nightly@latest",
     "remark-external-links": "^9.0.1",
     "theme-vitesse": "^0.7.5",
     "vue-tsc": "^1.8.24"
