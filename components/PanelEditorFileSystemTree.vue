@@ -85,7 +85,7 @@ const icon = computed(() => {
       v-if="name"
       hover="bg-active"
       :style="{
-        paddingLeft: `${0.5 + 0.8 * (props.depth)}rem`,
+        paddingLeft: `${0.8 + 0.8 * (props.depth)}rem`,
       }"
       :class="isFileSelected ? 'bg-active' : 'saturate-0 text-faded'"
       w-full flex items-center gap-2 px2 py1 text-left text-sm
