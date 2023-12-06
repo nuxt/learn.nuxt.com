@@ -1,8 +1,7 @@
 <script setup lang="ts">
+import { Pane, Splitpanes } from 'splitpanes'
 import type { VirtualFile } from '~/structures/VirtualFile'
 import { filesToVirtualFsTree } from '~/templates/utils'
-
-// TODO: replace with Monaco with a real file tree.
 
 const props = withDefaults(
   defineProps<{
@@ -12,6 +11,8 @@ const props = withDefaults(
     files: () => [],
   },
 )
+
+const ui = useUiState()
 
 const files = computed(() => props.files.filter(file => !isFileIgnored(file.filepath)))
 const directory = computed(() => filesToVirtualFsTree(files.value))
@@ -30,7 +31,7 @@ function selectFile(file: VirtualFile) {
 }
 
 watch(selectedFile, (file) => {
-  input.value = file?.read()
+  input.value = file?.read() || ''
 })
 
 function onTextInput() {
@@ -38,10 +39,31 @@ function onTextInput() {
   if (input.value != null)
     selectedFile?.value?.write(input.value)
 }
+
+function startDragging() {
+  ui.isPanelDragging = true
+}
+
+function endDragging(e: { size: number }[]) {
+  ui.isPanelDragging = false
+  ui.panelFileTree = e[0].size
+}
+
+// For panes size initialization on SSR
+const isMounted = useMounted()
+const panelInitFileTree = computed(() => isMounted.value || {
+  width: `${ui.panelFileTree}%`,
+})
+const panelInitEditor = computed(() => isMounted.value || {
+  width: `${100 - ui.panelFileTree}%`,
+})
 </script>
 
 <template>
-  <div h-full grid="~ rows-[min-content_1fr]">
+  <div
+    h-full
+    grid="~ rows-[min-content_1fr]"
+  >
     <div
       flex="~ gap-2 items-center"
       border="b base dashed"
@@ -50,25 +72,34 @@ function onTextInput() {
       <div i-ph-text-t-duotone />
       <span text-sm>Editor</span>
     </div>
-    <div grid="~ cols-[1fr_2fr]">
-      <div flex="~ col" h-full of-auto>
-        <PanelEditorFileSystemTree v-model="selectedFile" :directory="directory" :depth="-1" />
-      </div>
-      <PanelEditorClient
-        v-if="selectedFile"
-        v-model="input"
-        :filepath="selectedFile.filepath"
-        h-full w-full
-        @change="onTextInput"
-      />
-
-      <!-- <textarea
-        v-model="input"
-        border="l base"
-
-        h-full w-full resize-none bg-transparent p4 font-mono
-        @input="onTextInput"
-      /> -->
-    </div>
+    <Splitpanes
+      @resize="startDragging"
+      @resized="endDragging"
+    >
+      <Pane
+        flex="~ col" h-full of-auto
+        :size="ui.panelFileTree"
+        :style="panelInitFileTree"
+      >
+        <PanelEditorFileSystemTree
+          v-model="selectedFile"
+          :directory="directory"
+          :depth="-1"
+        />
+      </Pane>
+      <PaneSplitter />
+      <Pane
+        :size="100 - ui.panelFileTree"
+        :style="panelInitEditor"
+      >
+        <PanelEditorClient
+          v-if="selectedFile"
+          v-model="input"
+          :filepath="selectedFile.filepath"
+          h-full w-full
+          @change="onTextInput"
+        />
+      </Pane>
+    </Splitpanes>
   </div>
 </template>
