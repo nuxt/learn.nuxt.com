@@ -40,7 +40,7 @@ const fitAddon = new FitAddon()
 terminal.loadAddon(fitAddon)
 
 watch(
-  () => play.stream,
+  () => play.outputStream,
   (s) => {
     if (!s)
       return
@@ -58,6 +58,20 @@ watch(
     catch (e) {
       console.error(e)
     }
+  },
+  { flush: 'sync', immediate: true },
+)
+
+watch(
+  () => play.inputStream,
+  (ips) => {
+    if(!ips)
+      return
+    const input = ips.getWriter()
+    terminal.onData((data) => {
+      play.killPreviousProcess()
+      input.write(data)
+    })
   },
   { flush: 'sync', immediate: true },
 )

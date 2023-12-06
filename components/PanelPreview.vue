@@ -15,6 +15,15 @@ function refreshIframe() {
   }
 }
 
+watch(
+  () => play.previewUrl,
+  () => {
+    if(play.status === 'ready')
+      refreshIframe()
+  },
+  { flush: 'sync' }
+)
+
 function navigate() {
   play.previewLocation.fullPath = inputUrl.value
   play.updatePreviewUrl()

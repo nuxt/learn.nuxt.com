@@ -15,7 +15,8 @@ export type PlaygroundStatus = typeof PlaygroundStatusOrder[number] | 'error'
 export const usePlaygroundStore = defineStore('playground', () => {
   const status = ref<PlaygroundStatus>('init')
   const error = shallowRef<{ message: string }>()
-  const stream = shallowRef<ReadableStream>()
+  const outputStream = shallowRef<ReadableStream>()
+  const inputStream = shallowRef<WritableStream>()
   const files = shallowRef<Raw<VirtualFile>[]>([])
   const webcontainer = shallowRef<Raw<WebContainer>>()
 
@@ -33,6 +34,7 @@ export const usePlaygroundStore = defineStore('playground', () => {
 
   let processInstall: WebContainerProcess | undefined
   let processDev: WebContainerProcess | undefined
+  let processInteractivity: WebContainerProcess | undefined
 
   // Mount the playground on client side
   if (import.meta.client) {
@@ -61,6 +63,7 @@ export const usePlaygroundStore = defineStore('playground', () => {
         // Nuxt listen to multiple ports, and 'server-ready' is emitted for each of them
         // We need the main one
         if (port === 3000) {
+          previewUrl.value = ''
           previewLocation.value = {
             origin: url,
             fullPath: '/',
@@ -92,21 +95,29 @@ export const usePlaygroundStore = defineStore('playground', () => {
 
   function killPreviousProcess() {
     processInstall?.kill()
+    processInstall = undefined
     processDev?.kill()
+    processInstall = undefined
   }
 
   async function startServer() {
     if (!import.meta.client)
       return
 
-    const wc = webcontainer.value!
-
     killPreviousProcess()
 
+    launchDefaultProcess(webcontainer.value!)
+
+    launchInteractiveProcess(webcontainer.value!)
+  }
+
+  async function launchDefaultProcess(wc: WebContainer) {
+    if(!wc)
+      return
     status.value = 'install'
 
     processInstall = await wc.spawn('pnpm', ['install'])
-    stream.value = processInstall.output
+    outputStream.value = processInstall.output
     const installExitCode = await processInstall.exit
 
     if (installExitCode !== 0) {
@@ -119,7 +130,15 @@ export const usePlaygroundStore = defineStore('playground', () => {
 
     status.value = 'start'
     processDev = await wc.spawn('pnpm', ['run', 'dev', '--no-qr'])
-    stream.value = processDev.output
+    outputStream.value = processDev.output
+  }
+
+  async function launchInteractiveProcess(wc: WebContainer) {
+
+    processInteractivity = await wc.spawn('jsh')
+    
+    outputStream.value = processInteractivity.output
+    inputStream.value = processInteractivity.input
   }
 
   async function downloadZip() {
@@ -172,7 +191,8 @@ export const usePlaygroundStore = defineStore('playground', () => {
   return {
     status,
     error,
-    stream,
+    outputStream,
+    inputStream,
     files,
     webcontainer,
     previewUrl,
@@ -180,6 +200,7 @@ export const usePlaygroundStore = defineStore('playground', () => {
     previewLocation,
     restartServer: startServer,
     downloadZip,
+    killPreviousProcess
   }
 })
 
