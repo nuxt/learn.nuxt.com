@@ -1,6 +1,7 @@
 const INGORE_FILES: (string | RegExp)[] = [
   'pnpm-lock.yaml',
   'pnpm-workspace.yaml',
+  'node_modules',
   /tsconfig\.json$/,
   /^\./,
 ]
