@@ -2,21 +2,22 @@
 const play = usePlaygroundStore()
 
 const inputUrl = ref<string>('')
-const inner = ref<{ iframe?: Ref<HTMLIFrameElement | undefined> }>()
+const inner = ref<{ iframe?: HTMLIFrameElement | undefined }>()
 
 // auto update inputUrl when location value changed
 syncRef(computed(() => play.previewLocation.fullPath), inputUrl, { direction: 'ltr' })
 
 function refreshIframe() {
-  if (play.previewUrl && inner.value?.iframe?.value) {
-    inner.value.iframe.value.src = play.previewUrl
+  if (play.previewUrl && inner.value?.iframe) {
+    play.updatePreviewUrl()
+    inner.value.iframe.src = play.previewUrl
     inputUrl.value = play.previewLocation.fullPath
   }
 }
 
 function navigate() {
   play.previewLocation.fullPath = inputUrl.value
-
+  play.updatePreviewUrl()
   const activeElement = document.activeElement
   if (activeElement instanceof HTMLElement)
     activeElement.blur()
