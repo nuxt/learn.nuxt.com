@@ -1,7 +1,40 @@
-<script setup lang="ts">
+<script lang="ts">
 import type { VirtualFile } from '~/structures/VirtualFile'
 import type { VirtualFileSystemTree } from '~/structures/VirtualFileSystemTree'
 
+const FILE_ICONS = [
+  {
+    match: /\.vue$/,
+    icon: 'i-logos-vue',
+  },
+  {
+    match: /nuxt\.config\.\w+$/,
+    icon: 'i-logos-nuxt-icon scale-110',
+  },
+  {
+    match: /package\.json$/,
+    icon: 'i-file-icons-npm text-red scale-110',
+  },
+  {
+    match: /\.[mc]?tsx?$/,
+    icon: 'i-file-icons-typescript-alt text-blue3',
+  },
+  {
+    match: /\.[mc]?jsx?$/,
+    icon: 'i-devicon-javascript',
+  },
+]
+
+function getFileIcon(filepath: string): string {
+  for (const { match, icon } of FILE_ICONS) {
+    if (match.test(filepath))
+      return icon
+  }
+  return 'i-ph:file-duotone scale-120'
+}
+</script>
+
+<script setup lang="ts">
 const props = defineProps<{
   name?: string
   directory?: VirtualFileSystemTree
@@ -33,29 +66,34 @@ const sortedDirectory = computed(() => props.directory && Object.fromEntries(
     return aName.localeCompare(bName)
   }),
 ))
+
+const icon = computed(() => {
+  if (props.directory) {
+    return isDirectoryOpen.value
+      ? 'i-ph:folder-open-duotone scale-120'
+      : 'i-ph:folder-simple-duotone scale-120'
+  }
+  else {
+    return getFileIcon(props.name!)
+  }
+})
 </script>
 
 <template>
   <div>
-    <div
+    <button
       v-if="name"
       hover="bg-active"
       :style="{
-        paddingLeft: `${0.5 * (props.depth)}rem`,
+        paddingLeft: `${0.5 + 0.8 * (props.depth)}rem`,
       }"
+      :class="isFileSelected ? 'bg-active' : 'saturate-0 text-faded'"
+      w-full flex items-center gap-2 px2 py1 text-left text-sm
       @click="handleClick"
     >
-      <button
-        flex items-center gap-2 px2 py1 text-left :class="{
-          'text-primary': isFileSelected,
-        }"
-      >
-        <div v-if="directory && !isDirectoryOpen" i-ph:folder-duotone />
-        <div v-if="directory && isDirectoryOpen" i-ph:folder-open-duotone />
-        <div v-if="!directory" i-ph:file-duotone />
-        {{ name }}
-      </button>
-    </div>
+      <div :class="icon" h-4 w-4 flex-none />
+      {{ name }}
+    </button>
     <div v-if="directory" v-show="isDirectoryOpen">
       <PanelEditorFileSystemTree
         v-for="(child, chileName) in sortedDirectory"
