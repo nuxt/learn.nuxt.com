@@ -35,6 +35,9 @@ export default defineNuxtConfig({
       },
     },
   },
+  vue: {
+    defineModel: true,
+  },
   content: {
     highlight: {
       theme: {
