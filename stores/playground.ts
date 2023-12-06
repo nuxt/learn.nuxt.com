@@ -10,12 +10,16 @@ export const PlaygroundStatusOrder = [
   'ready',
 ] as const
 
+export type TerminalInteractionType = 'vibrant' | 'lethargic'
+
 export type PlaygroundStatus = typeof PlaygroundStatusOrder[number] | 'error'
 
 export const usePlaygroundStore = defineStore('playground', () => {
   const status = ref<PlaygroundStatus>('init')
+  const termInteractType = ref<TerminalInteractionType>('vibrant')
   const error = shallowRef<{ message: string }>()
-  const stream = shallowRef<ReadableStream>()
+  const outputStream = shallowRef<ReadableStream>()
+  const inputStream = shallowRef<WritableStream>()
   const files = shallowRef<Raw<VirtualFile>[]>([])
   const webcontainer = shallowRef<Raw<WebContainer>>()
 
@@ -72,7 +76,9 @@ export const usePlaygroundStore = defineStore('playground', () => {
       status.value = 'mount'
       await wc.mount(tree)
 
+
       startServer()
+      // startShell()
 
       // In dev, when doing HMR, we kill the previous process while reusing the same WebContainer
       if (import.meta.hot) {
@@ -94,14 +100,21 @@ export const usePlaygroundStore = defineStore('playground', () => {
     if (!import.meta.client)
       return
 
-    const wc = webcontainer.value!
-
     killPreviousProcess()
 
-    status.value = 'install'
+    if(termInteractType.value === 'vibrant') vibrantTerminal()
+    if(termInteractType.value === 'lethargic') lethargicTerminal()
+  }
 
+  /**
+   * terminal interaction type : Lethargic
+   */
+  async function lethargicTerminal() {
+    const wc = webcontainer.value!
+
+    status.value = 'install'
     processInstall = await wc.spawn('pnpm', ['install'])
-    stream.value = processInstall.output
+    outputStream.value = processInstall.output
     const installExitCode = await processInstall.exit
 
     if (installExitCode !== 0) {
@@ -114,7 +127,21 @@ export const usePlaygroundStore = defineStore('playground', () => {
 
     status.value = 'start'
     processDev = await wc.spawn('pnpm', ['run', 'dev', '--no-qr'])
-    stream.value = processDev.output
+    outputStream.value = processDev.output
+  }
+
+  /**
+   * terminal interaction type: vibrant
+   */
+  async function vibrantTerminal() {
+    const wc = webcontainer.value!
+
+    const shellProcess = await wc.spawn('jsh');
+
+    status.value = 'start'
+
+    outputStream.value = shellProcess.output
+    inputStream.value = shellProcess.input
   }
 
   async function downloadZip() {
@@ -166,8 +193,10 @@ export const usePlaygroundStore = defineStore('playground', () => {
 
   return {
     status,
+    termInteractType,
     error,
-    stream,
+    outputStream,
+    inputStream,
     files,
     webcontainer,
     previewUrl,

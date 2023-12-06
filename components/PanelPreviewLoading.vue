@@ -40,6 +40,9 @@ function getTextClass(status: PlaygroundStatus) {
       return 'op50'
   }
 }
+
+const isLethargicTerm = computed(() => play.termInteractType === 'lethargic')
+
 </script>
 
 <template>
@@ -53,10 +56,12 @@ function getTextClass(status: PlaygroundStatus) {
       <span :class="getTextClass('init')">Initialize WebContainer</span>
       <div :class="getStatusIcon('mount')" />
       <span :class="getTextClass('mount')">Mount files</span>
-      <div :class="getStatusIcon('install')" />
-      <span :class="getTextClass('install')">Install Dependencies</span>
-      <div :class="getStatusIcon('start')" />
-      <span :class="getTextClass('start')">Boot Nuxt Server</span>
+      <div v-if="isLethargicTerm" :class="getStatusIcon('install')" />
+      <span v-if="isLethargicTerm" :class="getTextClass('install')">Install Dependencies</span>
+      <div v-if="isLethargicTerm" :class="getStatusIcon('start')" />
+      <span v-if="isLethargicTerm" :class="getTextClass('start')">Boot Nuxt Server</span>
+      <div class="i-ph-dot-duotone text-xl" />
+      <span class="op50 normal-case">Execute Commands 'pnpm install' & 'pnpm dev' to Start. </span>
     </div>
   </div>
 </template>

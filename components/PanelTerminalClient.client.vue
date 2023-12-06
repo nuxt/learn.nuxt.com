@@ -23,6 +23,7 @@ const theme = computed<ITheme>(() => {
 
 const root = ref<HTMLDivElement>()
 const terminal = new Terminal({
+  convertEol: true,
   customGlyphs: true,
   allowTransparency: true,
   theme: theme.value,
@@ -40,7 +41,7 @@ const fitAddon = new FitAddon()
 terminal.loadAddon(fitAddon)
 
 watch(
-  () => play.stream,
+  () => play.outputStream,
   (s) => {
     if (!s)
       return
@@ -60,6 +61,23 @@ watch(
     }
   },
   { flush: 'sync', immediate: true },
+)
+
+watch(
+  () => play.inputStream,
+  (ipts) => {
+    if(!ipts)
+      return
+    try {
+      const input = ipts.getWriter()
+      terminal.onData((data) => {
+        input.write(data);
+      });
+    } catch (e) {
+      console.log(e)
+    }
+  },
+  { flush: 'sync', immediate: true }
 )
 
 useResizeObserver(root, useDebounceFn(() => fitAddon.fit(), 200))
