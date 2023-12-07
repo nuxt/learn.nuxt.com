@@ -40,15 +40,17 @@ const fitAddon = new FitAddon()
 terminal.loadAddon(fitAddon)
 
 watch(
-  () => play.outputStream,
-  (s) => {
-    if (!s)
+  () => play.currentProcess,
+  (p) => {
+    if (!p)
       return
+    // Output
     try {
-      const reader = s.getReader()
+      const reader = p.output.getReader()
       function read() {
         reader.read().then(({ done, value }) => {
-          terminal.write(value)
+          if (value)
+            terminal.write(value)
           if (!done)
             read()
         })
@@ -58,20 +60,16 @@ watch(
     catch (e) {
       console.error(e)
     }
-  },
-  { flush: 'sync', immediate: true },
-)
 
-watch(
-  () => play.inputStream,
-  (ips) => {
-    if(!ips)
-      return
-    const input = ips.getWriter()
-    terminal.onData((data) => {
-      play.killPreviousProcess()
-      input.write(data)
-    })
+    try {
+      const writer = p.input.getWriter()
+      terminal.onData((data) => {
+        writer.write(data)
+      })
+    }
+    catch (e) {
+      console.error(e)
+    }
   },
   { flush: 'sync', immediate: true },
 )
