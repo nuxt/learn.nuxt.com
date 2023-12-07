@@ -11,6 +11,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void
+  (event: 'change', value: string): void
 }>()
 
 const play = usePlaygroundStore()
@@ -102,7 +103,9 @@ watch(
     )
 
     editor.onDidChangeModelContent(() => {
-      emit('update:modelValue', editor.getValue())
+      const value = editor.getValue()
+      emit('update:modelValue', value)
+      emit('change', value)
     })
 
     watch(
