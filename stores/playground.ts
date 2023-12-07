@@ -58,18 +58,17 @@ export const usePlaygroundStore = defineStore('playground', () => {
         // Nuxt listen to multiple ports, and 'server-ready' is emitted for each of them
         // We need the main one
         if (port === 3000) {
-          previewUrl.value = ''
           previewLocation.value = {
             origin: url,
             fullPath: '/',
           }
-          updatePreviewUrl()
+          status.value = 'start'
         }
       })
 
       wc.on('error', (err) => {
-        status.value = 'error'
         error.value = err
+        status.value = 'error'
       })
 
       status.value = 'mount'
@@ -143,7 +142,6 @@ export const usePlaygroundStore = defineStore('playground', () => {
       throw new Error('Unable to run npm install')
     }
 
-    status.value = 'start'
     await spawn(wc, 'pnpm', ['run', 'dev', '--no-qr'])
   }
 
@@ -211,7 +209,6 @@ export const usePlaygroundStore = defineStore('playground', () => {
     previewLocation,
     restartServer: startServer,
     downloadZip,
-    killPreviousProcess,
   }
 })
 
