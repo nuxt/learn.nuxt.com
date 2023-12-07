@@ -28,7 +28,7 @@ let locale: string
 let ts: typeof import('typescript')
 let tsLocalized: any
 
-self.onmessage = async (msg: MessageEvent<WorkerMessage>) => {
+globalThis.onmessage = async (msg: MessageEvent<WorkerMessage>) => {
   if (msg.data?.event === 'init') {
     if (msg.data.tsLocale)
       locale = msg.data.tsLocale
@@ -40,7 +40,7 @@ self.onmessage = async (msg: MessageEvent<WorkerMessage>) => {
           `https://cdn.jsdelivr.net/npm/typescript@${msg.data.tsVersion}/lib/${locale}/diagnosticMessages.generated.json`,
       ),
     ])
-    self.postMessage('inited')
+    globalThis.postMessage('inited')
     return
   }
 

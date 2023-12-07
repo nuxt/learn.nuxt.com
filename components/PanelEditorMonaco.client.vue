@@ -17,9 +17,9 @@ const emit = defineEmits<{
 const play = usePlaygroundStore()
 const store = new Store()
 
+// TODO: refactor this out
 watchEffect(() => {
   store.state.files = play.files.map(i => i.filepath)
-  console.log(store.state.files)
 })
 
 initMonaco(store)
