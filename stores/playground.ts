@@ -53,6 +53,10 @@ export const usePlaygroundStore = defineStore('playground', () => {
       webcontainer.value = wc
       files.value = _files
 
+      // // TODO: not booting the webcontainer in dev mode
+      // if (import.meta.dev)
+      //   return
+
       _files.forEach((file) => {
         file.wc = wc
       })

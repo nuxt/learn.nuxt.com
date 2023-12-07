@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
-import '../monaco/worker'
+import { loadGrammars } from 'monaco-volar'
+import { initMonaco } from '../monaco/worker'
+import { Store } from '~/monaco/env'
 
 const props = defineProps<{
   modelValue: string
@@ -9,7 +11,18 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void
+  (event: 'change', value: string): void
 }>()
+
+const play = usePlaygroundStore()
+const store = new Store()
+
+watchEffect(() => {
+  store.state.files = play.files.map(i => i.filepath)
+  console.log(store.state.files)
+})
+
+initMonaco(store)
 
 const el = ref<HTMLDivElement>()
 
@@ -28,6 +41,7 @@ const language = computed(() => {
     case 'json':
       return 'json'
     case 'vue':
+      return 'vue'
     case 'html':
       return 'html'
     default:
@@ -58,36 +72,40 @@ function getModel(filepath: string) {
 
 watch(
   () => el.value,
-  (value) => {
+  async (value) => {
     if (!value)
       return
 
     const editor = monaco.editor.create(
       value,
       {
-        model: getModel(props.filepath),
-        theme: theme.value,
-        fontSize: 14,
-        bracketPairColorization: {
+        'model': getModel(props.filepath),
+        'theme': theme.value,
+        'fontSize': 14,
+        'bracketPairColorization': {
           enabled: false,
         },
-        glyphMargin: false,
-        automaticLayout: true,
-        folding: false,
-        lineDecorationsWidth: 10,
-        lineNumbersMinChars: 3,
-        minimap: {
+        'glyphMargin': false,
+        'automaticLayout': true,
+        'folding': false,
+        'lineDecorationsWidth': 10,
+        'lineNumbersMinChars': 3,
+        'fontFamily': 'DM Mono, monospace',
+        'minimap': {
           enabled: false,
         },
-        padding: {
+        'padding': {
           top: 8,
         },
-        overviewRulerLanes: 0,
+        'semanticHighlighting.enabled': true,
+        'overviewRulerLanes': 0,
       },
     )
 
     editor.onDidChangeModelContent(() => {
-      emit('update:modelValue', editor.getValue())
+      const value = editor.getValue()
+      emit('update:modelValue', value)
+      emit('change', value)
     })
 
     watch(
@@ -98,6 +116,8 @@ watch(
     )
 
     watch(theme, () => monaco.editor.setTheme(theme.value))
+
+    await loadGrammars(monaco, editor)
   },
 )
 </script>

@@ -34,6 +34,11 @@ export default defineNuxtConfig({
         'Cross-Origin-Opener-Policy': 'same-origin',
       },
     },
+    // optimizeDeps: {
+    //   exclude: [
+    //     'monaco-volar',
+    //   ],
+    // },
   },
   vue: {
     defineModel: true,
