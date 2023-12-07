@@ -91,7 +91,7 @@ const panelInitTerminal = computed(() => isMounted.value || {
           v-bind="terminalPaneProps" :style="panelInitTerminal"
           :class="ui.showTerminal ? '' : 'pane-hidden'"
         >
-          <PanelTerminal :stream="play.stream" />
+          <PanelTerminal />
         </Pane>
       </Splitpanes>
     </Pane>

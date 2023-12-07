@@ -8,12 +8,21 @@ const inner = ref<{ iframe?: HTMLIFrameElement | undefined }>()
 syncRef(computed(() => play.previewLocation.fullPath), inputUrl, { direction: 'ltr' })
 
 function refreshIframe() {
+  play.updatePreviewUrl()
   if (play.previewUrl && inner.value?.iframe) {
-    play.updatePreviewUrl()
     inner.value.iframe.src = play.previewUrl
     inputUrl.value = play.previewLocation.fullPath
   }
 }
+
+watch(
+  () => play.status,
+  (status) => {
+    if (status === 'ready' || status === 'start')
+      refreshIframe()
+  },
+  { flush: 'sync' },
+)
 
 function navigate() {
   play.previewLocation.fullPath = inputUrl.value
