@@ -40,6 +40,7 @@ export default defineNuxtConfig({
         '@volar/cdn',
         '@vue/language-service',
         '@volar/monaco/worker',
+        'typescript',
       ],
     },
   },
