@@ -25,7 +25,6 @@
     "monaco-textmate": "^3.0.1",
     "onigasm": "^2.2.5",
     "shiki": "^0.14.6",
-    "shikiji": "^0.8.0",
     "splitpanes": "^3.1.5",
     "theme-vitesse": "^0.7.5",
     "vue": "^3.3.10",
@@ -34,9 +33,9 @@
     "xterm-addon-fit": "^0.8.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.3.3",
+    "@antfu/eslint-config": "^2.4.2",
     "@iconify-json/logos": "^1.1.40",
-    "@iconify/json": "^2.2.152",
+    "@iconify/json": "^2.2.153",
     "@nuxt/content": "^2.9.0",
     "@nuxt/devtools": "^1.0.5",
     "@nuxtjs/color-mode": "^3.3.2",
@@ -44,12 +43,12 @@
     "@unocss/eslint-plugin": "^0.58.0",
     "@unocss/extractor-mdc": "^0.58.0",
     "@unocss/nuxt": "^0.58.0",
-    "@vueuse/nuxt": "^10.6.1",
+    "@vueuse/nuxt": "^10.7.0",
     "eslint": "^8.55.0",
     "eslint-plugin-format": "^0.1.0",
     "nuxt": "npm:nuxt-nightly@latest",
     "remark-external-links": "^9.0.1",
     "typescript": "^5.3.3",
-    "vue-tsc": "^1.8.24"
+    "vue-tsc": "^1.8.25"
   }
 }
