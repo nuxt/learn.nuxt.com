@@ -29,39 +29,12 @@ let disposeVue: undefined | (() => void)
 export async function reloadLanguageTools(store: Store) {
   disposeVue?.()
 
-  // let dependencies: Record<string, string> = {
-  //   // ...store.state.dependencyVersion,
-  // }
-
-  // if (store.vueVersion) {
-  //   dependencies = {
-  //     ...dependencies,
-  //     'vue': store.vueVersion,
-  //     '@vue/compiler-core': store.vueVersion,
-  //     '@vue/compiler-dom': store.vueVersion,
-  //     '@vue/compiler-sfc': store.vueVersion,
-  //     '@vue/compiler-ssr': store.vueVersion,
-  //     '@vue/reactivity': store.vueVersion,
-  //     '@vue/runtime-core': store.vueVersion,
-  //     '@vue/runtime-dom': store.vueVersion,
-  //     '@vue/shared': store.vueVersion,
-  //   }
-  // }
-
-  // if (store.state.typescriptVersion) {
-  //   dependencies = {
-  //     ...dependencies,
-  //     typescript: store.state.typescriptVersion,
-  //   }
-  // }
-
   const worker = editor.createWebWorker<any>({
     moduleId: 'vs/language/vue/vueWorker',
     label: 'vue',
     host: new WorkerHost(),
     createData: {
       tsconfig: {},
-      dependencies: {},
     } satisfies CreateData,
   })
   const languageId = ['vue', 'javascript', 'typescript']
@@ -90,8 +63,6 @@ export async function reloadLanguageTools(store: Store) {
     getSyncUris,
     languages,
   )
-
-  // console.log('volor registered', languages, languageId)
 
   disposeVue = () => {
     disposeMarkers()
