@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
-import { loadGrammars } from 'monaco-volar'
-import { initMonaco } from '../monaco/worker'
+import { loadGrammars } from '~/monaco/grammars'
+import { initMonaco } from '~/monaco/setup'
 import { Store } from '~/monaco/env'
 
 const props = defineProps<{
