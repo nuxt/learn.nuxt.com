@@ -92,7 +92,6 @@ export const usePlaygroundStore = defineStore('playground', () => {
             start: 'fulfilled',
             ready: 'pending',
           }
-          console.log(stageStatusMap.value.start,'startstartstart')
         }
       })
 
