@@ -16,12 +16,13 @@ function refreshIframe() {
 }
 
 watch(
-  () => play.status,
-  (status) => {
-    if (status === 'ready' || status === 'start')
+  () => play.playgroundStageStatusMap,
+  (map) => {
+    console.log(map, 'changed')
+    if (map.start === 'fulfilled' || map.ready === 'fulfilled')
       refreshIframe()
   },
-  { flush: 'sync' },
+  { flush: 'sync' , deep: true},
 )
 
 function navigate() {
@@ -34,9 +35,9 @@ function navigate() {
 </script>
 
 <template>
-  <div h-full :class="play.status === 'ready' ? ' grid grid-rows-[min-content_1fr]' : 'flex'">
+  <div h-full :class="play.playgroundStageStatusMap.ready === 'fulfilled' ? ' grid grid-rows-[min-content_1fr]' : 'flex'">
     <div
-      v-if="play.status === 'ready'"
+      v-if="play.playgroundStageStatusMap.ready === 'fulfilled'"
       flex="~ items-center gap-2"
       border="b base dashed" bg-faded px4
     >

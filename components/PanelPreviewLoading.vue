@@ -1,42 +1,29 @@
 <script setup lang="ts">
+
 const play = usePlaygroundStore()
 
-function getStep(status: PlaygroundStatus) {
-  if (status === 'error' || play.status === 'error')
-    return 'error'
-  const indexCurrent = PlaygroundStatusOrder.indexOf(play.status)
-  const index = PlaygroundStatusOrder.indexOf(status)
-  if (indexCurrent === index)
-    return 'current'
-  if (indexCurrent > index)
-    return 'done'
-  return 'todo'
-}
-
-function getStatusIcon(status: PlaygroundStatus) {
-  const step = getStep(status)
-  switch (step) {
-    case 'error':
+function getStatusIcon(status: PlaygroundStage) {
+  switch (play.playgroundStageStatusMap[status]) {
+    case 'rejected':
       return 'i-ph-x-circle-duotone text-error text-xl'
-    case 'current':
+    case 'pending':
       return 'i-svg-spinners-90-ring-with-bg scale-95 text-xl'
-    case 'done':
+    case 'fulfilled':
       return 'i-ph-check-circle-duotone text-primary text-xl'
-    case 'todo':
+    case 'waiting':
       return 'i-ph-dot-duotone text-xl'
   }
 }
 
-function getTextClass(status: PlaygroundStatus) {
-  const step = getStep(status)
-  switch (step) {
-    case 'error':
+function getTextClass(status: PlaygroundStage) {
+  switch (play.playgroundStageStatusMap[status]) {
+    case 'rejected':
       return 'text-red'
-    case 'current':
+    case 'pending':
       return 'animate-pulse'
-    case 'done':
+    case 'fulfilled':
       return 'text-primary'
-    case 'todo':
+    case 'waiting':
       return 'op50'
   }
 }
@@ -44,7 +31,7 @@ function getTextClass(status: PlaygroundStatus) {
 
 <template>
   <div
-    v-if="play.status !== 'ready'"
+    v-if="play.playgroundStageStatusMap.ready !== 'fulfilled'"
     flex="~ col items-center justify-center"
     h-full capitalize
   >

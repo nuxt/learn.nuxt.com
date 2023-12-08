@@ -13,7 +13,7 @@ const rpc = createBirpc<FrameFunctions, ParentFunctions>({
     play.previewLocation.fullPath = path
   },
   async onReady() {
-    play.status = 'ready'
+    play.playgroundStageStatusMap.ready = 'fulfilled'
     syncColorMode()
   },
 }, {
@@ -54,7 +54,7 @@ defineExpose({
     v-if="play.previewUrl"
     ref="iframe"
     :src="play.previewUrl"
-    :style="play.status === 'ready' ? '' : 'opacity: 0.001; pointer-events: none;'"
+    :style="play.playgroundStageStatusMap.ready === 'fulfilled' ? '' : 'opacity: 0.001; pointer-events: none;'"
     :class="{ 'pointer-events-none': ui.isPanelDragging }"
     absolute inset-0 h-full w-full bg-transparent allow="geolocation; microphone; camera; payment; autoplay; serial; cross-origin-isolated"
   />
