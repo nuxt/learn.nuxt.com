@@ -3,7 +3,7 @@
 const play = usePlaygroundStore()
 
 function getStatusIcon(status: PlaygroundStage) {
-  switch (play.playgroundStageStatusMap[status]) {
+  switch (play.stageStatusMap[status]) {
     case 'rejected':
       return 'i-ph-x-circle-duotone text-error text-xl'
     case 'pending':
@@ -16,7 +16,7 @@ function getStatusIcon(status: PlaygroundStage) {
 }
 
 function getTextClass(status: PlaygroundStage) {
-  switch (play.playgroundStageStatusMap[status]) {
+  switch (play.stageStatusMap[status]) {
     case 'rejected':
       return 'text-red'
     case 'pending':
@@ -31,7 +31,7 @@ function getTextClass(status: PlaygroundStage) {
 
 <template>
   <div
-    v-if="play.playgroundStageStatusMap.ready !== 'fulfilled'"
+    v-if="play.stageStatusMap.ready !== 'fulfilled'"
     flex="~ col items-center justify-center"
     h-full capitalize
   >
@@ -42,8 +42,8 @@ function getTextClass(status: PlaygroundStage) {
       <span :class="getTextClass('mount')">Mount files</span>
       <div :class="getStatusIcon('install')" />
       <span :class="getTextClass('install')">Install Dependencies</span>
-      <div :class="getStatusIcon('start')" />
-      <span :class="getTextClass('start')">Boot Nuxt Server</span>
+      <div :class="getStatusIcon('ready')" />
+      <span :class="getTextClass('ready')">Boot Nuxt Server</span>
     </div>
   </div>
 </template>

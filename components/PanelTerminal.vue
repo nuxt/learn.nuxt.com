@@ -14,7 +14,7 @@ const play = usePlaygroundStore()
       <span text-sm>Terminal</span>
       <div flex-auto />
       <button
-        v-if="play.playgroundStageStatusMap.install === 'fulfilled'"
+        v-if="play.stageStatusMap.install === 'fulfilled'"
         hover="bg-active" rounded p1
         title="Restart terminal"
         @click="play.restartServer()"

@@ -2,7 +2,7 @@ import type { Raw } from 'vue'
 import type { WebContainer, WebContainerProcess } from '@webcontainer/api'
 import type { VirtualFile } from '../structures/VirtualFile'
 
-export const PlaygroundStatusOrder = [
+export const PlaygroundStageOrder = [
   'init',
   'mount',
   'install',
@@ -10,10 +10,30 @@ export const PlaygroundStatusOrder = [
   'ready',
 ] as const
 
-export type PlaygroundStatus = typeof PlaygroundStatusOrder[number] | 'error'
+export const PlaygroundStatusOrder = [
+  'fulfilled',
+  'pending',
+  'rejected',
+  'waiting'
+] as const
+
+export type PlaygroundStage = typeof PlaygroundStageOrder[number]
+export type PlaygroundStatus = typeof PlaygroundStatusOrder[number]
+
+type PlaygroundStageStatus = {
+  [key in PlaygroundStage]: PlaygroundStatus
+}
+
+
 
 export const usePlaygroundStore = defineStore('playground', () => {
-  const status = ref<PlaygroundStatus>('init')
+  const stageStatusMap = ref<PlaygroundStageStatus>({
+    'init': 'fulfilled',
+    'mount': 'waiting',
+    'install': 'waiting',
+    'start': 'waiting',
+    'ready': 'waiting',
+  })
   const error = shallowRef<{ message: string }>()
   const currentProcess = shallowRef<Raw<WebContainerProcess | undefined>>()
   const files = shallowRef<Raw<VirtualFile>[]>([])
@@ -66,17 +86,19 @@ export const usePlaygroundStore = defineStore('playground', () => {
             origin: url,
             fullPath: '/',
           }
-          status.value = 'start'
+          stageStatusMap.value.start = 'fulfilled'
         }
       })
 
       wc.on('error', (err) => {
+        console.log(err, '错误')
         error.value = err
-        status.value = 'error'
+        // status.value = 'error'
       })
 
-      status.value = 'mount'
+      stageStatusMap.value.mount = 'pending'
       await wc.mount(tree)
+      stageStatusMap.value.mount = 'fulfilled'
 
       startServer()
 
@@ -129,23 +151,34 @@ export const usePlaygroundStore = defineStore('playground', () => {
   async function launchDefaultProcess(wc: WebContainer, signal: AbortSignal) {
     if (!wc)
       return
-    status.value = 'install'
+
+    stageStatusMap.value = {
+      ...stageStatusMap.value,
+      'install': 'waiting',
+      'start': 'waiting',
+      'ready': 'waiting',
+    }
 
     if (signal.aborted)
       return
 
+    stageStatusMap.value.install = 'pending'
     const installExitCode = await spawn(wc, 'pnpm', ['install'])
+    stageStatusMap.value.install = 'fulfilled'
+    
     if (signal.aborted)
       return
 
     if (installExitCode !== 0) {
-      status.value = 'error'
+      // status.value = 'error'
       error.value = {
         message: `Unable to run npm install, exit as ${installExitCode}`,
       }
       throw new Error('Unable to run npm install')
     }
 
+    stageStatusMap.value.start = 'pending'
+    stageStatusMap.value.ready = 'pending'
     await spawn(wc, 'pnpm', ['run', 'dev', '--no-qr'])
   }
 
@@ -203,7 +236,7 @@ export const usePlaygroundStore = defineStore('playground', () => {
   }
 
   return {
-    status,
+    stageStatusMap,
     error,
     currentProcess,
     files,
