@@ -86,7 +86,11 @@ export const usePlaygroundStore = defineStore('playground', () => {
             origin: url,
             fullPath: '/',
           }
-          stageStatusMap.value.start = 'fulfilled'
+          stageStatusMap.value = {
+            ...stageStatusMap.value,
+            'start': 'fulfilled',
+            'ready': 'pending',
+          }
         }
       })
 
