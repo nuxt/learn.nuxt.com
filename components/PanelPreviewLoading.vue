@@ -31,7 +31,7 @@ function getTextClass(status: PlaygroundStage) {
 
 <template>
   <div
-    v-if="play.stageStatusMap.ready !== 'fulfilled'"
+    v-if="play.stageStatusMap.start !== 'fulfilled'"
     flex="~ col items-center justify-center"
     h-full capitalize
   >
@@ -42,8 +42,8 @@ function getTextClass(status: PlaygroundStage) {
       <span :class="getTextClass('mount')">Mount files</span>
       <div :class="getStatusIcon('install')" />
       <span :class="getTextClass('install')">Install Dependencies</span>
-      <div :class="getStatusIcon('ready')" />
-      <span :class="getTextClass('ready')">Boot Nuxt Server</span>
+      <div :class="getStatusIcon('start')" />
+      <span :class="getTextClass('start')">Boot Nuxt Server</span>
     </div>
   </div>
 </template>

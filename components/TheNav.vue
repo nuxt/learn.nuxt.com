@@ -10,7 +10,7 @@ const play = usePlaygroundStore()
     </NuxtLink>
     <div flex-auto />
     <button
-      v-if="play.stageStatusMap.ready === 'fulfilled'"
+      v-if="play.stageStatusMap.start === 'fulfilled'"
       rounded p2
       hover="bg-active"
       title="Download as ZIP"

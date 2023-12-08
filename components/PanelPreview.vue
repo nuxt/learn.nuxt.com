@@ -15,12 +15,11 @@ function refreshIframe() {
   }
 }
 
-const shouldRefreshIframe = computed(() => play.stageStatusMap.start === 'fulfilled' || play.stageStatusMap.ready === 'fulfilled')
 
 watch(
-  () => shouldRefreshIframe.value,
+  () => play.stageStatusMap.start,
   (s) => {
-    if (s)
+    if (s === 'fulfilled')
       refreshIframe()
   },
   { flush: 'sync' , deep: true},
@@ -36,9 +35,9 @@ function navigate() {
 </script>
 
 <template>
-  <div h-full :class="play.stageStatusMap.ready === 'fulfilled' ? ' grid grid-rows-[min-content_1fr]' : 'flex'">
+  <div h-full :class="play.stageStatusMap.start === 'fulfilled' ? ' grid grid-rows-[min-content_1fr]' : 'flex'">
     <div
-      v-if="play.stageStatusMap.ready === 'fulfilled'"
+      v-if="play.stageStatusMap.start === 'fulfilled'"
       flex="~ items-center gap-2"
       border="b base dashed" bg-faded px4
     >

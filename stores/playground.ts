@@ -92,6 +92,7 @@ export const usePlaygroundStore = defineStore('playground', () => {
             start: 'fulfilled',
             ready: 'pending',
           }
+          console.log(stageStatusMap.value.start,'startstartstart')
         }
       })
 
@@ -190,9 +191,10 @@ export const usePlaygroundStore = defineStore('playground', () => {
       error.value = {
         message: `Unable to run npm install, exit as ${installExitCode}`,
       }
-      throw new Error('Unable to run npm install')
+      // throw new Error('Unable to run npm install')
+      console.log('Unable to run npm install')
+      return
     }
-
     stageStatusMap.value.start = 'pending'
     stageStatusMap.value.ready = 'pending'
     await spawn(wc, 'pnpm', ['run', 'dev', '--no-qr'])

@@ -54,7 +54,7 @@ defineExpose({
     v-if="play.previewUrl"
     ref="iframe"
     :src="play.previewUrl"
-    :style="play.stageStatusMap.ready === 'fulfilled' ? '' : 'opacity: 0.001; pointer-events: none;'"
+    :style="play.stageStatusMap.start === 'fulfilled' ? '' : 'opacity: 0.001; pointer-events: none;'"
     :class="{ 'pointer-events-none': ui.isPanelDragging }"
     absolute inset-0 h-full w-full bg-transparent allow="geolocation; microphone; camera; payment; autoplay; serial; cross-origin-isolated"
   />
