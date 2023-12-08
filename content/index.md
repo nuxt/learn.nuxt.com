@@ -21,13 +21,13 @@ The [installation of Nuxt](https://nuxt.com/docs/getting-started/installation) i
 Here are different sections of this tutorial:
 
 - [Views](/views/app-vue)
-- [Styling](/)
-- [Routing](/)
-- [Data Fetching](/)
-- [State Management](/)
-- [Server](/)
-- [Modules](/)
-- [Plugins](/)
-- [Middlewares](/)
+- Styling
+- Routing
+- Data Fetching
+- State Management
+- Server
+- Modules
+- Plugins
+- Middlewares
 
 Starting with the first section: [Views > app.vue](/views/app-vue).
