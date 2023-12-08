@@ -88,16 +88,22 @@ export const usePlaygroundStore = defineStore('playground', () => {
           }
           stageStatusMap.value = {
             ...stageStatusMap.value,
-            'start': 'fulfilled',
-            'ready': 'pending',
+            install: 'fulfilled',
+            start: 'fulfilled',
+            ready: 'pending',
           }
         }
       })
 
       wc.on('error', (err) => {
-        console.log(err, '错误')
+        stageStatusMap.value = {
+          init: 'rejected',
+          mount: 'rejected',
+          install: 'rejected',
+          start: 'rejected',
+          ready: 'rejected',
+        }
         error.value = err
-        // status.value = 'error'
       })
 
       stageStatusMap.value.mount = 'pending'
@@ -105,7 +111,6 @@ export const usePlaygroundStore = defineStore('playground', () => {
       stageStatusMap.value.mount = 'fulfilled'
 
       startServer()
-
       // In dev, when doing HMR, we kill the previous process while reusing the same WebContainer
       if (import.meta.hot) {
         import.meta.hot.accept(() => {
@@ -136,8 +141,10 @@ export const usePlaygroundStore = defineStore('playground', () => {
     abortController = new AbortController()
     const signal = abortController.signal
 
-    await launchDefaultProcess(wc, signal)
-    await launchInteractiveProcess(wc, signal)
+     await launchDefaultProcess(wc, signal)
+     await launchInteractiveProcess(wc, signal)
+
+     return true
   }
 
   async function spawn(wc: WebContainer, command: string, args: string[] = []) {
@@ -174,7 +181,12 @@ export const usePlaygroundStore = defineStore('playground', () => {
       return
 
     if (installExitCode !== 0) {
-      // status.value = 'error'
+      stageStatusMap.value = {
+        ...stageStatusMap.value,
+        install: 'rejected',
+        start: 'rejected',
+        ready: 'rejected',
+      }
       error.value = {
         message: `Unable to run npm install, exit as ${installExitCode}`,
       }
