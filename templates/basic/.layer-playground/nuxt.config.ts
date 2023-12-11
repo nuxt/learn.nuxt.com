@@ -18,7 +18,7 @@ export default defineNuxtConfig({
     includeWorkspace: true,
     tsConfig: {
       include: [
-        './.layer-playground/**',
+        '../.layer-playground/**/*',
       ],
     },
   },
