@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const play = usePlaygroundStore()
-const ui = useUiState()
 
 const inputUrl = ref<string>('')
 const inner = ref<{ iframe?: HTMLIFrameElement | undefined }>()
