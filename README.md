@@ -41,13 +41,13 @@ The development server will be running at [http://localhost:3000](http://localho
 ## Todolist
 
 - [ ] Switch playgrounds on different guides
-- [ ] Monaco editor and Volar
-- [ ] File tree
-- [ ] Show built time for the playground
+- [ ] Show release time for the playground
 - [ ] Custom bundler for templates (replaces `import.meta.glob`, create static gzip)
 - [ ] Show Nuxt and Vue versions from the container
-- [ ] [Add interactivity shell](https://webcontainers.io/tutorial/7-add-interactivity)
 - [ ] Verification for tutorial tasks
+- [x] Monaco editor and Volar
+- [x] File tree
+- [x] [Add interactivity shell](https://webcontainers.io/tutorial/7-add-interactivity)
 - [x] A basic editor
 - [x] Refactor logic from Vue SFC to composables
 - [x] Refactor to add Pinia
