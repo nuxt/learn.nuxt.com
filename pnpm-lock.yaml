@@ -97,6 +97,9 @@ devDependencies:
   eslint-plugin-format:
     specifier: ^0.1.0
     version: 0.1.0(eslint@8.55.0)
+  execa:
+    specifier: ^8.0.1
+    version: 8.0.1
   nuxt:
     specifier: npm:nuxt-nightly@latest
     version: /nuxt-nightly@3.9.0-28363388.1e393ad6(eslint@8.55.0)(nuxt-nightly@3.9.0-28363388.1e393ad6)(typescript@5.3.3)(vite@5.0.6)(vue-tsc@1.8.25)
@@ -1793,6 +1796,7 @@ packages:
     dependencies:
       is-glob: 4.0.3
       micromatch: 4.0.5
+      napi-wasm: 1.1.0
     dev: true
     bundledDependencies:
       - napi-wasm
@@ -7213,6 +7217,10 @@ packages:
     resolution: {integrity: sha512-7ZtY5KTCNheRGfEFxnedV5zFiORN1+Y1N6zvPTnHQd8ENUvfaDBeuJDZb2bN/oXwXxu3qkTXDzy57W5vAmDTBw==}
     engines: {node: ^14 || ^16 || >=18}
     hasBin: true
+    dev: true
+
+  /napi-wasm@1.1.0:
+    resolution: {integrity: sha512-lHwIAJbmLSjF9VDRm9GoVOy9AGp3aIvkjv+Kvz9h16QR3uSVYH78PNQUnT2U4X53mhlnV2M7wrhibQ3GHicDmg==}
     dev: true
 
   /natural-compare-lite@1.4.0:

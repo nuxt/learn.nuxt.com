@@ -1,3 +1,5 @@
+import { execaSync } from 'execa'
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
@@ -26,6 +28,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       buildTime: Date.now(),
+      gitSha: execaSync('git', ['rev-parse', 'HEAD']).stdout.trim(),
     },
   },
   vite: {
