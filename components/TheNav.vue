@@ -40,28 +40,6 @@ const timeAgo = useTimeAgo(buildTime)
               Built {{ timeAgo }} (<code>{{ runtime.public.gitSha.slice(0, 5) }}</code>)
             </time>
           </NuxtLink>
-          <div i-uim-vuejs text-xl />
-          <div flex="~ gap-2 items-center">
-            Vue version:
-            <div
-              v-if="!play.clientInfo?.versionVue"
-              i-svg-spinners-90-ring-with-bg
-            />
-            <code v-else>
-              v{{ play.clientInfo.versionVue }}
-            </code>
-          </div>
-          <div i-simple-icons-nuxtdotjs text-xl />
-          <div flex="~ gap-2 items-center">
-            Nuxt version:
-            <div
-              v-if="!play.clientInfo?.versionNuxt"
-              i-svg-spinners-90-ring-with-bg
-            />
-            <code v-else>
-              v{{ play.clientInfo.versionNuxt }}
-            </code>
-          </div>
         </div>
       </template>
     </VDropdown>

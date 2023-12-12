@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const play = usePlaygroundStore()
+const ui = useUiState()
 
 const inputUrl = ref<string>('')
 const inner = ref<{ iframe?: HTMLIFrameElement | undefined }>()
@@ -38,7 +39,7 @@ function navigate() {
     <div
       v-if="play.status === 'ready'"
       flex="~ items-center gap-2"
-      border="b base dashed" bg-faded px4
+      border="b base dashed" bg-faded pl4 pr2
     >
       <div flex="~ gap-2 items-center" py2>
         <div i-ph-globe-duotone />
@@ -70,6 +71,42 @@ function navigate() {
           </div>
         </div>
       </div>
+      <div flex-auto />
+      <VDropdown :distance="6">
+        <button
+          rounded p1
+          hover="bg-active"
+          title="Playground Information"
+        >
+          <div i-ph-info-duotone text-lg />
+        </button>
+        <template #popper>
+          <div px5 py4 grid="~ gap-y-3 gap-x-2 cols-[max-content_1fr] items-center">
+            <div i-uim-vuejs text-xl />
+            <div flex="~ gap-2 items-center">
+              Vue version:
+              <div
+                v-if="!play.clientInfo?.versionVue"
+                i-svg-spinners-90-ring-with-bg
+              />
+              <code v-else>
+                v{{ play.clientInfo.versionVue }}
+              </code>
+            </div>
+            <div i-simple-icons-nuxtdotjs text-xl />
+            <div flex="~ gap-2 items-center">
+              Nuxt version:
+              <div
+                v-if="!play.clientInfo?.versionNuxt"
+                i-svg-spinners-90-ring-with-bg
+              />
+              <code v-else>
+                v{{ play.clientInfo.versionNuxt }}
+              </code>
+            </div>
+          </div>
+        </template>
+      </VDropdown>
     </div>
     <div relative h-full w-full>
       <PanelPreviewLoading />

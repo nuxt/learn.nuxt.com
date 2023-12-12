@@ -69,4 +69,8 @@
   --uno: border-white dark:border-[#020420]
 }
 
+.v-popper {
+  --uno: flex items-center justify-center;
+}
+
 
