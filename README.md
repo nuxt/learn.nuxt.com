@@ -40,12 +40,13 @@ The development server will be running at [http://localhost:3000](http://localho
 
 ## Todolist
 
-- [ ] Switch playgrounds on different guides
 - [ ] Show release time for the playground
-- [ ] Custom bundler for templates (replaces `import.meta.glob`, create static gzip)
 - [ ] Show Nuxt and Vue versions from the container
+- [ ] Custom bundler for templates (replaces `import.meta.glob`, create static gzip)
+- [ ] Switch playgrounds on different guides
 - [ ] Verification for tutorial tasks
 - [x] Monaco editor and Volar
+  - [ ] Connection Volar to the WebContainer FS
 - [x] File tree
 - [x] [Add interactivity shell](https://webcontainers.io/tutorial/7-add-interactivity)
 - [x] A basic editor

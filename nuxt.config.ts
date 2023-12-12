@@ -28,6 +28,9 @@ export default defineNuxtConfig({
       minify: 'esbuild',
       cssMinify: 'esbuild',
     },
+    define: {
+      __BUILD_TIME__: Date.now(),
+    },
     server: {
       headers: {
         'Cross-Origin-Embedder-Policy': 'require-corp',

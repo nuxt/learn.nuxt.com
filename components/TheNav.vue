@@ -1,6 +1,11 @@
 <script setup lang="ts">
 const ui = useUiState()
 const play = usePlaygroundStore()
+
+declare const __BUILD_TIME__: string
+
+const buildTime = new Date(__BUILD_TIME__)
+const timeAgo = useTimeAgo(buildTime)
 </script>
 
 <template>
@@ -8,6 +13,9 @@ const play = usePlaygroundStore()
     <NuxtLink to="/" title="Nuxt Playground">
       <NuxtPlaygroundLogo h-2em />
     </NuxtLink>
+    <time text-sm op50 :datetime="buildTime.toISOString()" :title="buildTime.toLocaleString()">
+      Built {{ timeAgo }}
+    </time>
     <div flex-auto />
     <button
       v-if="play.status === 'ready'"
