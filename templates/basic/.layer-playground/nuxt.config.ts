@@ -1,4 +1,6 @@
 import { defineNuxtConfig } from 'nuxt/config'
+import { version as versionVue } from 'vue'
+import { version as versionNuxt } from 'nuxt/package.json'
 
 export default defineNuxtConfig({
   devtools: { enabled: false },
@@ -12,6 +14,14 @@ export default defineNuxtConfig({
         'ofetch',
         'defu',
       ],
+    },
+  },
+  runtimeConfig: {
+    public: {
+      clientInfo: {
+        versionVue,
+        versionNuxt,
+      },
     },
   },
   typescript: {
