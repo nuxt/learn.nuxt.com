@@ -41,8 +41,8 @@ The development server will be running at [http://localhost:3000](http://localho
 ## Todolist
 
 - [x] Show release time for the playground
-- [ ] Show Nuxt and Vue versions from the container
-- [ ] Custom bundler for templates (replaces `import.meta.glob`, create static gzip)
+- [x] Show Nuxt and Vue versions from the container
+- [x] Custom bundler for templates (replaces `import.meta.glob`, create static virtual modules)
 - [ ] Switch playgrounds on different guides
 - [ ] Verification for tutorial tasks
 - [x] Monaco editor and Volar

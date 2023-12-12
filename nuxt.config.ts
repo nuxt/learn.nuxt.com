@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@pinia/nuxt',
     'floating-vue/nuxt',
+    '~/modules/template-loader',
   ],
   colorMode: {
     classSuffix: '',
