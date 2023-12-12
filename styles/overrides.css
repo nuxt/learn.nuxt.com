@@ -1,3 +1,4 @@
+/* Splitpanes */
 .splitpanes--vertical > .splitpanes__splitter {
   width: 16px;
   margin: 0 -8px;
@@ -44,6 +45,7 @@
   display: none;
 }
 
+/* Xterm */
 .terminal.xterm {
   height: 100%;
   padding: 0 1.5em;
@@ -52,3 +54,19 @@
 .terminal.xterm .xterm-rows {
   --uno: font-mono;
 }
+
+/* Floating Vue */
+.v-popper--theme-dropdown .v-popper__inner {
+  --uno: bg-base border-base border;
+  color: inherit;
+}
+
+.v-popper__popper .v-popper__arrow-outer {
+  --uno: border-base;
+}
+
+.v-popper__popper .v-popper__arrow-inner {
+  --uno: border-white dark:border-[#020420]
+}
+
+

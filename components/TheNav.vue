@@ -13,15 +13,7 @@ const timeAgo = useTimeAgo(buildTime)
     <NuxtLink to="/" title="Nuxt Playground">
       <NuxtPlaygroundLogo h-2em />
     </NuxtLink>
-    <NuxtLink :to="`${repo}/commit/${runtime.public.gitSha}`" target="_blank" title="View on GitHub">
-      <time text-sm op50 :datetime="buildTime.toISOString()" :title="buildTime.toLocaleString()">
-        Built {{ timeAgo }}
-      </time>
-    </NuxtLink>
-    <div v-if="play.clientInfo" flex="~ col">
-      Vue version: {{ play.clientInfo.versionVue }}
-      Nuxt version: {{ play.clientInfo.versionNuxt }}
-    </div>
+
     <div flex-auto />
     <button
       v-if="play.status === 'ready'"
@@ -32,6 +24,47 @@ const timeAgo = useTimeAgo(buildTime)
     >
       <div i-ph-download-duotone text-2xl />
     </button>
+    <VDropdown :distance="6">
+      <button
+        rounded p2
+        hover="bg-active"
+        title="Playground Information"
+      >
+        <div i-ph-info-duotone text-2xl />
+      </button>
+      <template #popper>
+        <div px5 py4 grid="~ gap-y-3 gap-x-2 cols-[max-content_1fr] items-center">
+          <div i-ph-package-duotone text-xl />
+          <NuxtLink :to="`${repo}/commit/${runtime.public.gitSha}`" target="_blank" title="View on GitHub">
+            <time :datetime="buildTime.toISOString()" :title="buildTime.toLocaleString()">
+              Built {{ timeAgo }} (<code>{{ runtime.public.gitSha.slice(0, 5) }}</code>)
+            </time>
+          </NuxtLink>
+          <div i-uim-vuejs text-xl />
+          <div flex="~ gap-2 items-center">
+            Vue version:
+            <div
+              v-if="!play.clientInfo?.versionVue"
+              i-svg-spinners-90-ring-with-bg
+            />
+            <code v-else>
+              v{{ play.clientInfo.versionVue }}
+            </code>
+          </div>
+          <div i-simple-icons-nuxtdotjs text-xl />
+          <div flex="~ gap-2 items-center">
+            Nuxt version:
+            <div
+              v-if="!play.clientInfo?.versionNuxt"
+              i-svg-spinners-90-ring-with-bg
+            />
+            <code v-else>
+              v{{ play.clientInfo.versionNuxt }}
+            </code>
+          </div>
+        </div>
+      </template>
+    </VDropdown>
     <button
       rounded p2
       title="Toggle terminal"
