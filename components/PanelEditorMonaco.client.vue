@@ -99,6 +99,7 @@ watch(
         },
         'semanticHighlighting.enabled': true,
         'overviewRulerLanes': 0,
+        'fixedOverflowWidgets': true,
       },
     )
 
