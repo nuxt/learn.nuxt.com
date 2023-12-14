@@ -1,17 +1,12 @@
 import { basename, dirname } from 'pathe'
 import * as volar from '@volar/monaco'
 import { Uri, editor, languages } from 'monaco-editor-core'
-import * as onigasm from 'onigasm'
-import onigasmWasm from 'onigasm/lib/onigasm.wasm?url'
+import stripJsonComments from 'strip-json-comments'
 import { getOrCreateModel } from './utils'
 import type { CreateData } from './vue.worker'
 import type { FileType } from './types'
 
 export type PlaygroundMonacoContext = Pick<PlaygroundStore, 'webcontainer' | 'files'>
-
-export function loadWasm() {
-  return onigasm.loadWASM(onigasmWasm)
-}
 
 export class WorkerHost {
   constructor(private ctx: PlaygroundMonacoContext) {}
@@ -21,8 +16,10 @@ export class WorkerHost {
     try {
       const filepath = withoutLeadingSlash(uri.fsPath)
       const content = await this.ctx.webcontainer!.fs.readFile(filepath, encoding as 'utf-8')
-      if (content != null)
+      if (content != null) {
+        console.log('readFile', uriString)
         getOrCreateModel(uri, undefined, content)
+      }
       return content
     }
     catch (err) {
@@ -84,17 +81,53 @@ let disposeVue: undefined | (() => void)
 export async function reloadLanguageTools(ctx: PlaygroundMonacoContext) {
   disposeVue?.()
 
+  // eslint-disable-next-line no-console
+  console.info('Initializing Vue Language Service...')
+
+  // Try load tsconfig.json from .nuxt
+  const tsconfigRaw = await ctx.webcontainer?.fs
+    .readFile('.nuxt/tsconfig.json', 'utf-8')
+    .catch(() => undefined)
+  const tsconfig = tsconfigRaw
+    ? JSON.parse(stripJsonComments(tsconfigRaw, { trailingCommas: true }))
+    : {}
+
+  // Resolve .nuxt/tsconfig.json paths from `./.nuxt` to `./`
+  function resolvePath(path: string) {
+    if (path.startsWith('./'))
+      return `./.nuxt/${path.slice(2)}`
+    if (path.startsWith('..'))
+      return `.${path.slice(2)}`
+    return path
+  }
+  tsconfig.compilerOptions ||= {}
+  tsconfig.compilerOptions.paths ||= {}
+  Object.values(tsconfig.compilerOptions.paths as Record<string, string[]>)
+    .forEach((paths) => {
+      paths.forEach((path, i) => {
+        paths[i] = resolvePath(path)
+      })
+    })
+
+  // Load files into Model so that the language service is aware of it
+  // In VS Code this is done by `include` in tsconfig.json, while here in Monaco
+  // `include` and `exclude` are not supported.
+  const extraFiles = await loadFiles(ctx, ['.nuxt/nuxt.d.ts'])
+
   const worker = editor.createWebWorker<any>({
     moduleId: 'vs/language/vue/vueWorker',
     label: 'vue',
     host: new WorkerHost(ctx),
     createData: {
-      tsconfig: {},
+      tsconfig,
     } satisfies CreateData,
   })
 
   const languageId = ['vue', 'javascript', 'typescript']
-  const getSyncUris = () => ctx.files.map(file => Uri.parse(`file:///${file.filepath}`))
+  const getSyncUris = () => [
+    ...ctx.files.map(file => Uri.parse(`file:///${file.filepath}`)),
+    ...extraFiles,
+  ]
   const { dispose: disposeMarkers } = volar.editor.activateMarkers(
     worker,
     languageId,
@@ -121,6 +154,22 @@ export async function reloadLanguageTools(ctx: PlaygroundMonacoContext) {
     disposeAutoInsertion()
     disposeProvides()
   }
+}
+
+function loadFiles(ctx: PlaygroundMonacoContext, files: string[]) {
+  return Promise.all(files.map(async (file) => {
+    const filepath = withoutLeadingSlash(file)
+    const content = await ctx.webcontainer!.fs
+      .readFile(filepath, 'utf-8')
+      .catch(() => undefined)
+    const uri = Uri.parse(`file:///${filepath}`)
+    if (content != null) {
+      getOrCreateModel(uri, undefined, content)
+      return uri
+    }
+    return undefined!
+  }))
+    .then(uris => uris.filter(Boolean))
 }
 
 function withoutLeadingSlash(path: string) {

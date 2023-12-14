@@ -1,6 +1,15 @@
 import { wireTmGrammars } from 'monaco-editor-textmate'
 import type { IGrammarDefinition } from 'monaco-textmate'
 import { Registry } from 'monaco-textmate'
+import * as onigasm from 'onigasm'
+import onigasmWasm from 'onigasm/lib/onigasm.wasm?url'
+
+let _loaded: Promise<void> | undefined
+function loadWasm() {
+  if (!_loaded)
+    _loaded = onigasm.loadWASM(onigasmWasm)
+  return _loaded
+}
 
 async function dispatchGrammars(scopeName: string): Promise<IGrammarDefinition> {
   switch (scopeName) {
@@ -63,5 +72,6 @@ export async function loadGrammars(
     })
   }
 
+  await loadWasm()
   await wireTmGrammars(monaco as any, registry, grammars, editor as any)
 }

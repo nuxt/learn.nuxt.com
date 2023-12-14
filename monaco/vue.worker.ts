@@ -39,15 +39,10 @@ self.onmessage = () => {
   ) => {
   // TODO: link the tsconfig from `.nuxt/tsconfig.json`
     const { options: compilerOptions } = ts.convertCompilerOptionsFromJson(
-      {
-        esModuleInterop: true,
-        moduleResolution: 'bundler',
-        skipLibCheck: true,
-        isolatedModules: true,
-        ...tsconfig.compilerOptions,
-      },
+      tsconfig.compilerOptions || {},
       '',
     )
+    console.log('compilerOptions', compilerOptions)
 
     const env = createServiceEnvironment()
     const host = createLanguageHost(

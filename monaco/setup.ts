@@ -10,7 +10,7 @@ import htmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker'
 import themeDark from 'theme-vitesse/themes/vitesse-black.json'
 import themeLight from 'theme-vitesse/themes/vitesse-light.json'
 import vueWorker from './vue.worker?worker'
-import { loadWasm, reloadLanguageTools } from './env'
+import { reloadLanguageTools } from './env'
 
 export function initMonaco(ctx: PlaygroundStore) {
   self.MonacoEnvironment = {
@@ -54,6 +54,4 @@ export function initMonaco(ctx: PlaygroundStore) {
   monaco.editor.defineTheme('theme-dark', themeDark as any)
 
   monaco.languages.onLanguage('vue', () => reloadLanguageTools(ctx))
-
-  loadWasm()
 }

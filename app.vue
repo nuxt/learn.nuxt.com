@@ -7,7 +7,5 @@ import './styles/overrides.css'
 </script>
 
 <template>
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+  <NuxtPage />
 </template>
