@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable new-cap */
-import * as monaco from 'monaco-editor'
-import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker'
+import * as monaco from 'monaco-editor-core'
+import editorWorker from 'monaco-editor-core/esm/vs/editor/editor.worker?worker'
 import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker'
 import cssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker'
 import htmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker'
@@ -40,15 +40,6 @@ export function initMonaco(ctx: PlaygroundStore) {
     },
   }
 
-  monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
-    ...monaco.languages.typescript.typescriptDefaults.getCompilerOptions(),
-    noUnusedLocals: false,
-    noUnusedParameters: false,
-    allowUnreachableCode: true,
-    allowUnusedLabels: true,
-    strict: true,
-  })
-
   monaco.languages.register({ id: 'vue', extensions: ['.vue'] })
   monaco.languages.register({ id: 'javascript', extensions: ['.js'] })
   monaco.languages.register({ id: 'typescript', extensions: ['.ts'] })
@@ -62,7 +53,6 @@ export function initMonaco(ctx: PlaygroundStore) {
   monaco.editor.defineTheme('theme-light', themeLight as any)
   monaco.editor.defineTheme('theme-dark', themeDark as any)
 
-  monaco.languages.typescript.typescriptDefaults.setEagerModelSync(true)
   monaco.languages.onLanguage('vue', () => reloadLanguageTools(ctx))
 
   loadWasm()

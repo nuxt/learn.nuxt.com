@@ -50,6 +50,7 @@
     "eslint-plugin-format": "^0.1.0",
     "execa": "^8.0.1",
     "fast-glob": "^3.3.2",
+    "monaco-editor-core": "^0.45.0",
     "nuxt": "npm:nuxt-nightly@latest",
     "pathe": "^1.1.1",
     "remark-external-links": "^9.0.1",

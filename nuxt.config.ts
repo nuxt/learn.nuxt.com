@@ -47,6 +47,8 @@ export default defineNuxtConfig({
     optimizeDeps: {
       include: [
         'monaco-editor/esm/vs/editor/editor.worker',
+        'monaco-editor-core/esm/vs/editor/editor.worker',
+        'typescript/lib/tsserverlibrary',
         '@volar/cdn',
         '@vue/language-service',
         '@volar/monaco/worker',

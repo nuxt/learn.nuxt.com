@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
+import * as monaco from 'monaco-editor-core/esm/vs/editor/editor.api'
 import { loadGrammars } from '~/monaco/grammars'
 import { initMonaco } from '~/monaco/setup'
 import { reloadLanguageTools } from '~/monaco/env'

@@ -1,11 +1,7 @@
 // @ts-expect-error missing types
-import * as worker from 'monaco-editor/esm/vs/editor/editor.worker'
-import type * as monaco from 'monaco-editor'
-import {
-  createJsDelivrFs,
-  createJsDelivrUriResolver,
-  decorateServiceEnvironment,
-} from '@volar/cdn'
+import * as worker from 'monaco-editor-core/esm/vs/editor/editor.worker'
+import type * as monaco from 'monaco-editor-core'
+import { decorateServiceEnvironment } from '@volar/cdn'
 import * as ts from 'typescript/lib/tsserverlibrary'
 import type { VueCompilerOptions } from '@vue/language-service'
 import { resolveConfig } from '@vue/language-service'
@@ -23,111 +19,89 @@ export interface CreateData {
   }
 }
 
-const DEBUG_USE_JSDELIVR = false
+/**
+ * Pathes that we know won't exists, we can skip them to improve performance
+ */
+const invalidPathes = [
+  /\/@types\/(vue|typescript)/,
+  /\/@typescript\//,
+]
 
-worker.initialize((
-  ctx: monaco.worker.IWorkerContext<WorkerHost>,
-  // TODO: it seems that the create data is not pass in, investigate later
-  { tsconfig }: CreateData,
-) => {
+function isInvalidPath(filepath: string) {
+  return invalidPathes.some(re => re.test(filepath))
+}
+
+// eslint-disable-next-line no-restricted-globals
+self.onmessage = () => {
+  worker.initialize((
+    ctx: monaco.worker.IWorkerContext<WorkerHost>,
+    // TODO: it seems that the create data is not pass in, investigate later
+    { tsconfig }: CreateData,
+  ) => {
   // TODO: link the tsconfig from `.nuxt/tsconfig.json`
-  const { options: compilerOptions } = ts.convertCompilerOptionsFromJson(
-    tsconfig?.compilerOptions || {},
-    '',
-  )
+    const { options: compilerOptions } = ts.convertCompilerOptionsFromJson(
+      {
+        esModuleInterop: true,
+        moduleResolution: 'bundler',
+        skipLibCheck: true,
+        isolatedModules: true,
+        ...tsconfig.compilerOptions,
+      },
+      '',
+    )
 
-  const env = createServiceEnvironment()
-  const host = createLanguageHost(
-    ctx.getMirrorModels,
-    env,
-    '/',
-    compilerOptions,
-  )
-
-  if (DEBUG_USE_JSDELIVR) {
-    const jsDelivrFs = createJsDelivrFs(ctx.host.onFetchCdnFile)
-    const jsDelivrUriResolver = createJsDelivrUriResolver(
-      '/node_modules',
-      {},
+    const env = createServiceEnvironment()
+    const host = createLanguageHost(
+      ctx.getMirrorModels,
+      env,
+      '/',
+      compilerOptions,
     )
 
     decorateServiceEnvironment(
       env,
       {
         fileNameToUri(fileName) {
-          const uri = jsDelivrUriResolver.fileNameToUri(fileName)
+          if (isInvalidPath(fileName))
+            return undefined
+          const uri = new URL(fileName, 'file://').href
           return uri
         },
         uriToFileName(uri) {
-          const filename = jsDelivrUriResolver.uriToFileName(uri)
+          if (isInvalidPath(uri))
+            return undefined
+          const filename = new URL(uri).pathname
           return filename
         },
       },
       {
-        async stat(uri) {
-          const result = await jsDelivrFs.stat(uri)
-          return result
-        },
         async readFile(uri) {
-          const file = await jsDelivrFs.readFile(uri)
+          const file = await ctx.host.fsReadFile(uri)
           return file
         },
-        async readDirectory(uri) {
-          const dirs = await jsDelivrFs.readDirectory(uri)
-          return dirs
-        },
-      },
-    )
-  }
-  else {
-    const base = '/node_modules'
-    decorateServiceEnvironment(
-      env,
-      {
-        fileNameToUri(fileName) {
-          if (fileName.startsWith(base)) {
-            const uri = new URL(fileName, 'file://').href
-            return uri
-          }
-        },
-        uriToFileName(uri) {
-          if (uri.startsWith('file://')) {
-            const filename = new URL(uri).pathname
-            return filename
-          }
-        },
-      },
-      {
-        async readFile(uri) {
-          if (uri.startsWith('file:///node_modules')) {
-            const file = await ctx.host.fsReadFile?.(uri)
-            return file
-          }
-        },
         async stat(uri) {
-          const result = await ctx.host.fsStat?.(uri)
+          if (isInvalidPath(uri))
+            return undefined
+          const result = await ctx.host.fsStat(uri)
           return result
         },
         async readDirectory(uri) {
-          if (!ctx.host)
-            return []
-          const dirs = await ctx.host.fsReadDirectory?.(uri)
-          // console.log('readDirectory', uri, dirs)
+          const dirs = await ctx.host.fsReadDirectory(uri)
           return dirs
         },
       },
     )
-  }
 
-  return createLanguageService(
-    { typescript: ts },
-    env,
-    resolveConfig(
-      ts,
-      {},
-      compilerOptions,
-      tsconfig?.vueCompilerOptions || {},
-    ),
-    host,
-  )
-})
+    return createLanguageService(
+      { typescript: ts },
+      env,
+      resolveConfig(
+        ts,
+        {},
+        compilerOptions,
+        tsconfig?.vueCompilerOptions || {},
+      ),
+      host,
+    )
+  })
+}
