@@ -1,7 +1,6 @@
 // @ts-expect-error missing types
 import * as worker from 'monaco-editor-core/esm/vs/editor/editor.worker'
 import type * as monaco from 'monaco-editor-core'
-import { decorateServiceEnvironment } from '@volar/cdn'
 import * as ts from 'typescript/lib/tsserverlibrary'
 import type { VueCompilerOptions } from '@vue/language-service'
 import { resolveConfig } from '@vue/language-service'
@@ -58,39 +57,24 @@ self.onmessage = () => {
       compilerOptions,
     )
 
-    decorateServiceEnvironment(
-      env,
-      {
-        fileNameToUri(fileName) {
-          if (isInvalidPath(fileName))
-            return undefined
-          const uri = new URL(fileName, 'file://').href
-          return uri
-        },
-        uriToFileName(uri) {
-          if (isInvalidPath(uri))
-            return undefined
-          const filename = new URL(uri).pathname
-          return filename
-        },
+    env.fs = {
+      async readFile(uri) {
+        if (isInvalidPath(uri))
+          return undefined
+        const file = await ctx.host.fsReadFile(uri)
+        return file
       },
-      {
-        async readFile(uri) {
-          const file = await ctx.host.fsReadFile(uri)
-          return file
-        },
-        async stat(uri) {
-          if (isInvalidPath(uri))
-            return undefined
-          const result = await ctx.host.fsStat(uri)
-          return result
-        },
-        async readDirectory(uri) {
-          const dirs = await ctx.host.fsReadDirectory(uri)
-          return dirs
-        },
+      async stat(uri) {
+        if (isInvalidPath(uri))
+          return undefined
+        const result = await ctx.host.fsStat(uri)
+        return result
       },
-    )
+      async readDirectory(uri) {
+        const dirs = await ctx.host.fsReadDirectory(uri)
+        return dirs
+      },
+    }
 
     return createLanguageService(
       { typescript: ts },

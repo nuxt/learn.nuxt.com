@@ -1,3 +1,4 @@
+import { basename, dirname } from 'pathe'
 import * as volar from '@volar/monaco'
 import { Uri, editor, languages } from 'monaco-editor-core'
 import * as onigasm from 'onigasm'
@@ -15,16 +16,13 @@ export function loadWasm() {
 export class WorkerHost {
   constructor(private ctx: PlaygroundMonacoContext) {}
 
-  onFetchCdnFile(uri: string, content: string) {
-    return getOrCreateModel(Uri.parse(uri), undefined, content)
-  }
-
-  async fsReadFile(uri: string, encoding = 'utf-8') {
+  async fsReadFile(uriString: string, encoding = 'utf-8') {
+    const uri = Uri.parse(uriString)
     try {
-      const filepath = new URL(uri).pathname.replace(/^\/+/, '')
+      const filepath = withoutLeadingSlash(uri.fsPath)
       const content = await this.ctx.webcontainer!.fs.readFile(filepath, encoding as 'utf-8')
       if (content != null)
-        getOrCreateModel(Uri.parse(uri), undefined, content)
+        getOrCreateModel(uri, undefined, content)
       return content
     }
     catch (err) {
@@ -36,14 +34,14 @@ export class WorkerHost {
   // Because WebContainer doesn't support fs.stat,
   // we have to use readdir to check if the file is a directory
   async fsStat(uriString: string) {
-    const filepath = new URL(uriString).pathname.replace(/^\/+/, '')
-    const dirpath = new URL('.', uriString).pathname.replace(/^\/+/, '')
-    const basename = filepath.slice(dirpath.length)
+    const uri = Uri.parse(uriString)
+    const dir = withoutLeadingSlash(dirname(uri.fsPath))
+    const base = basename(uri.fsPath)
 
     try {
       // TODO: should we cache it?
-      const files = await this.ctx.webcontainer!.fs.readdir(dirpath, { withFileTypes: true })
-      const file = files.find(item => item.name === basename)
+      const files = await this.ctx.webcontainer!.fs.readdir(dir, { withFileTypes: true })
+      const file = files.find(item => item.name === base)
       if (!file)
         return undefined
       if (file.isFile()) {
@@ -68,9 +66,10 @@ export class WorkerHost {
     }
   }
 
-  async fsReadDirectory(uri: string) {
+  async fsReadDirectory(uriString: string) {
+    const uri = Uri.parse(uriString)
     try {
-      const filepath = new URL(uri).pathname.replace(/^\/+/, '')
+      const filepath = withoutLeadingSlash(uri.fsPath)
       const result = await this.ctx.webcontainer!.fs.readdir(filepath, { withFileTypes: true })
       return result.map(item => [item.name, item.isDirectory() ? 2 : 1]) as [string, 1 | 2][]
     }
@@ -122,4 +121,8 @@ export async function reloadLanguageTools(ctx: PlaygroundMonacoContext) {
     disposeAutoInsertion()
     disposeProvides()
   }
+}
+
+function withoutLeadingSlash(path: string) {
+  return path.replace(/^\/+/, '')
 }

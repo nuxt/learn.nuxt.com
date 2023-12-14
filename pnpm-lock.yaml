@@ -5,9 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  '@volar/cdn':
-    specifier: ^1.11.1
-    version: 1.11.1
   '@volar/monaco':
     specifier: ^1.11.1
     version: 1.11.1
@@ -3307,12 +3304,6 @@ packages:
       vite: 5.0.6
       vue: 3.3.11(typescript@5.3.3)
     dev: true
-
-  /@volar/cdn@1.11.1:
-    resolution: {integrity: sha512-iB2+ZQNHwR6fJpLm8rD8x5uWMFSA3B4237vj6E3QvFmcOXuAYEiHUGPtn3jeFBhxLqJMb/SvcooqZd5hd7e4Vg==}
-    dependencies:
-      '@volar/language-service': 1.11.1
-    dev: false
 
   /@volar/language-core@1.11.1:
     resolution: {integrity: sha512-dOcNn3i9GgZAcJt43wuaEykSluAuOkQgzni1cuxLxTV0nJKanQztp7FxyswdRILaKH+P2XZMPRp2S4MV/pElCw==}

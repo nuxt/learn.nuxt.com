@@ -28,7 +28,7 @@ export default defineNuxtModule({
         const filesMap: Record<string, string> = {}
 
         await Promise.all(
-          files.map(async (filename) => {
+          files.sort().map(async (filename) => {
             const content = await fs.readFile(filename, 'utf-8')
             filesMap[relative(dir, filename)] = content
           }),

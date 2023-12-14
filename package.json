@@ -14,7 +14,6 @@
     "format": "eslint . --fix"
   },
   "dependencies": {
-    "@volar/cdn": "^1.11.1",
     "@volar/monaco": "^1.11.1",
     "@vue/language-service": "^1.8.25",
     "@webcontainer/api": "^1.1.8",
