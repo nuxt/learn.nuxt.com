@@ -2,31 +2,18 @@ import * as volar from '@volar/monaco'
 import { Uri, editor, languages } from 'monaco-editor'
 import * as onigasm from 'onigasm'
 import onigasmWasm from 'onigasm/lib/onigasm.wasm?url'
-import type { WebContainer } from '@webcontainer/api'
 import { getOrCreateModel } from './utils'
 import type { CreateData } from './vue.worker'
 import type { FileType } from './types'
 
-// TODO: refactor this out
-export class Store {
-  constructor(
-    public ws: WebContainer,
-  ) {}
-
-  state = {
-    typescriptVersion: '5.3.3',
-    files: [] as string[],
-  }
-
-  vueVersion = '3.3.10'
-}
+export type PlaygroundMonacoContext = Pick<PlaygroundStore, 'webcontainer' | 'files'>
 
 export function loadWasm() {
   return onigasm.loadWASM(onigasmWasm)
 }
 
 export class WorkerHost {
-  constructor(private store: Store) {}
+  constructor(private ctx: PlaygroundMonacoContext) {}
 
   onFetchCdnFile(uri: string, content: string) {
     return getOrCreateModel(Uri.parse(uri), undefined, content)
@@ -35,7 +22,7 @@ export class WorkerHost {
   async fsReadFile(uri: string, encoding = 'utf-8') {
     try {
       const filepath = new URL(uri).pathname.replace(/^\/+/, '')
-      const content = await this.store.ws.fs.readFile(filepath, encoding as 'utf-8')
+      const content = await this.ctx.webcontainer!.fs.readFile(filepath, encoding as 'utf-8')
       if (content != null)
         getOrCreateModel(Uri.parse(uri), undefined, content)
       return content
@@ -53,7 +40,7 @@ export class WorkerHost {
     const dirpath = new URL('.', uriString).pathname.replace(/^\/+/, '')
     const basename = filepath.slice(dirpath.length)
 
-    const files = await this.store.ws.fs.readdir(dirpath, { withFileTypes: true })
+    const files = await this.ctx.webcontainer!.fs.readdir(dirpath, { withFileTypes: true })
     const file = files.find(item => item.name === basename)
     if (!file)
       return undefined
@@ -66,7 +53,7 @@ export class WorkerHost {
       }
     }
     else if (file.isFile()) {
-      const content = await this.store.ws.fs.readFile(filepath, 'utf-8')
+      const content = await this.ctx.webcontainer!.fs.readFile(filepath, 'utf-8')
       return {
         type: 1 satisfies FileType.File,
         size: content.length,
@@ -78,30 +65,28 @@ export class WorkerHost {
 
   async fsReadDirectory(uri: string) {
     const filepath = new URL(uri).pathname.replace(/^\/+/, '')
-    const result = await this.store.ws.fs.readdir(filepath, { withFileTypes: true })
+    const result = await this.ctx.webcontainer!.fs.readdir(filepath, { withFileTypes: true })
     return result.map(item => [item.name, item.isDirectory() ? 2 : 1]) as [string, 1 | 2][]
   }
 }
 
 let disposeVue: undefined | (() => void)
-export async function reloadLanguageTools(store: Store) {
+export async function reloadLanguageTools(ctx: PlaygroundMonacoContext) {
   disposeVue?.()
 
   const worker = editor.createWebWorker<any>({
     moduleId: 'vs/language/vue/vueWorker',
     label: 'vue',
-    host: new WorkerHost(store),
+    host: new WorkerHost(ctx),
     createData: {
       tsconfig: {},
     } satisfies CreateData,
   })
   const languageId = ['vue', 'javascript', 'typescript']
-  const getSyncUris = () => {
-    const files = store.state.files.map(filename =>
-      Uri.parse(`file:///${filename}`),
+  const getSyncUris = () =>
+    ctx.files.map(file =>
+      Uri.parse(`file:///${file.filepath}`),
     )
-    return files
-  }
   const { dispose: disposeMarkers } = volar.editor.activateMarkers(
     worker,
     languageId,
@@ -127,10 +112,4 @@ export async function reloadLanguageTools(store: Store) {
     disposeAutoInsertion()
     disposeProvides()
   }
-}
-
-export interface WorkerMessage {
-  event: 'init'
-  tsVersion: string
-  tsLocale?: string
 }

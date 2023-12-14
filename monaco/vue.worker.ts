@@ -25,121 +25,101 @@ export interface CreateData {
 
 const DEBUG_USE_JSDELIVR = false
 
-// globalThis.onmessage = async (e) => {
-//   console.log('message to vue worker', e)
-worker.initialize(
-  (
-    ctx: monaco.worker.IWorkerContext<WorkerHost>,
-    // TODO: it seems that the create data is not pass in, investigate later
-    { tsconfig }: CreateData,
-  ) => {
-    // const rpc = createBirpc<HostFunctions, WorkerFunctions>(
-    //   {},
-    //   {
-    //     post: message => globalThis.postMessage({
-    //       type: 'birpc',
-    //       data: message,
-    //     }),
-    //     on(handler) {
-    //       globalThis.addEventListener('message', (e) => {
-    //         if (e.data.type === 'birpc')
-    //           handler(e.data)
-    //       })
-    //     },
-    //   },
-    // )
+worker.initialize((
+  ctx: monaco.worker.IWorkerContext<WorkerHost>,
+  // TODO: it seems that the create data is not pass in, investigate later
+  { tsconfig }: CreateData,
+) => {
+  // TODO: link the tsconfig from `.nuxt/tsconfig.json`
+  const { options: compilerOptions } = ts.convertCompilerOptionsFromJson(
+    tsconfig?.compilerOptions || {},
+    '',
+  )
 
-    const { options: compilerOptions } = ts.convertCompilerOptionsFromJson(
-      tsconfig?.compilerOptions || {},
-      '',
+  const env = createServiceEnvironment()
+  const host = createLanguageHost(
+    ctx.getMirrorModels,
+    env,
+    '/',
+    compilerOptions,
+  )
+
+  if (DEBUG_USE_JSDELIVR) {
+    const jsDelivrFs = createJsDelivrFs(ctx.host.onFetchCdnFile)
+    const jsDelivrUriResolver = createJsDelivrUriResolver(
+      '/node_modules',
+      {},
     )
 
-    const env = createServiceEnvironment()
-    const host = createLanguageHost(
-      ctx.getMirrorModels,
+    decorateServiceEnvironment(
       env,
-      '/',
+      jsDelivrUriResolver,
+      {
+        async stat(uri) {
+          const result = await jsDelivrFs.stat(uri)
+          return result
+        },
+        async readFile(uri) {
+          const file = await jsDelivrFs.readFile(uri)
+          // console.log({ uri, file })
+          return file
+        },
+        async readDirectory(uri) {
+          const dirs = await jsDelivrFs.readDirectory(uri)
+          return dirs
+        },
+      },
+    )
+  }
+  else {
+    const base = '/node_modules'
+    decorateServiceEnvironment(
+      env,
+      {
+        fileNameToUri(fileName) {
+          if (fileName.startsWith(base)) {
+            const uri = new URL(fileName, 'file://').href
+            return uri
+          }
+          return undefined
+        },
+        uriToFileName(uri) {
+          if (uri.startsWith('file:///node_modules/')) {
+            const filename = new URL(uri).pathname
+            return filename
+          }
+          return undefined
+        },
+      },
+      {
+        async readFile(uri) {
+          const file = await ctx.host.fsReadFile(uri)
+          // console.log('readFile', { uri, file })
+          return file
+        },
+        async stat(uri) {
+          const result = await ctx.host.fsStat(uri)
+          // console.log('stat', uri, result)
+          return result
+        },
+        async readDirectory(uri) {
+          const dirs = await ctx.host.fsReadDirectory(uri)
+          // console.log('readDirectory', uri, dirs)
+          return dirs
+        },
+      },
+    )
+  }
+
+  return createLanguageService(
+    { typescript: ts },
+    env,
+    resolveConfig(
+      ts,
+      {},
       compilerOptions,
-    )
-
-    if (DEBUG_USE_JSDELIVR) {
-      const jsDelivrFs = createJsDelivrFs(ctx.host.onFetchCdnFile)
-      const jsDelivrUriResolver = createJsDelivrUriResolver(
-        '/node_modules',
-        {},
-      )
-
-      decorateServiceEnvironment(
-        env,
-        jsDelivrUriResolver,
-        {
-          async stat(uri) {
-            const result = await jsDelivrFs.stat(uri)
-            return result
-          },
-          async readFile(uri) {
-            const file = await jsDelivrFs.readFile(uri)
-            // console.log({ uri, file })
-            return file
-          },
-          async readDirectory(uri) {
-            const dirs = await jsDelivrFs.readDirectory(uri)
-            return dirs
-          },
-        },
-      )
-    }
-    else {
-      const base = '/node_modules'
-      decorateServiceEnvironment(
-        env,
-        {
-          fileNameToUri(fileName) {
-            if (fileName.startsWith(base)) {
-              const uri = new URL(fileName, 'file://').href
-              return uri
-            }
-            return undefined
-          },
-          uriToFileName(uri) {
-            if (uri.startsWith('file:///node_modules/')) {
-              const filename = new URL(uri).pathname
-              return filename
-            }
-            return undefined
-          },
-        },
-        {
-          async readFile(uri) {
-            const file = await ctx.host.fsReadFile(uri)
-            // console.log('readFile', { uri, file })
-            return file
-          },
-          async stat(uri) {
-            const result = await ctx.host.fsStat(uri)
-            // console.log('stat', uri, result)
-            return result
-          },
-          async readDirectory(uri) {
-            const dirs = await ctx.host.fsReadDirectory(uri)
-            // console.log('readDirectory', uri, dirs)
-            return dirs
-          },
-        },
-      )
-    }
-
-    return createLanguageService(
-      { typescript: ts },
-      env,
-      resolveConfig(
-        ts,
-        {},
-        compilerOptions,
-        tsconfig?.vueCompilerOptions || {},
-      ),
-      host,
-    )
-  },
-)
-// }
+      tsconfig?.vueCompilerOptions || {},
+    ),
+    host,
+  )
+})

@@ -2,7 +2,7 @@
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
 import { loadGrammars } from '~/monaco/grammars'
 import { initMonaco } from '~/monaco/setup'
-import { Store, reloadLanguageTools } from '~/monaco/env'
+import { reloadLanguageTools } from '~/monaco/env'
 
 const props = defineProps<{
   modelValue: string
@@ -15,14 +15,8 @@ const emit = defineEmits<{
 }>()
 
 const play = usePlaygroundStore()
-const store = new Store(play.webcontainer!)
 
-// TODO: refactor this out
-watchEffect(() => {
-  store.state.files = play.files.map(i => i.filepath)
-})
-
-initMonaco(store)
+initMonaco(play)
 
 const el = ref<HTMLDivElement>()
 
@@ -123,7 +117,7 @@ watch(
       () => play.status,
       (s) => {
         if (s === 'start')
-          reloadLanguageTools(store)
+          reloadLanguageTools(play)
       },
     )
 
