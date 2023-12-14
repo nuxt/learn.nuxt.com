@@ -2,7 +2,7 @@
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
 import { loadGrammars } from '~/monaco/grammars'
 import { initMonaco } from '~/monaco/setup'
-import { Store } from '~/monaco/env'
+import { Store, reloadLanguageTools } from '~/monaco/env'
 
 const props = defineProps<{
   modelValue: string
@@ -15,7 +15,7 @@ const emit = defineEmits<{
 }>()
 
 const play = usePlaygroundStore()
-const store = new Store()
+const store = new Store(play.webcontainer!)
 
 // TODO: refactor this out
 watchEffect(() => {
@@ -115,6 +115,15 @@ watch(
       () => props.filepath,
       () => {
         editor.setModel(getModel(props.filepath))
+      },
+    )
+
+    // Restart language tools when dependencies install finished
+    watch(
+      () => play.status,
+      (s) => {
+        if (s === 'start')
+          reloadLanguageTools(store)
       },
     )
 
