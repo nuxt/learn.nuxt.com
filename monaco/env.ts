@@ -36,37 +36,49 @@ export class WorkerHost {
   // Because WebContainer doesn't support fs.stat,
   // we have to use readdir to check if the file is a directory
   async fsStat(uriString: string) {
-    const filepath = new URL(uriString).pathname.replace(/^\/+/, '')
-    const dirpath = new URL('.', uriString).pathname.replace(/^\/+/, '')
-    const basename = filepath.slice(dirpath.length)
+    try {
+      const filepath = new URL(uriString).pathname.replace(/^\/+/, '')
+      const dirpath = new URL('.', uriString).pathname.replace(/^\/+/, '')
+      const basename = filepath.slice(dirpath.length)
 
-    const files = await this.ctx.webcontainer!.fs.readdir(dirpath, { withFileTypes: true })
-    const file = files.find(item => item.name === basename)
-    if (!file)
-      return undefined
-    if (file.isDirectory()) {
-      return {
-        type: 2 satisfies FileType.Directory,
-        size: -1,
-        ctime: -1,
-        mtime: -1,
+      const files = await this.ctx.webcontainer!.fs.readdir(dirpath, { withFileTypes: true })
+      const file = files.find(item => item.name === basename)
+      if (!file)
+        return undefined
+      if (file.isDirectory()) {
+        return {
+          type: 2 satisfies FileType.Directory,
+          size: -1,
+          ctime: -1,
+          mtime: -1,
+        }
+      }
+      else if (file.isFile()) {
+        const content = await this.ctx.webcontainer!.fs.readFile(filepath, 'utf-8')
+        return {
+          type: 1 satisfies FileType.File,
+          size: content.length,
+          ctime: Date.now(),
+          mtime: Date.now(),
+        }
       }
     }
-    else if (file.isFile()) {
-      const content = await this.ctx.webcontainer!.fs.readFile(filepath, 'utf-8')
-      return {
-        type: 1 satisfies FileType.File,
-        size: content.length,
-        ctime: Date.now(),
-        mtime: Date.now(),
-      }
+    catch (err) {
+      // file not found
+      return undefined
     }
   }
 
   async fsReadDirectory(uri: string) {
-    const filepath = new URL(uri).pathname.replace(/^\/+/, '')
-    const result = await this.ctx.webcontainer!.fs.readdir(filepath, { withFileTypes: true })
-    return result.map(item => [item.name, item.isDirectory() ? 2 : 1]) as [string, 1 | 2][]
+    try {
+      const filepath = new URL(uri).pathname.replace(/^\/+/, '')
+      const result = await this.ctx.webcontainer!.fs.readdir(filepath, { withFileTypes: true })
+      return result.map(item => [item.name, item.isDirectory() ? 2 : 1]) as [string, 1 | 2][]
+    }
+    catch (err) {
+      console.error(err)
+      return []
+    }
   }
 }
 
@@ -83,10 +95,7 @@ export async function reloadLanguageTools(ctx: PlaygroundMonacoContext) {
     } satisfies CreateData,
   })
   const languageId = ['vue', 'javascript', 'typescript']
-  const getSyncUris = () =>
-    ctx.files.map(file =>
-      Uri.parse(`file:///${file.filepath}`),
-    )
+  const getSyncUris = () => ctx.files.map(file => Uri.parse(`file:///${file.filepath}`))
   const { dispose: disposeMarkers } = volar.editor.activateMarkers(
     worker,
     languageId,

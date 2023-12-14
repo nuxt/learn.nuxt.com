@@ -6,7 +6,7 @@ import {
   createJsDelivrUriResolver,
   decorateServiceEnvironment,
 } from '@volar/cdn'
-import * as ts from 'typescript'
+import * as ts from 'typescript/lib/tsserverlibrary'
 import type { VueCompilerOptions } from '@vue/language-service'
 import { resolveConfig } from '@vue/language-service'
 import {
@@ -53,7 +53,16 @@ worker.initialize((
 
     decorateServiceEnvironment(
       env,
-      jsDelivrUriResolver,
+      {
+        fileNameToUri(fileName) {
+          const uri = jsDelivrUriResolver.fileNameToUri(fileName)
+          return uri
+        },
+        uriToFileName(uri) {
+          const filename = jsDelivrUriResolver.uriToFileName(uri)
+          return filename
+        },
+      },
       {
         async stat(uri) {
           const result = await jsDelivrFs.stat(uri)
@@ -61,7 +70,6 @@ worker.initialize((
         },
         async readFile(uri) {
           const file = await jsDelivrFs.readFile(uri)
-          // console.log({ uri, file })
           return file
         },
         async readDirectory(uri) {
@@ -81,29 +89,29 @@ worker.initialize((
             const uri = new URL(fileName, 'file://').href
             return uri
           }
-          return undefined
         },
         uriToFileName(uri) {
-          if (uri.startsWith('file:///node_modules/')) {
+          if (uri.startsWith('file://')) {
             const filename = new URL(uri).pathname
             return filename
           }
-          return undefined
         },
       },
       {
         async readFile(uri) {
-          const file = await ctx.host.fsReadFile(uri)
-          // console.log('readFile', { uri, file })
-          return file
+          if (uri.startsWith('file:///node_modules')) {
+            const file = await ctx.host.fsReadFile?.(uri)
+            return file
+          }
         },
         async stat(uri) {
-          const result = await ctx.host.fsStat(uri)
-          // console.log('stat', uri, result)
+          const result = await ctx.host.fsStat?.(uri)
           return result
         },
         async readDirectory(uri) {
-          const dirs = await ctx.host.fsReadDirectory(uri)
+          if (!ctx.host)
+            return []
+          const dirs = await ctx.host.fsReadDirectory?.(uri)
           // console.log('readDirectory', uri, dirs)
           return dirs
         },
