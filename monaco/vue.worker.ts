@@ -34,15 +34,15 @@ function isInvalidPath(filepath: string) {
 self.onmessage = () => {
   worker.initialize((
     ctx: monaco.worker.IWorkerContext<WorkerHost>,
-    // TODO: it seems that the create data is not pass in, investigate later
     { tsconfig }: CreateData,
   ) => {
-  // TODO: link the tsconfig from `.nuxt/tsconfig.json`
     const { options: compilerOptions } = ts.convertCompilerOptionsFromJson(
       tsconfig.compilerOptions || {},
       '',
     )
-    console.log('compilerOptions', compilerOptions)
+
+    // eslint-disable-next-line no-console
+    console.log('Vue Language Services: compilerOptions', compilerOptions)
 
     const env = createServiceEnvironment()
     const host = createLanguageHost(

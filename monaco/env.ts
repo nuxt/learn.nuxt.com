@@ -16,10 +16,8 @@ export class WorkerHost {
     try {
       const filepath = withoutLeadingSlash(uri.fsPath)
       const content = await this.ctx.webcontainer!.fs.readFile(filepath, encoding as 'utf-8')
-      if (content != null) {
-        console.log('readFile', uriString)
+      if (content != null)
         getOrCreateModel(uri, undefined, content)
-      }
       return content
     }
     catch (err) {
