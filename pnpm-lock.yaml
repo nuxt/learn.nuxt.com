@@ -35,9 +35,15 @@ dependencies:
   onigasm:
     specifier: ^2.2.5
     version: 2.2.5
-  shiki:
-    specifier: ^0.14.6
-    version: 0.14.6
+  shikiji:
+    specifier: ^0.9.3
+    version: 0.9.3
+  shikiji-core:
+    specifier: ^0.9.3
+    version: 0.9.3
+  shikiji-monaco:
+    specifier: ^0.9.3
+    version: 0.9.3
   splitpanes:
     specifier: ^3.1.5
     version: 3.1.5
@@ -68,8 +74,8 @@ devDependencies:
     specifier: ^1.1.41
     version: 1.1.41
   '@iconify/json':
-    specifier: ^2.2.157
-    version: 2.2.157
+    specifier: ^2.2.158
+    version: 2.2.158
   '@nuxt/content':
     specifier: ^2.9.0
     version: 2.9.0(nuxt-nightly@3.9.0-28363388.1e393ad6)(vue@3.3.11)
@@ -1314,8 +1320,8 @@ packages:
       '@iconify/types': 2.0.0
     dev: true
 
-  /@iconify/json@2.2.157:
-    resolution: {integrity: sha512-mKBFQz5BqP5TGgugb0AmL7bYi7rO5jxoWQO0m7XM82ZpPRn8/BTiUW/tr2knOU2ODcmg9W/pQOAXEpkR48So9g==}
+  /@iconify/json@2.2.158:
+    resolution: {integrity: sha512-6foGYcG97nmYpJ7N0MAbtfH7SKf7RvoOCYYSBi8gs+8qopXzplIP2F4lQiLrjpbPQihAoTercmGYWi4ABxLX1A==}
     dependencies:
       '@iconify/types': 2.0.0
       pathe: 1.1.1
@@ -3839,10 +3845,6 @@ packages:
     resolution: {integrity: sha512-n5M855fKb2SsfMIiFFoVrABHJC8QtHwVx+mHWP3QcEqBHYienj5dHSgjbxtC0WEZXYt4wcD6zrQElDPhFuZgfA==}
     engines: {node: '>=12'}
     dev: true
-
-  /ansi-sequence-parser@1.1.1:
-    resolution: {integrity: sha512-vJXt3yiaUL4UU546s3rPXlsry/RnM730G1+HkpKE012AN0sx1eOrxSu95oKDIonskeLTijMgqWZ3uDEe3NFvyg==}
-    dev: false
 
   /ansi-styles@3.2.1:
     resolution: {integrity: sha512-VT0ZI6kZRdTh8YyJw3SMbYm/u+NqfsAxEpWO0Pf9sq8/e94WxxOpPKx9FR1FlyCtOVDNOQ+8ntlqFxiRc+r5qA==}
@@ -9488,13 +9490,14 @@ packages:
     resolution: {integrity: sha512-e+/aueHx0YeIEut6RXC6K8gSf0PykwZiHD7q7AHtpTW8Kd8TpFUIWqTwhAnrGjOyOMyrwv+syr5WPagMpDpVYQ==}
     dev: true
 
-  /shiki@0.14.6:
-    resolution: {integrity: sha512-R4koBBlQP33cC8cpzX0hAoOURBHJILp4Aaduh2eYi+Vj8ZBqtK/5SWNEHBS3qwUMu8dqOtI/ftno3ESfNeVW9g==}
+  /shikiji-core@0.9.3:
+    resolution: {integrity: sha512-Khc/xyxUDAXit7QWA8QhtmuGSVdvpxooTathF+sYcsT52uKVH59GR2D48tMxQ8lnpW6Dx17TSZSE1ocRmhr6wQ==}
+    dev: false
+
+  /shikiji-monaco@0.9.3:
+    resolution: {integrity: sha512-6/4LyhUAT91XaOh/PVrKLQ7ddITYMEzcZQpXc2EGoLUDKy3DMpH7NtW0V64Wwd9gj9gAx9MirCd3E07IcyyYjw==}
     dependencies:
-      ansi-sequence-parser: 1.1.1
-      jsonc-parser: 3.2.0
-      vscode-oniguruma: 1.7.0
-      vscode-textmate: 8.0.0
+      shikiji-core: 0.9.3
     dev: false
 
   /shikiji@0.6.13:
@@ -9502,6 +9505,12 @@ packages:
     dependencies:
       hast-util-to-html: 9.0.0
     dev: true
+
+  /shikiji@0.9.3:
+    resolution: {integrity: sha512-v1F/jlsEDjxVticC9IZ74vHOaLe6zpyXkv5sI/8mfZ0esoitDjVDoINP2Tmbsx9NZuX1gSvLfjbK2mqkPM1ViA==}
+    dependencies:
+      shikiji-core: 0.9.3
+    dev: false
 
   /signal-exit@3.0.7:
     resolution: {integrity: sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==}
@@ -10917,14 +10926,6 @@ packages:
 
   /vscode-nls@5.2.0:
     resolution: {integrity: sha512-RAaHx7B14ZU04EU31pT+rKz2/zSl7xMsfIZuo8pd+KZO6PXtQmpevpq3vxvWNcrGbdmhM/rr5Uw5Mz+NBfhVng==}
-    dev: false
-
-  /vscode-oniguruma@1.7.0:
-    resolution: {integrity: sha512-L9WMGRfrjOhgHSdOYgCt/yRMsXzLDJSL7BPrOZt73gU0iWO4mpqzqQzOz5srxqTvMBaR0XZTSrVWo4j55Rc6cA==}
-    dev: false
-
-  /vscode-textmate@8.0.0:
-    resolution: {integrity: sha512-AFbieoL7a5LMqcnOF04ji+rpXadgOXnZsxQr//r83kLPr7biP7am3g9zbaZIaBGwBRWeSvoMD4mgPdX3e4NWBg==}
     dev: false
 
   /vscode-uri@2.1.2:

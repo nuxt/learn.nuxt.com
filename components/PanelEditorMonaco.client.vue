@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import * as monaco from 'monaco-editor-core/esm/vs/editor/editor.api'
-import { loadGrammars } from '~/monaco/grammars'
+import { shikijiToMonaco } from 'shikiji-monaco'
 import { initMonaco } from '~/monaco/setup'
 import { reloadLanguageTools } from '~/monaco/env'
+import { getShikiji } from '~/monaco/shikiji'
 
 const props = defineProps<{
   modelValue: string
@@ -43,8 +44,8 @@ const language = computed(() => {
   }
 })
 const theme = computed(() => colorMode.value === 'dark'
-  ? 'theme-dark'
-  : 'theme-light',
+  ? 'vitesse-black'
+  : 'vitesse-light',
 )
 
 function getModel(filepath: string) {
@@ -69,6 +70,9 @@ watch(
   async (value) => {
     if (!value)
       return
+
+    const shiki = await getShikiji()
+    shikijiToMonaco(shiki, monaco)
 
     const editor = monaco.editor.create(
       value,
@@ -122,8 +126,6 @@ watch(
     )
 
     watch(theme, () => monaco.editor.setTheme(theme.value))
-
-    await loadGrammars(monaco, editor)
   },
 )
 </script>

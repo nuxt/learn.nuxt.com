@@ -6,9 +6,6 @@ import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker'
 import cssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker'
 import htmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker'
 
-// TODO: material-theme-palenight's format it not compatible with monaco
-import themeDark from 'theme-vitesse/themes/vitesse-black.json'
-import themeLight from 'theme-vitesse/themes/vitesse-light.json'
 import vueWorker from './vue.worker?worker'
 import { reloadLanguageTools } from './env'
 
@@ -45,13 +42,6 @@ export function initMonaco(ctx: PlaygroundStore) {
   monaco.languages.register({ id: 'typescript', extensions: ['.ts'] })
   monaco.languages.register({ id: 'json', extensions: ['.json'] })
   monaco.languages.register({ id: 'html', extensions: ['.html'] })
-
-  const darkColors = (themeDark as any).colors as Record<string, string>
-  darkColors['editor.background'] = '#00000000'
-  darkColors['editor.lineHighlightBackground'] = '#00000000'
-
-  monaco.editor.defineTheme('theme-light', themeLight as any)
-  monaco.editor.defineTheme('theme-dark', themeDark as any)
 
   monaco.languages.onLanguage('vue', () => reloadLanguageTools(ctx))
 }
