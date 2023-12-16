@@ -34,8 +34,8 @@ watch(selectedFile, (file) => {
   input.value = file?.read() || ''
 })
 
-function onTextInput() {
-  // TODO: add throttle
+const onTextInput = useDebounceFn(_onTextInput, 500)
+function _onTextInput() {
   if (input.value != null)
     selectedFile?.value?.write(input.value)
 }
