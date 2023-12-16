@@ -77,27 +77,26 @@ watch(
     const editor = monaco.editor.create(
       value,
       {
-        'model': getModel(props.filepath),
-        'theme': theme.value,
-        'fontSize': 14,
-        'bracketPairColorization': {
+        model: getModel(props.filepath),
+        theme: theme.value,
+        fontSize: 14,
+        bracketPairColorization: {
           enabled: false,
         },
-        'glyphMargin': false,
-        'automaticLayout': true,
-        'folding': false,
-        'lineDecorationsWidth': 10,
-        'lineNumbersMinChars': 3,
-        'fontFamily': 'DM Mono, monospace',
-        'minimap': {
+        glyphMargin: false,
+        automaticLayout: true,
+        folding: false,
+        lineDecorationsWidth: 10,
+        lineNumbersMinChars: 3,
+        fontFamily: 'DM Mono, monospace',
+        minimap: {
           enabled: false,
         },
-        'padding': {
+        padding: {
           top: 8,
         },
-        'semanticHighlighting.enabled': true,
-        'overviewRulerLanes': 0,
-        'fixedOverflowWidgets': true,
+        overviewRulerLanes: 0,
+        fixedOverflowWidgets: true,
       },
     )
 
