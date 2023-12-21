@@ -7,5 +7,5 @@ import './styles/overrides.css'
 </script>
 
 <template>
-  <NuxtPage />
+  <NuxtPage page-key="playground" />
 </template>
