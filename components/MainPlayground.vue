@@ -7,7 +7,6 @@ So that we can discuss about the directions and plans, to avoid wasted efforts. 
 import { Pane, Splitpanes } from 'splitpanes'
 
 const ui = useUiState()
-const play = usePlaygroundStore()
 
 function startDragging() {
   ui.isPanelDragging = true
@@ -80,7 +79,7 @@ const panelInitTerminal = computed(() => isMounted.value || {
         @resized="endDraggingHorizontal"
       >
         <Pane :size="ui.panelEditor" min-size="10" :style="panelInitEditor">
-          <PanelEditor :files="play.files" />
+          <PanelEditor />
         </Pane>
         <PaneSplitter />
         <Pane :size="ui.panelPreview" min-size="10" :style="panelInitPreview">

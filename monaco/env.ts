@@ -123,7 +123,8 @@ export async function reloadLanguageTools(ctx: PlaygroundMonacoContext) {
 
   const languageId = ['vue', 'javascript', 'typescript']
   const getSyncUris = () => [
-    ...ctx.files.map(file => Uri.parse(`file:///${file.filepath}`)),
+    ...Array.from(ctx.files.values())
+      .map(file => Uri.parse(`file:///${file.filepath}`)),
     ...extraFiles,
   ]
   const { dispose: disposeMarkers } = volar.editor.activateMarkers(

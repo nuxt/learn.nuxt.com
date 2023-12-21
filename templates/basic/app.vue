@@ -1,8 +1,7 @@
 <script setup lang="ts">
-const msg = 'Hello World!'
+const msg = 'Hello World! This is the basic template.'
 </script>
 
 <template>
-  <div>{{ msg.toUpperCase() }}</div>
-  <NuxtPage />
+  <div>{{ msg }}</div>
 </template>
