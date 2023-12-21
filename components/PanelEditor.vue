@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Pane, Splitpanes } from 'splitpanes'
-import type { VirtualFile } from '~/structures/VirtualFile'
 import { filesToVirtualFsTree } from '~/templates/utils'
 
 const play = usePlaygroundStore()
