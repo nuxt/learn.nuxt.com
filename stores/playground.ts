@@ -5,18 +5,17 @@ import { VirtualFile } from '../structures/VirtualFile'
 import type { ClientInfo } from '~/types/rpc'
 import type { GuideMeta } from '~/types/guides'
 
-export const PlaygroundStatusOrder = [
-  'init',
-  'mount',
-  'install',
-  'start',
-  'ready',
-] as const
-
-export type PlaygroundStatus = typeof PlaygroundStatusOrder[number] | 'error'
+export enum playgroundStatus {
+  init = 1,
+  mount = 2,
+  install = 3,
+  start = 4,
+  ready = 5,
+  error = 6,
+}
 
 export const usePlaygroundStore = defineStore('playground', () => {
-  const status = ref<PlaygroundStatus>('init')
+  const status = ref<playgroundStatus>(playgroundStatus.init)
   const error = shallowRef<{ message: string }>()
   const currentProcess = shallowRef<Raw<WebContainerProcess | undefined>>()
   const files = shallowReactive<Raw<Map<string, VirtualFile>>>(new Map())
@@ -72,16 +71,16 @@ export const usePlaygroundStore = defineStore('playground', () => {
             origin: url,
             fullPath: '/',
           }
-          status.value = 'start'
+          status.value = playgroundStatus.start
         }
       })
 
       wc.on('error', (err) => {
         error.value = err
-        status.value = 'error'
+        status.value = playgroundStatus.error
       })
 
-      status.value = 'mount'
+      status.value = playgroundStatus.mount
       await wc.mount(tree)
 
       startServer()
@@ -135,7 +134,7 @@ export const usePlaygroundStore = defineStore('playground', () => {
   async function launchDefaultProcess(wc: WebContainer, signal: AbortSignal) {
     if (!wc)
       return
-    status.value = 'install'
+    status.value = playgroundStatus.install
 
     if (signal.aborted)
       return
@@ -145,7 +144,7 @@ export const usePlaygroundStore = defineStore('playground', () => {
       return
 
     if (installExitCode !== 0) {
-      status.value = 'error'
+      status.value = playgroundStatus.error
       error.value = {
         message: `Unable to run npm install, exit as ${installExitCode}`,
       }

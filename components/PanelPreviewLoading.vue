@@ -1,19 +1,19 @@
 <script setup lang="ts">
+import { playgroundStatus } from '~/stores/playground'
+
 const play = usePlaygroundStore()
 
-function getStep(status: PlaygroundStatus) {
-  if (status === 'error' || play.status === 'error')
+function getStep(status: playgroundStatus) {
+  if (status === playgroundStatus.error || play.status === playgroundStatus.error)
     return 'error'
-  const indexCurrent = PlaygroundStatusOrder.indexOf(play.status)
-  const index = PlaygroundStatusOrder.indexOf(status)
-  if (indexCurrent === index)
+  if (play.status === status)
     return 'current'
-  if (indexCurrent > index)
+  if (play.status > status)
     return 'done'
   return 'todo'
 }
 
-function getStatusIcon(status: PlaygroundStatus) {
+function getStatusIcon(status: playgroundStatus) {
   const step = getStep(status)
   switch (step) {
     case 'error':
@@ -27,7 +27,7 @@ function getStatusIcon(status: PlaygroundStatus) {
   }
 }
 
-function getTextClass(status: PlaygroundStatus) {
+function getTextClass(status: playgroundStatus) {
   const step = getStep(status)
   switch (step) {
     case 'error':
@@ -44,19 +44,19 @@ function getTextClass(status: PlaygroundStatus) {
 
 <template>
   <div
-    v-if="play.status !== 'ready'"
+    v-if="play.status !== playgroundStatus.ready"
     flex="~ col items-center justify-center"
     h-full capitalize
   >
     <div grid="~ cols-[max-content_1fr] gap-2 items-center justify-center">
-      <div :class="getStatusIcon('init')" />
-      <span :class="getTextClass('init')">Initialize WebContainer</span>
-      <div :class="getStatusIcon('mount')" />
-      <span :class="getTextClass('mount')">Mount files</span>
-      <div :class="getStatusIcon('install')" />
-      <span :class="getTextClass('install')">Install Dependencies</span>
-      <div :class="getStatusIcon('start')" />
-      <span :class="getTextClass('start')">Boot Nuxt Server</span>
+      <div :class="getStatusIcon(playgroundStatus.init)" />
+      <span :class="getTextClass(playgroundStatus.init)">Initialize WebContainer</span>
+      <div :class="getStatusIcon(playgroundStatus.mount)" />
+      <span :class="getTextClass(playgroundStatus.mount)">Mount files</span>
+      <div :class="getStatusIcon(playgroundStatus.install)" />
+      <span :class="getTextClass(playgroundStatus.install)">Install Dependencies</span>
+      <div :class="getStatusIcon(playgroundStatus.start)" />
+      <span :class="getTextClass(playgroundStatus.start)">Boot Nuxt Server</span>
     </div>
   </div>
 </template>
