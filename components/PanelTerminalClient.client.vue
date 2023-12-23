@@ -29,6 +29,7 @@ const terminal = new Terminal({
   fontFamily: 'DM Mono, monospace',
 })
 
+// persist the scroll position of terminal
 const ui = useUiState()
 watch(() => ui.showTerminal, (v) => {
   if (!root.value)
