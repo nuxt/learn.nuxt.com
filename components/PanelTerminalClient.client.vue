@@ -29,6 +29,19 @@ const terminal = new Terminal({
   fontFamily: 'DM Mono, monospace',
 })
 
+const ui = useUiState()
+watch(() => ui.showTerminal, (v) => {
+  if (!root.value)
+    return
+  if (!v) {
+    const { height } = root.value.getBoundingClientRect()
+    root.value.style.height = `${height}px`
+  }
+  else {
+    root.value.style.height = 'initial'
+  }
+}, { flush: 'sync' })
+
 watch(
   () => theme.value,
   (t) => {
