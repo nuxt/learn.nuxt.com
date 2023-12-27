@@ -53,6 +53,8 @@ watch(
 const fitAddon = new FitAddon()
 terminal.loadAddon(fitAddon)
 
+let init = false
+
 watch(
   () => play.currentProcess,
   (p) => {
@@ -69,6 +71,15 @@ watch(
             read()
         })
       }
+      if (!init) {
+        init = true
+      }
+      else {
+        terminal.writeln('')
+        terminal.writeln(`-------------`)
+        terminal.writeln('')
+      }
+
       read()
     }
     catch (e) {
@@ -78,7 +89,12 @@ watch(
     try {
       const writer = p.input.getWriter()
       terminal.onData((data) => {
-        writer.write(data)
+        try {
+          writer.write(data)
+        }
+        catch (e) {
+          console.error(e)
+        }
       })
     }
     catch (e) {

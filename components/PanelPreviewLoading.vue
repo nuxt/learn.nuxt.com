@@ -45,18 +45,36 @@ function getTextClass(status: PlaygroundStatus) {
 <template>
   <div
     v-if="play.status !== 'ready'"
-    flex="~ col items-center justify-center"
-    h-full capitalize
+    flex="~ col items-center gap-2 justify-center"
+    h-full
   >
-    <div grid="~ cols-[max-content_1fr] gap-2 items-center justify-center">
+    <template v-if="play.status === 'interactive'">
+      <div flex="~ gap-2 items-center" text-lg>
+        <div i-ph-terminal-window-duotone text-2xl />
+        Interactive terminal mode
+      </div>
+      <button
+        title="Restart terminal"
+        flex="~ gap-1 items-center"
+        hover="bg-active text-blue op100"
+        mx--1 rounded px1 op50
+        @click="play.restartServer()"
+      >
+        <div i-ph-arrow-clockwise-duotone text-lg />
+        Restart the server
+      </button>
+    </template>
+    <div v-else grid="~ cols-[max-content_1fr] gap-2 items-center justify-center">
       <div :class="getStatusIcon('init')" />
-      <span :class="getTextClass('init')">Initialize WebContainer</span>
+      <span :class="getTextClass('init')">Initializing WebContainer</span>
       <div :class="getStatusIcon('mount')" />
-      <span :class="getTextClass('mount')">Mount files</span>
+      <span :class="getTextClass('mount')">Mounting files</span>
       <div :class="getStatusIcon('install')" />
-      <span :class="getTextClass('install')">Install Dependencies</span>
+      <span :class="getTextClass('install')">Installing dependencies</span>
       <div :class="getStatusIcon('start')" />
-      <span :class="getTextClass('start')">Boot Nuxt Server</span>
+      <span :class="getTextClass('start')">Starting Nuxt server</span>
+      <div :class="getStatusIcon('polling')" />
+      <span :class="getTextClass('polling')">Waiting for Nuxt to ready</span>
     </div>
   </div>
 </template>

@@ -10,10 +10,14 @@ export const PlaygroundStatusOrder = [
   'mount',
   'install',
   'start',
+  'polling',
   'ready',
+  'interactive',
 ] as const
 
 export type PlaygroundStatus = typeof PlaygroundStatusOrder[number] | 'error'
+
+const NUXT_PORT = 4000
 
 export const usePlaygroundStore = defineStore('playground', () => {
   const status = ref<PlaygroundStatus>('init')
@@ -37,6 +41,7 @@ export const usePlaygroundStore = defineStore('playground', () => {
 
   const colorMode = useColorMode()
   let mountPromise: Promise<void> | undefined
+  let hasInstalled = false
 
   // Mount the playground on client side
   if (import.meta.client) {
@@ -60,19 +65,15 @@ export const usePlaygroundStore = defineStore('playground', () => {
         file.wc = wc
       })
 
-      // // TODO: not booting the webcontainer in dev mode
-      // if (import.meta.dev)
-      //   return
-
       wc.on('server-ready', async (port, url) => {
         // Nuxt listen to multiple ports, and 'server-ready' is emitted for each of them
         // We need the main one
-        if (port === 3000) {
+        if (port === NUXT_PORT) {
           previewLocation.value = {
             origin: url,
             fullPath: '/',
           }
-          status.value = 'start'
+          status.value = 'polling'
         }
       })
 
@@ -106,7 +107,7 @@ export const usePlaygroundStore = defineStore('playground', () => {
     currentProcess.value = undefined
   }
 
-  async function startServer() {
+  async function startServer(reinstall = false) {
     if (!import.meta.client)
       return
 
@@ -116,14 +117,26 @@ export const usePlaygroundStore = defineStore('playground', () => {
     abortController = new AbortController()
     const signal = abortController.signal
 
-    await launchDefaultProcess(wc, signal)
+    if (reinstall)
+      hasInstalled = false
+
+    if (!hasInstalled)
+      await launchInstallProcess(wc, signal)
+
+    if (hasInstalled)
+      await launchNuxtProcess(wc, signal)
+
     await launchInteractiveProcess(wc, signal)
   }
 
   async function spawn(wc: WebContainer, command: string, args: string[] = []) {
     if (currentProcess.value)
       throw new Error('A process is already running')
-    const process = await wc.spawn(command, args)
+    const process = await wc.spawn(command, args, {
+      env: {
+        NUXT_PORT: NUXT_PORT.toString(),
+      },
+    })
     currentProcess.value = process
     return process.exit.then((r) => {
       if (currentProcess.value === process)
@@ -132,13 +145,11 @@ export const usePlaygroundStore = defineStore('playground', () => {
     })
   }
 
-  async function launchDefaultProcess(wc: WebContainer, signal: AbortSignal) {
-    if (!wc)
-      return
-    status.value = 'install'
-
+  async function launchInstallProcess(wc: WebContainer, signal: AbortSignal) {
     if (signal.aborted)
       return
+
+    status.value = 'install'
 
     const installExitCode = await spawn(wc, 'pnpm', ['install'])
     if (signal.aborted)
@@ -150,15 +161,23 @@ export const usePlaygroundStore = defineStore('playground', () => {
         message: `Unable to run npm install, exit as ${installExitCode}`,
       }
       console.error('Unable to run npm install')
-      return
+      return false
     }
 
+    hasInstalled = true
+  }
+
+  async function launchNuxtProcess(wc: WebContainer, signal: AbortSignal) {
+    if (signal.aborted)
+      return
+    status.value = 'start'
     await spawn(wc, 'pnpm', ['run', 'dev', '--no-qr'])
   }
 
   async function launchInteractiveProcess(wc: WebContainer, signal: AbortSignal) {
     if (signal.aborted)
       return
+    status.value = 'interactive'
     await spawn(wc, 'jsh')
   }
 
@@ -231,8 +250,6 @@ export const usePlaygroundStore = defineStore('playground', () => {
       )
     }
 
-    // if (status.value === 'ready')
-    //   status.value = 'start'
     previewLocation.value.fullPath = guide?.startingUrl || '/'
     fileSelected.value = files.get(guide?.startingFile || 'app.vue')
     updatePreviewUrl()
