@@ -39,7 +39,7 @@
     "@antfu/eslint-config": "^2.6.0",
     "@iconify-json/logos": "^1.1.42",
     "@iconify/json": "^2.2.162",
-    "@nuxt/content": "^2.10.0",
+    "@nuxt/content": "2.9.0",
     "@nuxt/devtools": "^1.0.6",
     "@nuxt/kit": "^3.9.0",
     "@nuxtjs/color-mode": "^3.3.2",
