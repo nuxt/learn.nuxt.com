@@ -32,6 +32,9 @@ export default defineNuxtConfig({
       },
     },
   },
+  features: {
+    inlineStyles: false,
+  },
   runtimeConfig: {
     public: {
       buildTime: Date.now(),
