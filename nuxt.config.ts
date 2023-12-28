@@ -67,6 +67,7 @@ export default defineNuxtConfig({
     defineModel: true,
   },
   content: {
+    documentDriven: true,
     highlight: {
       theme: {
         default: 'vitesse-light',

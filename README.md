@@ -45,13 +45,14 @@ The development server will be running at [http://localhost:3000](http://localho
   - [x] Allow each guide to toggle features
   - [ ] Allow each guide to configure file filter
   - [ ] Solution for each guide
-  - [ ] A button of "Edit this page"
+  - [x] A button of "Edit this page"
   - [ ] Verification for tutorial tasks
   - [ ] Search feature
   - [ ] Embedded Nuxt Docs (update CORS headers)
 - [ ] Command K System
 - [ ] About Page
 - [ ] Welcome Screen
+- [ ] Try https://ark-ui.com/docs/components/splitter
 - [x] Show release time for the playground
 - [x] Show Nuxt and Vue versions from the container
 - [x] Custom bundler for templates (replaces `import.meta.glob`, create static virtual modules)
