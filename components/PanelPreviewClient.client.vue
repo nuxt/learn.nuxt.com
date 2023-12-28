@@ -5,16 +5,17 @@ import type { FrameFunctions, ParentFunctions } from '~/types/rpc'
 const ui = useUiState()
 const play = usePlaygroundStore()
 const colorMode = useColorMode()
+const preview = usePreviewStore()
 
 const iframe = ref<HTMLIFrameElement>()
 
 const rpc = createBirpc<FrameFunctions, ParentFunctions>({
   onNavigate(path) {
-    play.previewLocation.fullPath = path
+    preview.location.fullPath = path
   },
   async onReady(info) {
     play.status = 'ready'
-    play.clientInfo = info
+    preview.clientInfo = info
     syncColorMode()
   },
 }, {
@@ -52,9 +53,9 @@ defineExpose({
 
 <template>
   <iframe
-    v-if="play.previewUrl"
+    v-if="preview.url"
     ref="iframe"
-    :src="play.previewUrl"
+    :src="preview.url"
     :style="play.status === 'ready' ? '' : 'opacity: 0.001; pointer-events: none;'"
     :class="{ 'pointer-events-none': ui.isPanelDragging }"
     absolute inset-0 h-full w-full bg-transparent allow="geolocation; microphone; camera; payment; autoplay; serial; cross-origin-isolated"

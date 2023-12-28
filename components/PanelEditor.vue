@@ -4,6 +4,7 @@ import { filesToVirtualFsTree } from '~/templates/utils'
 
 const play = usePlaygroundStore()
 const ui = useUiState()
+const guide = useGuideStore()
 
 const files = computed(() => Array.from(play.files.values()).filter(file => !isFileIgnored(file.filepath)))
 const directory = computed(() => filesToVirtualFsTree(files.value))
@@ -11,14 +12,7 @@ const directory = computed(() => filesToVirtualFsTree(files.value))
 const input = ref<string>('')
 
 watch(
-  () => play.fileSelected,
-  () => {
-    input.value = play.fileSelected?.read() || ''
-  },
-)
-
-watch(
-  () => [play.mountedGuide, play.showingSolution],
+  () => [play.fileSelected, guide.currentGuide, guide.showingSolution],
   () => {
     input.value = play.fileSelected?.read() || ''
   },

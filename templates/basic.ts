@@ -1,6 +1,4 @@
-import { VirtualFile } from '../structures/VirtualFile'
 import type { TemplateOptions } from './types'
-import { filesToWebContainerFs } from './utils'
 import template from '#build/templates/basic'
 
 export default function load(options: TemplateOptions = {}) {
@@ -20,17 +18,5 @@ export default function load(options: TemplateOptions = {}) {
     ].filter(Boolean).join('\n')
   }
 
-  const files = Object.entries(rawFiles)
-    .map(([path, content]) => {
-      return new VirtualFile(path, content)
-    })
-
-  const tree = filesToWebContainerFs(
-    files,
-  )
-
-  return {
-    files,
-    tree,
-  }
+  return rawFiles
 }

@@ -1,10 +1,11 @@
 import type { FileNode, WebContainer } from '@webcontainer/api'
+import { dirname } from 'pathe'
 
 export class VirtualFile {
   constructor(
     public readonly filepath: string,
     private _content: string,
-    public wc?: WebContainer,
+    public wc: WebContainer,
   ) {
   }
 
@@ -26,7 +27,11 @@ export class VirtualFile {
 
   async write(content: string) {
     this._content = content
-    if (this.wc)
-      await this.wc.fs.writeFile(this.filepath, content, 'utf-8')
+    await this.wc.fs.mkdir(dirname(this.filepath), { recursive: true })
+    await this.wc.fs.writeFile(this.filepath, content, 'utf-8')
+  }
+
+  async remove() {
+    await this.wc.fs.rm(this.filepath)
   }
 }

@@ -43,14 +43,19 @@ The development server will be running at [http://localhost:3000](http://localho
 - [ ] Content
   - [ ] Allow each guide to configure file filter
   - [ ] Persist user changes when toggling solutions
-  - [ ] Only make necessary changes when navigating between guides
   - [ ] Verification for tutorial tasks
   - [ ] Search feature
   - [ ] Embedded Nuxt Docs (update CORS headers)
+  - [x] Only make necessary changes when navigating between guides
   - [x] Switch playgrounds on different guides
   - [x] Allow each guide to toggle features
   - [x] Solution for each guide
   - [x] A button of "Edit this page"
+- [ ] SEO
+  - [ ] OG Image
+  - [ ] Meta tags
+  - [ ] Sitemap
+  - [ ] RSS
 - [ ] Command K System
 - [ ] About Page
 - [ ] Welcome Screen
