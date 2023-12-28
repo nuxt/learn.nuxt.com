@@ -41,14 +41,16 @@ The development server will be running at [http://localhost:3000](http://localho
 ## Todolist
 
 - [ ] Content
-  - [x] Switch playgrounds on different guides
-  - [x] Allow each guide to toggle features
   - [ ] Allow each guide to configure file filter
-  - [ ] Solution for each guide
-  - [x] A button of "Edit this page"
+  - [ ] Persist user changes when toggling solutions
+  - [ ] Only make necessary changes when navigating between guides
   - [ ] Verification for tutorial tasks
   - [ ] Search feature
   - [ ] Embedded Nuxt Docs (update CORS headers)
+  - [x] Switch playgrounds on different guides
+  - [x] Allow each guide to toggle features
+  - [x] Solution for each guide
+  - [x] A button of "Edit this page"
 - [ ] Command K System
 - [ ] About Page
 - [ ] Welcome Screen

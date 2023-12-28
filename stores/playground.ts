@@ -30,6 +30,7 @@ export const usePlaygroundStore = defineStore('playground', () => {
   const clientInfo = ref<ClientInfo>()
   const fileSelected = shallowRef<Raw<VirtualFile>>()
   const mountedGuide = shallowRef<Raw<GuideMeta>>()
+  const showingSolution = ref(false)
   const features = ref<PlaygroundFeatures>({})
 
   const previewLocation = ref({
@@ -248,38 +249,14 @@ export const usePlaygroundStore = defineStore('playground', () => {
 
   const guideDispose: (() => void | Promise<void>)[] = []
 
-  async function mountGuide(guide?: GuideMeta) {
-    await mountPromise
-
-    // Unmount the previous guide
-    await Promise.all(guideDispose.map(dispose => dispose()))
-    guideDispose.length = 0
-
-    if (guide) {
-      // eslint-disable-next-line no-console
-      console.log('mounting guide', guide)
-
-      await Promise.all(
-        Object.entries(guide?.files || {})
-          .map(async ([filepath, content]) => {
-            await webcontainer.value?.fs.mkdir(dirname(filepath), { recursive: true })
-            await updateOrCreateFile(filepath, content)
-          }),
-      )
-
-      features.value = guide?.features || {}
-    }
-    else {
-      features.value = {}
-    }
-
-    previewLocation.value.fullPath = guide?.startingUrl || '/'
-    fileSelected.value = files.get(guide?.startingFile || 'app.vue')
-    updatePreviewUrl()
-
-    mountedGuide.value = guide
-
-    return undefined
+  async function _mountFiles(overrides: Record<string, string>) {
+    await Promise.all(
+      Object.entries(overrides)
+        .map(async ([filepath, content]) => {
+          await webcontainer.value?.fs.mkdir(dirname(filepath), { recursive: true })
+          await updateOrCreateFile(filepath, content)
+        }),
+    )
 
     async function updateOrCreateFile(filepath: string, content: string) {
       const file = files.get(filepath)
@@ -305,6 +282,41 @@ export const usePlaygroundStore = defineStore('playground', () => {
     }
   }
 
+  async function mountGuide(guide?: GuideMeta, withSolution = false) {
+    await mountPromise
+
+    // TODO: only make necessary changes
+    // Unmount the previous guide
+    await Promise.all(guideDispose.map(dispose => dispose()))
+    guideDispose.length = 0
+
+    if (guide) {
+      // eslint-disable-next-line no-console
+      console.log('mounting guide', guide)
+
+      const overrides = {
+        ...guide.files,
+        ...withSolution ? guide.solutions : {},
+      }
+
+      await _mountFiles(overrides)
+
+      features.value = guide?.features || {}
+    }
+    else {
+      features.value = {}
+    }
+
+    previewLocation.value.fullPath = guide?.startingUrl || '/'
+    fileSelected.value = files.get(guide?.startingFile || 'app.vue')
+    updatePreviewUrl()
+
+    mountedGuide.value = guide
+    showingSolution.value = withSolution
+
+    return undefined
+  }
+
   return {
     clientInfo,
     currentProcess,
@@ -314,6 +326,7 @@ export const usePlaygroundStore = defineStore('playground', () => {
     fileSelected,
     mountedGuide,
     mountGuide,
+    showingSolution,
     previewLocation,
     previewUrl,
     features,

@@ -18,7 +18,7 @@ watch(
 )
 
 watch(
-  () => play.mountedGuide,
+  () => [play.mountedGuide, play.showingSolution],
   () => {
     input.value = play.fileSelected?.read() || ''
   },
