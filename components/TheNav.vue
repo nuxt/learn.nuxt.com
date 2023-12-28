@@ -17,12 +17,6 @@ const timeAgo = useTimeAgo(buildTime)
 
     <div flex-auto />
     <button
-      v-if="guide.currentGuide?.solutions"
-      @click="guide.toggleSolutions()"
-    >
-      Toggle Solution
-    </button>
-    <button
       v-if="play.status === 'ready' && guide.features.download !== false"
       rounded p2
       hover="bg-active"
