@@ -16,7 +16,7 @@ const timeAgo = useTimeAgo(buildTime)
 
     <div flex-auto />
     <button
-      v-if="play.status === 'ready'"
+      v-if="play.status === 'ready' && play.features.download !== false"
       rounded p2
       hover="bg-active"
       title="Download as ZIP"
@@ -44,6 +44,7 @@ const timeAgo = useTimeAgo(buildTime)
       </template>
     </VDropdown>
     <button
+      v-if="play.features.terminal !== false"
       rounded p2
       title="Toggle terminal"
       hover="bg-active"

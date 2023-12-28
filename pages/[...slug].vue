@@ -8,7 +8,7 @@ const templatesMap = Object.fromEntries(
       key
         .replace(/^\/content/, '')
         .replace(/\/\.template\/index\.ts$/, '')
-        .replace(/\/\d+\./g, '/'),
+        .replace(/\/\d+\./g, '/') || '',
       loader,
     ]),
 )
@@ -18,6 +18,7 @@ if (process.dev)
   console.log('templates', Object.keys(templatesMap))
 
 async function mount(path: string) {
+  path = path.replace(/\/$/, '')
   if (templatesMap[path])
     play.mountGuide(await templatesMap[path]().then((m: any) => m.meta))
   else

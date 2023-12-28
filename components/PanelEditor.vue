@@ -63,6 +63,7 @@ const panelInitEditor = computed(() => isMounted.value || {
       <span text-sm>Editor</span>
     </div>
     <Splitpanes
+      of-hidden
       @resize="startDragging"
       @resized="endDragging"
     >

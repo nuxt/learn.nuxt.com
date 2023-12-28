@@ -1,8 +1,9 @@
 import type { GuideMeta } from '~/types/guides'
 
 export const meta: GuideMeta = {
-  startingFile: 'pages/index.vue',
+  startingFile: 'app.vue',
   features: {
-    fileTree: true,
+    terminal: false,
+    fileTree: false,
   },
 }

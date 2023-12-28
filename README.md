@@ -42,13 +42,13 @@ The development server will be running at [http://localhost:3000](http://localho
 
 - [ ] Content
   - [x] Switch playgrounds on different guides
-  - [ ] Allow each guide to toggle features
+  - [x] Allow each guide to toggle features
   - [ ] Allow each guide to configure file filter
   - [ ] Solution for each guide
   - [ ] A button of "Edit this page"
   - [ ] Verification for tutorial tasks
   - [ ] Search feature
-  - [ ] Embedded Nuxt Docs
+  - [ ] Embedded Nuxt Docs (update CORS headers)
 - [ ] Command K System
 - [ ] About Page
 - [ ] Welcome Screen

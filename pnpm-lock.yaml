@@ -7,6 +7,11 @@ settings:
 overrides:
   shikiji: ^0.9.12
 
+patchedDependencies:
+  splitpanes@3.1.5:
+    hash: h4hqdnxj6cbudirz7t37wp3wee
+    path: patches/splitpanes@3.1.5.patch
+
 dependencies:
   '@volar/monaco':
     specifier: ^1.11.1
@@ -49,7 +54,7 @@ dependencies:
     version: 0.9.12
   splitpanes:
     specifier: ^3.1.5
-    version: 3.1.5
+    version: 3.1.5(patch_hash=h4hqdnxj6cbudirz7t37wp3wee)
   strip-json-comments:
     specifier: ^5.0.1
     version: 5.0.1
@@ -8600,9 +8605,10 @@ packages:
     resolution: {integrity: sha512-eWN+LnM3GR6gPu35WxNgbGl8rmY1AEmoMDvL/QD6zYmPWgywxWqJWNdLGT+ke8dKNWrcYgYjPpG5gbTfghP8rw==}
     dev: true
 
-  /splitpanes@3.1.5:
+  /splitpanes@3.1.5(patch_hash=h4hqdnxj6cbudirz7t37wp3wee):
     resolution: {integrity: sha512-r3Mq2ITFQ5a2VXLOy4/Sb2Ptp7OfEO8YIbhVJqJXoFc9hc5nTXXkCvtVDjIGbvC0vdE7tse+xTM9BMjsszP6bw==}
     dev: false
+    patched: true
 
   /ssri@10.0.5:
     resolution: {integrity: sha512-bSf16tAFkGeRlUNDjXu8FzaMQt6g2HZJrun7mtMbIPOddxt3GLMSz5VWUWcqTJUPfLEaDIepGxv+bYQW49596A==}
