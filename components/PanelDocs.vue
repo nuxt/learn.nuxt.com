@@ -2,7 +2,9 @@
 const guide = useGuideStore()
 const { page } = useContent()
 
-const sourceUrl = computed(() => `https://github.com/nuxt/learn.nuxt.com/edit/main/content/${page.value._file}`)
+const sourceUrl = computed(() => page.value?._file
+  ? `https://github.com/nuxt/learn.nuxt.com/edit/main/content/${page.value._file}`
+  : undefined)
 </script>
 
 <template>
@@ -28,6 +30,7 @@ const sourceUrl = computed(() => `https://github.com/nuxt/learn.nuxt.com/edit/ma
     </article>
     <div border="t base dashed" px6 py2>
       <NuxtLink
+        v-if="sourceUrl"
         :to="sourceUrl" target="_blank"
         flex="~ items-center gap-2" op50 hover="text-primary op100"
       >

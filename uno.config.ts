@@ -20,7 +20,7 @@ export default defineConfig({
   theme: {
     colors: {
       primary: {
-        DEFAULT: '#00DC82',
+        DEFAULT: '#00c16a',
       },
     },
   },
@@ -31,7 +31,10 @@ export default defineConfig({
     presetWebFonts({
       provider: 'bunny',
       fonts: {
-        sans: 'DM Sans',
+        sans: {
+          name: 'DM Sans',
+          weights: [200, 400, 600, 700],
+        },
         mono: 'DM Mono',
       },
     }),

@@ -17,3 +17,8 @@
   color: inherit;
   font-weight: inherit;
 }
+
+.prose strong,
+.prose b {
+  font-weight: 600;
+}
