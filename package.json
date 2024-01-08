@@ -18,7 +18,7 @@
     "@vue/language-service": "^1.8.27",
     "@webcontainer/api": "^1.1.8",
     "birpc": "^0.2.14",
-    "floating-vue": "2.0.0-beta.24",
+    "floating-vue": "2.0.0",
     "jszip": "^3.10.1",
     "monaco-editor": "^0.45.0",
     "monaco-editor-textmate": "^4.0.0",
