@@ -1,9 +1,9 @@
-# learn.nuxt.com
+# Nuxt Tutorial Playground
 
 > [!WARNING]
 > This project is unfinished and heavily work in progress.
 
-An interactive Nuxt playground for learning Nuxt. Powered by [Nuxt](https://nuxt.com) and [WebContainers](https://webcontainers.io/).
+An interactive interactive tutorial and playground for learning Nuxt. Powered by [Nuxt](https://nuxt.com) and [WebContainers](https://webcontainers.io/).
 
 Inspired by [learn.svelte.dev](https://learn.svelte.dev).
 
