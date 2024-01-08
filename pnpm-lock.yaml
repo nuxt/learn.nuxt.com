@@ -26,8 +26,8 @@ dependencies:
     specifier: ^0.2.14
     version: 0.2.14
   floating-vue:
-    specifier: 2.0.0-beta.24
-    version: 2.0.0-beta.24(@nuxt/kit@3.9.1)(vue@3.4.5)
+    specifier: ^5.0.2
+    version: 5.0.2(@nuxt/kit@3.9.1)(vue@3.4.5)
   jszip:
     specifier: ^3.10.1
     version: 3.10.1
@@ -77,7 +77,7 @@ dependencies:
 devDependencies:
   '@antfu/eslint-config':
     specifier: ^2.6.2
-    version: 2.6.2(@unocss/eslint-plugin@0.58.3)(@vue/compiler-sfc@3.4.0)(eslint-plugin-format@0.1.0)(eslint@8.56.0)(typescript@5.3.3)
+    version: 2.6.2(@unocss/eslint-plugin@0.58.3)(@vue/compiler-sfc@3.4.5)(eslint-plugin-format@0.1.0)(eslint@8.56.0)(typescript@5.3.3)
   '@iconify-json/logos':
     specifier: ^1.1.42
     version: 1.1.42
@@ -107,7 +107,7 @@ devDependencies:
     version: 0.58.3
   '@unocss/nuxt':
     specifier: ^0.58.3
-    version: 0.58.3(postcss@8.4.32)(vite@5.0.11)(webpack@5.89.0)
+    version: 0.58.3(postcss@8.4.33)(vite@5.0.11)(webpack@5.89.0)
   '@vueuse/nuxt':
     specifier: ^10.7.1
     version: 10.7.1(nuxt@3.9.1)(vue@3.4.5)
@@ -156,7 +156,7 @@ packages:
       '@jridgewell/gen-mapping': 0.3.3
       '@jridgewell/trace-mapping': 0.3.20
 
-  /@antfu/eslint-config@2.6.2(@unocss/eslint-plugin@0.58.3)(@vue/compiler-sfc@3.4.0)(eslint-plugin-format@0.1.0)(eslint@8.56.0)(typescript@5.3.3):
+  /@antfu/eslint-config@2.6.2(@unocss/eslint-plugin@0.58.3)(@vue/compiler-sfc@3.4.5)(eslint-plugin-format@0.1.0)(eslint@8.56.0)(typescript@5.3.3):
     resolution: {integrity: sha512-iHJtFrJLE0gc+oQGxe8I2vpXwhn2wAbz2kqunSPhiOt39yV6yuoE+NJt5nstzy0INKfjSL2teQKlr4g7E2bVhA==}
     hasBin: true
     peerDependencies:
@@ -212,7 +212,7 @@ packages:
       eslint-plugin-vitest: 0.3.20(@typescript-eslint/eslint-plugin@6.18.0)(eslint@8.56.0)(typescript@5.3.3)
       eslint-plugin-vue: 9.19.2(eslint@8.56.0)
       eslint-plugin-yml: 1.11.0(eslint@8.56.0)
-      eslint-processor-vue-blocks: 0.1.1(@vue/compiler-sfc@3.4.0)(eslint@8.56.0)
+      eslint-processor-vue-blocks: 0.1.1(@vue/compiler-sfc@3.4.5)(eslint@8.56.0)
       globals: 13.24.0
       jsonc-eslint-parser: 2.4.0
       local-pkg: 0.5.0
@@ -2671,7 +2671,7 @@ packages:
       sirv: 2.0.4
     dev: true
 
-  /@unocss/nuxt@0.58.3(postcss@8.4.32)(vite@5.0.11)(webpack@5.89.0):
+  /@unocss/nuxt@0.58.3(postcss@8.4.33)(vite@5.0.11)(webpack@5.89.0):
     resolution: {integrity: sha512-dDQVKb8VtJt2/8SE6/vK1foEaqoTXVUUVq/TT7rSRLHdvRSVKE7M2eeoTS+k38RYdeooMx9YCtzwZDxun6caeQ==}
     dependencies:
       '@nuxt/kit': 3.9.1
@@ -2687,7 +2687,7 @@ packages:
       '@unocss/reset': 0.58.3
       '@unocss/vite': 0.58.3(vite@5.0.11)
       '@unocss/webpack': 0.58.3(webpack@5.89.0)
-      unocss: 0.58.3(@unocss/webpack@0.58.3)(postcss@8.4.32)(vite@5.0.11)
+      unocss: 0.58.3(@unocss/webpack@0.58.3)(postcss@8.4.33)(vite@5.0.11)
     transitivePeerDependencies:
       - postcss
       - rollup
@@ -2696,7 +2696,7 @@ packages:
       - webpack
     dev: true
 
-  /@unocss/postcss@0.58.3(postcss@8.4.32):
+  /@unocss/postcss@0.58.3(postcss@8.4.33):
     resolution: {integrity: sha512-y1WQNvLUidypCu/tr6oJfaV4pjd8Lsk1N27ASEVsvockOH3MekRYpHtJfTl2fMk+1Y98AHv7hPAVjM2NlvhDow==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -2708,7 +2708,7 @@ packages:
       css-tree: 2.3.1
       fast-glob: 3.3.2
       magic-string: 0.30.5
-      postcss: 8.4.32
+      postcss: 8.4.33
     dev: true
 
   /@unocss/preset-attributify@0.58.3:
@@ -3354,12 +3354,12 @@ packages:
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dev: true
 
-  /acorn-import-assertions@1.9.0(acorn@8.11.2):
+  /acorn-import-assertions@1.9.0(acorn@8.11.3):
     resolution: {integrity: sha512-cmMwop9x+8KFhxvKrKfPYmN6/pKTYYHBqLa0DfvVZcKMJWNyWLnaqND7dx/qn66R7ewM1UX5XMaDVP5wlVTaVA==}
     peerDependencies:
       acorn: ^8
     dependencies:
-      acorn: 8.11.2
+      acorn: 8.11.3
     dev: true
 
   /acorn-jsx@5.3.2(acorn@8.11.2):
@@ -4887,13 +4887,13 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-processor-vue-blocks@0.1.1(@vue/compiler-sfc@3.4.0)(eslint@8.56.0):
+  /eslint-processor-vue-blocks@0.1.1(@vue/compiler-sfc@3.4.5)(eslint@8.56.0):
     resolution: {integrity: sha512-9+dU5lU881log570oBwpelaJmOfOzSniben7IWEDRYQPPWwlvaV7NhOtsTuUWDqpYT+dtKKWPsgz4OkOi+aZnA==}
     peerDependencies:
       '@vue/compiler-sfc': ^3.3.0
       eslint: ^8.50.0
     dependencies:
-      '@vue/compiler-sfc': 3.4.0
+      '@vue/compiler-sfc': 3.4.5
       eslint: 8.56.0
     dev: true
 
@@ -5176,8 +5176,8 @@ packages:
     resolution: {integrity: sha512-36yxDn5H7OFZQla0/jFJmbIKTdZAQHngCedGxiMmpNfEZM0sdEeT+WczLQrjK6D7o2aiyLYDnkw0R3JK0Qv1RQ==}
     dev: true
 
-  /floating-vue@2.0.0-beta.24(@nuxt/kit@3.9.1)(vue@3.4.5):
-    resolution: {integrity: sha512-URSzP6YXaF4u1oZ9XGL8Sn8puuM7ivp5jkOUrpy5Q1mfo9BfGppJOn+ierTmsSUfJEeHBae8KT7r5DeI3vQIEw==}
+  /floating-vue@5.0.2(@nuxt/kit@3.9.1)(vue@3.4.5):
+    resolution: {integrity: sha512-CY6emiecyIIvdoK4xYN8mDSNRWutetR+rM10mu6VGrTCqxSdvHyF6TX/zslIgXDC2eIjEkcrpAMg3Mxh724t9w==}
     peerDependencies:
       '@nuxt/kit': ^3.2.0
       vue: ^3.2.0
@@ -9673,7 +9673,7 @@ packages:
     engines: {node: '>= 10.0.0'}
     dev: true
 
-  /unocss@0.58.3(@unocss/webpack@0.58.3)(postcss@8.4.32)(vite@5.0.11):
+  /unocss@0.58.3(@unocss/webpack@0.58.3)(postcss@8.4.33)(vite@5.0.11):
     resolution: {integrity: sha512-2rnvghfiIDRQ2cOrmN4P7J7xV2p3yBK+bPAt1aoUxCXcszkLczAnQzh9c7IZ+p70kSVstK45cJTYV6TMzOLF7Q==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -9689,7 +9689,7 @@ packages:
       '@unocss/cli': 0.58.3
       '@unocss/core': 0.58.3
       '@unocss/extractor-arbitrary-variants': 0.58.3
-      '@unocss/postcss': 0.58.3(postcss@8.4.32)
+      '@unocss/postcss': 0.58.3(postcss@8.4.33)
       '@unocss/preset-attributify': 0.58.3
       '@unocss/preset-icons': 0.58.3
       '@unocss/preset-mini': 0.58.3
@@ -10403,8 +10403,8 @@ packages:
       '@webassemblyjs/ast': 1.11.6
       '@webassemblyjs/wasm-edit': 1.11.6
       '@webassemblyjs/wasm-parser': 1.11.6
-      acorn: 8.11.2
-      acorn-import-assertions: 1.9.0(acorn@8.11.2)
+      acorn: 8.11.3
+      acorn-import-assertions: 1.9.0(acorn@8.11.3)
       browserslist: 4.22.2
       chrome-trace-event: 1.0.3
       enhanced-resolve: 5.15.0
