@@ -17,10 +17,10 @@ export default defineConfig({
     'bg-base': 'bg-white dark:bg-[#020420]',
     'text-faded': 'text-gray6:100 dark:text-gray:100',
 
-    'z-index-embedded-docs': 'z-100',
-    'z-index-embedded-docs-right-raising': 'z-101',
-    'z-index-splitter': 'z-102',
-    'z-index-embedded-docs-close-button': 'z-103',
+    'z-embedded-docs': 'z-100',
+    'z-embedded-docs-raised': 'z-101',
+    'z-splitter': 'z-102',
+    'z-embedded-docs-close': 'z-103',
   },
   theme: {
     colors: {

@@ -5,7 +5,7 @@
   background: transparent;
   position: relative;
   transition: background 0.2s ease;
-  --uno: z-index-splitter;
+  --uno: z-splitter;
 }
 .splitpanes--vertical > .splitpanes__splitter:hover {
   background: #8882;
@@ -26,7 +26,7 @@
   background: transparent;
   position: relative;
   transition: background 0.2s ease;
-  --uno: z-index-splitter;
+  --uno: z-splitter;
 }
 .splitpanes--horizontal > .splitpanes__splitter:hover {
   background: #8882;
