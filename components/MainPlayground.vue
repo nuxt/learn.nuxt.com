@@ -66,7 +66,7 @@ const panelInitTerminal = computed(() => isMounted.value || {
   <Splitpanes
     h-full of-hidden
     :class="{ 'splitpanes--dragging': ui.isPanelDragging }"
-    @resize="startDragging"
+    @resize="draggingEmbeddedDocs"
     @resized="endDraggingVertical"
   >
     <Pane
