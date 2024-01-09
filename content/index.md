@@ -2,11 +2,13 @@
 
 [🚧 Working in Progress](https://github.com/nuxt/learn.nuxt.com#todolist){.text-orange}
 
-This is an interactive tutorial that is composed with guides and challenges to help you learn [Nuxt](https://nuxt.com) and its concepts step by step.
+This is an interactive tutorial that is composed with guides and challenges to help you learn [Nuxt](https://nuxt.com/docs/) and its concepts step by step.
+
+[NuxtLink](https://nuxt.com/docs/api/components/nuxt-link#overwriting-defaults)
 
 ## What's Nuxt?
 
-Nuxt is a free and [open-source framework](https://github.com/nuxt/nuxt) with an intuitive and extendable way to create type-safe, performant and production-grade full-stack web applications and websites with [Vue.js](https://vuejs.org). Nuxt has no vendor lock-in, allowing you to deploy your application [**everywhere, even on the edge**](/blog/nuxt-on-the-edge).
+Nuxt is a free and [open-source framework](https://github.com/nuxt/nuxt) with an intuitive and extendable way to create type-safe, performant and production-grade full-stack web applications and websites with [Vue.js](https://vuejs.org). Nuxt has no vendor lock-in, allowing you to deploy your application [**everywhere, even on the edge**](https://nuxt.com/blog/nuxt-on-the-edge).
 
 ## Getting Started
 

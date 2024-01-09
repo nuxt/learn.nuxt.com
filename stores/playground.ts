@@ -204,10 +204,12 @@ export const usePlaygroundStore = defineStore('playground', () => {
     }
 
     await Promise.all([
+      // update or create files
       ...Object.entries(objects)
         .map(async ([filepath, content]) => {
           await _updateOrCreateFile(filepath, content)
         }),
+      // remove extra files
       ...Array.from(files.keys())
         .filter(filepath => !(filepath in objects))
         .map(async (filepath) => {

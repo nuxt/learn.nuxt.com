@@ -3,7 +3,7 @@
 > [!WARNING]
 > This project is unfinished and heavily work in progress.
 
-An interactive interactive tutorial and playground for learning Nuxt. Powered by [Nuxt](https://nuxt.com) and [WebContainers](https://webcontainers.io/).
+An interactive interactive tutorial and playground for learning Nuxt. Powered by [Nuxt](https://nuxt.com/docs) and [WebContainers](https://webcontainers.io/).
 
 Inspired by [learn.svelte.dev](https://learn.svelte.dev).
 
@@ -45,7 +45,7 @@ The development server will be running at [http://localhost:3000](http://localho
   - [ ] Persist user changes when toggling solutions
   - [ ] Verification for tutorial tasks
   - [ ] Search feature
-  - [ ] Embedded Nuxt Docs (update CORS headers)
+  - [x] Embedded Nuxt Docs (update CORS headers)
   - [x] Only make necessary changes when navigating between guides
   - [x] Switch playgrounds on different guides
   - [x] Allow each guide to toggle features
