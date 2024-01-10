@@ -19,7 +19,7 @@ defineProps<{
     <div class="my-0 text-lg font-semibold">
       {{ title }}
       <sup v-if="wip" rounded bg-primary:10 px1 text-sm text-primary font-normal>
-        Comming Soon
+        Coming Soon
       </sup>
     </div>
     <div class="mb-0 mt-1 text-[15px] op50">
