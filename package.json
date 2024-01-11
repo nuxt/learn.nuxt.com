@@ -2,7 +2,7 @@
   "name": "learn.nuxt.com",
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@8.14.0",
+  "packageManager": "pnpm@8.14.1",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -18,19 +18,19 @@
     "@vue/language-service": "^1.8.27",
     "@webcontainer/api": "^1.1.8",
     "birpc": "^0.2.14",
-    "floating-vue": "^5.0.2",
+    "floating-vue": "^5.0.3",
     "jszip": "^3.10.1",
     "monaco-editor": "^0.45.0",
     "monaco-editor-textmate": "^4.0.0",
     "monaco-textmate": "^3.0.1",
     "onigasm": "^2.2.5",
-    "shikiji": "^0.9.17",
-    "shikiji-core": "^0.9.17",
-    "shikiji-monaco": "^0.9.17",
+    "shikiji": "^0.9.18",
+    "shikiji-core": "^0.9.18",
+    "shikiji-monaco": "^0.9.18",
     "splitpanes": "^3.1.5",
     "strip-json-comments": "^5.0.1",
     "theme-vitesse": "^0.7.5",
-    "vue": "^3.4.5",
+    "vue": "^3.4.10",
     "vue-router": "^4.2.5",
     "xterm": "^5.3.0",
     "xterm-addon-fit": "^0.8.0"
@@ -38,13 +38,12 @@
   "devDependencies": {
     "@antfu/eslint-config": "^2.6.2",
     "@iconify-json/logos": "^1.1.42",
-    "@iconify/json": "^2.2.166",
+    "@iconify/json": "^2.2.167",
     "@nuxt/content": "2.9.0",
-    "@nuxt/devtools": "^1.0.6",
+    "@nuxt/devtools": "^1.0.8",
     "@nuxt/kit": "^3.9.1",
     "@nuxtjs/color-mode": "^3.3.2",
     "@nuxtjs/seo": "2.0.0-rc.4",
-    "@nuxtjs/sitemap": "^5.0.1",
     "@pinia/nuxt": "^0.5.1",
     "@unocss/eslint-plugin": "^0.58.3",
     "@unocss/extractor-mdc": "^0.58.3",
@@ -58,7 +57,7 @@
     "monaco-editor-core": "^0.45.0",
     "nuxt": "^3.9.1",
     "nuxt-icon": "^0.6.8",
-    "pathe": "^1.1.1",
+    "pathe": "^1.1.2",
     "remark-external-links": "^9.0.1",
     "typescript": "^5.3.3",
     "vue-tsc": "^1.8.27"
@@ -69,6 +68,6 @@
     }
   },
   "resolutions": {
-    "shikiji": "^0.9.17"
+    "shikiji": "^0.9.18"
   }
 }

@@ -52,6 +52,27 @@ export default defineNuxtConfig({
       ],
     },
   },
+
+  features: {
+    inlineStyles: false,
+  },
+  runtimeConfig: {
+    public: {
+      buildTime: Date.now(),
+      gitSha: execaSync('git', ['rev-parse', 'HEAD']).stdout.trim(),
+    },
+    app: {
+      devtools: {
+        iframeProps: {
+          allow: 'cross-origin-isolated',
+          credentialless: true,
+        },
+      },
+    },
+  },
+  devtools: {
+    enabled: true,
+  },
   nitro: {
     routeRules: {
       '/**': {
@@ -60,15 +81,6 @@ export default defineNuxtConfig({
           'Cross-Origin-Opener-Policy': 'same-origin',
         },
       },
-    },
-  },
-  features: {
-    inlineStyles: false,
-  },
-  runtimeConfig: {
-    public: {
-      buildTime: Date.now(),
-      gitSha: execaSync('git', ['rev-parse', 'HEAD']).stdout.trim(),
     },
   },
   vite: {
@@ -111,7 +123,4 @@ export default defineNuxtConfig({
     },
   },
 
-  devtools: {
-    enabled: true,
-  },
 })
