@@ -52,7 +52,7 @@ The development server will be running at [http://localhost:3000](http://localho
   - [x] Solution for each guide
   - [x] A button of "Edit this page"
 - [ ] SEO
-  - [ ] OG Image
+  - [x] OG Image
   - [ ] Meta tags
   - [x] Sitemap
   - [ ] RSS

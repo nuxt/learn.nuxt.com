@@ -1,10 +1,17 @@
+---
+ogImage:
+  props:
+    title: Nuxt Tutorial
+    excerpt: Hello
+    colorMode: dark
+    description: An interactive tutorial for learning Nuxt
+---
+
 # Welcome to Nuxt Tutorial!
 
 [🚧 Working in Progress](https://github.com/nuxt/learn.nuxt.com#todolist){.text-orange}
 
 This is an interactive tutorial that is composed with guides and challenges to help you learn [Nuxt](https://nuxt.com/docs/) and its concepts step by step.
-
-[NuxtLink](https://nuxt.com/docs/api/components/nuxt-link#overwriting-defaults)
 
 ## What's Nuxt?
 

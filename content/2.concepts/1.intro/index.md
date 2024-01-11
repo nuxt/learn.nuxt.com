@@ -1,3 +1,7 @@
+---
+ogImage: true
+---
+
 # Nuxt Concepts
 
 - Entry

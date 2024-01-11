@@ -9,19 +9,29 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@pinia/nuxt',
     'floating-vue/nuxt',
-
-    // seo
-    '@nuxtjs/sitemap',
+    '@nuxtjs/seo',
+    'nuxt-icon',
 
     // local
     '~/modules/template-loader',
     '~/modules/nuxt-link',
   ],
+  colorMode: {
+    classSuffix: '',
+  },
   site: {
     url: 'https://learn-dev.nuxt.com',
   },
-  colorMode: {
-    classSuffix: '',
+  ogImage: {
+    defaults: {
+      component: 'NuxtSeo',
+      props: {
+        colorMode: 'dark',
+      },
+    },
+    componentOptions: {
+      global: true,
+    },
   },
   typescript: {
     includeWorkspace: true,
