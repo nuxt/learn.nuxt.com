@@ -1,5 +1,5 @@
 import { fileURLToPath } from 'node:url'
-import { addTemplate, addVitePlugin, defineNuxtModule } from '@nuxt/kit'
+import { defineNuxtModule } from '@nuxt/kit'
 
 export default defineNuxtModule({
   meta: {
