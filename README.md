@@ -54,7 +54,7 @@ The development server will be running at [http://localhost:3000](http://localho
 - [ ] SEO
   - [ ] OG Image
   - [ ] Meta tags
-  - [ ] Sitemap
+  - [x] Sitemap
   - [ ] RSS
 - [ ] Command K System
 - [ ] About Page

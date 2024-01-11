@@ -119,8 +119,8 @@ const panelInitTerminal = computed(() => isMounted.value || {
       >
         <iframe
           :class="{ 'pointer-events-none': ui.isPanelDragging }"
-          :src="guide.embeddedDocs" crossorigin="anonymous"
-          allow="cross-origin-isolated" credentialless
+          :src="guide.embeddedDocs"
+          crossorigin="anonymous" allow="cross-origin-isolated" credentialless
           inset-0 h-full w-full
         />
       </Pane>

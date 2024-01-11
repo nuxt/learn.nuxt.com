@@ -43,6 +43,7 @@
     "@nuxt/devtools": "^1.0.6",
     "@nuxt/kit": "^3.9.1",
     "@nuxtjs/color-mode": "^3.3.2",
+    "@nuxtjs/sitemap": "^5.0.1",
     "@pinia/nuxt": "^0.5.1",
     "@unocss/eslint-plugin": "^0.58.3",
     "@unocss/extractor-mdc": "^0.58.3",
