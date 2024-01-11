@@ -51,11 +51,10 @@ The development server will be running at [http://localhost:3000](http://localho
   - [x] Allow each guide to toggle features
   - [x] Solution for each guide
   - [x] A button of "Edit this page"
-- [ ] SEO
+- [x] SEO
   - [x] OG Image
-  - [ ] Meta tags
+  - [x] Meta tags
   - [x] Sitemap
-  - [ ] RSS
 - [ ] Command K System
 - [ ] About Page
 - [ ] Welcome Screen

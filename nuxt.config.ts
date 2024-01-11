@@ -33,6 +33,17 @@ export default defineNuxtConfig({
       global: true,
     },
   },
+  app: {
+    head: {
+      titleTemplate: '%s - Nuxt Tutorial',
+      htmlAttrs: {
+        lang: 'en-US',
+      },
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      ],
+    },
+  },
   typescript: {
     includeWorkspace: true,
     tsConfig: {
@@ -99,11 +110,7 @@ export default defineNuxtConfig({
       ],
     },
   },
-  app: {
-    head: {
-      titleTemplate: '%s - Nuxt Tutorial',
-    },
-  },
+
   devtools: {
     enabled: true,
   },
