@@ -37,5 +37,6 @@ onMounted(() => {
   >
     <TheNav />
     <MainPlayground />
+    <CommandPalette />
   </main>
 </template>

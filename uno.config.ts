@@ -21,6 +21,7 @@ export default defineConfig({
     'z-embedded-docs-raised': 'z-101',
     'z-splitter': 'z-102',
     'z-embedded-docs-close': 'z-103',
+    'z-index-command-palette': 'z-200',
   },
   theme: {
     colors: {
