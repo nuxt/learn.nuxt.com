@@ -1,37 +1,6 @@
 <script lang="ts">
 import type { VirtualFile } from '~/structures/VirtualFile'
 import type { VirtualFileSystemTree } from '~/structures/VirtualFileSystemTree'
-
-const FILE_ICONS = [
-  {
-    match: /\.vue$/,
-    icon: 'i-logos-vue',
-  },
-  {
-    match: /nuxt\.config\.\w+$/,
-    icon: 'i-logos-nuxt-icon scale-110',
-  },
-  {
-    match: /package\.json$/,
-    icon: 'i-file-icons-npm text-red scale-110',
-  },
-  {
-    match: /\.[mc]?tsx?$/,
-    icon: 'i-file-icons-typescript-alt text-blue3',
-  },
-  {
-    match: /\.[mc]?jsx?$/,
-    icon: 'i-devicon-javascript',
-  },
-]
-
-function getFileIcon(filepath: string): string {
-  for (const { match, icon } of FILE_ICONS) {
-    if (match.test(filepath))
-      return icon
-  }
-  return 'i-ph:file-duotone scale-120'
-}
 </script>
 
 <script setup lang="ts">
@@ -67,17 +36,6 @@ const sortedDirectory = computed(() => props.directory && Object.fromEntries(
   }),
 ))
 
-const icon = computed(() => {
-  if (props.directory) {
-    return isDirectoryOpen.value
-      ? 'i-ph:folder-open-duotone scale-120'
-      : 'i-ph:folder-simple-duotone scale-120'
-  }
-  else {
-    return getFileIcon(props.name!)
-  }
-})
-
 const folderCaret = computed(() => {
   const icon = 'i-ph-caret-right transition-transform duration-300 op50'
   if (props.directory) {
@@ -104,7 +62,12 @@ const folderCaret = computed(() => {
       @click="handleClick"
     >
       <div :class="folderCaret" h-4 w-4 flex-none />
-      <div :class="icon" h-4 w-4 flex-none />
+      <FileIcon
+        h-4 w-4 flex-none
+        :path="name"
+        :is-directory="!!props.directory"
+        :is-directory-open="isDirectoryOpen"
+      />
       <span ml1>{{ name }}</span>
     </button>
     <div v-if="directory" v-show="isDirectoryOpen">

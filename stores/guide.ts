@@ -1,12 +1,17 @@
 import type { Raw } from 'vue'
 import type { GuideMeta, PlaygroundFeatures } from '~/types/guides'
 
+const defaultFeatures: PlaygroundFeatures = Object.freeze({
+  fileTree: false,
+  terminal: false,
+})
+
 export const useGuideStore = defineStore('guide', () => {
   const play = usePlaygroundStore()
   const ui = useUiState()
   const preview = usePreviewStore()
 
-  const features = ref<PlaygroundFeatures>({})
+  const features = ref<PlaygroundFeatures>(defaultFeatures)
   const currentGuide = shallowRef<Raw<GuideMeta>>()
   const showingSolution = ref(false)
   const embeddedDocs = ref('')
@@ -41,7 +46,7 @@ export const useGuideStore = defineStore('guide', () => {
     preview.location.fullPath = guide?.startingUrl || '/'
     preview.updateUrl()
 
-    features.value = guide?.features || {}
+    features.value = guide?.features || defaultFeatures
     currentGuide.value = guide
     showingSolution.value = withSolution
 
