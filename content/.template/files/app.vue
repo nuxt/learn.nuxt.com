@@ -1,7 +1,7 @@
 <script setup lang="ts">
-const msg = 'INDEX PAGE'
+const msg = 'Welcome to Nuxt Tutorial!'
 </script>
 
 <template>
-  <div>{{ msg.toUpperCase() }}</div>
+  <h1>{{ msg }}</h1>
 </template>

@@ -22,3 +22,22 @@
 .prose b {
   font-weight: 600;
 }
+
+.prose pre[class*='language-'] {
+  padding: 1.5rem;
+  border-radius: 0;
+  overflow-x: auto;
+  margin: 1rem -1.5rem;
+  --uno: bg-code;
+}
+
+.prose :where(:not(pre) > code):not(:where(.not-prose, .not-prose *)) {
+  border-radius: 0.2rem;
+  padding: 0.2em 0.4em;
+  --uno: bg-code text-primary/75;
+}
+
+.prose :where(:not(pre) > code):not(:where(.not-prose, .not-prose *))::before,
+.prose :where(:not(pre) > code):not(:where(.not-prose, .not-prose *))::after {
+  content: '';
+}

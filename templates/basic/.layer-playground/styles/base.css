@@ -2,6 +2,10 @@
 
 html {
   font-family: 'DM Sans', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 html.dark {

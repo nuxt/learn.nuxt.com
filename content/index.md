@@ -11,7 +11,7 @@ ogImage:
 
 [🚧 Working in Progress](https://github.com/nuxt/learn.nuxt.com#todolist){.text-orange}
 
-This is an interactive tutorial that is composed with guides and challenges to help you learn [Nuxt](https://nuxt.com/docs/) and its concepts step by step.
+This is an interactive tutorial that is composed with guides and challenges to help you learn [Nuxt](https://nuxt.com/) and its concepts step by step.
 
 ## What's Nuxt?
 

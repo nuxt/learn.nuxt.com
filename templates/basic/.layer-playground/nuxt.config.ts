@@ -4,7 +4,6 @@ import { version as versionNuxt } from 'nuxt/package.json'
 
 export default defineNuxtConfig({
   devtools: { enabled: false },
-  ssr: false,
   vite: {
     warmupEntry: false,
     optimizeDeps: {
