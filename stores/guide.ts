@@ -46,7 +46,7 @@ export const useGuideStore = defineStore('guide', () => {
     preview.location.fullPath = guide?.startingUrl || '/'
     preview.updateUrl()
 
-    features.value = guide?.features || defaultFeatures
+    features.value = guide?.features || { ...defaultFeatures }
     currentGuide.value = guide
     showingSolution.value = withSolution
 

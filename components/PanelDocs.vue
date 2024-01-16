@@ -1,5 +1,4 @@
 <script setup lang="ts">
-const guide = useGuideStore()
 const { page } = useContent()
 
 const sourceUrl = computed(() => page.value?._file
