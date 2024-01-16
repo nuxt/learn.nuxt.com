@@ -45,6 +45,11 @@
   display: none;
 }
 
+.splitpanes.disabled > .splitpanes__splitter {
+  cursor: default;
+  pointer-events: none;
+}
+
 /* Xterm */
 .terminal.xterm {
   height: 100%;
