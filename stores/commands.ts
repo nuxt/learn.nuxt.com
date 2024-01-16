@@ -1,3 +1,4 @@
+import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
 import Fuse from 'fuse.js'
 
 export interface Command {
@@ -14,16 +15,39 @@ export const useCommandsStore = defineStore('commands', () => {
   const search = ref('')
   const isShown = ref(false)
   const commandsAll = reactive<Set<Command>>(new Set())
+  const guidesResult = ref<Command[]>([])
 
   const fuse = computed(() => new Fuse(Array.from(commandsAll), {
     keys: ['title', 'description'],
     threshold: 0.3,
   }))
 
+  const debouncedSearch = refDebounced(search, 100)
+
+  watch(debouncedSearch, async (v) => {
+    if (v) {
+      // TODO: send a PR to nuxt/content to default generic type
+      // TODO: move it out if it's reactive
+      const result = await searchContent(v, {}) as ComputedRef<ParsedContent[]>
+      guidesResult.value = result.value.map((i): Command => ({
+        id: i.id,
+        title: i.title || 'Untitled',
+        to: i.id,
+        icon: 'i-ph-file-duotone',
+      }))
+    }
+    else {
+      guidesResult.value = []
+    }
+  })
+
   const commandsResult = computed(() => {
     if (!search.value)
       return Array.from(commandsAll)
-    return fuse.value.search(search.value).map(i => i.item)
+    return [
+      ...fuse.value.search(search.value).map(i => i.item),
+      ...guidesResult.value,
+    ]
   })
 
   return {

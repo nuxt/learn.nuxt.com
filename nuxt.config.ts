@@ -121,6 +121,9 @@ export default defineNuxtConfig({
         'remark-external-links',
       ],
     },
+    experimental: {
+      // @ts-expect-error awaits https://github.com/nuxt/content/pull/2506
+      search: {},
+    },
   },
-
 })
