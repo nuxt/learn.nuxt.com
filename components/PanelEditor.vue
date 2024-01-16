@@ -55,6 +55,18 @@ const panelInitEditor = computed(() => isMounted.value || {
     >
       <div i-ph-text-t-duotone />
       <span text-sm>Editor</span>
+      <div flex-auto />
+      <button
+        v-if="guide.currentGuide?.solutions"
+        my--1 mr--3 rounded px2 py1 text-sm op50
+        hover="bg-active op100"
+        flex="~ gap-2 items-center"
+        @click="guide.toggleSolutions()"
+      >
+        <div v-if="!guide.showingSolution " i-ph-lightbulb-filament-duotone />
+        <div v-else i-ph-arrow-counter-clockwise-duotone />
+        {{ guide.showingSolution ? 'Reset challenge' : 'Show solution' }}
+      </button>
     </div>
     <Splitpanes
       of-hidden
