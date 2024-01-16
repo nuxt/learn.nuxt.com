@@ -42,12 +42,17 @@ export const useCommandsStore = defineStore('commands', () => {
   })
 
   const commandsResult = computed(() => {
-    if (!search.value)
-      return Array.from(commandsAll)
-    return [
-      ...fuse.value.search(search.value).map(i => i.item),
-      ...guidesResult.value,
-    ]
+    let result = !search.value
+      ? Array.from(commandsAll)
+      : [
+          ...fuse.value.search(search.value).map(i => i.item),
+          ...guidesResult.value,
+        ]
+
+    result = result
+      .filter(i => i.visible ? i.visible() : true)
+
+    return result
   })
 
   return {
