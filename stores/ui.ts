@@ -19,19 +19,11 @@ export const useUiState = defineStore('ui', () => {
 
   const stateCookie = useCookie<Partial<typeof persistState>>(
     'nuxt-playground-ui-state',
-    { default: () => getLayoutDefaults(), watch: true },
+    { default: () => ({}), watch: true },
   )
 
-  // assign default value if missing keys on migraton
-  const defaults = getLayoutDefaults()
-  const keys = Object.keys(defaults) as (keyof typeof defaults)[]
-  keys.forEach((key) => {
-    if (stateCookie.value[key] == null)
-      stateCookie.value[key] = defaults[key] as any
-  })
-
   // update and sync cookie with the reactive state
-  Object.assign(persistState, stateCookie.value)
+  Object.assign(persistState, getLayoutDefaults(), stateCookie.value)
   watch(persistState, () => {
     stateCookie.value = { ...persistState }
   })
