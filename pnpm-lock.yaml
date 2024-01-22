@@ -51,8 +51,8 @@ dependencies:
     specifier: ^0.9.19
     version: 0.9.19
   shikiji-monaco:
-    specifier: ^0.9.19
-    version: 0.9.19
+    specifier: ^0.10.0
+    version: 0.10.0
   splitpanes:
     specifier: ^3.1.5
     version: 3.1.5(patch_hash=h4hqdnxj6cbudirz7t37wp3wee)
@@ -9766,13 +9766,17 @@ packages:
     resolution: {integrity: sha512-e+/aueHx0YeIEut6RXC6K8gSf0PykwZiHD7q7AHtpTW8Kd8TpFUIWqTwhAnrGjOyOMyrwv+syr5WPagMpDpVYQ==}
     dev: true
 
+  /shikiji-core@0.10.0:
+    resolution: {integrity: sha512-imG+bvRkuNlZUi2q9tMVfegRRouTpDxMFejpfF/6J+bFX3NDKtlW9T9iIAkBYnw4pcCtSwirW0AvkwlQR4wyxg==}
+    dev: false
+
   /shikiji-core@0.9.19:
     resolution: {integrity: sha512-AFJu/vcNT21t0e6YrfadZ+9q86gvPum6iywRyt1OtIPjPFe25RQnYJyxHQPMLKCCWA992TPxmEmbNcOZCAJclw==}
 
-  /shikiji-monaco@0.9.19:
-    resolution: {integrity: sha512-rTSjHavIjfJ7eb1Dapw0rR1Ybm3kOadO039PXjISmzvzZLoPmMJhJdu5r8WFVg7DWP1jYRi8eFPcbGhlAXra9w==}
+  /shikiji-monaco@0.10.0:
+    resolution: {integrity: sha512-EdpeRLlUVmQjRtRv1yN8h/VX1Ff6eKlk14gsNO8zXIfJ1UWorks0rInMp5JG4oA3M7rJOzqKB0wKv+WbbMw4Jg==}
     dependencies:
-      shikiji-core: 0.9.19
+      shikiji-core: 0.10.0
     dev: false
 
   /shikiji-transformers@0.9.19:
