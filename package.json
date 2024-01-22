@@ -25,7 +25,7 @@
     "monaco-textmate": "^3.0.1",
     "onigasm": "^2.2.5",
     "shikiji": "^0.9.19",
-    "shikiji-core": "^0.9.19",
+    "shikiji-core": "^0.10.0",
     "shikiji-monaco": "^0.9.19",
     "splitpanes": "^3.1.5",
     "strip-json-comments": "^5.0.1",
