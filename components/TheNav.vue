@@ -3,6 +3,7 @@ const ui = useUiState()
 const play = usePlaygroundStore()
 const guide = useGuideStore()
 const runtime = useRuntimeConfig()
+const commands = useCommandsStore()
 
 const repo = 'https://github.com/nuxt/learn.nuxt.com'
 const buildTime = new Date(runtime.public.buildTime)
@@ -44,6 +45,14 @@ addCommands(
       flex="~ gap-1 items-center"
       :class="guide.embeddedDocs ? 'z-embedded-docs-raised' : ''"
     >
+      <button
+        rounded p2
+        hover="bg-active"
+        title="Search"
+        @click="commands.isShown = true"
+      >
+        <div i-ph-magnifying-glass-duotone text-2xl />
+      </button>
       <button
         v-if="play.status === 'ready' && guide.features.download !== false"
         rounded p2

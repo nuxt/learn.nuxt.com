@@ -88,7 +88,10 @@ useEventListener('keydown', (e) => {
     v-if="commands.isShown"
     fixed inset-0 z-index-command-palette flex="~ items-center justify-center"
   >
-    <div absolute inset-0 z--1 bg-black:75 />
+    <div
+      absolute inset-0 z--1 bg-black:75
+      @click="commands.isShown = false"
+    />
     <div
       border="~ base rounded" h-100 w-200 of-hidden bg-base
       grid="~ rows-[max-content_1fr]"

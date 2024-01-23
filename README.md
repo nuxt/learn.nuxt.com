@@ -44,10 +44,10 @@ The development server will be running at [http://localhost:3000](http://localho
   - [ ] Allow each guide to configure file filter
   - [ ] Persist user changes when toggling solutions
   - [ ] Verification for tutorial tasks
-  - [ ] Search feature
+  - [x] Search feature
     - [x] Search in command palette
-    - [ ] Search button
-  - [ ] Navigation
+    - [x] Search button
+  - [x] Navigation
     - [x] Dropdown for guide outlines
     - [x] Breadcrumbs
     - [x] Previous/Next buttons
