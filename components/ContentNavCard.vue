@@ -1,8 +1,8 @@
 <script setup lang="ts">
 defineProps<{
-  to: string
+  to?: string
   icon?: string
-  title: string
+  title?: string
   subheader: string
   description: string
 }>()

@@ -49,7 +49,7 @@ The development server will be running at [http://localhost:3000](http://localho
     - [ ] Search button
   - [ ] Navigation
     - [x] Dropdown for guide outlines
-    - [ ] Breadcrumbs
+    - [x] Breadcrumbs
     - [x] Previous/Next buttons
   - [x] Embedded Nuxt Docs (update CORS headers)
   - [x] Only make necessary changes when navigating between guides
