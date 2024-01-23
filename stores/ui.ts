@@ -8,7 +8,7 @@ export const useUiState = defineStore('ui', () => {
       panelDocs: 30,
       panelEditor: 60,
       panelPreview: 40,
-      panelFileTree: 20,
+      panelFileTree: 0,
       showTerminal: false,
     }
   }
@@ -19,11 +19,11 @@ export const useUiState = defineStore('ui', () => {
 
   const stateCookie = useCookie<Partial<typeof persistState>>(
     'nuxt-playground-ui-state',
-    { default: () => ({}), watch: true },
+    { default: () => (getLayoutDefaults()), watch: true },
   )
 
   // update and sync cookie with the reactive state
-  Object.assign(persistState, getLayoutDefaults(), stateCookie.value)
+  Object.assign(persistState, getLayoutDefaults(), { ...stateCookie.value })
   watch(persistState, () => {
     stateCookie.value = { ...persistState }
   })
