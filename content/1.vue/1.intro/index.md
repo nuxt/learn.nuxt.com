@@ -33,7 +33,6 @@ In Nuxt, we supports Vue SFC out-of-box and highly recommend you to use it to bu
 
 Going forward, we will cover the following topics:
 
-- Reactivity
-- Composition API
-- Component Lifecycles
-- Props
+- [Reactivity](/vue/reactivity)
+- [Composition API](/vue/composition-api)
+- [Vue Components](/vue/components)

@@ -45,6 +45,12 @@ The development server will be running at [http://localhost:3000](http://localho
   - [ ] Persist user changes when toggling solutions
   - [ ] Verification for tutorial tasks
   - [ ] Search feature
+    - [x] Search in command palette
+    - [ ] Search button
+  - [ ] Navigation
+    - [ ] Dropdown for guide outlines
+    - [ ] Breadcrumbs
+    - [ ] Previous/Next buttons
   - [x] Embedded Nuxt Docs (update CORS headers)
   - [x] Only make necessary changes when navigating between guides
   - [x] Switch playgrounds on different guides
@@ -55,7 +61,7 @@ The development server will be running at [http://localhost:3000](http://localho
   - [x] OG Image
   - [x] Meta tags
   - [x] Sitemap
-- [ ] Command K System
+- [x] Command K System
 - [ ] About Page
 - [ ] Welcome Screen
 - [ ] Try https://ark-ui.com/docs/components/splitter
