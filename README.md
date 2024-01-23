@@ -48,9 +48,9 @@ The development server will be running at [http://localhost:3000](http://localho
     - [x] Search in command palette
     - [ ] Search button
   - [ ] Navigation
-    - [ ] Dropdown for guide outlines
+    - [x] Dropdown for guide outlines
     - [ ] Breadcrumbs
-    - [ ] Previous/Next buttons
+    - [x] Previous/Next buttons
   - [x] Embedded Nuxt Docs (update CORS headers)
   - [x] Only make necessary changes when navigating between guides
   - [x] Switch playgrounds on different guides

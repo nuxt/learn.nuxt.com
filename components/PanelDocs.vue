@@ -7,6 +7,22 @@ const sourceUrl = computed(() => page.value?._file
   : undefined)
 
 const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation())
+
+const {
+  // // Global references
+  // globals,
+  // navigation,
+  // surround,
+  // page,
+  // // Computed properties from `page` key
+  // excerpt,
+  // toc,
+  // type,
+  // layout,
+  // Computed properties from `surround` key
+  next,
+  prev,
+} = useContent()
 </script>
 
 <template>
@@ -25,6 +41,29 @@ const { data: navigation } = await useAsyncData('navigation', () => fetchContent
     <div relative h-full of-hidden>
       <article class="max-w-none prose" h-full of-auto p6>
         <ContentDoc />
+        <div mt8 py2 grid="~ cols-[1fr_1fr] gap-4">
+          <div>
+            <ContentNavCard
+              v-if="prev"
+              :to="prev._path"
+              :title="prev.title"
+              :description="prev.description"
+              subheader="Previous section"
+              icon="i-ph-arrow-left"
+            />
+          </div>
+          <div>
+            <ContentNavCard
+              v-if="next"
+              :to="next._path"
+              :title="next.title"
+              :description="next.description"
+              subheader="Next section"
+              icon="i-ph-arrow-right"
+              items-end text-right
+            />
+          </div>
+        </div>
       </article>
       <!-- Navigration Dropdown -->
       <div
