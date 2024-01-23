@@ -1,5 +1,6 @@
 export const useUiState = defineStore('ui', () => {
   const isPanelDragging = ref(false)
+  const isContentDropdownShown = ref(false)
 
   const persistState = reactive(getLayoutDefaults())
 
@@ -44,6 +45,7 @@ export const useUiState = defineStore('ui', () => {
 
   return {
     isPanelDragging,
+    isContentDropdownShown,
     toggleTerminal,
     resetLayout,
     ...toRefs(persistState),
