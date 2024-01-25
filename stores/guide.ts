@@ -1,9 +1,10 @@
 import type { Raw } from 'vue'
 import type { GuideMeta, PlaygroundFeatures } from '~/types/guides'
 
-const defaultFeatures: PlaygroundFeatures = Object.freeze({
+const defaultFeatures = Object.freeze(<PlaygroundFeatures>{
   fileTree: false,
   terminal: false,
+  navigation: true,
 })
 
 export const useGuideStore = defineStore('guide', () => {
@@ -46,7 +47,10 @@ export const useGuideStore = defineStore('guide', () => {
     preview.location.fullPath = guide?.startingUrl || '/'
     preview.updateUrl()
 
-    features.value = guide?.features || { ...defaultFeatures }
+    features.value = {
+      ...defaultFeatures,
+      ...guide?.features,
+    }
     currentGuide.value = guide
     showingSolution.value = withSolution
 

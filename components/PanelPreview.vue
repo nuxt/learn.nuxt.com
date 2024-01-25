@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const play = usePlaygroundStore()
 const preview = usePreviewStore()
+const guide = useGuideStore()
 
 const inputUrl = ref<string>('')
 const inner = ref<{ iframe?: HTMLIFrameElement | undefined }>()
@@ -49,7 +50,7 @@ function navigate() {
         <div i-ph-globe-duotone />
         <span text-sm>Preview</span>
       </div>
-      <div flex px-2 py1>
+      <div v-if="guide.features.navigation" flex px-2 py1>
         <div
           flex="~ items-center justify-center"
           mx-auto min-w-100 w-full rounded bg-faded px2 text-sm
