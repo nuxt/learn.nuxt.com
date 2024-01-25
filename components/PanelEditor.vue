@@ -91,11 +91,10 @@ const panelInitEditor = computed(() => isMounted.value || {
           bg-faded px4 py2
         >
           <FileIcon :path="play.fileSelected?.filepath || ''" />
-          <span text-sm>{{ play.fileSelected?.filepath || 'Editor' }}</span>
-          <div flex-auto />
+          <span flex-auto text-sm>{{ play.fileSelected?.filepath || 'Editor' }}</span>
           <button
             v-if="guide.currentGuide?.solutions"
-            my--1 mr--3 rounded px2 py1 text-sm op50
+            my--1 mr--3 flex-none rounded px2 py1 text-sm op50
             hover="bg-active op100"
             flex="~ gap-2 items-center"
             @click="guide.toggleSolutions()"
