@@ -8,3 +8,7 @@ body {
 .dark {
   color-scheme: dark;
 }
+
+* {
+  min-width: 0;
+}
