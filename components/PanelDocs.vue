@@ -67,7 +67,7 @@ const sourceUrl = computed(() => page.value?._file
       <div i-ph-book-duotone />
       <template v-for="bc, idx of breadcrumbs" :key="bc.path">
         <div v-if="idx !== 0" i-ph-caret-right mx--1 text-sm op50 />
-        <NuxtLink :to="bc.path" text-sm hover="underline underline-dashed text-primary">
+        <NuxtLink :to="bc.path" text-sm hover="text-primary">
           {{ bc.title }}
         </NuxtLink>
       </template>
@@ -109,15 +109,17 @@ const sourceUrl = computed(() => page.value?._file
         </div>
       </article>
       <!-- Navigration Dropdown -->
-      <div
-        v-if="ui.isContentDropdownShown"
-        flex="~ col"
-        border="b base"
-        absolute left-0 right-0 top-0 max-h-60vh py2
-        backdrop-blur-10 bg-base important-bg-opacity-80
-      >
-        <ContentNavItem v-for="item in navigation" :key="item.url" :item="item" />
-      </div>
+      <Transition name="nav-dropdown">
+        <div
+          v-if="ui.isContentDropdownShown"
+          flex="~ col"
+          border="b base"
+          absolute left-0 right-0 top-0 max-h-60vh py2
+          backdrop-blur-10 bg-base important-bg-opacity-80
+        >
+          <ContentNavItem v-for="item in navigation" :key="item.url" :item="item" />
+        </div>
+      </Transition>
     </div>
     <div border="t base dashed" px6 py2>
       <NuxtLink
@@ -131,3 +133,19 @@ const sourceUrl = computed(() => page.value?._file
     </div>
   </div>
 </template>
+
+<style>
+.nav-dropdown-enter-active {
+  transition: all 0.1s ease-out;
+}
+
+.nav-dropdown-leave-active {
+  transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.nav-dropdown-enter-from,
+.nav-dropdown-leave-to {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+</style>
