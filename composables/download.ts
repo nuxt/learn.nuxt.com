@@ -1,5 +1,5 @@
 import type { WebContainer } from '@webcontainer/api'
-import type { GuideIgnoredFiles, StringOrRegExp } from '~/types/guides'
+import type { StringOrRegExp } from '~/types/guides'
 
 export async function downloadZip(wc: WebContainer, ignoredFiles?: StringOrRegExp[]) {
   if (!import.meta.client)
