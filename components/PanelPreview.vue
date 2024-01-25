@@ -44,17 +44,19 @@ function navigate() {
     <div
       v-if="play.status === 'ready'"
       flex="~ items-center gap-2"
-      border="b base dashed" bg-faded pl4 pr2
+      border="b base dashed" bg-faded pl1 pr2
     >
-      <div flex="~ gap-2 items-center" py2>
+      <div
+        v-if="guide.features.navigation"
+        flex="~ auto gap-2 items-center"
+        border="~ base"
+        m1.5 rounded bg-faded px2 py0.5 tracking-wide
+      >
         <div i-ph-globe-duotone />
-        <span text-sm>Preview</span>
-      </div>
-      <div v-if="guide.features.navigation" flex px-2 py1>
+        <span text-sm op50>Preview</span>
         <div
-          flex="~ items-center justify-center"
-          mx-auto min-w-100 w-full rounded bg-faded px2 text-sm
-          border="base 1 hover:gray-500/30"
+          text-sm
+          flex="~ items-center justify-center auto"
           :class="{
             'pointer-events-none': !preview.url,
           }"
@@ -65,18 +67,24 @@ function navigate() {
               w-full flex-1 bg-transparent focus:outline-none
             >
           </form>
-          <div flex="~ items-center justify-end">
-            <button
-              v-if="preview.url"
-              mx1 op-75 hover:op-100
-              @click="refreshIframe"
-            >
-              <div i-ph-arrow-clockwise-duotone text-sm />
-            </button>
-          </div>
         </div>
       </div>
-      <div flex-auto />
+      <div
+        v-else
+        flex="~ gap-2 auto items-center" px2 py2
+      >
+        <div i-ph-globe-duotone />
+        <span text-sm>Preview</span>
+      </div>
+      <button
+        v-if="preview.url && guide.features.navigation"
+        rounded p1
+        hover="bg-active"
+        title="Refresh Preview"
+        @click="refreshIframe"
+      >
+        <div i-ph-arrow-clockwise-duotone text-lg />
+      </button>
       <VDropdown :distance="6">
         <button
           rounded p1
