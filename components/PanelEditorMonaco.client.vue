@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import * as monaco from 'monaco-editor-core/esm/vs/editor/editor.api'
-import { shikijiToMonaco } from 'shikiji-monaco'
+import { shikiToMonaco } from '@shikijs/monaco'
 import { initMonaco } from '~/monaco/setup'
 import { reloadLanguageTools } from '~/monaco/env'
-import { getShikiji } from '~/monaco/shikiji'
+import { getShiki } from '~/monaco/shiki'
 
 const props = defineProps<{
   modelValue: string
@@ -71,8 +71,8 @@ watch(
     if (!value)
       return
 
-    const shiki = await getShikiji()
-    shikijiToMonaco(shiki, monaco)
+    const shiki = await getShiki()
+    shikiToMonaco(shiki, monaco)
 
     const editor = monaco.editor.create(
       value,

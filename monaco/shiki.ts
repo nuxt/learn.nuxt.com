@@ -1,22 +1,20 @@
-import type { HighlighterCore } from 'shikiji-core'
-import { getHighlighterCore } from 'shikiji-core'
-import { getWasmInlined } from 'shikiji/wasm'
+import type { HighlighterCore } from 'shiki/core'
+import { getHighlighterCore } from 'shiki/core'
+import getWasmInlined from 'shiki/wasm'
 
-import langVue from 'shikiji/langs/vue.mjs'
-import themeBlack from 'theme-vitesse/themes/vitesse-black.json'
-import themeLight from 'theme-vitesse/themes/vitesse-light.json'
+import langVue from 'shiki/langs/vue.mjs'
+import themeBlack from 'shiki/themes/vitesse-black.mjs'
+import themeLight from 'shiki/themes/vitesse-light.mjs'
 
 let highlighter: Promise<HighlighterCore> | undefined
 
-export async function getShikiji() {
+export async function getShiki() {
   if (highlighter)
     return highlighter
 
   const darkColors = (themeBlack as any).colors as Record<string, string>
   darkColors['editor.background'] = '#00000000'
   darkColors['editor.lineHighlightBackground'] = '#00000000'
-  themeLight.name = 'vitesse-light'
-  themeBlack.name = 'vitesse-black'
 
   highlighter = getHighlighterCore({
     langs: [
