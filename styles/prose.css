@@ -2,7 +2,7 @@
   --un-prose-links: #00dc82;
 }
 
-.prose :where(p,ul,ol,pre):not(:where(.not-prose,.not-prose *)) {
+.prose :where(p, ul, ol, pre):not(:where(.not-prose, .not-prose *)) {
   line-height: 2rem;
 }
 
@@ -49,7 +49,7 @@
 }
 
 .prose :where(a:has(> code)):not(:where(.not-prose, .not-prose *)) {
-  text-decoration: none !important
+  text-decoration: none !important;
 }
 
 .prose :where(:not(pre) > code):not(:where(.not-prose, .not-prose *))::before,
