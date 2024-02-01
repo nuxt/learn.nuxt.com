@@ -6,4 +6,5 @@ export const meta: GuideMeta = {
     fileTree: true,
     navigation: false,
   },
+  ignoredFiles: ['package.json', 'server'],
 }

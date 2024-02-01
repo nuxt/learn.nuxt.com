@@ -1,6 +1,7 @@
 import type { WebContainer } from '@webcontainer/api'
+import type { StringOrRegExp } from '~/types/guides'
 
-export async function downloadZip(wc: WebContainer) {
+export async function downloadZip(wc: WebContainer, ignoredFiles?: StringOrRegExp[]) {
   if (!import.meta.client)
     return
 
@@ -8,13 +9,12 @@ export async function downloadZip(wc: WebContainer) {
   const zip = new JSZip()
 
     type Zip = typeof zip
-
     const crawlFiles = async (dir: string, zip: Zip) => {
       const files = await wc.fs.readdir(dir, { withFileTypes: true })
 
       await Promise.all(
         files.map(async (file) => {
-          if (isFileIgnored(file.name))
+          if (isFileIgnored(file.name, ignoredFiles))
             return
 
           if (file.isFile()) {

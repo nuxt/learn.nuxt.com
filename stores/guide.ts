@@ -5,6 +5,7 @@ const defaultFeatures = Object.freeze(<PlaygroundFeatures>{
   fileTree: false,
   terminal: false,
   navigation: true,
+  download: true,
 })
 
 export const useGuideStore = defineStore('guide', () => {
@@ -16,6 +17,8 @@ export const useGuideStore = defineStore('guide', () => {
   const currentGuide = shallowRef<Raw<GuideMeta>>()
   const showingSolution = ref(false)
   const embeddedDocs = ref('')
+
+  const ignoredFiles = computed(() => transformGuideIgnoredFiles(currentGuide.value?.ignoredFiles))
 
   watch(features, () => {
     if (features.value.fileTree === true) {
@@ -73,6 +76,7 @@ export const useGuideStore = defineStore('guide', () => {
     showingSolution,
     embeddedDocs,
     openEmbeddedDocs,
+    ignoredFiles,
   }
 })
 
