@@ -105,9 +105,6 @@ export default defineNuxtConfig({
       ],
     },
   },
-  vue: {
-    defineModel: true,
-  },
   content: {
     documentDriven: true,
     highlight: {
@@ -122,7 +119,6 @@ export default defineNuxtConfig({
       ],
     },
     experimental: {
-      // @ts-expect-error awaits https://github.com/nuxt/content/pull/2506
       search: {},
     },
   },

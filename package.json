@@ -16,7 +16,7 @@
   "dependencies": {
     "@shikijs/core": "^1.0.0-beta.3",
     "@shikijs/monaco": "^1.0.0-beta.3",
-    "@volar/monaco": "^2.0.0",
+    "@volar/monaco": "^1.11.1",
     "@vue/language-service": "^1.8.27",
     "@webcontainer/api": "^1.1.9",
     "birpc": "^0.2.15",
