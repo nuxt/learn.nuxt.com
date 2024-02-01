@@ -44,7 +44,7 @@ const language = computed(() => {
   }
 })
 const theme = computed(() => colorMode.value === 'dark'
-  ? 'vitesse-black'
+  ? 'vitesse-dark'
   : 'vitesse-light',
 )
 

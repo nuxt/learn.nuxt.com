@@ -2,6 +2,10 @@
   --un-prose-links: #00dc82;
 }
 
+.prose :where(p,ul,ol,pre):not(:where(.not-prose,.not-prose *)) {
+  line-height: 2rem;
+}
+
 .prose a {
   text-decoration: none;
 }
@@ -32,9 +36,20 @@
 }
 
 .prose :where(:not(pre) > code):not(:where(.not-prose, .not-prose *)) {
-  border-radius: 0.2rem;
-  padding: 0.2em 0.4em;
-  --uno: bg-code text-primary/75;
+  padding: 0.1em 0.4em 0.15em 0.4em;
+  --uno: bg-inline-code border rounded border-inline-code text-faded;
+}
+
+.prose :where(a > code):not(:where(.not-prose, .not-prose *)) {
+  --uno: border-dashed important-text-emerald;
+}
+
+.prose :where(a > code):hover:not(:where(.not-prose, .not-prose *)) {
+  --uno: important-border-emerald/50;
+}
+
+.prose :where(a:has(> code)):not(:where(.not-prose, .not-prose *)) {
+  text-decoration: none !important
 }
 
 .prose :where(:not(pre) > code):not(:where(.not-prose, .not-prose *))::before,

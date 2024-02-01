@@ -62,7 +62,7 @@ const sourceUrl = computed(() => page.value?._file
 </script>
 
 <template>
-  <div grid="~ rows-[min-content_1fr_min-content]" relative h-full>
+  <div grid="~ rows-[min-content_1fr]" relative h-full>
     <div flex="~ gap-2 items-center" border="b base dashed" bg-faded px4 py2>
       <div i-ph-book-duotone />
       <template v-for="bc, idx of breadcrumbs" :key="bc.path">
@@ -107,6 +107,18 @@ const sourceUrl = computed(() => page.value?._file
             />
           </div>
         </div>
+        <div border="t base dashed" mt-8 p3>
+          <NuxtLink
+            v-if="sourceUrl"
+            :to="sourceUrl" target="_blank"
+            flex="~ items-center gap-2"
+            text-inherit op75
+            hover="text-primary op100"
+          >
+            <div i-ph-note-pencil-duotone />
+            Edit this page
+          </NuxtLink>
+        </div>
       </article>
       <!-- Navigration Dropdown -->
       <Transition name="nav-dropdown">
@@ -120,16 +132,6 @@ const sourceUrl = computed(() => page.value?._file
           <ContentNavItem v-for="item in navigation" :key="item.url" :item="item" />
         </div>
       </Transition>
-    </div>
-    <div border="t base dashed" px6 py2>
-      <NuxtLink
-        v-if="sourceUrl"
-        :to="sourceUrl" target="_blank"
-        flex="~ items-center gap-2" op50 hover="text-primary op100"
-      >
-        <div i-ph-note-pencil-duotone />
-        Edit this page
-      </NuxtLink>
     </div>
   </div>
 </template>

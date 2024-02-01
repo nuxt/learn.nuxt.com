@@ -12,3 +12,7 @@ html.dark {
   color-scheme: dark;
   background: #020420;
 }
+
+button {
+  margin-right: 5px;
+}
