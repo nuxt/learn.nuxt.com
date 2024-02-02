@@ -1,26 +1,21 @@
 # Nuxt Tutorial Playground
 
 > [!WARNING]
-> This project is unfinished and heavily work in progress.
+> The architecture of this project is ready, while the tutorial content is still work in progress, contributions appreciated!
 
 An interactive interactive tutorial and playground for learning Nuxt. Powered by [Nuxt](https://nuxt.com/docs) and [WebContainers](https://webcontainers.io/).
 
 Inspired by [learn.svelte.dev](https://learn.svelte.dev).
 
+`learn.nuxt.com` is not yet deployed, but you can preview the latest branch at [learn-dev.nuxt.com](https://learn-dev.nuxt.com).
+
 ## Live Streaming
 
-Anthony Fu is doing regular live streaming on building this project from scratch. You can watch the recordings or join the live stream on [YouTube](https://www.youtube.com/playlist?list=PL4ETc_mXFfxUGiY852jH3ctljnI2e9Rax).
+Anthony Fu built this project from scratch on Live Streaming. You can watch the recordings of the full process on [YouTube](https://www.youtube.com/playlist?list=PL4ETc_mXFfxUGiY852jH3ctljnI2e9Rax).
 
 ## Contributing
 
-> [!IMPORTANT]
->
-> **Please create an issue first before submitting PRs.**
-> So that we can discuss about the directions and plans, to avoid wasted efforts. Thank you!
->
-> This project is progressed mainly on Live Stream. In general, we want to present the main progress on the stream so people can follow along the whole process. Contributions are still greatly welcome! For PR that makes refactors or big changes, we could review them on the stream as well.
-
-## Development
+### Development
 
 To run this project locally, you need to have [Node.js v20.0+](https://nodejs.org/en/) and [pnpm](https://pnpm.io/) installed.
 
@@ -37,6 +32,14 @@ pnpm dev
 ```
 
 The development server will be running at [http://localhost:3000](http://localhost:3000).
+
+### Content Structure
+
+The tutorial content is located in the `content/` directory. Each route contains a number prefix (`1.`) to indicate the order and will be removed in the final URL. For each route, we use a folder with an `index.md` to serve the extra files. A `.template` folder can be placed with the `index.md` file to provide the template for the playground.
+
+- `.template/index.ts` - Indicates the metadata for that guide, like enabling/disabling features, file filters, etc.
+- `.template/files/**` - The files that will be copied to the playground when the user navigates to that guide, merged with the basic template under `template/basic/`
+- `.template/solutions/**` - Optional solutions for the tasks in that guide, merged with the guide files.
 
 ## Todolist
 
