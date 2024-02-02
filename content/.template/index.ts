@@ -5,5 +5,6 @@ export const meta: GuideMeta = {
   features: {
     terminal: false,
     fileTree: false,
+    navigation: false,
   },
 }

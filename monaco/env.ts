@@ -86,6 +86,10 @@ export async function reloadLanguageTools(ctx: PlaygroundMonacoContext) {
   const tsconfigRaw = await ctx.webcontainer?.fs
     .readFile('.nuxt/tsconfig.json', 'utf-8')
     .catch(() => undefined)
+
+  if (!tsconfigRaw)
+    return
+
   const tsconfig = tsconfigRaw
     ? JSON.parse(stripJsonComments(tsconfigRaw, { trailingCommas: true }))
     : {}

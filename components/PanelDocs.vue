@@ -56,9 +56,19 @@ const breadcrumbs = computed(() => {
 
 const ui = useUiState()
 
-const sourceUrl = computed(() => page.value?._file
-  ? `https://github.com/nuxt/learn.nuxt.com/edit/main/content/${page.value._file}`
-  : undefined)
+const sourceUrl = computed(() =>
+  page.value?._file
+    ? `https://github.com/nuxt/learn.nuxt.com/edit/main/content/${page.value._file}`
+    : undefined,
+)
+
+const docsEl = ref<HTMLElement | null>(null)
+const router = useRouter()
+router.beforeEach(() => {
+  docsEl.value?.scrollTo({
+    top: 0,
+  })
+})
 </script>
 
 <template>
@@ -82,7 +92,7 @@ const sourceUrl = computed(() => page.value?._file
       />
     </div>
     <div relative h-full of-hidden>
-      <article class="max-w-none prose" h-full of-auto p6>
+      <article ref="docsEl" class="max-w-none prose" h-full of-auto p6>
         <ContentDoc />
         <div mt8 py2 grid="~ cols-[1fr_1fr] gap-4">
           <div>
