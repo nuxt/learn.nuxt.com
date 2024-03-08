@@ -132,8 +132,8 @@ devDependencies:
     specifier: ^7.0.0
     version: 7.0.0
   monaco-editor-core:
-    specifier: ^0.46.0
-    version: 0.46.0
+    specifier: ^0.47.0
+    version: 0.47.0
   nuxt:
     specifier: ^3.10.3
     version: 3.10.3(eslint@8.57.0)(typescript@5.4.2)(vite@5.1.4)(vue-tsc@1.8.27)
@@ -7854,8 +7854,8 @@ packages:
       pkg-types: 1.0.3
       ufo: 1.4.0
 
-  /monaco-editor-core@0.46.0:
-    resolution: {integrity: sha512-JA5BzCaC0nUB5zUhzGUfecNhVNxEXpJxp6YNBYLr0SPyv0DKSIeBpF21WVkpwYm00UJaVc4m3TTcwB9/Gzd/nw==}
+  /monaco-editor-core@0.47.0:
+    resolution: {integrity: sha512-xho7dsmSYOIek6bkMKQApWHVyoOBQ1eaBIE6CIlER40paTN0r0efrig6Q9QkCacfzIuNNxNjyb1uMVoMpi8gcA==}
     dev: true
 
   /monaco-editor-textmate@4.0.0(monaco-editor@0.46.0)(monaco-textmate@3.0.1):
