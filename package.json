@@ -68,7 +68,7 @@
     }
   },
   "resolutions": {
-    "shikiji": "npm:shiki@1.0.0-beta.3",
+    "shikiji": "npm:shiki@1.2.0",
     "shikiji-transformers": "npm:@shikijs/transformers@1.0.0-beta.3",
     "unified": "^11.0.4"
   }

@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  shikiji: npm:shiki@1.0.0-beta.3
+  shikiji: npm:shiki@1.2.0
   shikiji-transformers: npm:@shikijs/transformers@1.0.0-beta.3
   unified: ^11.0.4
 
@@ -2656,6 +2656,10 @@ packages:
 
   /@shikijs/core@1.1.7:
     resolution: {integrity: sha512-gTYLUIuD1UbZp/11qozD3fWpUTuMqPSf3svDMMrL0UmlGU7D9dPw/V1FonwAorCUJBltaaESxq90jrSjQyGixg==}
+
+  /@shikijs/core@1.2.0:
+    resolution: {integrity: sha512-OlFvx+nyr5C8zpcMBnSGir0YPD6K11uYhouqhNmm1qLiis4GA7SsGtu07r9gKS9omks8RtQqHrJL4S+lqWK01A==}
+    dev: true
 
   /@shikijs/monaco@1.1.7:
     resolution: {integrity: sha512-mtU0hTGlrfFqVV3Y31SvddoqiC3FLE69E+5cLNzd68DdsJFDhlWDCG759zLaaTRDnuOK/Veotf4DflTF70nhcg==}
@@ -8551,7 +8555,7 @@ packages:
       nuxt-site-config-kit: 2.2.7(vue@3.4.21)
       pathe: 1.1.2
       pkg-types: 1.0.3
-      shikiji: /shiki@1.0.0-beta.3
+      shikiji: /shiki@1.2.0
       sirv: 2.0.4
       site-config-stack: 2.2.7(vue@3.4.21)
       ufo: 1.4.0
@@ -10011,6 +10015,12 @@ packages:
     resolution: {integrity: sha512-9kUTMjZtcPH3i7vHunA6EraTPpPOITYTdA5uMrvsJRexktqP0s7P3s9HVK80b4pP42FRVe03D7fT3NmJv2yYhw==}
     dependencies:
       '@shikijs/core': 1.1.7
+
+  /shiki@1.2.0:
+    resolution: {integrity: sha512-xLhiTMOIUXCv5DqJ4I70GgQCtdlzsTqFLZWcMHHG3TAieBUbvEGthdrlPDlX4mL/Wszx9C6rEcxU6kMlg4YlxA==}
+    dependencies:
+      '@shikijs/core': 1.2.0
+    dev: true
 
   /signal-exit@3.0.7:
     resolution: {integrity: sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==}
