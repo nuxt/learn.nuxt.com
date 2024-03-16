@@ -4,7 +4,7 @@ ogImage: true
 
 # Application Entry
 
-To give you the full control of your application, Nuxt allows you to define your down application entry `app.vue` to start minimal (optional).
+To give you the full control of your application, Nuxt allows you to define your own application entry `app.vue` to start minimal (optional).
 
 // TODO:
 
