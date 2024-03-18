@@ -25,7 +25,7 @@ const paddingLeft = computed(() => `${0.5 + props.level * 0.8}rem`)
 <template>
   <div class="content-nav-item">
     <template v-if="resolved.children?.length">
-      <details>
+      <details :open="$route.path.includes(resolved._path)">
         <summary>
           <div
             flex="~ gap-1 items-center" cursor-pointer select-none px1 py0.5
@@ -52,6 +52,7 @@ const paddingLeft = computed(() => `${0.5 + props.level * 0.8}rem`)
       :to="resolved._path"
       px1 py0.5
       :style="{ paddingLeft }"
+      :class="{ 'text-primary bg-active': resolved._path === $route.path }"
       flex="~ gap-1 items-center"
       hover="text-primary bg-active "
       @click="ui.isContentDropdownShown = false"
