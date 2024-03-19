@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     'floating-vue/nuxt',
     '@nuxtjs/seo',
     'nuxt-icon',
+    '@nuxt/eslint',
 
     // local
     '~/modules/template-loader',
@@ -21,6 +22,11 @@ export default defineNuxtConfig({
   },
   site: {
     url: 'https://learn-dev.nuxt.com',
+  },
+  eslint: {
+    config: {
+      standalone: false,
+    },
   },
   ogImage: {
     defaults: {
