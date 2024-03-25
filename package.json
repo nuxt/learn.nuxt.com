@@ -17,7 +17,7 @@
     "@shikijs/core": "^1.2.0",
     "@shikijs/monaco": "^1.2.0",
     "@volar/monaco": "^1.11.1",
-    "@vue/language-service": "^1.8.27",
+    "@vue/language-service": "^2.0.0",
     "@webcontainer/api": "^1.1.9",
     "birpc": "^0.2.17",
     "floating-vue": "^5.2.2",
