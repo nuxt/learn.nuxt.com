@@ -2,4 +2,4 @@
 ogImage: true
 ---
 
-# Components
+# Auto Imports
