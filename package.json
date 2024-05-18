@@ -17,7 +17,7 @@
     "@shikijs/core": "^1.5.2",
     "@shikijs/monaco": "^1.5.2",
     "@volar/monaco": "^1.11.1",
-    "@vue/language-service": "^1.8.27",
+    "@vue/language-service": "^2.0.0",
     "@webcontainer/api": "^1.1.9",
     "@xterm/addon-fit": "^0.10.0",
     "@xterm/xterm": "^5.5.0",
