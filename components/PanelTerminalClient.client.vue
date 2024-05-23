@@ -65,8 +65,10 @@ watch(
       const reader = p.output.getReader()
       function read() {
         reader.read().then(({ done, value }) => {
-          if (value)
+          if (value) {
             terminal.write(value)
+            terminal.scrollToBottom()
+          }
           if (!done)
             read()
         })
@@ -78,6 +80,7 @@ watch(
         terminal.writeln('')
         terminal.writeln(`-------------`)
         terminal.writeln('')
+        terminal.scrollToBottom()
       }
 
       read()
