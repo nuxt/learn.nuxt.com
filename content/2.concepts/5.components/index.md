@@ -1,5 +1,0 @@
----
-ogImage: true
----
-
-# Components
