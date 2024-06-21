@@ -3,7 +3,7 @@
 > [!WARNING]
 > The architecture of this project is ready, while the tutorial content is still work in progress, contributions appreciated!
 
-An interactive interactive tutorial and playground for learning Nuxt. Powered by [Nuxt](https://nuxt.com/docs) and [WebContainers](https://webcontainers.io/).
+An interactive tutorial and playground for learning Nuxt. Powered by [Nuxt](https://nuxt.com/docs) and [WebContainers](https://webcontainers.io/).
 
 Inspired by [learn.svelte.dev](https://learn.svelte.dev).
 
