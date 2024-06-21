@@ -24,7 +24,7 @@
     "birpc": "^0.2.17",
     "floating-vue": "^5.2.2",
     "jszip": "^3.10.1",
-    "monaco-editor": "^0.48.0",
+    "monaco-editor": "^0.50.0",
     "monaco-editor-textmate": "^4.0.0",
     "monaco-textmate": "^3.0.1",
     "onigasm": "^2.2.5",
