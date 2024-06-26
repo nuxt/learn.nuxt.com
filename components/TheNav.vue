@@ -53,7 +53,7 @@ addCommands(
       <NuxtTutorialLogo h-2em />
     </NuxtLink>
     <NuxtLink
-      href="https://github.com/nuxt/learn.nuxt.com"
+      :href="repo"
       target="_blank"
     >
       <div block translate-y--2 rounded bg-orange:10 px2 py1 text-xs text-orange>
@@ -116,7 +116,7 @@ addCommands(
         rounded p2
         title="GitHub"
         hover="bg-active"
-        href="https://github.com/nuxt/learn.nuxt.com"
+        :href="repo"
         target="_blank"
       >
         <div i-carbon-logo-github text-2xl />
