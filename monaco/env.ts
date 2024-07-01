@@ -131,20 +131,20 @@ export async function reloadLanguageTools(ctx: PlaygroundMonacoContext) {
       .map(file => Uri.parse(`file:///${file.filepath}`)),
     ...extraFiles,
   ]
-  const { dispose: disposeMarkers } = volar.editor.activateMarkers(
+  const { dispose: disposeMarkers } = volar.activateMarkers(
     worker,
     languageId,
     'vue',
     getSyncUris,
     editor,
   )
-  const { dispose: disposeAutoInsertion } = volar.editor.activateAutoInsertion(
+  const { dispose: disposeAutoInsertion } = volar.activateAutoInsertion(
     worker,
     languageId,
     getSyncUris,
     editor,
   )
-  const { dispose: disposeProvides } = await volar.languages.registerProvides(
+  const { dispose: disposeProvides } = await volar.registerProviders(
     worker,
     languageId,
     getSyncUris,
