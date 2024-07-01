@@ -16,7 +16,7 @@
   "dependencies": {
     "@shikijs/core": "^1.5.2",
     "@shikijs/monaco": "^1.5.2",
-    "@volar/monaco": "~2.4.0-alpha.7",
+    "@volar/monaco": "~2.4.0-alpha.8",
     "@vue/language-service": "^2.0.24",
     "@webcontainer/api": "^1.1.9",
     "@xterm/addon-fit": "^0.10.0",
