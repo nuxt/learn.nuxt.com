@@ -20,8 +20,8 @@ importers:
         specifier: ^1.5.2
         version: 1.5.2
       '@volar/monaco':
-        specifier: ^2.4.0-alpha.6
-        version: 2.4.0-alpha.6
+        specifier: ~2.4.0-alpha.7
+        version: 2.4.0-alpha.7
       '@vue/language-service':
         specifier: ^2.0.24
         version: 2.0.24(typescript@5.4.5)
@@ -1894,17 +1894,29 @@ packages:
   '@volar/language-core@2.4.0-alpha.6':
     resolution: {integrity: sha512-8+icYMgr3dKjoEloUPf2OLSqp0ds7Gs/3YrRJiik7rJD68qgSkJ8En2XmmkPnbJ4Vt7bXqU1VCq0TWRePMrY0A==}
 
+  '@volar/language-core@2.4.0-alpha.7':
+    resolution: {integrity: sha512-3ncRpnoVHCTzJeTiUyKwFTLb3jGfe1r5+S3MwRDPEjsV4LID6Rq6EmdRoF+aKw+Iwg63x4nV+/KYZjeYrp5mNA==}
+
   '@volar/language-service@2.4.0-alpha.6':
     resolution: {integrity: sha512-njEFMkHjH/mA3JS0io4tjpcJR7UKx+twJkSkxIZu6zyrnL/Ao9WiS8xelBUOizYYVHrIlQCuLIm/uF88PIQ0sQ==}
 
-  '@volar/monaco@2.4.0-alpha.6':
-    resolution: {integrity: sha512-ns4vg0crd0+MzFfOuJYek5ybfYn/Ss3ANpuvdC/KWCLTqDv/l1KRwCpX6bWtL4LI3675UTEDwj7bFus2w7NP9A==}
+  '@volar/language-service@2.4.0-alpha.7':
+    resolution: {integrity: sha512-vSuH2c0o7z9zDPcmUGqK9sT4l71B8Ooj6VKKB1H6F++ZAI0I9Uch7V7wc6VQjuB2LuYmojxwKxl1bydjnGxpHg==}
+
+  '@volar/monaco@2.4.0-alpha.7':
+    resolution: {integrity: sha512-y17zSR5zxT+Di5fDDXEGpOOetmqDB1BRCtY8uYWNVcfkaIlUjegQ2lXSkekjaXZgGll0X2hfYKE4RhHtICyX/g==}
 
   '@volar/source-map@2.4.0-alpha.6':
     resolution: {integrity: sha512-Pgn3fjmnHsL4jq7X+czi12gKH/OyTbHDQH1x0ogKD5QXQvMKNz4Wra2fFb5HNF6zZHRQch+Ps2lwSE78+rIlXw==}
 
+  '@volar/source-map@2.4.0-alpha.7':
+    resolution: {integrity: sha512-yn66qcUXxUCyyW8PXMHE4z9RdfTO1OhP6BMa/JI0Ed6I6bggzkxvXsJOaMqw3EalCskGPuIWAbWgxwa3Hlp7SA==}
+
   '@volar/typescript@2.4.0-alpha.6':
     resolution: {integrity: sha512-4wzXpPE2f2x3QQU5IIkg7urcrnL41WRTLpZAzjxRhjXhz+O7PgsAqiqshmEB8aBpHjH3MYCs1u0bA6BJ3dqLIw==}
+
+  '@volar/typescript@2.4.0-alpha.7':
+    resolution: {integrity: sha512-MjvkhcIYPDZS5vbE4bSvbWi8z/VI47AY8MkPVgfa6xqTDLLxV6+QulJ8hIC3wYxh3dfVmA5MOoL5c3cZAsWbDQ==}
 
   '@vscode/emmet-helper@2.9.3':
     resolution: {integrity: sha512-rB39LHWWPQYYlYfpv9qCoZOVioPCftKXXqrsyqN1mTWZM6dTnONT63Db+03vgrBbHzJN45IrgS/AGxw9iiqfEw==}
@@ -8929,6 +8941,10 @@ snapshots:
     dependencies:
       '@volar/source-map': 2.4.0-alpha.6
 
+  '@volar/language-core@2.4.0-alpha.7':
+    dependencies:
+      '@volar/source-map': 2.4.0-alpha.7
+
   '@volar/language-service@2.4.0-alpha.6':
     dependencies:
       '@volar/language-core': 2.4.0-alpha.6
@@ -8936,19 +8952,34 @@ snapshots:
       vscode-languageserver-textdocument: 1.0.11
       vscode-uri: 3.0.8
 
-  '@volar/monaco@2.4.0-alpha.6':
+  '@volar/language-service@2.4.0-alpha.7':
     dependencies:
-      '@volar/language-service': 2.4.0-alpha.6
-      '@volar/typescript': 2.4.0-alpha.6
+      '@volar/language-core': 2.4.0-alpha.7
+      vscode-languageserver-protocol: 3.17.5
+      vscode-languageserver-textdocument: 1.0.11
+      vscode-uri: 3.0.8
+
+  '@volar/monaco@2.4.0-alpha.7':
+    dependencies:
+      '@volar/language-service': 2.4.0-alpha.7
+      '@volar/typescript': 2.4.0-alpha.7
       monaco-languageserver-types: 0.3.4
       monaco-types: 0.1.0
       vscode-uri: 3.0.8
 
   '@volar/source-map@2.4.0-alpha.6': {}
 
+  '@volar/source-map@2.4.0-alpha.7': {}
+
   '@volar/typescript@2.4.0-alpha.6':
     dependencies:
       '@volar/language-core': 2.4.0-alpha.6
+      path-browserify: 1.0.1
+      vscode-uri: 3.0.8
+
+  '@volar/typescript@2.4.0-alpha.7':
+    dependencies:
+      '@volar/language-core': 2.4.0-alpha.7
       path-browserify: 1.0.1
       vscode-uri: 3.0.8
 
