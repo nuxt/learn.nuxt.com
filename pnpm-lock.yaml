@@ -6,7 +6,7 @@ settings:
 
 patchedDependencies:
   splitpanes@3.1.5:
-    hash: h4hqdnxj6cbudirz7t37wp3wee
+    hash: nsm5oxjtb4qlzf4us7osrtwcgy
     path: patches/splitpanes@3.1.5.patch
 
 importers:
@@ -51,7 +51,7 @@ importers:
         version: 1.10.1
       splitpanes:
         specifier: ^3.1.5
-        version: 3.1.5(patch_hash=h4hqdnxj6cbudirz7t37wp3wee)
+        version: 3.1.5(patch_hash=nsm5oxjtb4qlzf4us7osrtwcgy)
       strip-json-comments:
         specifier: ^5.0.1
         version: 5.0.1
@@ -3520,10 +3520,6 @@ packages:
 
   hash-sum@2.0.0:
     resolution: {integrity: sha512-WdZTbAByD+pHfl/g9QSsBIIwy8IT+EsPiKDs0KNX+zSHhdDLFKdZu0BQHljvO+0QI/BasbMSUa8wYNCZTvhslg==}
-
-  hasown@2.0.0:
-    resolution: {integrity: sha512-vUptKVTpIJhcczKBbgnS+RtcuYMB8+oNzPK2/Hp3hanz8JmpATdmmgLgSaadVREkDm+e2giHwY3ZRkyjSIDDFA==}
-    engines: {node: '>= 0.4'}
 
   hasown@2.0.2:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
@@ -7180,7 +7176,7 @@ snapshots:
       '@vueuse/nuxt': 10.11.0(magicast@0.3.4)(nuxt@3.12.2(@parcel/watcher@2.4.1)(@types/node@20.14.9)(encoding@0.1.13)(eslint@9.6.0)(ioredis@5.3.2)(magicast@0.3.4)(optionator@0.9.3)(rollup@4.14.0)(sass@1.74.1)(terser@5.31.1)(typescript@5.5.3)(vite@5.3.2(@types/node@20.14.9)(sass@1.74.1)(terser@5.31.1))(vue-tsc@2.0.26-alpha.2(typescript@5.5.3)))(rollup@4.14.0)(vue@3.4.31(typescript@5.5.3))
       defu: 6.1.4
       focus-trap: 7.5.4
-      splitpanes: 3.1.5(patch_hash=h4hqdnxj6cbudirz7t37wp3wee)
+      splitpanes: 3.1.5(patch_hash=nsm5oxjtb4qlzf4us7osrtwcgy)
       unocss: 0.58.9(@unocss/webpack@0.61.0(rollup@4.14.0)(webpack@5.89.0(esbuild@0.20.2)))(postcss@8.4.38)(rollup@4.14.0)(vite@5.3.2(@types/node@20.14.9)(sass@1.74.1)(terser@5.31.1))
       v-lazy-show: 0.2.4(@vue/compiler-core@3.4.31)
     transitivePeerDependencies:
@@ -10596,10 +10592,6 @@ snapshots:
 
   hash-sum@2.0.0: {}
 
-  hasown@2.0.0:
-    dependencies:
-      function-bind: 1.1.2
-
   hasown@2.0.2:
     dependencies:
       function-bind: 1.1.2
@@ -10836,7 +10828,7 @@ snapshots:
 
   is-core-module@2.13.1:
     dependencies:
-      hasown: 2.0.0
+      hasown: 2.0.2
 
   is-decimal@1.0.4: {}
 
@@ -11848,7 +11840,7 @@ snapshots:
       satori-html: 0.3.2
       shiki: 1.10.1
       sirv: 2.0.4
-      splitpanes: 3.1.5(patch_hash=h4hqdnxj6cbudirz7t37wp3wee)
+      splitpanes: 3.1.5(patch_hash=nsm5oxjtb4qlzf4us7osrtwcgy)
       std-env: 3.7.0
       terminate: 2.6.1
       ufo: 1.5.3
@@ -13192,7 +13184,7 @@ snapshots:
     dependencies:
       through: 2.3.8
 
-  splitpanes@3.1.5(patch_hash=h4hqdnxj6cbudirz7t37wp3wee): {}
+  splitpanes@3.1.5(patch_hash=nsm5oxjtb4qlzf4us7osrtwcgy): {}
 
   standard-as-callback@2.1.0: {}
 

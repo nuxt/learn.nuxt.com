@@ -95,7 +95,8 @@ const panelInitTerminal = computed(() => isMounted.value || {
         </Pane>
         <PaneSplitter />
         <Pane
-          v-bind="terminalPaneProps" :style="panelInitTerminal"
+          v-bind="terminalPaneProps"
+          :style="panelInitTerminal"
           :class="ui.showTerminal ? '' : 'pane-hidden'"
         >
           <PanelTerminal />
