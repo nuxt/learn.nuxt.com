@@ -3,10 +3,10 @@ import * as worker from 'monaco-editor-core/esm/vs/editor/editor.worker'
 import type * as monaco from 'monaco-editor-core'
 import * as ts from 'typescript/lib/tsserverlibrary'
 import type { LanguageServiceEnvironment, VueCompilerOptions } from '@vue/language-service'
-import { getFullLanguageServicePlugins, createVueLanguagePlugin, resolveVueCompilerOptions } from '@vue/language-service'
+import { createVueLanguagePlugin, getFullLanguageServicePlugins, resolveVueCompilerOptions } from '@vue/language-service'
 import { createTypeScriptWorkerService } from '@volar/monaco/worker'
-import type { WorkerHost } from './env'
 import { URI } from 'vscode-uri'
+import type { WorkerHost } from './env'
 
 export interface CreateData {
   tsconfig: {
