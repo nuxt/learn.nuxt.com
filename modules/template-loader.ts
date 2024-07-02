@@ -81,12 +81,15 @@ export default defineNuxtModule({
           getFileMap(resolve(id, '../solutions')),
         ])
 
-        return [
-          code,
-          `meta.files = ${JSON.stringify(files)}`,
-          `meta.solutions = ${JSON.stringify(solutions)}`,
-          '',
-        ].join('\n')
+        return {
+          code: [
+            code,
+            `meta.files = ${JSON.stringify(files)}`,
+            `meta.solutions = ${JSON.stringify(solutions)}`,
+            '',
+          ].join('\n'),
+          map: null,
+        }
       },
     })
   },
