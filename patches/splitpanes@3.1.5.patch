@@ -139,3 +139,18 @@ index 2354cb734b79a4109c2a511d5fc49d944372d8d0..50d37289adc60f94183c93d10896b30a
 +.default-theme .splitpanes--horizontal>.splitpanes__splitter:after {
 +  margin-top: 1px
 +}
+diff --git a/dist/splitpanes.es.js b/dist/splitpanes.es.js
+index 6a8e64363e592840123438b1a5959a580440b325..0b2ddee308cfbc48bef9351286b218d8cc1ace7b 100644
+--- a/dist/splitpanes.es.js
++++ b/dist/splitpanes.es.js
+@@ -160,7 +160,9 @@ const M = {
+     },
+     requestUpdate({ target: e, ...i }) {
+       const s = this.indexedPanes[e._.uid];
+-      Object.entries(i).forEach(([n, t]) => s[n] = t);
++      if (s) {
++        Object.entries(i).forEach(([n, t]) => s[n] = t);
++      }
+     },
+     onPaneAdd(e) {
+       let i = -1;

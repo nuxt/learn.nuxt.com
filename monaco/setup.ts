@@ -10,7 +10,6 @@ import vueWorker from './vue.worker?worker'
 import { reloadLanguageTools } from './env'
 
 export function initMonaco(ctx: PlaygroundStore) {
-  // @ts-expect-error MonacoEnvironment is a global variable injected for monaco
   self.MonacoEnvironment = {
     async getWorker(_: any, label: string) {
       switch (label) {
