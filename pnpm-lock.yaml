@@ -70,6 +70,9 @@ importers:
       unified:
         specifier: ^11.0.4
         version: 11.0.4
+      vscode-uri:
+        specifier: ^3.0.8
+        version: 3.0.8
       vue:
         specifier: ^3.4.27
         version: 3.4.27(typescript@5.4.5)
@@ -135,8 +138,8 @@ importers:
         specifier: ^7.0.0
         version: 7.0.0
       monaco-editor-core:
-        specifier: ^0.48.0
-        version: 0.48.0
+        specifier: ^0.50.0
+        version: 0.50.0
       nuxt:
         specifier: ^3.11.2
         version: 3.11.2(@parcel/watcher@2.4.1)(@types/node@20.10.5)(@unocss/reset@0.60.2)(encoding@0.1.13)(eslint@9.3.0)(floating-vue@5.2.2(@nuxt/kit@3.11.2(rollup@4.14.0))(vue@3.4.27(typescript@5.4.5)))(fuse.js@7.0.0)(ioredis@5.3.2)(optionator@0.9.3)(rollup@4.14.0)(sass@1.74.1)(terser@5.26.0)(typescript@5.4.5)(unocss@0.60.2(@unocss/webpack@0.60.2(rollup@4.14.0)(webpack@5.89.0(esbuild@0.20.2)))(postcss@8.4.38)(rollup@4.14.0)(vite@5.2.8(@types/node@20.10.5)(sass@1.74.1)(terser@5.26.0)))(vite@5.2.8(@types/node@20.10.5)(sass@1.74.1)(terser@5.26.0))(vue-tsc@2.0.26-alpha.2(typescript@5.4.5))
@@ -153,7 +156,7 @@ importers:
         specifier: ^5.4.5
         version: 5.4.5
       vue-tsc:
-        specifier: ^2.0.26-alpah.2
+        specifier: ^2.0.26-alpha.2
         version: 2.0.26-alpha.2(typescript@5.4.5)
 
 packages:
@@ -4339,8 +4342,8 @@ packages:
   mlly@1.7.0:
     resolution: {integrity: sha512-U9SDaXGEREBYQgfejV97coK0UL1r+qnF2SyO9A3qcI8MzKnsIFKHNVEkrDyNncQTKQQumsasmeq84eNMdBfsNQ==}
 
-  monaco-editor-core@0.48.0:
-    resolution: {integrity: sha512-HaGsPuwG+2LA9Ya2lmU7zEh8TdA33E8kh94+RplFDq+4ZjW+pa3NlxOIZGyrNrBybvicitByY3Ys9c//NLaDVQ==}
+  monaco-editor-core@0.50.0:
+    resolution: {integrity: sha512-XKdublTat9qDKwJhMbm6nnTUKA75MU7jWVooZeXcZKP0/y2jscNWQ9FpCiRtWk33Teemihx155WQ7o7xgf89eA==}
 
   monaco-editor-textmate@4.0.0:
     resolution: {integrity: sha512-Clwup5LJzVfwURQrS+odSEC5/hZBEG36pQnvBKt4OtBndF8r2xLeXUZcK/AqEBK2u0Npy7frFp9hG7m66Ol9hA==}
@@ -6063,8 +6066,8 @@ packages:
       '@volar/language-service':
         optional: true
 
-  volar-service-json@0.0.58:
-    resolution: {integrity: sha512-tP2cC8UAuP3RM6IZNDipK46dIdFq3MDizgMuLPPKzzAvCtrQlcTDhxknJzgMsmq92PjRTpwDZr6KDTGZknfgTQ==}
+  volar-service-json@0.0.59:
+    resolution: {integrity: sha512-LfDOQhCvUpDBjA6CP9EogO0dn1yEFbInvV3Yk4OsEdyxwWUEYPLVjDacPlVUYcjCIKQN6NcTOWbVwpg4vYjw6A==}
     peerDependencies:
       '@volar/language-service': ~2.4.0-alpha.12
     peerDependenciesMeta:
@@ -9162,7 +9165,7 @@ snapshots:
       volar-service-css: 0.0.59(@volar/language-service@2.4.0-alpha.12)
       volar-service-emmet: 0.0.59(@volar/language-service@2.4.0-alpha.12)
       volar-service-html: 0.0.59(@volar/language-service@2.4.0-alpha.12)
-      volar-service-json: 0.0.58(@volar/language-service@2.4.0-alpha.12)
+      volar-service-json: 0.0.59(@volar/language-service@2.4.0-alpha.12)
       volar-service-pug: 0.0.59
       volar-service-pug-beautify: 0.0.59(@volar/language-service@2.4.0-alpha.12)
       volar-service-typescript: 0.0.58(@volar/language-service@2.4.0-alpha.12)
@@ -11871,7 +11874,7 @@ snapshots:
       pkg-types: 1.1.1
       ufo: 1.5.3
 
-  monaco-editor-core@0.48.0: {}
+  monaco-editor-core@0.50.0: {}
 
   monaco-editor-textmate@4.0.0(monaco-editor@0.50.0)(monaco-textmate@3.0.1(onigasm@2.2.5)):
     dependencies:
@@ -14372,7 +14375,7 @@ snapshots:
     optionalDependencies:
       '@volar/language-service': 2.4.0-alpha.12
 
-  volar-service-json@0.0.58(@volar/language-service@2.4.0-alpha.12):
+  volar-service-json@0.0.59(@volar/language-service@2.4.0-alpha.12):
     dependencies:
       vscode-json-languageservice: 5.4.0
       vscode-uri: 3.0.8

@@ -136,19 +136,19 @@ export async function reloadLanguageTools(ctx: PlaygroundMonacoContext) {
     languageId,
     'vue',
     getSyncUris,
-    editor,
+    editor as typeof import('monaco-editor').editor,
   )
   const { dispose: disposeAutoInsertion } = volar.activateAutoInsertion(
     worker,
     languageId,
     getSyncUris,
-    editor,
+    editor as typeof import('monaco-editor').editor,
   )
   const { dispose: disposeProvides } = await volar.registerProviders(
     worker,
     languageId,
     getSyncUris,
-    languages,
+    languages as unknown as typeof import('monaco-editor').languages,
   )
 
   disposeVue = () => {
