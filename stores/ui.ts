@@ -10,7 +10,7 @@ export const useUiState = defineStore('ui', () => {
       panelEditor: 60,
       panelPreview: 40,
       panelFileTree: 0,
-      showTerminal: false,
+      showTerminal: true,
     }
   }
 
