@@ -16,8 +16,8 @@
   "dependencies": {
     "@shikijs/core": "^1.5.2",
     "@shikijs/monaco": "^1.5.2",
-    "@volar/monaco": "~2.4.0-alpha.8",
-    "@vue/language-service": "^2.0.24",
+    "@volar/monaco": "~2.4.0-alpha.12",
+    "@vue/language-service": "^2.0.26-alpha.2",
     "@webcontainer/api": "^1.1.9",
     "@xterm/addon-fit": "^0.10.0",
     "@xterm/xterm": "^5.5.0",
@@ -62,7 +62,7 @@
     "pathe": "^1.1.2",
     "remark-external-links": "^9.0.1",
     "typescript": "^5.4.5",
-    "vue-tsc": "^2.0.24"
+    "vue-tsc": "^2.0.26-alpah.2"
   },
   "pnpm": {
     "patchedDependencies": {
