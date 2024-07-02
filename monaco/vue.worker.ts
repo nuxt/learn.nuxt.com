@@ -2,14 +2,11 @@
 import * as worker from 'monaco-editor-core/esm/vs/editor/editor.worker'
 import type * as monaco from 'monaco-editor-core'
 import * as ts from 'typescript/lib/tsserverlibrary'
-import type { VueCompilerOptions } from '@vue/language-service'
-import { resolveConfig } from '@vue/language-service'
-import {
-  createLanguageHost,
-  createLanguageService,
-  createServiceEnvironment,
-} from '@volar/monaco/worker'
+import type { LanguageServiceEnvironment, VueCompilerOptions } from '@vue/language-service'
+import { getFullLanguageServicePlugins, createVueLanguagePlugin, resolveVueCompilerOptions } from '@vue/language-service'
+import { createTypeScriptWorkerService } from '@volar/monaco/worker'
 import type { WorkerHost } from './env'
+import { URI } from 'vscode-uri'
 
 export interface CreateData {
   tsconfig: {
@@ -36,51 +33,70 @@ self.onmessage = () => {
     ctx: monaco.worker.IWorkerContext<WorkerHost>,
     { tsconfig }: CreateData,
   ) => {
+    const asFileName = (uri: URI) => uri.path
+    const asUri = (fileName: string): URI => URI.file(fileName)
+    const env: LanguageServiceEnvironment = {
+      workspaceFolders: [URI.file('/')],
+    }
     const { options: compilerOptions } = ts.convertCompilerOptionsFromJson(
       tsconfig.compilerOptions || {},
       '',
+    )
+    const vueCompilerOptions = resolveVueCompilerOptions(
+      tsconfig.vueCompilerOptions || {},
     )
 
     // eslint-disable-next-line no-console
     console.log('Vue Language Services: compilerOptions', compilerOptions)
 
-    const env = createServiceEnvironment()
-    const host = createLanguageHost(
-      ctx.getMirrorModels,
-      env,
-      '/',
-      compilerOptions,
-    )
-
     env.fs = {
       async readFile(uri) {
-        if (isInvalidPath(uri))
+        if (isInvalidPath(uri.path))
           return undefined
-        const file = await ctx.host.fsReadFile(uri)
+        const file = await ctx.host.fsReadFile(uri.toString())
         return file
       },
       async stat(uri) {
-        if (isInvalidPath(uri))
+        if (isInvalidPath(uri.path))
           return undefined
-        const result = await ctx.host.fsStat(uri)
+        const result = await ctx.host.fsStat(uri.toString())
         return result
       },
       async readDirectory(uri) {
-        const dirs = await ctx.host.fsReadDirectory(uri)
+        const dirs = await ctx.host.fsReadDirectory(uri.toString())
         return dirs
       },
     }
 
-    return createLanguageService(
-      { typescript: ts },
+    return createTypeScriptWorkerService({
+      typescript: ts,
       env,
-      resolveConfig(
+      compilerOptions,
+      uriConverter: {
+        asFileName,
+        asUri,
+      },
+      workerContext: ctx,
+      languagePlugins: [createVueLanguagePlugin(
         ts,
-        {},
+        asFileName,
+        () => '', // TODO getProjectVersion
+        (fileName) => {
+          const uri = asUri(fileName)
+          for (const model of ctx.getMirrorModels()) {
+            if (model.uri.toString() === uri.toString()) {
+              return true
+            }
+          }
+          return false
+        },
         compilerOptions,
-        tsconfig?.vueCompilerOptions || {},
-      ),
-      host,
-    )
+        vueCompilerOptions,
+      )],
+      languageServicePlugins: getFullLanguageServicePlugins(ts),
+      setup({ project }) {
+        project.vue = { compilerOptions: vueCompilerOptions }
+      },
+    })
   })
 }
