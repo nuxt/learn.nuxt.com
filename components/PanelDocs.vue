@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { NavItem, ParsedContent } from '@nuxt/content'
+const runtime = useRuntimeConfig()
 
 const {
   navigation,
@@ -9,9 +10,9 @@ const {
 } = useContent() as {
   navigation: Ref<NavItem[]>
   page: Ref<ParsedContent>
-  next: Ref<ParsedContent | undefined>
-  prev: Ref<ParsedContent | undefined>
-}
+    next: Ref<ParsedContent | undefined>
+      prev: Ref<ParsedContent | undefined>
+      }
 
 interface BreadcrumbItem {
   title: string
@@ -58,7 +59,7 @@ const ui = useUiState()
 
 const sourceUrl = computed(() =>
   page.value?._file
-    ? `https://github.com/nuxt/learn.nuxt.com/edit/main/content/${page.value._file}`
+    ? `${runtime.public.repoUrl}/edit/main/content/${page.value._file}`
     : undefined,
 )
 
