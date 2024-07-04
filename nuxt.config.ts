@@ -6,11 +6,12 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@unocss/nuxt',
     '@nuxt/content',
+    '@nuxt/image',
     '@nuxtjs/color-mode',
     '@pinia/nuxt',
     'floating-vue/nuxt',
     '@nuxtjs/seo',
-    'nuxt-icon',
+    '@nuxt/icon',
     '@nuxt/eslint',
 
     // local
@@ -108,6 +109,7 @@ export default defineNuxtConfig({
         '@vue/language-service',
         '@volar/monaco/worker',
         'typescript',
+        'vscode-uri',
       ],
     },
   },

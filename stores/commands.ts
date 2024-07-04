@@ -1,4 +1,3 @@
-import type { ParsedContent } from '@nuxt/content/dist/runtime/types'
 import Fuse from 'fuse.js'
 
 export interface Command {
@@ -28,7 +27,7 @@ export const useCommandsStore = defineStore('commands', () => {
     if (v) {
       // TODO: send a PR to nuxt/content to default generic type
       // TODO: move it out if it's reactive
-      const result = await searchContent(v, {}) as ComputedRef<ParsedContent[]>
+      const result = await searchContent(v, {})
       guidesResult.value = result.value.map((i): Command => ({
         id: i.id,
         title: i.title || 'Untitled',
