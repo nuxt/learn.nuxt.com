@@ -79,7 +79,7 @@ importers:
         version: 1.1.43
       '@iconify/json':
         specifier: ^2.2.224
-        version: 2.2.224
+        version: 2.2.225
       '@nuxt/content':
         specifier: ^2.13.0
         version: 2.13.0(ioredis@5.3.2)(magicast@0.3.4)(nuxt@3.12.2(@parcel/watcher@2.4.1)(@types/node@20.14.9)(encoding@0.1.13)(eslint@9.6.0)(ioredis@5.3.2)(magicast@0.3.4)(optionator@0.9.3)(rollup@4.14.0)(sass@1.74.1)(terser@5.31.1)(typescript@5.5.3)(vite@5.3.2(@types/node@20.14.9)(sass@1.74.1)(terser@5.31.1))(vue-tsc@2.0.26-alpha.2(typescript@5.5.3)))(rollup@4.14.0)(vue@3.4.31(typescript@5.5.3))
@@ -904,8 +904,8 @@ packages:
   '@iconify/collections@1.0.436':
     resolution: {integrity: sha512-M1PinD36UOFlwbhAJtnVNxqb9mpvow4SNHieSY4vCn4eVq/oWgk1nmPoUjxU0lAMlbNcy0xT2smDr90xt3ZnWw==}
 
-  '@iconify/json@2.2.224':
-    resolution: {integrity: sha512-VK7nFjtxUeyp+K311SbbeU8cxlZifiUWh0yYaXks4Sj0DTzubKTDMzRCuTcO/QdEQ/0qwDE8m2nn5+wQjS66gQ==}
+  '@iconify/json@2.2.225':
+    resolution: {integrity: sha512-3MxzXdrxDxItlGxvTmLnbZGlvGcwuBIOofJfyobq097lysZasvsNddFguiWecmKP91nRR4I2ik7enFVQ9Lz3mg==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -2148,6 +2148,11 @@ packages:
 
   acorn@8.12.0:
     resolution: {integrity: sha512-RTvkC4w+KNXrM39/lWCUaG0IbRkWdCv7W/IOW9oU6SawyxulvkQy5HQPVTKxEjczcUvapcrw3cFx/60VN/NRNw==}
+    engines: {node: '>=0.4.0'}
+    hasBin: true
+
+  acorn@8.12.1:
+    resolution: {integrity: sha512-tcpGyI9zbizT9JbV6oYE477V6mTlXvvi0T0G3SNIYE2apm/G5huBa1+K89VGeovbg+jycCrfhl3ADxErOuO6Jg==}
     engines: {node: '>=0.4.0'}
     hasBin: true
 
@@ -5975,8 +5980,8 @@ packages:
       '@volar/language-service':
         optional: true
 
-  volar-service-typescript@0.0.58:
-    resolution: {integrity: sha512-r4MVuRlerFzMwpiN8VWumBULuBxcNUCURptnkCPEcypw8N0GjxPBvq5vXOTGRcukKihgY6mvgYKmJMrkQvbmtQ==}
+  volar-service-typescript@0.0.59:
+    resolution: {integrity: sha512-VCOpfiu+lUo5lapWLB5L5vmQGtwzmNWn5MueV915eku7blpphmE+Z7hCNcL1NApn7AetXWhiblv8ZhmUx/dGIA==}
     peerDependencies:
       '@volar/language-service': ~2.4.0-alpha.12
     peerDependenciesMeta:
@@ -6942,7 +6947,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify/json@2.2.224':
+  '@iconify/json@2.2.225':
     dependencies:
       '@iconify/types': 2.0.0
       pathe: 1.1.2
@@ -8797,7 +8802,7 @@ snapshots:
       volar-service-json: 0.0.59(@volar/language-service@2.4.0-alpha.12)
       volar-service-pug: 0.0.59
       volar-service-pug-beautify: 0.0.59(@volar/language-service@2.4.0-alpha.12)
-      volar-service-typescript: 0.0.58(@volar/language-service@2.4.0-alpha.12)
+      volar-service-typescript: 0.0.59(@volar/language-service@2.4.0-alpha.12)
       volar-service-typescript-twoslash-queries: 0.0.59(@volar/language-service@2.4.0-alpha.12)
       vscode-html-languageservice: 5.3.0
       vscode-languageserver-textdocument: 1.0.11
@@ -9004,9 +9009,9 @@ snapshots:
     dependencies:
       event-target-shim: 5.0.1
 
-  acorn-import-assertions@1.9.0(acorn@8.12.0):
+  acorn-import-assertions@1.9.0(acorn@8.12.1):
     dependencies:
-      acorn: 8.12.0
+      acorn: 8.12.1
 
   acorn-import-attributes@1.9.2(acorn@8.12.0):
     dependencies:
@@ -9019,6 +9024,8 @@ snapshots:
   acorn@7.4.1: {}
 
   acorn@8.12.0: {}
+
+  acorn@8.12.1: {}
 
   agent-base@6.0.2:
     dependencies:
@@ -13406,7 +13413,7 @@ snapshots:
   terser@5.31.1:
     dependencies:
       '@jridgewell/source-map': 0.3.6
-      acorn: 8.12.0
+      acorn: 8.12.1
       commander: 2.20.3
       source-map-support: 0.5.21
 
@@ -14023,7 +14030,7 @@ snapshots:
     optionalDependencies:
       '@volar/language-service': 2.4.0-alpha.12
 
-  volar-service-typescript@0.0.58(@volar/language-service@2.4.0-alpha.12):
+  volar-service-typescript@0.0.59(@volar/language-service@2.4.0-alpha.12):
     dependencies:
       path-browserify: 1.0.1
       semver: 7.6.2
@@ -14168,8 +14175,8 @@ snapshots:
       '@webassemblyjs/ast': 1.12.1
       '@webassemblyjs/wasm-edit': 1.12.1
       '@webassemblyjs/wasm-parser': 1.12.1
-      acorn: 8.12.0
-      acorn-import-assertions: 1.9.0(acorn@8.12.0)
+      acorn: 8.12.1
+      acorn-import-assertions: 1.9.0(acorn@8.12.1)
       browserslist: 4.23.1
       chrome-trace-event: 1.0.4
       enhanced-resolve: 5.17.0
