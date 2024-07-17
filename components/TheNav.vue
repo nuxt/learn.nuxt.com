@@ -4,10 +4,10 @@ const play = usePlaygroundStore()
 const guide = useGuideStore()
 const runtime = useRuntimeConfig()
 const commands = useCommandsStore()
-
 const repo = 'https://github.com/nuxt/learn.nuxt.com'
 const buildTime = new Date(runtime.public.buildTime)
 const timeAgo = useTimeAgo(buildTime)
+const route = useRoute()
 
 function downloadCurrentGuide() {
   if (!play.webcontainer)
@@ -67,6 +67,7 @@ addCommands(
       :class="guide.embeddedDocs ? 'z-embedded-docs-raised' : ''"
     >
       <button
+        v-if="route.path === '/welcome' || route.path !== '/about'"
         rounded p2
         hover="bg-active"
         title="Search"
@@ -103,6 +104,7 @@ addCommands(
         </template>
       </VDropdown>
       <button
+        v-if="route.path === '/welcome' || route.path !== '/about'"
         rounded p2
         title="Toggle terminal"
         hover="bg-active"
@@ -112,6 +114,14 @@ addCommands(
         <div i-ph-terminal-window-duotone text-2xl />
       </button>
       <ColorSchemeToggle />
+      <NuxtLink
+        rounded p2
+        title="About"
+        hover="bg-active"
+        to="/about"
+      >
+        <div i-carbon-help text-2xl />
+      </NuxtLink>
       <NuxtLink
         rounded p2
         title="GitHub"
