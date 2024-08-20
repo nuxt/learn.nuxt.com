@@ -11,7 +11,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     'floating-vue/nuxt',
     '@nuxtjs/seo',
-    '@nuxt/icon',
+    // '@nuxt/icon',
     '@nuxt/eslint',
 
     // local
@@ -130,4 +130,6 @@ export default defineNuxtConfig({
       search: {},
     },
   },
+
+  compatibilityDate: '2024-04-03',
 })
