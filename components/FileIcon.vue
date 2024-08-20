@@ -8,40 +8,40 @@ const props = defineProps<{
 const FILE_ICONS = [
   {
     match: /\.vue$/,
-    icon: 'i-logos-vue',
+    icon: 'i-catppuccin-vue',
   },
   {
     match: /nuxt\.config\.\w+$/,
-    icon: 'i-logos-nuxt-icon scale-110',
+    icon: 'i-catppuccin-nuxt',
   },
   {
     match: /package\.json$/,
-    icon: 'i-file-icons-npm text-red scale-110',
+    icon: 'i-catppuccin-npm',
   },
   {
     match: /\.[mc]?tsx?$/,
-    icon: 'i-file-icons-typescript-alt text-blue3',
+    icon: 'i-catppuccin-typescript',
   },
   {
     match: /\.[mc]?jsx?$/,
-    icon: 'i-devicon-javascript',
+    icon: 'i-catppuccin-javascript',
   },
 ]
 
 const icon = computed(() => {
   if (props.isDirectory) {
     return props.isDirectoryOpen
-      ? 'i-ph:folder-open-duotone scale-120'
-      : 'i-ph:folder-simple-duotone scale-120'
+      ? 'i-catppuccin-folder-open'
+      : 'i-catppuccin-folder'
   }
   for (const { match, icon } of FILE_ICONS) {
     if (match.test(props.path))
       return icon
   }
-  return 'i-ph:file-duotone scale-120'
+  return 'i-catppuccin-file'
 })
 </script>
 
 <template>
-  <div :class="icon" />
+  <div :class="icon" light="brightness-60 hue-rotate-180 invert-100 saturate-200" scale-110 />
 </template>

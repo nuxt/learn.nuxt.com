@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.26.0",
+    "@iconify-json/catppuccin": "^1.1.4",
     "@iconify-json/logos": "^1.1.44",
     "@iconify-json/ph": "^1.1.14",
     "@iconify-json/svg-spinners": "^1.1.3",
