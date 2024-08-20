@@ -4,7 +4,7 @@ import type * as monaco from 'monaco-editor-core'
 import * as ts from 'typescript/lib/tsserverlibrary'
 import type { LanguageServiceEnvironment, VueCompilerOptions } from '@vue/language-service'
 import { createVueLanguagePlugin, getFullLanguageServicePlugins, resolveVueCompilerOptions } from '@vue/language-service'
-import { createTypeScriptWorkerService } from '@volar/monaco/worker'
+import { createTypeScriptWorkerLanguageService } from '@volar/monaco/worker'
 import { URI } from 'vscode-uri'
 import type { WorkerHost } from './env'
 
@@ -68,7 +68,7 @@ self.onmessage = () => {
       },
     }
 
-    return createTypeScriptWorkerService({
+    return createTypeScriptWorkerLanguageService({
       typescript: ts,
       env,
       compilerOptions,
