@@ -77,7 +77,7 @@ function navigate() {
         <span text-sm>Preview</span>
       </div>
       <button
-        v-if="preview.url && guide.features.navigation"
+
         rounded p1
         hover="bg-active"
         title="Refresh Preview"
