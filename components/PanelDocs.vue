@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { NavItem, ParsedContent } from '@nuxt/content'
 
+const runtime = useRuntimeConfig()
 const {
   navigation,
   page,
@@ -58,7 +59,7 @@ const ui = useUiState()
 
 const sourceUrl = computed(() =>
   page.value?._file
-    ? `https://github.com/nuxt/learn.nuxt.com/edit/main/content/${page.value._file}`
+    ? `${runtime.public.repoUrl}/edit/main/content/${page.value._file}`
     : undefined,
 )
 

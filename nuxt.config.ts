@@ -11,7 +11,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     'floating-vue/nuxt',
     '@nuxtjs/seo',
-    '@nuxt/icon',
+    // '@nuxt/icon',
     '@nuxt/eslint',
 
     // local
@@ -67,6 +67,7 @@ export default defineNuxtConfig({
     public: {
       buildTime: Date.now(),
       gitSha: execaSync('git', ['rev-parse', 'HEAD']).stdout.trim(),
+      repoUrl: 'https://github.com/nuxt/learn.nuxt.com',
     },
     app: {
       devtools: {
@@ -130,4 +131,6 @@ export default defineNuxtConfig({
       search: {},
     },
   },
+
+  compatibilityDate: '2024-04-03',
 })

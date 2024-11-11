@@ -57,7 +57,7 @@ const folderCaret = computed(() => {
       :style="{
         paddingLeft: `${0.2 + 0.8 * (props.depth)}rem`,
       }"
-      :class="isFileSelected ? 'bg-active' : 'saturate-0 text-faded'"
+      :class="isFileSelected ? 'bg-active' : 'text-faded'"
       w-full flex items-center gap-1 px2 py1 text-left text-sm
       @click="handleClick"
     >

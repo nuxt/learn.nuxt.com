@@ -56,7 +56,7 @@ export class WorkerHost {
         }
       }
     }
-    catch (err) {
+    catch {
       return undefined
     }
   }
