@@ -34,7 +34,7 @@ self.onmessage = () => {
     { tsconfig }: CreateData,
   ) => {
     const asFileName = (uri: URI) => uri.path
-    const asUri = (fileName: string): URI => URI.file(fileName)
+    const asUri = (fileName: string | URI): URI => fileName instanceof URI ? fileName : URI.file(fileName)
     const env: LanguageServiceEnvironment = {
       workspaceFolders: [URI.file('/')],
     }
@@ -77,22 +77,14 @@ self.onmessage = () => {
         asUri,
       },
       workerContext: ctx,
-      languagePlugins: [createVueLanguagePlugin(
-        ts,
-        asFileName,
-        () => '', // TODO getProjectVersion
-        (fileName) => {
-          const uri = asUri(fileName)
-          for (const model of ctx.getMirrorModels()) {
-            if (model.uri.toString() === uri.toString()) {
-              return true
-            }
-          }
-          return false
-        },
-        compilerOptions,
-        vueCompilerOptions,
-      )],
+      languagePlugins: [
+        createVueLanguagePlugin(
+          ts,
+          compilerOptions,
+          vueCompilerOptions,
+          asFileName,
+        ),
+      ],
       languageServicePlugins: getFullLanguageServicePlugins(ts),
       setup({ project }) {
         project.vue = { compilerOptions: vueCompilerOptions }

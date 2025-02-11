@@ -4,7 +4,7 @@ import type { NavItem } from '@nuxt/content'
 const props = withDefaults(
   defineProps<{
     item: NavItem
-    level: number
+    level?: number
   }>(),
   {
     level: 0,
