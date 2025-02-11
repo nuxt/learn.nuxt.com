@@ -63,6 +63,7 @@ export default defineNuxtConfig({
   features: {
     inlineStyles: false,
   },
+
   runtimeConfig: {
     public: {
       buildTime: Date.now(),
@@ -130,6 +131,10 @@ export default defineNuxtConfig({
     experimental: {
       search: {},
     },
+  },
+
+  experimental: {
+    watcher: 'parcel',
   },
 
   compatibilityDate: '2024-04-03',
