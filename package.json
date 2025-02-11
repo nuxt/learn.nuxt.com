@@ -24,7 +24,7 @@
     "birpc": "^2.2.0",
     "floating-vue": "^5.2.2",
     "jszip": "^3.10.1",
-    "monaco-editor": "^0.50.0",
+    "monaco-editor": "^0.52.0",
     "shiki": "^2.3.2",
     "splitpanes": "3.1.5",
     "strip-json-comments": "^5.0.1",

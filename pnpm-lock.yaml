@@ -48,8 +48,8 @@ importers:
         specifier: ^3.10.1
         version: 3.10.1
       monaco-editor:
-        specifier: ^0.50.0
-        version: 0.50.0
+        specifier: ^0.52.0
+        version: 0.52.2
       shiki:
         specifier: ^2.3.2
         version: 2.3.2
@@ -3685,6 +3685,7 @@ packages:
 
   lodash.isequal@4.5.0:
     resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
+    deprecated: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
 
   lodash.memoize@4.1.2:
     resolution: {integrity: sha512-t7j+NzmgnQzTAYXcsHYLgimltOV1MXHtlOWf6GjL9Kj8GK5FInw5JotxvbOs+IvV1/Dzo04/fCGfLVs7aXb4Ag==}
@@ -3960,8 +3961,8 @@ packages:
   monaco-editor-core@0.50.0:
     resolution: {integrity: sha512-XKdublTat9qDKwJhMbm6nnTUKA75MU7jWVooZeXcZKP0/y2jscNWQ9FpCiRtWk33Teemihx155WQ7o7xgf89eA==}
 
-  monaco-editor@0.50.0:
-    resolution: {integrity: sha512-8CclLCmrRRh+sul7C08BmPBP3P8wVWfBHomsTcndxg5NRCEPfu/mc2AGU8k37ajjDVXcXFc12ORAMUkmk+lkFA==}
+  monaco-editor@0.52.2:
+    resolution: {integrity: sha512-GEQWEZmfkOGLdd3XK8ryrfWz3AIP8YymVXiPHEdewrUq7mh0qrKrfHLNCXcbB6sTnMLnOZ3ztSiKcciFUkIJwQ==}
 
   monaco-languageserver-types@0.4.0:
     resolution: {integrity: sha512-QQ3BZiU5LYkJElGncSNb5AKoJ/LCs6YBMCJMAz9EA7v+JaOdn3kx2cXpPTcZfKA5AEsR0vc97sAw+5mdNhVBmw==}
@@ -10685,7 +10686,7 @@ snapshots:
 
   monaco-editor-core@0.50.0: {}
 
-  monaco-editor@0.50.0: {}
+  monaco-editor@0.52.2: {}
 
   monaco-languageserver-types@0.4.0:
     dependencies:
