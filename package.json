@@ -26,7 +26,7 @@
     "jszip": "^3.10.1",
     "monaco-editor": "^0.50.0",
     "shiki": "^2.3.2",
-    "splitpanes": "3.1.5",
+    "splitpanes": "3.1.8",
     "strip-json-comments": "^5.0.1",
     "theme-vitesse": "^0.8.3",
     "unified": "^11.0.5",
