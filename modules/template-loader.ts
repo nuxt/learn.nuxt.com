@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
-import { addTemplate, addVitePlugin, defineNuxtModule, logger } from '@nuxt/kit'
+import { addTemplate, addVitePlugin, defineNuxtModule } from '@nuxt/kit'
 // import consola from 'consola'
 import fg from 'fast-glob'
 import { relative, resolve } from 'pathe'
