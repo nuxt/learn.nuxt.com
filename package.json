@@ -58,7 +58,7 @@
     "execa": "^9.5.2",
     "fast-glob": "^3.3.3",
     "fuse.js": "^7.1.0",
-    "monaco-editor-core": "^0.50.0",
+    "monaco-editor-core": "^0.52.0",
     "nuxi": "^3.21.1",
     "nuxt": "^3.15.4",
     "pathe": "^2.0.2",
