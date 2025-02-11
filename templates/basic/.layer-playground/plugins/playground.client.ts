@@ -1,5 +1,5 @@
-import { createBirpc } from 'birpc'
 import type { ClientInfo, FrameFunctions, ParentFunctions } from '../../../../types/rpc'
+import { createBirpc } from 'birpc'
 
 export default defineNuxtPlugin(() => {
   // Communicate with parent window for navigation

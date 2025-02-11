@@ -1,12 +1,12 @@
+import type { LanguageServiceEnvironment, VueCompilerOptions } from '@vue/language-service'
+import type * as monaco from 'monaco-editor-core'
+import type { WorkerHost } from './env'
+import { createTypeScriptWorkerLanguageService } from '@volar/monaco/worker'
+import { createVueLanguagePlugin, getFullLanguageServicePlugins, resolveVueCompilerOptions } from '@vue/language-service'
 // @ts-expect-error missing types
 import * as worker from 'monaco-editor-core/esm/vs/editor/editor.worker'
-import type * as monaco from 'monaco-editor-core'
 import * as ts from 'typescript/lib/tsserverlibrary'
-import type { LanguageServiceEnvironment, VueCompilerOptions } from '@vue/language-service'
-import { createVueLanguagePlugin, getFullLanguageServicePlugins, resolveVueCompilerOptions } from '@vue/language-service'
-import { createTypeScriptWorkerLanguageService } from '@volar/monaco/worker'
 import { URI } from 'vscode-uri'
-import type { WorkerHost } from './env'
 
 export interface CreateData {
   tsconfig: {
@@ -34,7 +34,7 @@ self.onmessage = () => {
     { tsconfig }: CreateData,
   ) => {
     const asFileName = (uri: URI) => uri.path
-    const asUri = (fileName: string): URI => URI.file(fileName)
+    const asUri = (fileName: string | URI): URI => fileName instanceof URI ? fileName : URI.file(fileName)
     const env: LanguageServiceEnvironment = {
       workspaceFolders: [URI.file('/')],
     }
@@ -77,22 +77,14 @@ self.onmessage = () => {
         asUri,
       },
       workerContext: ctx,
-      languagePlugins: [createVueLanguagePlugin(
-        ts,
-        asFileName,
-        () => '', // TODO getProjectVersion
-        (fileName) => {
-          const uri = asUri(fileName)
-          for (const model of ctx.getMirrorModels()) {
-            if (model.uri.toString() === uri.toString()) {
-              return true
-            }
-          }
-          return false
-        },
-        compilerOptions,
-        vueCompilerOptions,
-      )],
+      languagePlugins: [
+        createVueLanguagePlugin(
+          ts,
+          compilerOptions,
+          vueCompilerOptions,
+          asFileName,
+        ),
+      ],
       languageServicePlugins: getFullLanguageServicePlugins(ts),
       setup({ project }) {
         project.vue = { compilerOptions: vueCompilerOptions }

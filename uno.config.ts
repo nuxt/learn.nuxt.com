@@ -1,3 +1,4 @@
+import extractorMdc from '@unocss/extractor-mdc'
 import {
   defineConfig,
   presetAttributify,
@@ -7,7 +8,6 @@ import {
   presetWebFonts,
   transformerDirectives,
 } from 'unocss'
-import extractorMdc from '@unocss/extractor-mdc'
 
 export default defineConfig({
   shortcuts: {

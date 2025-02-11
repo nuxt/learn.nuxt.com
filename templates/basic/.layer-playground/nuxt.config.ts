@@ -1,6 +1,6 @@
 import { defineNuxtConfig } from 'nuxt/config'
-import { version as versionVue } from 'vue'
 import { version as versionNuxt } from 'nuxt/package.json'
+import { version as versionVue } from 'vue'
 
 export default defineNuxtConfig({
   devtools: { enabled: false },

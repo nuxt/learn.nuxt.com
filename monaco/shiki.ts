@@ -1,7 +1,6 @@
 import type { HighlighterCore } from 'shiki/core'
-import { getHighlighterCore } from 'shiki/core'
-import getWasmInlined from 'shiki/wasm'
-
+import { createHighlighterCore } from 'shiki/core'
+import { createJavaScriptRegexEngine } from 'shiki/engine-javascript.mjs'
 import langVue from 'shiki/langs/vue.mjs'
 import themeDark from 'shiki/themes/vitesse-dark.mjs'
 import themeLight from 'shiki/themes/vitesse-light.mjs'
@@ -16,7 +15,7 @@ export async function getShiki() {
   darkColors['editor.background'] = '#00000000'
   darkColors['editor.lineHighlightBackground'] = '#00000000'
 
-  highlighter = getHighlighterCore({
+  highlighter = createHighlighterCore({
     langs: [
       langVue as any,
     ],
@@ -24,7 +23,7 @@ export async function getShiki() {
       themeLight as any,
       themeDark as any,
     ],
-    loadWasm: getWasmInlined,
+    engine: createJavaScriptRegexEngine(),
   })
 
   return highlighter

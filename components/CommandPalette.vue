@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { NuxtLink } from '#components'
 import type { Command } from '~/stores/commands'
+import { NuxtLink } from '#components'
 
 const commands = useCommandsStore()
 const router = useRouter()
