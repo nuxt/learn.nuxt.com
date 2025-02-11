@@ -1,12 +1,12 @@
+import type { LanguageServiceEnvironment, VueCompilerOptions } from '@vue/language-service'
+import type * as monaco from 'monaco-editor-core'
+import type { WorkerHost } from './env'
+import { createTypeScriptWorkerLanguageService } from '@volar/monaco/worker'
+import { createVueLanguagePlugin, getFullLanguageServicePlugins, resolveVueCompilerOptions } from '@vue/language-service'
 // @ts-expect-error missing types
 import * as worker from 'monaco-editor-core/esm/vs/editor/editor.worker'
-import type * as monaco from 'monaco-editor-core'
 import * as ts from 'typescript/lib/tsserverlibrary'
-import type { LanguageServiceEnvironment, VueCompilerOptions } from '@vue/language-service'
-import { createVueLanguagePlugin, getFullLanguageServicePlugins, resolveVueCompilerOptions } from '@vue/language-service'
-import { createTypeScriptWorkerLanguageService } from '@volar/monaco/worker'
 import { URI } from 'vscode-uri'
-import type { WorkerHost } from './env'
 
 export interface CreateData {
   tsconfig: {

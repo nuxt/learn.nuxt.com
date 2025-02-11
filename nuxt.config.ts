@@ -123,8 +123,8 @@ export default defineNuxtConfig({
       },
     },
     markdown: {
-      remarkPlugins: [
-        'remark-external-links',
+      rehypePlugins: [
+        'rehype-external-links',
       ],
     },
     experimental: {

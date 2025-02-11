@@ -1,6 +1,7 @@
-import { fileURLToPath } from 'node:url'
 import fs from 'node:fs/promises'
-import { addTemplate, addVitePlugin, defineNuxtModule } from '@nuxt/kit'
+import { fileURLToPath } from 'node:url'
+import { addTemplate, addVitePlugin, defineNuxtModule, logger } from '@nuxt/kit'
+import consola from 'consola'
 import fg from 'fast-glob'
 import { relative, resolve } from 'pathe'
 
@@ -9,6 +10,11 @@ export default defineNuxtModule({
     name: 'template-loader',
   },
   setup(_) {
+    logger.restoreAll()
+    logger.wrapAll = () => {}
+    consola.restoreAll()
+    consola.wrapAll = () => {}
+
     addTemplate({
       filename: 'templates/basic.ts',
       getContents: async () => {

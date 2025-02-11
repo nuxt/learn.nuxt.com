@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import * as monaco from 'monaco-editor-core/esm/vs/editor/editor.api'
 import { shikiToMonaco } from '@shikijs/monaco'
-import { initMonaco } from '~/monaco/setup'
+import * as monaco from 'monaco-editor-core/esm/vs/editor/editor.api'
 import { reloadLanguageTools } from '~/monaco/env'
+import { initMonaco } from '~/monaco/setup'
 import { getShiki } from '~/monaco/shiki'
 
 const props = defineProps<{

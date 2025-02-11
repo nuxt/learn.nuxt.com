@@ -1,10 +1,10 @@
-import { basename, dirname } from 'pathe'
+import type { FileType } from './types'
+import type { CreateData } from './vue.worker'
 import * as volar from '@volar/monaco'
-import { Uri, editor, languages } from 'monaco-editor-core'
+import { editor, languages, Uri } from 'monaco-editor-core'
+import { basename, dirname } from 'pathe'
 import stripJsonComments from 'strip-json-comments'
 import { getOrCreateModel } from './utils'
-import type { CreateData } from './vue.worker'
-import type { FileType } from './types'
 
 export type PlaygroundMonacoContext = Pick<PlaygroundStore, 'webcontainer' | 'files'>
 
@@ -162,9 +162,7 @@ export async function reloadLanguageTools(ctx: PlaygroundMonacoContext) {
 function loadFiles(ctx: PlaygroundMonacoContext, files: string[]) {
   return Promise.all(files.map(async (file) => {
     const filepath = withoutLeadingSlash(file)
-    const content = await ctx.webcontainer!.fs
-      .readFile(filepath, 'utf-8')
-      .catch(() => undefined)
+    const content = await ctx.webcontainer!.fs.readFile(filepath, 'utf-8').catch(() => undefined)
     const uri = Uri.parse(`file:///${filepath}`)
     if (content != null) {
       getOrCreateModel(uri, undefined, content)
