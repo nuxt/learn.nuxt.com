@@ -48,7 +48,7 @@
     "@nuxt/kit": "^3.15.4",
     "@nuxtjs/color-mode": "^3.5.2",
     "@nuxtjs/seo": "^2.1.1",
-    "@pinia/nuxt": "^0.5.3",
+    "@pinia/nuxt": "^0.10.0",
     "@unocss/eslint-plugin": "^65.4.3",
     "@unocss/extractor-mdc": "^65.4.3",
     "@unocss/nuxt": "^65.4.3",
