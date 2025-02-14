@@ -10,7 +10,7 @@ overrides:
 
 patchedDependencies:
   splitpanes@3.1.5:
-    hash: nsm5oxjtb4qlzf4us7osrtwcgy
+    hash: 4487ed8f4571dc58f2bbdd3d581c7b1c32e44a765bce8c39c432fa77d571c026
     path: patches/splitpanes@3.1.5.patch
 
 importers:
@@ -55,7 +55,7 @@ importers:
         version: 2.3.2
       splitpanes:
         specifier: 3.1.5
-        version: 3.1.5(patch_hash=nsm5oxjtb4qlzf4us7osrtwcgy)
+        version: 3.1.5(patch_hash=4487ed8f4571dc58f2bbdd3d581c7b1c32e44a765bce8c39c432fa77d571c026)
       strip-json-comments:
         specifier: ^5.0.1
         version: 5.0.1
@@ -3685,6 +3685,7 @@ packages:
 
   lodash.isequal@4.5.0:
     resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
+    deprecated: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
 
   lodash.memoize@4.1.2:
     resolution: {integrity: sha512-t7j+NzmgnQzTAYXcsHYLgimltOV1MXHtlOWf6GjL9Kj8GK5FInw5JotxvbOs+IvV1/Dzo04/fCGfLVs7aXb4Ag==}
@@ -12122,7 +12123,7 @@ snapshots:
 
   speakingurl@14.0.1: {}
 
-  splitpanes@3.1.5(patch_hash=nsm5oxjtb4qlzf4us7osrtwcgy): {}
+  splitpanes@3.1.5(patch_hash=4487ed8f4571dc58f2bbdd3d581c7b1c32e44a765bce8c39c432fa77d571c026): {}
 
   stable-hash@0.0.4: {}
 
