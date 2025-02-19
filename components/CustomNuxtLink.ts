@@ -4,7 +4,7 @@ const NuxtLink = defineNuxtLink({})
 export default defineComponent({
   name: 'NuxtLink',
   props: NuxtLink.props,
-  setup(props, { slots }) {
+  setup(props: any, { slots }) {
     const url = props.to || props.href
     // Get CORS and add url?.startsWith('https://vuejs.org')
     if (url?.startsWith('https://nuxt.com')) {

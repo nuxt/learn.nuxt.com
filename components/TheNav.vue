@@ -58,7 +58,7 @@ addCommands(
       target="_blank"
     >
       <div block translate-y--2 rounded bg-orange:10 px2 py1 text-xs text-orange>
-        Working in Progress
+        Work in Progress
       </div>
     </NuxtLink>
 

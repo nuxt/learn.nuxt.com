@@ -1,6 +1,5 @@
 import { execaSync } from 'execa'
 
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
     '@vueuse/nuxt',
@@ -18,27 +17,8 @@ export default defineNuxtConfig({
     '~/modules/template-loader',
     '~/modules/nuxt-link',
   ],
-  colorMode: {
-    classSuffix: '',
-  },
-  site: {
-    url: 'https://learn-dev.nuxt.com',
-  },
-  eslint: {
-    config: {
-      standalone: false,
-    },
-  },
-  ogImage: {
-    defaults: {
-      component: 'OgImageDocs',
-      props: {
-        colorMode: 'dark',
-      },
-    },
-    componentOptions: {
-      global: true,
-    },
+  devtools: {
+    enabled: true,
   },
   app: {
     head: {
@@ -51,18 +31,30 @@ export default defineNuxtConfig({
       ],
     },
   },
-  typescript: {
-    includeWorkspace: true,
-    tsConfig: {
-      include: [
-        '../content/**/.template/**/*.ts',
+  site: {
+    url: 'https://learn-dev.nuxt.com',
+  },
+  colorMode: {
+    classSuffix: '',
+  },
+  content: {
+    documentDriven: true,
+    highlight: {
+      theme: {
+        default: 'vitesse-light',
+        dark: 'vitesse-dark',
+      },
+    },
+    markdown: {
+      rehypePlugins: [
+        'rehype-external-links',
       ],
+    },
+    experimental: {
+      search: {},
     },
   },
 
-  features: {
-    inlineStyles: false,
-  },
   runtimeConfig: {
     public: {
       buildTime: Date.now(),
@@ -78,9 +70,16 @@ export default defineNuxtConfig({
       },
     },
   },
-  devtools: {
-    enabled: true,
+
+  features: {
+    inlineStyles: false,
   },
+
+  experimental: {
+    watcher: 'parcel',
+  },
+
+  compatibilityDate: '2024-04-03',
   nitro: {
     routeRules: {
       '/**': {
@@ -114,23 +113,31 @@ export default defineNuxtConfig({
       ],
     },
   },
-  content: {
-    documentDriven: true,
-    highlight: {
-      theme: {
-        default: 'vitesse-light',
-        dark: 'vitesse-dark',
-      },
-    },
-    markdown: {
-      remarkPlugins: [
-        'remark-external-links',
+  typescript: {
+    includeWorkspace: true,
+    tsConfig: {
+      include: [
+        '../content/**/.template/**/*.ts',
       ],
     },
-    experimental: {
-      search: {},
+  },
+  eslint: {
+    config: {
+      standalone: false,
+      nuxt: {
+        sortConfigKeys: true,
+      },
     },
   },
-
-  compatibilityDate: '2024-04-03',
+  ogImage: {
+    defaults: {
+      component: 'OgImageDocs',
+      props: {
+        colorMode: 'dark',
+      },
+    },
+    componentOptions: {
+      global: true,
+    },
+  },
 })

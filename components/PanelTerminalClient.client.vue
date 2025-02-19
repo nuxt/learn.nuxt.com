@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import '@xterm/xterm/css/xterm.css'
 import type { ITheme } from '@xterm/xterm'
-import { Terminal } from '@xterm/xterm'
 import { FitAddon } from '@xterm/addon-fit'
-import themeLight from 'theme-vitesse/extra/xterm-vitesse-light.json'
+import { Terminal } from '@xterm/xterm'
 import themeDark from 'theme-vitesse/extra/xterm-vitesse-dark.json'
+import themeLight from 'theme-vitesse/extra/xterm-vitesse-light.json'
+import '@xterm/xterm/css/xterm.css'
 
 const play = usePlaygroundStore()
 

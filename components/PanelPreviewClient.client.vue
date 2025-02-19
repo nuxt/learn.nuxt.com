@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { createBirpc } from 'birpc'
 import type { FrameFunctions, ParentFunctions } from '~/types/rpc'
+import { createBirpc } from 'birpc'
 
 const ui = useUiState()
 const play = usePlaygroundStore()

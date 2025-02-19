@@ -1,9 +1,20 @@
 import { defineNuxtConfig } from 'nuxt/config'
-import { version as versionVue } from 'vue'
 import { version as versionNuxt } from 'nuxt/package.json'
+import { version as versionVue } from 'vue'
 
 export default defineNuxtConfig({
   devtools: { enabled: false },
+  css: [
+    '~/.layer-playground/styles/base.css',
+  ],
+  runtimeConfig: {
+    public: {
+      clientInfo: {
+        versionVue,
+        versionNuxt,
+      },
+    },
+  },
   vite: {
     warmupEntry: false,
     optimizeDeps: {
@@ -15,14 +26,6 @@ export default defineNuxtConfig({
       ],
     },
   },
-  runtimeConfig: {
-    public: {
-      clientInfo: {
-        versionVue,
-        versionNuxt,
-      },
-    },
-  },
   typescript: {
     includeWorkspace: true,
     tsConfig: {
@@ -31,7 +34,4 @@ export default defineNuxtConfig({
       ],
     },
   },
-  css: [
-    '~/.layer-playground/styles/base.css',
-  ],
 })

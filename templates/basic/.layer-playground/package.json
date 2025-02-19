@@ -1,6 +1,6 @@
 {
   "private": true,
   "dependencies": {
-    "birpc": "^0.2.14"
+    "birpc": "^2.0.0"
   }
 }

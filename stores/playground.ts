@@ -1,7 +1,7 @@
-import type { Raw } from 'vue'
 import type { WebContainer, WebContainerProcess } from '@webcontainer/api'
-import { VirtualFile } from '../structures/VirtualFile'
+import type { Raw } from 'vue'
 import { filesToWebContainerFs } from '~/templates/utils'
+import { VirtualFile } from '../structures/VirtualFile'
 
 export const PlaygroundStatusOrder = [
   'init',
