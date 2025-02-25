@@ -1,0 +1,23 @@
+{
+  "type": "module",
+  "private": true,
+  "packageManager": "pnpm@9.15.4",
+  "scripts": {
+    "dev": "nuxt dev",
+    "prepare": "nuxt prepare",
+    "test:unit": "vitest",
+    "test:unit-coverage": "vitest --coverage",
+    "test:unit-ui": "vitest --coverage --ui"
+  },
+  "devDependencies": {
+    "@nuxt/test-utils": "latest",
+    "@vitest/coverage-v8": "latest",
+    "@vitest/ui": "latest",
+    "@vue/test-utils": "latest",
+    "happy-dom": "latest",
+    "nuxt": "latest",
+    "typescript": "latest",
+    "vitest": "latest",
+    "vue": "latest"
+  }
+}
