@@ -14,10 +14,11 @@ You are also able to auto-import functions exported deom custom folders or third
 ## Built-in Auto-imports
 
 Nuxt auto-imports functions and compostables to:
-* perform [data fetching](https://nuxt.com/docs/getting-started/data-fetching)
-* get access to the [app context](https://nuxt.com/docs/api/composables/use-nuxt-app) and [running config](https://nuxt.com/docs/guide/going-further/runtime-config)
-* manage [state](https://nuxt.com/docs/getting-started/state-management)
-* or define components and plugins
+
+- perform [data fetching](https://nuxt.com/docs/getting-started/data-fetching)
+- get access to the [app context](https://nuxt.com/docs/api/composables/use-nuxt-app) and [running config](https://nuxt.com/docs/guide/going-further/runtime-config)
+- manage [state](https://nuxt.com/docs/getting-started/state-management)
+- or define components and plugins
 
 ```vue
 <script setup lang="ts">
@@ -25,6 +26,7 @@ Nuxt auto-imports functions and compostables to:
 const { data, refresh, status } = await useFetch('/api/hello')
 </script>
 ```
+
 Vue 3 exposes Reactivity APIs like `ref` or `computed`, as well as lifecycle hooks and helpers that are auto-imported by Nuxt.
 
 ## Vue and Nuxt composables
@@ -34,18 +36,23 @@ When you are using the built-in Composition API composables provided by Vue and 
 The global variable tracking mechanism in Vue and Nuxt imposes strict usage constraints on composables and context-specific functions. These restrictions mean that developers can typically only access these instances within specific, controlled environments:
 
 1. Permitted Contexts:
-* Nuxt plugins
-* Nuxt route middleware
-* Vue setup functions
+
+- Nuxt plugins
+- Nuxt route middleware
+- Vue setup functions
+
 2. Synchronous Execution Requirement:
-* Composables must be called synchronously
-* Using await before calling a composable is generally prohibited
+
+- Composables must be called synchronously
+- Using await before calling a composable is generally prohibited
+
 3. Exceptions to the Rule:
-Some specialized contexts allow for asynchronous usage while maintaining the synchronous context:
-* `<script setup>` blocks
-* Components defined with `defineNuxtComponent`
-* Functions created with `defineNuxtPlugin`
-* Route middleware defined with `defineNuxtRouteMiddleware`
+   Some specialized contexts allow for asynchronous usage while maintaining the synchronous context:
+
+- `<script setup>` blocks
+- Components defined with `defineNuxtComponent`
+- Functions created with `defineNuxtPlugin`
+- Route middleware defined with `defineNuxtRouteMiddleware`
 
 These limitations are designed to prevent state management issues and ensure clean, predictable component and application behavior during server-side rendering.
 
@@ -54,9 +61,10 @@ If you get an error message like `Nuxt instance is unavailable` then it probably
 ## Directory-based Auto-imports
 
 Nuxt directly auto-imports files created in defined directories:
-* `components/` for [Vue components](https://nuxt.com/docs/guide/directory-structure/components).
-* `composables/` for [Vue composables](https://nuxt.com/docs/guide/directory-structure/composables).
-* `utils/` for helper functions and other utilities.
+
+- `components/` for [Vue components](https://nuxt.com/docs/guide/directory-structure/components).
+- `composables/` for [Vue composables](https://nuxt.com/docs/guide/directory-structure/composables).
+- `utils/` for helper functions and other utilities.
 
 ### Explicit imports
 
@@ -64,7 +72,7 @@ Nuxt exposes every auto-import with the `#imports` alias that can be used to mak
 
 ```vue
 <script setup lang="ts">
-import { ref, computed } from '#imports'
+import { computed, ref } from '#imports'
 
 const count = ref(1)
 const double = computed(() => count.value * 2)
@@ -88,6 +96,7 @@ This will disable auto-imports completely but it's still possible to use explici
 ### Partially Disabling Auto-imports
 
 If you want framework-specific functions like `ref` to remain auto-imported but wish to disable auto-imports for your own code (e.g., custom composables), you can set the `imports.scan` option to `false` in your `nuxt.config.ts` file:
+
 ```ts filename="nuxt.config.ts"
 export default defineNuxtConfig({
   imports: {
