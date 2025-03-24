@@ -43,6 +43,8 @@ const terminalPaneProps = computed(() => {
   }
 })
 
+const route = useRoute()
+
 // For panes size initialization on SSR
 const isMounted = useMounted()
 const panelInitDocs = computed(() => isMounted.value || {
@@ -73,7 +75,7 @@ const panelInitTerminal = computed(() => isMounted.value || {
       :size="ui.panelDocs" min-size="10"
       :style="panelInitDocs"
     >
-      <PanelDocs />
+      <PanelDocs :key="route.path" />
     </Pane>
     <PaneSplitter />
     <Pane

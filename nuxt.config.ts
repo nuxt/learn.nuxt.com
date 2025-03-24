@@ -1,16 +1,16 @@
 import { execaSync } from 'execa'
+import rehypeExternalLinks from 'rehype-external-links'
 
 export default defineNuxtConfig({
   modules: [
     '@vueuse/nuxt',
     '@unocss/nuxt',
+    '@nuxtjs/seo',
     '@nuxt/content',
     '@nuxt/image',
     '@nuxtjs/color-mode',
     '@pinia/nuxt',
     'floating-vue/nuxt',
-    '@nuxtjs/seo',
-    // '@nuxt/icon',
     '@nuxt/eslint',
 
     // local
@@ -32,26 +32,25 @@ export default defineNuxtConfig({
     },
   },
   site: {
-    url: 'https://learn-dev.nuxt.com',
+    url: 'https://learn.nuxt.com',
   },
   colorMode: {
     classSuffix: '',
   },
+
   content: {
-    documentDriven: true,
-    highlight: {
-      theme: {
-        default: 'vitesse-light',
-        dark: 'vitesse-dark',
+    build: {
+      markdown: {
+        rehypePlugins: {
+          'rehype-external-links': {},
+        },
+        highlight: {
+          theme: {
+            default: 'vitesse-light',
+            dark: 'vitesse-dark',
+          },
+        },
       },
-    },
-    markdown: {
-      rehypePlugins: [
-        'rehype-external-links',
-      ],
-    },
-    experimental: {
-      search: {},
     },
   },
 
