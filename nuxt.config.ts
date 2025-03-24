@@ -1,5 +1,4 @@
 import { execaSync } from 'execa'
-import rehypeExternalLinks from 'rehype-external-links'
 
 export default defineNuxtConfig({
   modules: [
