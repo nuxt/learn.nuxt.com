@@ -9,9 +9,9 @@ Layouts are implemented in the `~/layouts` directory and applied using `NuxtLayo
 Each page can specify a layout by using `definePageMeta`.
 
 ```
--| layouts/
-  ---| default.vue
-  ---| custom.vue
+├── layouts/
+│   ├── default.ts
+│   └── custom.ts
 ```
 
 ```vue
