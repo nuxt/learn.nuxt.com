@@ -10,7 +10,9 @@ const { data: navigation } = useAsyncData(`navigation`, () => {
   return queryCollectionNavigation('tutorials')
 })
 const { data: surroundings } = useAsyncData(`${route.path}-surroundings`, () => {
-  return queryCollectionItemSurroundings('tutorials', route.path)
+  return queryCollectionItemSurroundings('tutorials', route.path, {
+    fields: ['title', 'description'],
+  })
 })
 
 const prev = computed(() => surroundings.value?.[0])
@@ -106,7 +108,7 @@ router.beforeEach(() => {
               v-if="prev"
               :to="prev.path"
               :title="prev.title"
-              :description="prev.description"
+              :description="prev.description as string"
               subheader="Previous section"
               icon="i-ph-arrow-left"
             />
@@ -116,7 +118,7 @@ router.beforeEach(() => {
               v-if="next"
               :to="next.path"
               :title="next.title"
-              :description="next.description"
+              :description="next.description as string"
               subheader="Next section"
               icon="i-ph-arrow-right"
               items-end text-right
