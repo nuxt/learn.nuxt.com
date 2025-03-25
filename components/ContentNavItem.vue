@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { NavItem } from '@nuxt/content'
+import type { ContentNavigationItem } from '@nuxt/content'
 
 const props = withDefaults(
   defineProps<{
-    item: NavItem
+    item: ContentNavigationItem
     level?: number
   }>(),
   {
@@ -11,6 +11,7 @@ const props = withDefaults(
   },
 )
 
+const route = useRoute()
 const ui = useUiState()
 
 const resolved = computed(() => {
@@ -25,7 +26,7 @@ const paddingLeft = computed(() => `${0.5 + props.level * 0.8}rem`)
 <template>
   <div class="content-nav-item">
     <template v-if="resolved.children?.length">
-      <details :open="$route.path.includes(resolved._path)">
+      <details :open="route.path.includes(resolved.path)">
         <summary>
           <div
             flex="~ gap-1 items-center" cursor-pointer select-none px1 py0.5
@@ -41,18 +42,20 @@ const paddingLeft = computed(() => `${0.5 + props.level * 0.8}rem`)
         </summary>
         <div v-if="resolved.children?.length">
           <ContentNavItem
-            v-for="child in resolved.children"
-            :key="child.url" :item="child" :level="props.level + 1"
+            v-for="child of resolved.children"
+            :key="child.path"
+            :item="child"
+            :level="props.level + 1"
           />
         </div>
       </details>
     </template>
     <NuxtLink
       v-else
-      :to="resolved._path"
+      :to="resolved.path"
       px1 py0.5
       :style="{ paddingLeft }"
-      :class="{ 'text-primary bg-active': resolved._path === $route.path }"
+      :class="{ 'text-primary bg-active': resolved.path === route.path }"
       flex="~ gap-1 items-center"
       hover="text-primary bg-active "
       @click="ui.isContentDropdownShown = false"

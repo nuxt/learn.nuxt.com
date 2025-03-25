@@ -21,19 +21,24 @@ export const useCommandsStore = defineStore('commands', () => {
     threshold: 0.3,
   }))
 
+  const { data: sections } = useAsyncData('search-sections', () => {
+    return queryCollectionSearchSections('tutorials', {
+      ignoredTags: ['hidden'],
+    })
+  })
+
   const debouncedSearch = refDebounced(search, 100)
 
   watch(debouncedSearch, async (v) => {
     if (v) {
-      // TODO: send a PR to nuxt/content to default generic type
-      // TODO: move it out if it's reactive
-      const result = await searchContent(v, {})
-      guidesResult.value = result.value.map((i): Command => ({
-        id: i.id,
-        title: i.title || 'Untitled',
-        to: i.id,
-        icon: 'i-ph-file-duotone',
-      }))
+      guidesResult.value = sections.value
+        ?.filter(x => !x.id.includes('#'))
+        ?.map((i): Command => ({
+          id: i.id,
+          title: i.title || 'Untitled',
+          to: i.id,
+          icon: 'i-ph-file-duotone',
+        })) || []
     }
     else {
       guidesResult.value = []

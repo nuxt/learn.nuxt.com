@@ -1,39 +1,46 @@
 <script setup lang="ts">
-import type { NavItem, ParsedContent } from '@nuxt/content'
+import type { ContentNavigationItem } from '@nuxt/content'
 
 const runtime = useRuntimeConfig()
-const {
-  navigation,
-  page,
-  next,
-  prev,
-} = useContent() as {
-  navigation: Ref<NavItem[]>
-  page: Ref<ParsedContent>
-  next: Ref<ParsedContent | undefined>
-  prev: Ref<ParsedContent | undefined>
-}
+const route = useRoute()
+const { data: page } = useAsyncData(route.path, () => {
+  return queryCollection('tutorials').path(route.path).first()
+})
+const { data: navigation } = useAsyncData(`navigation`, () => {
+  return queryCollectionNavigation('tutorials')
+})
+const { data: surroundings } = useAsyncData(`${route.path}-surroundings`, () => {
+  return queryCollectionItemSurroundings('tutorials', route.path, {
+    fields: ['title', 'description'],
+  })
+})
+
+const prev = computed(() => surroundings.value?.[0])
+const next = computed(() => surroundings.value?.[1])
 
 interface BreadcrumbItem {
   title: string
   path?: string
 }
 
-function findNavItemFromPath(path: string, items = navigation.value): NavItem | undefined {
-  const item = items.find(i => i._path === path)
+function findNavItemFromPath(
+  path: string,
+  items: ContentNavigationItem[] | null = navigation.value,
+): ContentNavigationItem | undefined {
+  const item = items?.find(i => i.path === path)
   if (item)
     return item
 
   const parts = path.split('/').filter(Boolean)
   for (let i = parts.length - 1; i > 0; i--) {
     const parentPath = `/${parts.slice(0, i).join('/')}`
-    const parent = items.find(i => i._path === parentPath)
+    const parent = items?.find(i => i.path === parentPath)
     if (parent)
       return findNavItemFromPath(path, parent.children || [])
   }
 }
 
-const contentPath = computed(() => page.value?._path as string | undefined)
+const contentPath = computed(() => page.value?.path as string | undefined)
 const breadcrumbs = computed(() => {
   const parts = contentPath.value?.split('/').filter(Boolean) || []
   const breadcrumbs = parts
@@ -58,8 +65,8 @@ const breadcrumbs = computed(() => {
 const ui = useUiState()
 
 const sourceUrl = computed(() =>
-  page.value?._file
-    ? `${runtime.public.repoUrl}/edit/main/content/${page.value._file}`
+  page.value?.id
+    ? `${runtime.public.repoUrl}/edit/main/content/${page.value.id}`
     : undefined,
 )
 
@@ -94,14 +101,14 @@ router.beforeEach(() => {
     </div>
     <div relative h-full of-hidden>
       <article ref="docsEl" class="max-w-none prose" h-full of-auto p6>
-        <ContentDoc />
+        <ContentRenderer v-if="page" :key="page.id" :value="page" />
         <div mt8 py2 grid="~ cols-[1fr_1fr] gap-4">
           <div>
             <ContentNavCard
               v-if="prev"
-              :to="prev._path"
+              :to="prev.path"
               :title="prev.title"
-              :description="prev.description"
+              :description="prev.description as string"
               subheader="Previous section"
               icon="i-ph-arrow-left"
             />
@@ -109,9 +116,9 @@ router.beforeEach(() => {
           <div>
             <ContentNavCard
               v-if="next"
-              :to="next._path"
+              :to="next.path"
               :title="next.title"
-              :description="next.description"
+              :description="next.description as string"
               subheader="Next section"
               icon="i-ph-arrow-right"
               items-end text-right
@@ -140,7 +147,7 @@ router.beforeEach(() => {
           absolute left-0 right-0 top-0 max-h-60vh py2
           backdrop-blur-10 bg-base important-bg-opacity-80
         >
-          <ContentNavItem v-for="item of navigation" :key="item.url" :item="item" />
+          <ContentNavItem v-for="item of navigation" :key="item.path" :item="item" />
         </div>
       </Transition>
     </div>
