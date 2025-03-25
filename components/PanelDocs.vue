@@ -144,9 +144,8 @@ router.beforeEach(() => {
           v-if="ui.isContentDropdownShown"
           flex="~ col"
           border="b base"
-          absolute left-0 right-0 top-0 max-h-60vh py2
-          backdrop-blur-10 bg-base important-bg-opacity-80
-          overflow-y-auto
+
+          absolute left-0 right-0 top-0 max-h-60vh overflow-y-auto py2 backdrop-blur-10 bg-base important-bg-opacity-80
         >
           <ContentNavItem v-for="item of navigation" :key="item.path" :item="item" />
         </div>
