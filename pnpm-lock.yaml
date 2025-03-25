@@ -4,9 +4,155 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  '@nuxt/devtools': ^2.3.1
-  '@nuxt/devtools-ui-kit': ^2.3.1
+catalogs:
+  dev:
+    '@antfu/eslint-config':
+      specifier: ^4.11.0
+      version: 4.11.0
+    '@unocss/eslint-plugin':
+      specifier: ^65.5.0
+      version: 65.5.0
+    eslint:
+      specifier: ^9.23.0
+      version: 9.23.0
+    eslint-plugin-format:
+      specifier: ^1.0.1
+      version: 1.0.1
+    execa:
+      specifier: ^9.5.2
+      version: 9.5.2
+    fast-glob:
+      specifier: ^3.3.3
+      version: 3.3.3
+    rehype-external-links:
+      specifier: ^3.0.0
+      version: 3.0.0
+    typescript:
+      specifier: ^5.8.2
+      version: 5.8.2
+    vue-tsc:
+      specifier: ^2.2.8
+      version: 2.2.8
+  frontend:
+    '@shikijs/core':
+      specifier: ^3.2.1
+      version: 3.2.1
+    '@shikijs/monaco':
+      specifier: ^3.2.1
+      version: 3.2.1
+    '@volar/monaco':
+      specifier: ~2.4.12
+      version: 2.4.12
+    '@vue/language-service':
+      specifier: ^2.2.8
+      version: 2.2.8
+    '@webcontainer/api':
+      specifier: ^1.5.2
+      version: 1.5.2
+    '@xterm/addon-fit':
+      specifier: ^0.10.0
+      version: 0.10.0
+    '@xterm/xterm':
+      specifier: ^5.5.0
+      version: 5.5.0
+    birpc:
+      specifier: ^2.3.0
+      version: 2.3.0
+    floating-vue:
+      specifier: ^5.2.2
+      version: 5.2.2
+    fuse.js:
+      specifier: ^7.1.0
+      version: 7.1.0
+    jszip:
+      specifier: ^3.10.1
+      version: 3.10.1
+    monaco-editor:
+      specifier: ^0.50.0
+      version: 0.50.0
+    monaco-editor-core:
+      specifier: ^0.50.0
+      version: 0.50.0
+    pathe:
+      specifier: ^2.0.3
+      version: 2.0.3
+    shiki:
+      specifier: ^3.2.1
+      version: 3.2.1
+    splitpanes:
+      specifier: 3.1.5
+      version: 3.1.5
+    strip-json-comments:
+      specifier: ^5.0.1
+      version: 5.0.1
+    theme-vitesse:
+      specifier: ^0.8.3
+      version: 0.8.3
+    vscode-uri:
+      specifier: ^3.1.0
+      version: 3.1.0
+    vue:
+      specifier: ^3.5.13
+      version: 3.5.13
+    vue-router:
+      specifier: ^4.5.0
+      version: 4.5.0
+  icons:
+    '@iconify-json/catppuccin':
+      specifier: ^1.2.10
+      version: 1.2.10
+    '@iconify-json/logos':
+      specifier: ^1.2.4
+      version: 1.2.4
+    '@iconify-json/ph':
+      specifier: ^1.2.2
+      version: 1.2.2
+    '@iconify-json/svg-spinners':
+      specifier: ^1.2.2
+      version: 1.2.2
+  nuxt:
+    '@nuxt/content':
+      specifier: ^3.4.0
+      version: 3.4.0
+    '@nuxt/devtools':
+      specifier: ^2.3.1
+      version: 2.3.1
+    '@nuxt/eslint':
+      specifier: ^1.2.0
+      version: 1.2.0
+    '@nuxt/icon':
+      specifier: ^1.11.0
+      version: 1.11.0
+    '@nuxt/image':
+      specifier: ^1.10.0
+      version: 1.10.0
+    '@nuxt/kit':
+      specifier: ^3.16.1
+      version: 3.16.1
+    '@nuxtjs/color-mode':
+      specifier: ^3.5.2
+      version: 3.5.2
+    '@nuxtjs/seo':
+      specifier: ^3.0.1
+      version: 3.0.1
+    '@pinia/nuxt':
+      specifier: ^0.10.1
+      version: 0.10.1
+    '@unocss/extractor-mdc':
+      specifier: ^65.5.0
+      version: 65.5.0
+    '@unocss/nuxt':
+      specifier: ^65.5.0
+      version: 65.5.0
+    '@vueuse/nuxt':
+      specifier: ^13.0.0
+      version: 13.0.0
+    nuxi:
+      specifier: ^3.23.1
+      version: 3.23.1
+    nuxt:
+      specifier: ^3.16.1
+      version: 3.16.1
 
 patchedDependencies:
   splitpanes@3.1.5:
@@ -18,155 +164,149 @@ importers:
   .:
     dependencies:
       '@shikijs/core':
-        specifier: ^3.2.1
+        specifier: catalog:frontend
         version: 3.2.1
       '@shikijs/monaco':
-        specifier: ^3.2.1
+        specifier: catalog:frontend
         version: 3.2.1
       '@volar/monaco':
-        specifier: ~2.4.12
+        specifier: catalog:frontend
         version: 2.4.12
       '@vue/language-service':
-        specifier: ^2.2.8
+        specifier: catalog:frontend
         version: 2.2.8(typescript@5.8.2)
       '@webcontainer/api':
-        specifier: ^1.5.1
-        version: 1.5.1
+        specifier: catalog:frontend
+        version: 1.5.2
       '@xterm/addon-fit':
-        specifier: ^0.10.0
+        specifier: catalog:frontend
         version: 0.10.0(@xterm/xterm@5.5.0)
       '@xterm/xterm':
-        specifier: ^5.5.0
+        specifier: catalog:frontend
         version: 5.5.0
       birpc:
-        specifier: ^2.2.0
-        version: 2.2.0
+        specifier: catalog:frontend
+        version: 2.3.0
       floating-vue:
-        specifier: ^5.2.2
+        specifier: catalog:frontend
         version: 5.2.2(@nuxt/kit@3.16.1(magicast@0.3.5))(vue@3.5.13(typescript@5.8.2))
+      fuse.js:
+        specifier: catalog:frontend
+        version: 7.1.0
       jszip:
-        specifier: ^3.10.1
+        specifier: catalog:frontend
         version: 3.10.1
       monaco-editor:
-        specifier: ^0.50.0
+        specifier: catalog:frontend
         version: 0.50.0
+      monaco-editor-core:
+        specifier: catalog:frontend
+        version: 0.50.0
+      pathe:
+        specifier: catalog:frontend
+        version: 2.0.3
       shiki:
-        specifier: ^3.2.1
+        specifier: catalog:frontend
         version: 3.2.1
       splitpanes:
-        specifier: 3.1.5
+        specifier: catalog:frontend
         version: 3.1.5(patch_hash=4487ed8f4571dc58f2bbdd3d581c7b1c32e44a765bce8c39c432fa77d571c026)
       strip-json-comments:
-        specifier: ^5.0.1
+        specifier: catalog:frontend
         version: 5.0.1
       theme-vitesse:
-        specifier: ^0.8.3
+        specifier: catalog:frontend
         version: 0.8.3
-      unified:
-        specifier: ^11.0.5
-        version: 11.0.5
       vscode-uri:
-        specifier: ^3.1.0
+        specifier: catalog:frontend
         version: 3.1.0
       vue:
-        specifier: ^3.5.13
+        specifier: catalog:frontend
         version: 3.5.13(typescript@5.8.2)
       vue-router:
-        specifier: ^4.5.0
+        specifier: catalog:frontend
         version: 4.5.0(vue@3.5.13(typescript@5.8.2))
     devDependencies:
       '@antfu/eslint-config':
-        specifier: ^4.11.0
+        specifier: catalog:dev
         version: 4.11.0(@typescript-eslint/utils@8.27.0(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2))(@unocss/eslint-plugin@65.5.0(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2))(@vue/compiler-sfc@3.5.13)(eslint-plugin-format@1.0.1(eslint@9.23.0(jiti@2.4.2)))(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2)
       '@iconify-json/catppuccin':
-        specifier: ^1.2.10
+        specifier: catalog:icons
         version: 1.2.10
       '@iconify-json/logos':
-        specifier: ^1.2.4
+        specifier: catalog:icons
         version: 1.2.4
       '@iconify-json/ph':
-        specifier: ^1.2.2
+        specifier: catalog:icons
         version: 1.2.2
       '@iconify-json/svg-spinners':
-        specifier: ^1.2.2
+        specifier: catalog:icons
         version: 1.2.2
       '@nuxt/content':
-        specifier: ^3.4.0
+        specifier: catalog:nuxt
         version: 3.4.0(magicast@0.3.5)(typescript@5.8.2)
       '@nuxt/devtools':
-        specifier: ^2.3.1
+        specifier: catalog:nuxt
         version: 2.3.1(vite@6.2.2(@types/node@22.13.11)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.8.2))
       '@nuxt/eslint':
-        specifier: ^1.2.0
+        specifier: catalog:nuxt
         version: 1.2.0(@vue/compiler-sfc@3.5.13)(eslint-plugin-format@1.0.1(eslint@9.23.0(jiti@2.4.2)))(eslint@9.23.0(jiti@2.4.2))(magicast@0.3.5)(typescript@5.8.2)(vite@6.2.2(@types/node@22.13.11)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))
       '@nuxt/icon':
-        specifier: ^1.11.0
+        specifier: catalog:nuxt
         version: 1.11.0(magicast@0.3.5)(vite@6.2.2(@types/node@22.13.11)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.8.2))
       '@nuxt/image':
-        specifier: ^1.10.0
+        specifier: catalog:nuxt
         version: 1.10.0(db0@0.3.1(better-sqlite3@11.9.1))(ioredis@5.6.0)(magicast@0.3.5)
       '@nuxt/kit':
-        specifier: ^3.16.1
+        specifier: catalog:nuxt
         version: 3.16.1(magicast@0.3.5)
       '@nuxtjs/color-mode':
-        specifier: ^3.5.2
+        specifier: catalog:nuxt
         version: 3.5.2(magicast@0.3.5)
       '@nuxtjs/seo':
-        specifier: ^3.0.1
+        specifier: catalog:nuxt
         version: 3.0.1(@unhead/vue@2.0.0(vue@3.5.13(typescript@5.8.2)))(h3@1.15.1)(magicast@0.3.5)(rollup@4.37.0)(unstorage@1.15.0(db0@0.3.1(better-sqlite3@11.9.1))(ioredis@5.6.0))(vite@6.2.2(@types/node@22.13.11)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.8.2))
       '@pinia/nuxt':
-        specifier: ^0.10.1
+        specifier: catalog:nuxt
         version: 0.10.1(magicast@0.3.5)(pinia@3.0.1(typescript@5.8.2)(vue@3.5.13(typescript@5.8.2)))
       '@unocss/eslint-plugin':
-        specifier: ^65.5.0
+        specifier: catalog:dev
         version: 65.5.0(eslint@9.23.0(jiti@2.4.2))(typescript@5.8.2)
       '@unocss/extractor-mdc':
-        specifier: ^65.5.0
+        specifier: catalog:nuxt
         version: 65.5.0
       '@unocss/nuxt':
-        specifier: ^65.5.0
+        specifier: catalog:nuxt
         version: 65.5.0(magicast@0.3.5)(postcss@8.5.3)(vite@6.2.2(@types/node@22.13.11)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.8.2))(webpack@5.98.0(esbuild@0.25.1))
       '@vueuse/nuxt':
-        specifier: ^13.0.0
+        specifier: catalog:nuxt
         version: 13.0.0(magicast@0.3.5)(nuxt@3.16.1(@parcel/watcher@2.5.1)(@types/node@22.13.11)(better-sqlite3@11.9.1)(db0@0.3.1(better-sqlite3@11.9.1))(eslint@9.23.0(jiti@2.4.2))(ioredis@5.6.0)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2)(vite@6.2.2(@types/node@22.13.11)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))(vue-tsc@2.2.8(typescript@5.8.2))(yaml@2.7.0))(vue@3.5.13(typescript@5.8.2))
       eslint:
-        specifier: ^9.23.0
+        specifier: catalog:dev
         version: 9.23.0(jiti@2.4.2)
       eslint-plugin-format:
-        specifier: ^1.0.1
+        specifier: catalog:dev
         version: 1.0.1(eslint@9.23.0(jiti@2.4.2))
       execa:
-        specifier: ^9.5.2
+        specifier: catalog:dev
         version: 9.5.2
       fast-glob:
-        specifier: ^3.3.3
+        specifier: catalog:dev
         version: 3.3.3
-      fuse.js:
-        specifier: ^7.1.0
-        version: 7.1.0
-      monaco-editor-core:
-        specifier: ^0.50.0
-        version: 0.50.0
       nuxi:
-        specifier: ^3.23.1
+        specifier: catalog:nuxt
         version: 3.23.1
       nuxt:
-        specifier: ^3.16.1
+        specifier: catalog:nuxt
         version: 3.16.1(@parcel/watcher@2.5.1)(@types/node@22.13.11)(better-sqlite3@11.9.1)(db0@0.3.1(better-sqlite3@11.9.1))(eslint@9.23.0(jiti@2.4.2))(ioredis@5.6.0)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.37.0)(terser@5.39.0)(typescript@5.8.2)(vite@6.2.2(@types/node@22.13.11)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))(vue-tsc@2.2.8(typescript@5.8.2))(yaml@2.7.0)
-      pathe:
-        specifier: ^2.0.3
-        version: 2.0.3
       rehype-external-links:
-        specifier: ^3.0.0
+        specifier: catalog:dev
         version: 3.0.0
-      remark-external-links:
-        specifier: ^10.0.0
-        version: 10.0.0
       typescript:
-        specifier: ^5.8.2
+        specifier: catalog:dev
         version: 5.8.2
       vue-tsc:
-        specifier: ^2.2.8
+        specifier: catalog:dev
         version: 2.2.8(typescript@5.8.2)
 
 packages:
@@ -1868,8 +2008,8 @@ packages:
   '@webassemblyjs/wast-printer@1.14.1':
     resolution: {integrity: sha512-kPSSXE6De1XOR820C90RIo2ogvZG+c3KiHzqUoO/F34Y2shGzesfqv7o57xrxovZJH/MetF5UjroJ/R/3isoiw==}
 
-  '@webcontainer/api@1.5.1':
-    resolution: {integrity: sha512-+ELk+TbTOUx0LawAUdB+nnxaofg/FxUXo/Ac/+CzHSP3SOc3ebBAW3fLo4UZfvJdUW+ygWZOiQMthPLQXvKZEg==}
+  '@webcontainer/api@1.5.2':
+    resolution: {integrity: sha512-zHS7nVOURmqv4WzjjheifFaOn3E+D9ALj+uvC8sv2Y/BSwaMpaWOxHnz8lFGDDGFgGLb7IfycurRCYDkBkB5yg==}
 
   '@webcontainer/env@1.1.1':
     resolution: {integrity: sha512-6aN99yL695Hi9SuIk1oC88l9o0gmxL1nGWWQ/kNy81HigJ0FoaoTXpytCj6ItzgyCEwA9kF1wixsTuv5cjsgng==}
@@ -2060,8 +2200,8 @@ packages:
   birpc@0.2.19:
     resolution: {integrity: sha512-5WeXXAvTmitV1RqJFppT5QtUiz2p1mRSYU000Jkft5ZUCLJIk4uQriYNO50HknxKwM6jd8utNc66K1qGIwwWBQ==}
 
-  birpc@2.2.0:
-    resolution: {integrity: sha512-1/22obknhoj56PcE+pZPp6AbWDdY55M81/ofpPW3Ltlp9Eh4zoFFLswvZmNpRTb790CY5tsNfgbYeNOqIARJfQ==}
+  birpc@2.3.0:
+    resolution: {integrity: sha512-ijbtkn/F3Pvzb6jHypHRyve2QApOCZDR25D/VnkY2G/lBNcXCTsnsCxgY4k4PkVB7zfwzYbY3O9Lcqe3xufS5g==}
 
   bl@4.1.0:
     resolution: {integrity: sha512-1W07cM9gS6DcLperZfFSj+bWLtaPGSOHWhPiGzXmvVJbRLdG82sH/Kn8EtW1VqWVA54AKf2h5k5BbnIbwF3h6w==}
@@ -4598,10 +4738,6 @@ packages:
     resolution: {integrity: sha512-QCqTSvcZ65Ym+P+VyBKd4JfJfh7icMl7cIOGVmPMzWkDtdD8pQ0nQG7yxGolVIiMzSx90EZ7SwNiVpYpfTxn7w==}
     engines: {node: '>=18'}
 
-  remark-external-links@10.0.0:
-    resolution: {integrity: sha512-i0WMfyR6RT3F6Sunu8Q5mpZvHd9YLLiSio8v2+2E/9KhJ/4g/nCg2rGo5e6vpRFIwwZKGInM9kgVYUoNrCa56g==}
-    deprecated: 'Deprecated: use `rehype-external-links`'
-
   remark-gfm@4.0.1:
     resolution: {integrity: sha512-1quofZ2RQ9EWdeN34S79+KExV1764+wCUGop5CPL1WGdD0ocPpu91lzPGbwWMECpEpd42kJGQwzRfyov9j4yNg==}
 
@@ -6460,7 +6596,7 @@ snapshots:
       '@nuxt/kit': 3.16.1(magicast@0.3.5)
       '@vue/devtools-core': 7.7.2(vite@6.2.2(@types/node@22.13.11)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.8.2))
       '@vue/devtools-kit': 7.7.2
-      birpc: 2.2.0
+      birpc: 2.3.0
       consola: 3.4.2
       destr: 2.0.3
       error-stack-parser-es: 1.0.5
@@ -8011,7 +8147,7 @@ snapshots:
       '@webassemblyjs/ast': 1.14.1
       '@xtuc/long': 4.2.2
 
-  '@webcontainer/api@1.5.1': {}
+  '@webcontainer/api@1.5.2': {}
 
   '@webcontainer/env@1.1.1': {}
 
@@ -8187,7 +8323,7 @@ snapshots:
 
   birpc@0.2.19: {}
 
-  birpc@2.2.0: {}
+  birpc@2.3.0: {}
 
   bl@4.1.0:
     dependencies:
@@ -11376,8 +11512,6 @@ snapshots:
       node-emoji: 2.2.0
       unified: 11.0.5
 
-  remark-external-links@10.0.0: {}
-
   remark-gfm@4.0.1:
     dependencies:
       '@types/mdast': 4.0.4
@@ -12216,7 +12350,7 @@ snapshots:
 
   vite-dev-rpc@1.0.7(vite@6.2.2(@types/node@22.13.11)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0)):
     dependencies:
-      birpc: 2.2.0
+      birpc: 2.3.0
       vite: 6.2.2(@types/node@22.13.11)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0)
       vite-hot-client: 2.0.4(vite@6.2.2(@types/node@22.13.11)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0))
 
