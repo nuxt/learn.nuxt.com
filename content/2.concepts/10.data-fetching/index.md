@@ -46,10 +46,10 @@ https://nuxt.com/docs/api/utils/dollarfetch
 
 ## Challenge
 
-1. Check that the API works  
+1. Check that the API works
    Add a fourth Todo item to `server/api/todos/index.ts`, then click the refresh button to verify that the data updates.
 
-2. Check type inference  
+2. Check type inference
    Add a `completed` property to the Todo in `server/api/todos/index.ts`, and confirm that the `useFetch` type updates accordingly.
 
 :ButtonShowSolution{.bg-faded.px4.py2.mb3.rounded.border.border-base.hover:bg-active.hover:text-primary.hover:border-primary:50}
