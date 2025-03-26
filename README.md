@@ -5,19 +5,20 @@
 
 An interactive tutorial and playground for learning Nuxt. Powered by [Nuxt](https://nuxt.com/docs) and [WebContainers](https://webcontainers.io/).
 
-Inspired by [learn.svelte.dev](https://learn.svelte.dev).
+[📖 learn.nuxt.com](https://learn.nuxt.com).
 
-`learn.nuxt.com` is not yet deployed, but you can preview the latest branch at [learn-dev.nuxt.com](https://learn-dev.nuxt.com).
+> Inspired by [learn.svelte.dev](https://learn.svelte.dev).
 
-## Live Streaming
+## Project Development Process
 
-Anthony Fu built this project from scratch on Live Streaming. You can watch the recordings of the full process on [YouTube](https://www.youtube.com/playlist?list=PL4ETc_mXFfxUGiY852jH3ctljnI2e9Rax).
+Anthony Fu is building this project from scratch on Live Streaming.
+You can watch the recordings of the full process on [YouTube](https://www.youtube.com/playlist?list=PL4ETc_mXFfxUGiY852jH3ctljnI2e9Rax).
 
 ## Contributing
 
 ### Development
 
-To run this project locally, you need to have [Node.js v20.0+](https://nodejs.org/en/) and [pnpm](https://pnpm.io/) installed.
+To run this project locally, you need to have [Node.js v22.0+](https://nodejs.org/en/) and [pnpm](https://pnpm.io/) installed.
 
 After cloning the repo, run the following commands to install dependencies:
 

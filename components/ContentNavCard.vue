@@ -4,7 +4,7 @@ defineProps<{
   icon?: string
   title?: string
   subheader: string
-  description: string
+  description?: string
 }>()
 </script>
 
@@ -19,7 +19,7 @@ defineProps<{
     <div class="my-0 text-lg font-semibold">
       {{ title }}
     </div>
-    <div class="line-clamp line-clamp-2 mb-0 mt-1 text-[14px] op50">
+    <div v-if="description" class="line-clamp line-clamp-2 mb-0 mt-1 text-[14px] op50">
       {{ description }}
       <slot />
     </div>
