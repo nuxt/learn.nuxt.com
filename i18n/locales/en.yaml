@@ -1,0 +1,16 @@
+guide: Guide
+edit-this-page: Edit this page
+terminal:
+  name: Terminal
+  restart: Restart terminal
+  hide: Hide terminal
+  toggle: Toggle terminal
+download-zip: Download playground as ZIP
+work-in-progress: Work in Progress
+search: Search
+color-mode:
+  to-dark: Switch to dark mode
+  to-light: Switch to light mode
+coming-soon: Coming Soon
+reset-challenge: Reset challenge
+show-solution: Show solution

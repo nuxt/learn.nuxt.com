@@ -26,7 +26,7 @@ const i18n = useI18n()
 addCommands(
   {
     id: 'download-zip',
-    title: 'Download playground as ZIP',
+    title: $t('download-zip'),
     visible: () => {
       return play.status === 'ready' && guide.features.download !== false
     },
@@ -37,7 +37,7 @@ addCommands(
   },
   {
     id: 'toggle-terminal',
-    title: 'Toggle terminal',
+    title: $t('terminal.toggle'),
     handler: () => {
       ui.toggleTerminal()
     },
@@ -58,7 +58,7 @@ addCommands(
       target="_blank"
     >
       <div block translate-y--2 rounded bg-orange:10 px2 py1 text-xs text-orange>
-        Work in Progress
+        {{ $t('work-in-progress') }}
       </div>
     </NuxtLink>
 
@@ -92,7 +92,7 @@ addCommands(
       <button
         rounded p2
         hover="bg-active"
-        title="Search"
+        :title="$t('search')"
         @click="commands.isShown = true"
       >
         <div i-ph-magnifying-glass-duotone text-2xl />
@@ -101,7 +101,7 @@ addCommands(
         v-if="play.status === 'ready' && !!guide.features.download"
         rounded p2
         hover="bg-active"
-        title="Download as ZIP"
+        :title="$t('download-zip')"
         @click="downloadCurrentGuide()"
       >
         <div i-ph-download-duotone text-2xl />
@@ -127,7 +127,7 @@ addCommands(
       </VDropdown>
       <button
         rounded p2
-        title="Toggle terminal"
+        :title="$t('terminal.toggle')"
         hover="bg-active"
         :class="ui.showTerminal ? '' : 'op50'"
         @click="ui.toggleTerminal()"

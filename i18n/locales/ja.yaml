@@ -1,0 +1,16 @@
+guide: ガイド
+edit-this-page: このページを編集
+terminal:
+  name: ターミナル
+  restart: ターミナルを再起動
+  hide: ターミナルを非表示
+  toggle: ターミナルを切り替える
+download-zip: プレイグラウンドをZIPとしてダウンロード
+work-in-progress: 作業中
+search: 検索
+color-mode:
+  to-dark: ダークモードに切り替える
+  to-light: ライトモードに切り替える
+coming-soon: 作業中
+reset-challenge: 挑戦をリセット
+show-solution: 解答を表示

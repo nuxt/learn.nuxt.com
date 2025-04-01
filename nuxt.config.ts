@@ -133,18 +133,24 @@ export default defineNuxtConfig({
       {
         name: 'English',
         code: 'en',
+        file: 'en.yaml',
       },
       {
         name: '日本語',
         code: 'ja',
+        file: 'ja.yaml',
       },
     ],
+    lazy: true,
     strategy: 'prefix',
     defaultLocale: 'en',
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_redirected',
       redirectOn: 'root',
+    },
+    experimental: {
+      autoImportTranslationFunctions: true,
     },
   },
 

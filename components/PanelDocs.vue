@@ -55,7 +55,7 @@ const breadcrumbs = computed(() => {
 
   if (!breadcrumbs.find(i => i.path === '/')) {
     breadcrumbs.unshift({
-      title: 'Guide',
+      title: $t('guide'),
       path: '/',
     })
   }
@@ -134,7 +134,7 @@ router.beforeEach(() => {
             hover="text-primary op100"
           >
             <div i-ph-note-pencil-duotone />
-            Edit this page
+            {{ $t('edit-this-page') }}
           </NuxtLink>
         </div>
       </article>
