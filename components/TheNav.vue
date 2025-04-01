@@ -21,6 +21,8 @@ function downloadCurrentGuide() {
   downloadZip(play.webcontainer, guide.ignoredFiles)
 }
 
+const i18n = useI18n()
+
 addCommands(
   {
     id: 'download-zip',
@@ -65,6 +67,28 @@ addCommands(
       flex="~ gap-1 items-center"
       :class="guide.embeddedDocs ? 'z-embedded-docs-raised' : ''"
     >
+      <VDropdown :distance="6">
+        <button
+          rounded p2
+          hover="bg-active"
+          title="Languages"
+        >
+          <div i-ph-translate-duotone text-2xl />
+        </button>
+        <template #popper>
+          <div flex="~ col gap-y-1" p2>
+            <button
+              v-for="locale of i18n.locales.value" :key="locale.code"
+              rounded px2 py1
+              hover="bg-active"
+              :class="locale.code === i18n.locale.value ? 'text-primary' : ''"
+              @click="i18n.setLocale(locale.code)"
+            >
+              {{ locale.name }}
+            </button>
+          </div>
+        </template>
+      </VDropdown>
       <button
         rounded p2
         hover="bg-active"

@@ -54,8 +54,24 @@ catalogs:
     '@vueuse/nuxt': ^13.0.0
     nuxi: ^3.23.1
     nuxt: ^3.16.1
+  conflicts_nuxt_:
+    '@nuxt/content': ''
+  conflicts_nuxt_h:
+    '@nuxt/content': ^
+  conflicts_nuxt_h3:
+    '@nuxt/content': ^3
+  conflicts_nuxt_h3_:
+    '@nuxt/content': ^3.
+  conflicts_nuxt_h3_0:
+    '@nuxt/content': ^3.0
+  conflicts_nuxt_h3_0_:
+    '@nuxt/content': ^3.0.
+  conflicts_nuxt_h3_0_0:
+    '@nuxt/content': ^3.0.0
 onlyBuiltDependencies:
   - '@parcel/watcher'
   - better-sqlite3
   - esbuild
   - sharp
+catalog:
+  '@nuxtjs/i18n': 9.4.0
