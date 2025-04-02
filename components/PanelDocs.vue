@@ -21,6 +21,15 @@ const { data: surroundings } = useAsyncData(`${locale.value}-${route.path}-surro
   })
 })
 
+useHead({
+  title: page.value?.title,
+})
+
+useSeoMeta({
+  title: page.value?.title,
+  description: page.value?.description,
+})
+
 const prev = computed(() => surroundings.value?.[0])
 const next = computed(() => surroundings.value?.[1])
 
@@ -86,9 +95,9 @@ router.beforeEach(() => {
 </script>
 
 <template>
-  <div grid="~ rows-[min-content_1fr]" relative h-full>
-    <div flex="~ gap-2 items-center" border="b base dashed" bg-faded px4 py2>
-      <div i-ph-book-duotone />
+  <div grid="~ rows-[max-content_1fr]" relative h-full>
+    <div flex="~ gap-x-2 items-center wrap" border="b base dashed" bg-faded px4 py2>
+      <div i-ph-book-duotone flex-none />
       <template v-for="bc, idx of breadcrumbs" :key="bc.path">
         <div v-if="idx !== 0" i-ph-caret-right mx--1 text-sm op50 />
         <NuxtLink :to="bc.path" text-sm hover="text-primary">
