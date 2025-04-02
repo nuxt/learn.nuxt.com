@@ -26,7 +26,7 @@ const i18n = useI18n()
 addCommands(
   {
     id: 'download-zip',
-    title: $t('download-zip'),
+    title: () => $t('download-zip'),
     visible: () => {
       return play.status === 'ready' && guide.features.download !== false
     },
@@ -37,11 +37,33 @@ addCommands(
   },
   {
     id: 'toggle-terminal',
-    title: $t('terminal.toggle'),
+    title: () => $t('terminal.toggle'),
     handler: () => {
       ui.toggleTerminal()
     },
     icon: 'i-ph-terminal-window-duotone',
+  },
+  {
+    id: 'language-en',
+    title: 'Change to English',
+    handler: () => {
+      i18n.setLocale('en')
+    },
+    icon: 'i-ph-globe-duotone',
+    visible: () => {
+      return i18n.locale.value !== 'en'
+    },
+  },
+  {
+    id: 'language-ja',
+    title: '日本語に切り替える',
+    handler: () => {
+      i18n.setLocale('ja')
+    },
+    icon: 'i-ph-globe-duotone',
+    visible: () => {
+      return i18n.locale.value !== 'ja'
+    },
   },
 )
 </script>

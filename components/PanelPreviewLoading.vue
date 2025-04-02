@@ -51,7 +51,7 @@ function getTextClass(status: PlaygroundStatus) {
     <template v-if="play.status === 'interactive'">
       <div flex="~ gap-2 items-center" text-lg>
         <div i-ph-terminal-window-duotone text-2xl />
-        Interactive terminal mode
+        {{ $t('interactive-terminal-mode') }}
       </div>
       <button
         title="Restart terminal"
@@ -61,20 +61,20 @@ function getTextClass(status: PlaygroundStatus) {
         @click="play.restartServer()"
       >
         <div i-ph-arrow-clockwise-duotone text-lg />
-        Restart the server
+        {{ $t('restart-server') }}
       </button>
     </template>
     <div v-else grid="~ cols-[max-content_1fr] gap-2 items-center justify-center">
       <div :class="getStatusIcon('init')" />
-      <span :class="getTextClass('init')">Initializing WebContainer</span>
+      <span :class="getTextClass('init')">{{ $t('steps.initializing-webcontainer') }}</span>
       <div :class="getStatusIcon('mount')" />
-      <span :class="getTextClass('mount')">Mounting files</span>
+      <span :class="getTextClass('mount')">{{ $t('steps.mounting-files') }}</span>
       <div :class="getStatusIcon('install')" />
-      <span :class="getTextClass('install')">Installing dependencies</span>
+      <span :class="getTextClass('install')">{{ $t('steps.installing-dependencies') }}</span>
       <div :class="getStatusIcon('start')" />
-      <span :class="getTextClass('start')">Starting Nuxt server</span>
+      <span :class="getTextClass('start')">{{ $t('steps.starting-nuxt-server') }}</span>
       <div :class="getStatusIcon('polling')" />
-      <span :class="getTextClass('polling')">Waiting for Nuxt to ready</span>
+      <span :class="getTextClass('polling')">{{ $t('steps.waiting-for-nuxt-to-ready') }}</span>
     </div>
   </div>
 </template>

@@ -5,7 +5,7 @@ terminal:
   restart: Restart terminal
   hide: Hide terminal
   toggle: Toggle terminal
-download-zip: Download playground as ZIP
+download-zip: Download playground as zip
 work-in-progress: Work in Progress
 search: Search
 color-mode:
@@ -14,3 +14,12 @@ color-mode:
 coming-soon: Coming Soon
 reset-challenge: Reset challenge
 show-solution: Show solution
+search-dots: Search...
+steps:
+  initializing-webcontainer: Initializing WebContainer
+  mounting-files: Mounting files
+  installing-dependencies: Installing dependencies
+  starting-nuxt-server: Starting Nuxt server
+  waiting-for-nuxt-to-ready: Waiting for Nuxt to ready
+restart-server: Restart the server
+interactive-terminal-mode: Interactive terminal mode

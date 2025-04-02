@@ -2,10 +2,17 @@ import { defineCollection, defineContentConfig } from '@nuxt/content'
 
 export default defineContentConfig({
   collections: {
-    tutorials: defineCollection({
+    en: defineCollection({
       type: 'page',
       source: {
-        include: '**',
+        include: 'en/**',
+        exclude: ['**/.template/**'],
+      },
+    }),
+    ja: defineCollection({
+      type: 'page',
+      source: {
+        include: 'ja/**',
         exclude: ['**/.template/**'],
       },
     }),

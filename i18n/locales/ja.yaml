@@ -14,3 +14,12 @@ color-mode:
 coming-soon: 作業中
 reset-challenge: 挑戦をリセット
 show-solution: 解答を表示
+search-dots: 検索...
+steps:
+  initializing-webcontainer: WebContainerを初期化中
+  mounting-files: ファイルをマウント中
+  installing-dependencies: 依存関係をインストール中
+  starting-nuxt-server: Nuxtサーバーを起動中
+  waiting-for-nuxt-to-ready: Nuxtが準備完了を待機中
+restart-server: サーバーを再起動
+interactive-terminal-mode: インタラクティブターミナルモード

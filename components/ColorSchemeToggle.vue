@@ -8,7 +8,7 @@ function toggleMode() {
 addCommands(
   {
     id: 'toggle-color-mode',
-    title: colorMode.value === 'light'
+    title: () => colorMode.value === 'light'
       ? $t('color-mode.to-dark')
       : $t('color-mode.to-light'),
     handler: toggleMode,
