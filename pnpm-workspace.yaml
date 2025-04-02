@@ -47,6 +47,7 @@ catalogs:
     '@nuxt/image': ^1.10.0
     '@nuxt/kit': ^3.16.1
     '@nuxtjs/color-mode': ^3.5.2
+    '@nuxtjs/i18n': ^9.4.0
     '@nuxtjs/seo': ^3.0.1
     '@pinia/nuxt': ^0.10.1
     '@unocss/extractor-mdc': ^65.5.0

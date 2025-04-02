@@ -10,6 +10,6 @@ const guide = useGuideStore()
   >
     <div v-if="!guide.showingSolution " i-ph-lightbulb-filament-duotone />
     <div v-else i-ph-arrow-counter-clockwise-duotone />
-    {{ guide.showingSolution ? 'Reset challenge' : 'Show solution' }}
+    {{ guide.showingSolution ? $t('reset-challenge') : $t('show-solution') }}
   </button>
 </template>

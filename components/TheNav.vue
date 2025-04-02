@@ -21,10 +21,12 @@ function downloadCurrentGuide() {
   downloadZip(play.webcontainer, guide.ignoredFiles)
 }
 
+const i18n = useI18n()
+
 addCommands(
   {
     id: 'download-zip',
-    title: 'Download playground as ZIP',
+    title: () => $t('download-zip'),
     visible: () => {
       return play.status === 'ready' && guide.features.download !== false
     },
@@ -35,11 +37,33 @@ addCommands(
   },
   {
     id: 'toggle-terminal',
-    title: 'Toggle terminal',
+    title: () => $t('terminal.toggle'),
     handler: () => {
       ui.toggleTerminal()
     },
     icon: 'i-ph-terminal-window-duotone',
+  },
+  {
+    id: 'language-en',
+    title: 'Change to English',
+    handler: () => {
+      i18n.setLocale('en')
+    },
+    icon: 'i-ph-globe-duotone',
+    visible: () => {
+      return i18n.locale.value !== 'en'
+    },
+  },
+  {
+    id: 'language-ja',
+    title: '日本語に切り替える',
+    handler: () => {
+      i18n.setLocale('ja')
+    },
+    icon: 'i-ph-globe-duotone',
+    visible: () => {
+      return i18n.locale.value !== 'ja'
+    },
   },
 )
 </script>
@@ -56,7 +80,7 @@ addCommands(
       target="_blank"
     >
       <div block translate-y--2 rounded bg-orange:10 px2 py1 text-xs text-orange>
-        Work in Progress
+        {{ $t('work-in-progress') }}
       </div>
     </NuxtLink>
 
@@ -65,10 +89,32 @@ addCommands(
       flex="~ gap-1 items-center"
       :class="guide.embeddedDocs ? 'z-embedded-docs-raised' : ''"
     >
+      <VDropdown :distance="6">
+        <button
+          rounded p2
+          hover="bg-active"
+          title="Languages"
+        >
+          <div i-ph-translate-duotone text-2xl />
+        </button>
+        <template #popper>
+          <div flex="~ col gap-y-1" p2>
+            <button
+              v-for="locale of i18n.locales.value" :key="locale.code"
+              rounded px2 py1
+              hover="bg-active"
+              :class="locale.code === i18n.locale.value ? 'text-primary' : ''"
+              @click="i18n.setLocale(locale.code)"
+            >
+              {{ locale.name }}
+            </button>
+          </div>
+        </template>
+      </VDropdown>
       <button
         rounded p2
         hover="bg-active"
-        title="Search"
+        :title="$t('search')"
         @click="commands.isShown = true"
       >
         <div i-ph-magnifying-glass-duotone text-2xl />
@@ -77,7 +123,7 @@ addCommands(
         v-if="play.status === 'ready' && !!guide.features.download"
         rounded p2
         hover="bg-active"
-        title="Download as ZIP"
+        :title="$t('download-zip')"
         @click="downloadCurrentGuide()"
       >
         <div i-ph-download-duotone text-2xl />
@@ -103,7 +149,7 @@ addCommands(
       </VDropdown>
       <button
         rounded p2
-        title="Toggle terminal"
+        :title="$t('terminal.toggle')"
         hover="bg-active"
         :class="ui.showTerminal ? '' : 'op50'"
         @click="ui.toggleTerminal()"

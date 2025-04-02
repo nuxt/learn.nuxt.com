@@ -32,6 +32,12 @@ function scrollIntoView(elOrComponent?: any) {
   })
 }
 
+function getTitle(command: Command) {
+  if (typeof command.title === 'function')
+    return command.title()
+  return command.title
+}
+
 // Reset selected when search changes
 watch(
   () => commands.search,
@@ -102,15 +108,15 @@ useEventListener('keydown', (e) => {
           ref="input"
           v-model="commands.search"
           h-full w-full rounded border-none p4 pl0 outline-none bg-base
-          placeholder="Search..."
+          :placeholder="$t('search-dots')"
         >
       </div>
 
       <div border="t base" flex="~ col" of-y-auto py2>
         <component
           :is="c.to ? NuxtLink : 'button'"
-          v-for="c, idx in commands.commandsResult"
-          :key="c.id || c.title"
+          v-for="c, idx of commands.commandsResult"
+          :key="c.id || getTitle(c)"
           :ref="(el: Element) => selected === idx && scrollIntoView(el)"
           :to="c.to" flex="~ gap-2 items-center" mx1 rounded p2
           px3
@@ -118,7 +124,7 @@ useEventListener('keydown', (e) => {
           @click="runCommand(c)"
         >
           <div :class="c.icon || 'i-ph-dot-duotone'" />
-          {{ c.title }}
+          {{ getTitle(c) }}
         </component>
       </div>
     </div>

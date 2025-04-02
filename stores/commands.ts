@@ -2,7 +2,7 @@ import Fuse from 'fuse.js'
 
 export interface Command {
   id?: string
-  title: string
+  title: string | (() => string)
   to?: string
   description?: string
   visible?: () => boolean
@@ -21,8 +21,11 @@ export const useCommandsStore = defineStore('commands', () => {
     threshold: 0.3,
   }))
 
+  const { locale } = useI18n()
+  const collection = computed(() => locale.value === 'ja' ? 'ja' : 'en')
+
   const { data: sections } = useAsyncData('search-sections', () => {
-    return queryCollectionSearchSections('tutorials', {
+    return queryCollectionSearchSections(collection.value, {
       ignoredTags: ['hidden'],
     })
   })

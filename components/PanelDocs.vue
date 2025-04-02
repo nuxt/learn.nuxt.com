@@ -3,14 +3,20 @@ import type { ContentNavigationItem } from '@nuxt/content'
 
 const runtime = useRuntimeConfig()
 const route = useRoute()
-const { data: page } = useAsyncData(route.path, () => {
-  return queryCollection('tutorials').path(route.path).first()
+const { locale } = useI18n()
+
+const collection = computed(() => locale.value === 'ja' ? 'ja' : 'en')
+
+const { data: page } = useAsyncData(`${locale.value}-${route.path}`, () => {
+  return queryCollection(collection.value)
+    .path(route.path)
+    .first()
 })
-const { data: navigation } = useAsyncData(`navigation`, () => {
-  return queryCollectionNavigation('tutorials')
+const { data: navigation } = useAsyncData(`${locale.value}-navigation`, () => {
+  return queryCollectionNavigation(collection.value)
 })
-const { data: surroundings } = useAsyncData(`${route.path}-surroundings`, () => {
-  return queryCollectionItemSurroundings('tutorials', route.path, {
+const { data: surroundings } = useAsyncData(`${locale.value}-${route.path}-surroundings`, () => {
+  return queryCollectionItemSurroundings(collection.value, route.path, {
     fields: ['title', 'description'],
   })
 })
@@ -55,7 +61,7 @@ const breadcrumbs = computed(() => {
 
   if (!breadcrumbs.find(i => i.path === '/')) {
     breadcrumbs.unshift({
-      title: 'Guide',
+      title: $t('guide'),
       path: '/',
     })
   }
@@ -134,7 +140,7 @@ router.beforeEach(() => {
             hover="text-primary op100"
           >
             <div i-ph-note-pencil-duotone />
-            Edit this page
+            {{ $t('edit-this-page') }}
           </NuxtLink>
         </div>
       </article>

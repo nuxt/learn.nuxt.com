@@ -11,7 +11,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     'floating-vue/nuxt',
     '@nuxt/eslint',
-
+    '@nuxtjs/i18n',
     // local
     '~/modules/template-loader',
     '~/modules/nuxt-link',
@@ -127,6 +127,33 @@ export default defineNuxtConfig({
       },
     },
   },
+
+  i18n: {
+    locales: [
+      {
+        name: 'English',
+        code: 'en',
+        file: 'en.yaml',
+      },
+      {
+        name: '日本語',
+        code: 'ja',
+        file: 'ja.yaml',
+      },
+    ],
+    lazy: true,
+    strategy: 'prefix',
+    defaultLocale: 'en',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root',
+    },
+    experimental: {
+      autoImportTranslationFunctions: true,
+    },
+  },
+
   ogImage: {
     defaults: {
       component: 'OgImageDocs',
