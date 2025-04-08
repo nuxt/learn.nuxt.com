@@ -2,7 +2,7 @@
   "name": "learn.nuxt.com",
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@10.6.5",
+  "packageManager": "pnpm@10.8.0",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:dev",
+    "@iconify-json/carbon": "catalog:icons",
     "@iconify-json/catppuccin": "catalog:icons",
     "@iconify-json/logos": "catalog:icons",
     "@iconify-json/ph": "catalog:icons",
