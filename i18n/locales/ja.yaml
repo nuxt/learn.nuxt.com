@@ -23,3 +23,8 @@ steps:
   waiting-for-nuxt-to-ready: Nuxtが準備完了を待機中
 restart-server: サーバーを再起動
 interactive-terminal-mode: インタラクティブターミナルモード
+files: ファイル
+preview: プレビュー
+built: ビルド
+vueVersion: Vueバージョン
+nuxtVersion: Nuxtバージョン

@@ -53,7 +53,7 @@ function navigate() {
         m1.5 rounded bg-faded px2 py0.5 tracking-wide
       >
         <div i-ph-globe-duotone />
-        <span text-sm op50>Preview</span>
+        <span text-sm op50>{{ $t('preview') }}</span>
         <div
           text-sm
           flex="~ items-center justify-center auto"
@@ -74,7 +74,7 @@ function navigate() {
         flex="~ gap-2 auto items-center" px2 py2
       >
         <div i-ph-globe-duotone />
-        <span text-sm>Preview</span>
+        <span text-sm>{{ $t('preview') }}</span>
       </div>
       <button
 
@@ -97,22 +97,26 @@ function navigate() {
           <div px5 py4 grid="~ gap-y-3 gap-x-2 cols-[max-content_1fr] items-center">
             <div i-uim-vuejs text-xl />
             <div flex="~ gap-2 items-center">
-              Vue version:
+              <!-- eslint-disable-next-line @intlify/vue-i18n/no-raw-text -->
+              {{ $t('vueVersion') }}:
               <div
                 v-if="!preview.clientInfo?.versionVue"
                 i-svg-spinners-90-ring-with-bg
               />
+              <!-- eslint-disable-next-line @intlify/vue-i18n/no-raw-text -->
               <code v-else>
                 v{{ preview.clientInfo.versionVue }}
               </code>
             </div>
             <div i-simple-icons-nuxtdotjs text-xl />
             <div flex="~ gap-2 items-center">
-              Nuxt version:
+              <!-- eslint-disable-next-line @intlify/vue-i18n/no-raw-text -->
+              {{ $t('nuxtVersion') }}:
               <div
                 v-if="!preview.clientInfo?.versionNuxt"
                 i-svg-spinners-90-ring-with-bg
               />
+              <!-- eslint-disable-next-line @intlify/vue-i18n/no-raw-text -->
               <code v-else>
                 v{{ preview.clientInfo.versionNuxt }}
               </code>
