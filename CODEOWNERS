@@ -1,0 +1,8 @@
+# By default, assign to Anthony
+* @antfu
+
+# For the time being, we have Yuki Mina-san in charge of managing the Japanese content
+# Having this file for auto-assigning reviewer
+# Deps on NuxtLabs Japan's management, this might be changed as needed
+/content/ja @yuki-mina
+/i18n/locales/ja.yaml @yuki-mina
