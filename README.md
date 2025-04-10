@@ -5,9 +5,9 @@
 
 An interactive tutorial and playground for learning Nuxt. Powered by [Nuxt](https://nuxt.com/docs) and [WebContainers](https://webcontainers.io/).
 
-[📖 learn.nuxt.com](https://learn.nuxt.com).
+Live at: [📖 learn.nuxt.com](https://learn.nuxt.com).
 
-> Inspired by [learn.svelte.dev](https://learn.svelte.dev).
+This project is heavily inspired by [learn.svelte.dev](https://learn.svelte.dev).
 
 ## Project Development Process
 
@@ -36,11 +36,15 @@ The development server will be running at [http://localhost:3000](http://localho
 
 ### Content Structure
 
-The tutorial content is located in the `content/` directory. Each route contains a number prefix (`1.`) to indicate the order and will be removed in the final URL. For each route, we use a folder with an `index.md` to serve the extra files. A `.template` folder can be placed with the `index.md` file to provide the template for the playground.
+The tutorial content is located in the `content/en/` directory. Each route contains a number prefix (`1.`) to indicate the order and will be removed in the final URL. For each route, we use a folder with an `index.md` to serve the extra files. A `.template` folder can be placed with the `index.md` file to provide the template for the playground.
 
 - `.template/index.ts` - Indicates the metadata for that guide, like enabling/disabling features, file filters, etc.
 - `.template/files/**` - The files that will be copied to the playground when the user navigates to that guide, merged with the basic template under `template/basic/`
 - `.template/solutions/**` - Optional solutions for the tasks in that guide, merged with the guide files.
+
+### Translations
+
+We have the Japanese content under `content/ja` in collobration with the [Vue.js community](https://github.com/vuejs-jp). At this moment, we are **NOT accepting new languages**, please [learn more here](./content/FOR_TRANSLATORS.md).
 
 ## Todolist
 
