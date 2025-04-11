@@ -4,6 +4,7 @@ patchedDependencies:
 catalogs:
   dev:
     '@antfu/eslint-config': ^4.11.0
+    '@intlify/eslint-plugin-vue-i18n': ^4.0.1
     '@unocss/eslint-plugin': ^65.5.0
     eslint: ^9.24.0
     eslint-plugin-format: ^1.0.1

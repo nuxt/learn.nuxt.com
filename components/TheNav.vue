@@ -141,7 +141,8 @@ addCommands(
             <div i-ph-package-duotone text-xl />
             <NuxtLink :to="`${runtime.public.repoUrl}/commit/${runtime.public.gitSha}`" target="_blank" title="View on GitHub">
               <time :datetime="buildTime.toISOString()" :title="buildTime.toLocaleString()">
-                Built {{ timeAgo }} (<code>{{ runtime.public.gitSha.slice(0, 5) }}</code>)
+                <!-- eslint-disable-next-line @intlify/vue-i18n/no-raw-text -->
+                {{ $t('built') }} {{ timeAgo }} (<code>{{ runtime.public.gitSha.slice(0, 5) }}</code>)
               </time>
             </NuxtLink>
           </div>

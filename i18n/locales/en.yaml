@@ -23,3 +23,8 @@ steps:
   waiting-for-nuxt-to-ready: Waiting for Nuxt to ready
 restart-server: Restart the server
 interactive-terminal-mode: Interactive terminal mode
+files: Files
+preview: Preview
+built: Built
+vueVersion: Vue version
+nuxtVersion: Nuxt version
