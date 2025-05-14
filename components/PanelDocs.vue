@@ -81,7 +81,7 @@ const ui = useUiState()
 
 const sourceUrl = computed(() =>
   page.value?.id
-    ? `${runtime.public.repoUrl}/edit/main/content/${page.value.id}`
+    ? `${runtime.public.repoUrl}/edit/main/content/${page.value.stem}.${page.value.extension}`
     : undefined,
 )
 
