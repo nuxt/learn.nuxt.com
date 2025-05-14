@@ -36,7 +36,7 @@ Named route middleware can be defined as follows:
 ```
 
 ```ts
-// middleware/hello.ts
+// middleware/helloA.ts
 export default defineNuxtRouteMiddleware(() => {
   console.log('helloA')
 })
@@ -46,7 +46,7 @@ export default defineNuxtRouteMiddleware(() => {
 <!-- pages/a.vue -->
 <script setup lang="ts">
 definePageMeta({
-  middleware: ['hello'],
+  middleware: ['helloA'],
 })
 </script>
 
