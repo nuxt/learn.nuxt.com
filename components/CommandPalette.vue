@@ -107,7 +107,7 @@ useEventListener('keydown', (e) => {
         <input
           ref="input"
           v-model="commands.search"
-          h-full w-full rounded border-none p4 pl0 outline-none bg-base
+          h-full w-full rounded border-none bg-base p4 pl0 outline-none
           :placeholder="$t('search-dots')"
         >
       </div>
