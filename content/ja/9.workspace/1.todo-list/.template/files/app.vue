@@ -131,193 +131,183 @@ watch(showUnDoneOnly, () => {
 </script>
 
 <template>
-  <UApp>
-    <UContainer class="container">
-      <header class="header">
-        <div class="header-left">
-          <h1 class="title">Vue TODO Application</h1>
-        </div>
-        <div class="header-right">
-          <UIcon name="i-heroicons-user" />
-          <span class="username">{{ userName }}</span>
-        </div>
-      </header>
+  <div class="container">
+    <header class="header">
+      <div class="header-left">
+        <h1 class="title">Vue TODO Application</h1>
+      </div>
+      <div class="header-right">
+        <img src="@/assets/person-black.svg" alt="ユーザー" class="icon" />
+        <span class="username">{{ userName }}</span>
+      </div>
+    </header>
 
-      <main class="main">
-        <div class="actions">
-          <div class="search-area">
-            <div class="search-controls">
-              <!-- search -->
-              <div class="search-input-wrapper">
-                <label for="search">
-                  <UIcon name="i-heroicons-magnifying-glass" class="search-icon" />
-                </label>
-                <input
-                  id="search"
-                  v-model="searchText"
-                  type="search"
-                  placeholder="検索"
-                  class="search-input"
-                />
-              </div>
-              <!-- show un done only -->
-              <label class="checkbox-label"
-                ><input
-                  v-model="showUnDoneOnly"
-                  type="checkbox"
-                />未完了のみ表示</label
-              >
+    <main class="main">
+      <div class="actions">
+        <div class="search-area">
+          <div class="search-controls">
+            <!-- search -->
+            <div>
+              <input
+                id="search"
+                v-model="searchText"
+                type="search"
+                placeholder="検索"
+                class="search-input"
+              />
             </div>
-          </div>
-          <button
-            type="button"
-            class="button primary"
-            aria-haspopup="dialog"
-            aria-expanded="false"
-            aria-controls="create-dialog"
-            @click="isCreateDialogOpen = true"
-          >
-            新規作成
-          </button>
-        </div>
 
-        <table class="todo-table">
-          <thead>
-            <tr>
-              <th class="w-checkbox">
-                <input
-                  v-model="allChecked"
-                  type="checkbox"
-                  aria-label="全てのタスクの選択"
-                  @change="handleAllCheckedChange"
-                />
-              </th>
-              <th class="w-status">完了</th>
-              <th>タイトル</th>
-              <th>メモ</th>
-              <th>期限</th>
-            </tr>
-          </thead>
-          <tbody>
-            <template v-if="filteredTodos.length > 0">
-              <tr v-for="todo in filteredTodos" :key="todo.id">
-                <td class="text-center">
-                  <input
-                    v-model="checkedTaskIds"
-                    type="checkbox"
-                    :value="todo.id"
-                    :aria-label="`${todo.title}の選択`"
-                  />
-                </td>
-                <td class="text-center">
-                  <button
-                    v-if="todo.done"
-                    type="button"
-                    class="button-icon"
-                    aria-label="未完了にする"
-                    @click="todo.done = false"
-                  >
-                    <UIcon name="i-heroicons-check-circle" class="icon check" aria-hidden="true" />
-                  </button>
-                  <button
-                    v-else
-                    type="button"
-                    class="button-icon"
-                    aria-label="完了にする"
-                    @click="todo.done = true"
-                  >
-                    <UIcon name="i-heroicons-check-circle" class="icon uncheck" aria-hidden="true" />
-                  </button>
-                </td>
-                <td>{{ todo.title }}</td>
-                <td><div class="multiline">{{ todo.note }}</div></td>
-                <td>{{ todo.dueDate }}</td>
-              </tr>
-            </template>
-            <template v-else>
-              <tr>
-                <td colspan="5" class="text-center">
-                  <p class="no-tasks">該当のタスクがありません。</p>
-                </td>
-              </tr>
-            </template>
-          </tbody>
-        </table>
-
-        <div
-          v-if="checkedTaskCount > 0"
-          role="dialog"
-          class="bulk-bar"
-        >
-          <div class="bulk-controls">
-            <p>選択した{{ checkedTaskCount }}件のタスクを</p>
-            <ul class="bulk-buttons">
-              <li>
-                <button type="button" class="button primary" @click="handleCheckedComplete">完了にする</button>
-              </li>
-              <li>
-                <button type="button" class="button primary" @click="handleCheckedIncomplete">未完了にする</button>
-              </li>
-              <li>
-                <button type="button" class="button danger" @click="handleCheckedRemove">削除する</button>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- 新規作成 -->
-        <dialog
-          id="create-dialog"
-          :open="isCreateDialogOpen"
-          class="dialog"
-        >
-          <div class="dialog-content">
-            <div class="dialog-header">
-              <h2 class="dialog-title">新規作成</h2>
-              <button
-                type="button"
-                aria-label="新規作成ダイアログを閉じる"
-                class="button-icon"
-                @click="isCreateDialogOpen = false"
-              >
-                <UIcon name="i-heroicons-x-mark" class="icon close" aria-hidden="true" />
-              </button>
-            </div>
-            <form
-              id="create-form"
-              class="form"
-              @submit.prevent="handleSubmitCreateTodo"
+            <!-- show un done only -->
+            <label class="checkbox-label"
+              ><input
+                v-model="showUnDoneOnly"
+                type="checkbox"
+              />未完了のみ表示</label
             >
-              <div class="form-group">
-                <label for="title">タイトル</label>
-                <input id="title" v-model="createTodo.title" type="text" required />
-              </div>
-              <div class="form-group">
-                <label for="note">メモ</label>
-                <textarea id="note" v-model="createTodo.note" rows="5" />
-              </div>
-              <div class="form-group">
-                <label for="dueDate">期限</label>
-                <input
-                  id="dueDate"
-                  :value="createTodo.dueDate"
-                  type="date"
-                  @change="createTodo.dueDate = ($event.target as HTMLInputElement).value || null"
-                />
-              </div>
-            </form>
-            <div class="form-actions">
-              <button type="submit" form="create-form" class="button primary">登録</button>
-            </div>
           </div>
-        </dialog>
-      </main>
+        </div>
+        <button
+          type="button"
+          class="button primary"
+          @click="isCreateDialogOpen = true"
+        >
+          新規作成
+        </button>
+      </div>
 
-      <footer class="footer">
-        <p class="copyright">Vue Fes Tokyo 2025</p>
-      </footer>
-    </UContainer>
-  </UApp>
+      <table class="todo-table">
+        <thead>
+          <tr>
+            <th class="w-checkbox">
+              <input
+                v-model="allChecked"
+                type="checkbox"
+                aria-label="全てのタスクの選択"
+                @change="handleAllCheckedChange"
+              />
+            </th>
+            <th class="w-status">完了</th>
+            <th>タイトル</th>
+            <th>メモ</th>
+            <th>期限</th>
+          </tr>
+        </thead>
+        <tbody>
+          <template v-if="filteredTodos.length > 0">
+            <tr v-for="todo in filteredTodos" :key="todo.id">
+              <td class="text-center">
+                <input
+                  v-model="checkedTaskIds"
+                  type="checkbox"
+                  :value="todo.id"
+                  :aria-label="`${todo.title}の選択`"
+                />
+              </td>
+              <td class="text-center">
+                <button
+                  v-if="todo.done"
+                  type="button"
+                  class="button-icon"
+                  aria-label="未完了にする"
+                  @click="todo.done = false"
+                >
+                  <img src="@/assets/check-circle-green.svg" alt="完了" class="icon" />
+                </button>
+                <button
+                  v-else
+                  type="button"
+                  class="button-icon"
+                  aria-label="完了にする"
+                  @click="todo.done = true"
+                >
+                  <img src="@/assets/check-circle-gray.svg" alt="未完了" class="icon" />
+                </button>
+              </td>
+              <td>{{ todo.title }}</td>
+              <td><div class="multiline">{{ todo.note }}</div></td>
+              <td>{{ todo.dueDate }}</td>
+            </tr>
+          </template>
+          <template v-else>
+            <tr>
+              <td colspan="5" class="text-center">
+                <p class="no-tasks">該当のタスクがありません。</p>
+              </td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+
+      <div v-if="checkedTaskCount > 0" class="bulk-bar" role="dialog">
+        <div class="bulk-controls">
+          <p>選択した{{ checkedTaskCount }}件のタスクを</p>
+          <ul class="bulk-buttons">
+            <li>
+              <button type="button" class="button primary" @click="handleCheckedComplete">完了にする</button>
+            </li>
+            <li>
+              <button type="button" class="button primary" @click="handleCheckedIncomplete">未完了にする</button>
+            </li>
+            <li>
+              <button type="button" class="button danger" @click="handleCheckedRemove">削除する</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 新規作成モーダル -->
+      <div v-if="isCreateDialogOpen" id="create-dialog" class="dialog">
+        <div class="dialog-content">
+          <div class="dialog-header">
+            <h2 class="dialog-title">新規作成</h2>
+            <button
+              type="button"
+              aria-label="新規作成ダイアログを閉じる"
+              class="button-icon"
+              @click="isCreateDialogOpen = false"
+            >
+              <img
+                src="@/assets/close-gray.svg"
+                alt="閉じる"
+                class="icon"
+                @click="isCreateDialogOpen = false"
+              />
+            </button>
+          </div>
+          <form
+            id="create-form"
+            class="form"
+            @submit.prevent="handleSubmitCreateTodo"
+          >
+            <div class="form-group">
+              <label for="title">タイトル</label>
+              <input id="title" v-model="createTodo.title" type="text" required />
+            </div>
+            <div class="form-group">
+              <label for="note">メモ</label>
+              <textarea id="note" v-model="createTodo.note" rows="5" />
+            </div>
+            <div class="form-group">
+              <label for="dueDate">期限</label>
+              <input
+                id="dueDate"
+                :value="createTodo.dueDate"
+                type="date"
+                @change="createTodo.dueDate = ($event.target as HTMLInputElement).value || null"
+              />
+            </div>
+          </form>
+          <div class="form-actions">
+            <button type="submit" form="create-form" class="button primary">登録</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p class="copyright">Vue Fes Tokyo 2025</p>
+    </footer>
+  </div>
 </template>
 
 <style scoped>
@@ -380,23 +370,12 @@ watch(showUnDoneOnly, () => {
   font-size: 0.875rem;
 }
 
-.search-input-wrapper {
-  position: relative;
-}
-
-.search-icon {
-  position: absolute;
-  font-size: 1.25rem;
-  color: #aaa;
-  top: 50%;
-  left: 0.5rem;
-  transform: translateY(-50%);
-}
-
 .search-input {
-  padding: 0.25rem 0.5rem 0.25rem 2rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
   border: 1px solid #ccc;
-  border-radius: 0.125rem;
+  border-radius: 0.25rem;
+  width: 12rem;     
 }
 
 .checkbox-label {
@@ -414,12 +393,12 @@ watch(showUnDoneOnly, () => {
 }
 
 .primary {
-  background-color: #007bff;
+  background-color: #02C169;
   color: #fff;
 }
 
 .primary:hover {
-  background-color: #0056b3;
+  background-color: #029e58;
 }
 
 .danger {
@@ -435,6 +414,7 @@ watch(showUnDoneOnly, () => {
 .todo-table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
 }
 
 .todo-table th,
@@ -472,19 +452,19 @@ watch(showUnDoneOnly, () => {
   font-size: 1.25rem;
 }
 
-.check {
-  color: #28a745;
-}
-
-.uncheck {
-  opacity: 0.3;
+.button-icon {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .button-icon:hover {
   opacity: 0.7;
-  background: none;
-  border: none;
-  cursor: pointer;
 }
 
 .bulk-bar {
@@ -514,13 +494,37 @@ watch(showUnDoneOnly, () => {
 
 .dialog {
   position: fixed;
-  inset-block: 0;
+  top: 0;
+  bottom: 0;
   right: 0;
+  height: 100vh;
   width: 24rem;
   max-width: 100%;
   border: none;
   background: #fff;
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.dark .dialog {
+  background: #020420;
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  font-size: 1.5rem;
+  line-height: 1;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #999;
+}
+
+.modal-close-button:hover {
+  color: #333;
 }
 
 .dialog-content {
