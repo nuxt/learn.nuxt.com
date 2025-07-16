@@ -1,14 +1,11 @@
 <script setup lang="ts">
-type Todo = {
-  id: number;
-  done: boolean;
-  title: string;
-  note: string;
-  dueDate: string | null;
-};
+import Modal from './components/Modal.vue';
+import type { Todo } from './types'
 
+/**
+ * Data
+ */
 const userName = ref("Vue Fes Japan");
-
 const todos = ref<Todo[]>([
   {
     id: 1,
@@ -22,30 +19,25 @@ const todos = ref<Todo[]>([
     done: true,
     title: "Vue Fes Japan ボランティアスタッフに応募する",
     note: "",
-    dueDate: null,
+    dueDate: "",
   },
 ]);
-
-// 一括操作
 const checkedTaskIds = ref<number[]>([]);
-
 const searchText = ref("");
-
 const showUnDoneOnly = ref(false);
+const isCreateDialogOpen = ref(false);
 
+
+/**
+ * Computed
+ */
 const filteredTodos = computed(() => {
-  return todos.value.filter((todo) => {
-    const isDone = todo.done;
-    const isTitleMatch = todo.title.includes(searchText.value);
-    const isNoteMatch = todo.note?.includes(searchText.value) ?? false;
+  return todos.value.filter(({ done, title, note }) => {
+    const text = searchText.value;
+    const matchesText = title.includes(text) || note?.includes(text);
 
-    // 未完了のみ表示
-    if (showUnDoneOnly.value) {
-      return !isDone && (isTitleMatch || isNoteMatch);
-    } else {
-      return isTitleMatch || isNoteMatch;
-    }
-  });
+    return showUnDoneOnly.value ? !done && matchesText : matchesText;
+  })
 });
 
 const checkedTaskCount = computed(() => {
@@ -56,34 +48,16 @@ const allChecked = computed(() => {
   return checkedTaskCount.value === filteredTodos.value.length;
 });
 
-const isCreateDialogOpen = ref(false);
 
-const createTodo = ref<Todo>(createEmtpyTodo());
-
-function createEmtpyTodo() {
-  return {
-    id: createRandomNumber(),
-    done: false,
-    title: "",
-    note: "",
-    dueDate: null,
-  };
-}
-
-function createRandomNumber() {
-  return Math.floor(Math.random() * 1_000_000);
-}
-
-function resetCreateTodo() {
-  createTodo.value = createEmtpyTodo();
-}
-
-function resetCheckedTaskIds() {
+/**
+ * Methods
+ */
+const resetCheckedTaskIds = () => {
   checkedTaskIds.value = [];
 }
 
-function handleAllCheckedChange(e: Event) {
-  const target = e.target as HTMLInputElement;
+const handleAllCheckedChange = (event: Event) => {
+  const target = event.target as HTMLInputElement;
   if (target.checked) {
     checkedTaskIds.value = filteredTodos.value.map((todo) => todo.id);
   } else {
@@ -91,7 +65,7 @@ function handleAllCheckedChange(e: Event) {
   }
 }
 
-function bulkUpdateIsDone(taskIds: number[], isDone: boolean) {
+const bulkUpdateIsDone = (taskIds: number[], isDone: boolean) => {
   return todos.value.map((todo) => {
     return {
       ...todo,
@@ -100,33 +74,41 @@ function bulkUpdateIsDone(taskIds: number[], isDone: boolean) {
   });
 }
 
-function handleCheckedComplete() {
+const handleCheckedComplete = () => {
   todos.value = bulkUpdateIsDone(checkedTaskIds.value, true);
+
   resetCheckedTaskIds();
 }
 
-function handleCheckedIncomplete() {
+const handleCheckedIncomplete = () => {
   todos.value = bulkUpdateIsDone(checkedTaskIds.value, false);
+
   resetCheckedTaskIds();
 }
 
-function handleCheckedRemove() {
+const handleCheckedRemove = () => {
   todos.value = todos.value.filter(
     (todo) => !checkedTaskIds.value.includes(todo.id)
   );
+
   resetCheckedTaskIds();
 }
 
-function handleSubmitCreateTodo() {
-  todos.value.unshift({ ...createTodo.value });
-  resetCreateTodo();
+const handleSubmitCreateTodo = (newTodo: Todo) => {
+  todos.value.unshift({ ...newTodo });
 }
 
-watch(showUnDoneOnly, () => {
-  checkedTaskIds.value = checkedTaskIds.value.filter((id) => {
-    const todo = todos.value.find((todo) => todo.id === id);
-    return showUnDoneOnly.value ? !todo?.done : true;
-  });
+/**
+ * Watch
+ */
+watch(showUnDoneOnly, (visibleOnly) => {
+  if (visibleOnly) {
+    checkedTaskIds.value = checkedTaskIds.value.filter((id) => {
+      const todo = todos.value.find((todo) => todo.id === id);
+
+      return todo?.done === false;
+    });
+  }
 });
 </script>
 
@@ -134,45 +116,33 @@ watch(showUnDoneOnly, () => {
   <div class="container">
     <header class="header">
       <div class="header-left">
-        <h1 class="title">Vue TODO Application</h1>
+        <h1>Vue TODO Application</h1>
       </div>
       <div class="header-right">
-        <img src="@/assets/person-black.svg" alt="ユーザー" class="icon" />
-        <span class="username">{{ userName }}</span>
+        <img src="@/assets/person-black.svg" alt="ユーザー" />
+        <span>{{ userName }}</span>
       </div>
     </header>
 
-    <main class="main">
+    <main>
       <div class="actions">
         <div class="search-area">
           <div class="search-controls">
-            <!-- search -->
             <div>
               <input
                 id="search"
                 v-model="searchText"
                 type="search"
                 placeholder="検索"
-                class="search-input"
               />
             </div>
-
-            <!-- show un done only -->
-            <label class="checkbox-label"
-              ><input
-                v-model="showUnDoneOnly"
-                type="checkbox"
-              />未完了のみ表示</label
-            >
+            <label>
+              <input v-model="showUnDoneOnly" type="checkbox" />
+              未完了のみ表示
+            </label>
           </div>
         </div>
-        <button
-          type="button"
-          class="button primary"
-          @click="isCreateDialogOpen = true"
-        >
-          新規作成
-        </button>
+        <button type="button" @click="isCreateDialogOpen = true">新規作成</button>
       </div>
 
       <table class="todo-table">
@@ -195,7 +165,7 @@ watch(showUnDoneOnly, () => {
         <tbody>
           <template v-if="filteredTodos.length > 0">
             <tr v-for="todo in filteredTodos" :key="todo.id">
-              <td class="text-center">
+              <td>
                 <input
                   v-model="checkedTaskIds"
                   type="checkbox"
@@ -211,7 +181,7 @@ watch(showUnDoneOnly, () => {
                   aria-label="未完了にする"
                   @click="todo.done = false"
                 >
-                  <img src="@/assets/check-circle-green.svg" alt="完了" class="icon" />
+                  <img src="@/assets/check-circle-green.svg" alt="完了" />
                 </button>
                 <button
                   v-else
@@ -220,7 +190,7 @@ watch(showUnDoneOnly, () => {
                   aria-label="完了にする"
                   @click="todo.done = true"
                 >
-                  <img src="@/assets/check-circle-gray.svg" alt="未完了" class="icon" />
+                  <img src="@/assets/check-circle-gray.svg" alt="未完了" />
                 </button>
               </td>
               <td>{{ todo.title }}</td>
@@ -230,7 +200,7 @@ watch(showUnDoneOnly, () => {
           </template>
           <template v-else>
             <tr>
-              <td colspan="5" class="text-center">
+              <td colspan="5">
                 <p class="no-tasks">該当のタスクがありません。</p>
               </td>
             </tr>
@@ -241,85 +211,38 @@ watch(showUnDoneOnly, () => {
       <div v-if="checkedTaskCount > 0" class="bulk-bar" role="dialog">
         <div class="bulk-controls">
           <p>選択した{{ checkedTaskCount }}件のタスクを</p>
-          <ul class="bulk-buttons">
-            <li>
-              <button type="button" class="button primary" @click="handleCheckedComplete">完了にする</button>
-            </li>
-            <li>
-              <button type="button" class="button primary" @click="handleCheckedIncomplete">未完了にする</button>
-            </li>
-            <li>
-              <button type="button" class="button danger" @click="handleCheckedRemove">削除する</button>
-            </li>
+          <ul>
+            <li><button type="button" @click="handleCheckedComplete">完了にする</button></li>
+            <li><button type="button" @click="handleCheckedIncomplete">未完了にする</button></li>
+            <li><button type="button" class="danger" @click="handleCheckedRemove">削除する</button></li>
           </ul>
         </div>
       </div>
 
       <!-- 新規作成モーダル -->
-      <div v-if="isCreateDialogOpen" id="create-dialog" class="dialog">
-        <div class="dialog-content">
-          <div class="dialog-header">
-            <h2 class="dialog-title">新規作成</h2>
-            <button
-              type="button"
-              aria-label="新規作成ダイアログを閉じる"
-              class="button-icon"
-              @click="isCreateDialogOpen = false"
-            >
-              <img
-                src="@/assets/close-gray.svg"
-                alt="閉じる"
-                class="icon"
-                @click="isCreateDialogOpen = false"
-              />
-            </button>
-          </div>
-          <form
-            id="create-form"
-            class="form"
-            @submit.prevent="handleSubmitCreateTodo"
-          >
-            <div class="form-group">
-              <label for="title">タイトル</label>
-              <input id="title" v-model="createTodo.title" type="text" required />
-            </div>
-            <div class="form-group">
-              <label for="note">メモ</label>
-              <textarea id="note" v-model="createTodo.note" rows="5" />
-            </div>
-            <div class="form-group">
-              <label for="dueDate">期限</label>
-              <input
-                id="dueDate"
-                :value="createTodo.dueDate"
-                type="date"
-                @change="createTodo.dueDate = ($event.target as HTMLInputElement).value || null"
-              />
-            </div>
-          </form>
-          <div class="form-actions">
-            <button type="submit" form="create-form" class="button primary">登録</button>
-          </div>
-        </div>
-      </div>
+      <Modal
+        :isOpen="isCreateDialogOpen"
+        @close="isCreateDialogOpen = false"
+        @submit="handleSubmitCreateTodo"
+      />
     </main>
 
     <footer class="footer">
-      <p class="copyright">Vue Fes Tokyo 2025</p>
+      <p>Vue Fes Tokyo 2025</p>
     </footer>
   </div>
 </template>
 
 <style scoped>
 .container {
-  padding-top: 1rem;
-  padding-bottom: 2.5rem;
+  padding: 1rem 0 2.5rem;
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
   min-height: 100vh;
 }
 
+/* header */
 .header {
   display: flex;
   gap: 0.25rem;
@@ -330,23 +253,28 @@ watch(showUnDoneOnly, () => {
 .header-left {
   flex-grow: 1;
 }
-
-.title {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
 .header-right {
   display: flex;
   align-items: center;
   gap: 0.25rem;
 }
 
-.username {
+.header h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.header img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.header span {
   font-size: 0.875rem;
 }
 
-.main {
+/* main */
+main {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -357,6 +285,7 @@ watch(showUnDoneOnly, () => {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
+  align-items: flex-end;
 }
 
 .search-area {
@@ -368,49 +297,38 @@ watch(showUnDoneOnly, () => {
   flex-wrap: wrap;
   gap: 0.5rem 1rem;
   font-size: 0.875rem;
+  align-items: center;
 }
 
-.search-input {
+.search-area input[type="search"] {
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
   border: 1px solid #ccc;
   border-radius: 0.25rem;
-  width: 12rem;     
+  width: 12rem;
 }
 
-.checkbox-label {
+.search-controls label {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.button {
+.actions button {
   padding: 0.375rem 1rem;
   border-radius: 0.375rem;
   border: none;
   font-size: 0.875rem;
+  background-color: #02C169;
+  color: #fff;
   cursor: pointer;
 }
 
-.primary {
-  background-color: #02C169;
-  color: #fff;
-}
-
-.primary:hover {
+.actions button:hover {
   background-color: #029e58;
 }
 
-.danger {
-  border: 1px solid #e3342f;
-  color: #e3342f;
-  background: none;
-}
-
-.danger:hover {
-  background-color: #fdd;
-}
-
+/* table */
 .todo-table {
   width: 100%;
   border-collapse: collapse;
@@ -426,7 +344,7 @@ watch(showUnDoneOnly, () => {
 }
 
 .w-checkbox {
-  width: 1%;
+  width: 16px;
   text-align: center;
 }
 
@@ -435,24 +353,7 @@ watch(showUnDoneOnly, () => {
   text-align: center;
 }
 
-.multiline {
-  white-space: pre-line;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.no-tasks {
-  padding: 2rem;
-  color: #666;
-}
-
-.icon {
-  font-size: 1.25rem;
-}
-
-.button-icon {
+.todo-table button {
   background: none;
   border: none;
   padding: 0;
@@ -463,10 +364,26 @@ watch(showUnDoneOnly, () => {
   justify-content: center;
 }
 
-.button-icon:hover {
+.todo-table button:hover {
   opacity: 0.7;
 }
 
+.todo-table img {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.todo-table .multiline {
+  white-space: pre-line;
+}
+
+.no-tasks {
+  padding: 2rem;
+  color: #666;
+  text-align: center;
+}
+
+/* bulk bar */
 .bulk-bar {
   position: fixed;
   bottom: 0;
@@ -485,98 +402,40 @@ watch(showUnDoneOnly, () => {
   align-items: center;
 }
 
-.bulk-buttons {
+.bulk-controls ul {
   display: flex;
   gap: 1rem;
   list-style: none;
-  padding-left: 0;
+  margin: 0;
+  padding: 0;
 }
 
-.dialog {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  height: 100vh;
-  width: 24rem;
-  max-width: 100%;
+.bulk-controls button {
+  padding: 0.375rem 1rem;
+  border-radius: 0.375rem;
   border: none;
-  background: #fff;
-  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  overflow-y: auto;
-}
-
-.dark .dialog {
-  background: #020420;
-}
-
-.modal-close-button {
-  position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  font-size: 1.5rem;
-  line-height: 1;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: #999;
-}
-
-.modal-close-button:hover {
-  color: #333;
-}
-
-.dialog-content {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  padding: 1rem;
-  height: 100%;
-}
-
-.dialog-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.dialog-title {
-  font-size: 1.125rem;
-  font-weight: bold;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  flex-grow: 1;
   font-size: 0.875rem;
+  background-color: #02C169;
+  color: #fff;
+  cursor: pointer;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+.bulk-controls button:hover {
+  background-color: #029e58;
+}
+.bulk-controls .danger {
+  border: 1px solid #e3342f;
+  color: #e3342f;
+  background: none;
 }
 
-.form-group input,
-.form-group textarea {
-  padding: 0.375rem 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 0.25rem;
+.bulk-controls .danger:hover {
+  background-color: #fdd;
 }
 
-.form-actions {
-  text-align: center;
-  margin-top: auto;
-}
-
+/* footer */
 .footer {
   text-align: center;
-}
-
-.copyright {
   color: #666;
 }
 </style>
