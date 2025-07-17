@@ -119,7 +119,7 @@ watch(showUnDoneOnly, (visibleOnly) => {
         <h1>Vue TODO Application</h1>
       </div>
       <div class="header-right">
-        <img src="@/assets/person-black.svg" alt="ユーザー" />
+        <img src="@/assets/person-gray.svg" alt="ユーザー" />
         <span>{{ userName }}</span>
       </div>
     </header>
