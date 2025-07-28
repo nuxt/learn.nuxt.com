@@ -242,7 +242,7 @@ watch(showUnDoneOnly, (visibleOnly) => {
   min-height: 100vh;
 }
 
-/* header */
+/* ------- header start ------- */
 .header {
   display: flex;
   gap: 0.25rem;
@@ -272,8 +272,10 @@ watch(showUnDoneOnly, (visibleOnly) => {
 .header span {
   font-size: 0.875rem;
 }
+/* ------- header last ------- */
 
-/* main */
+
+/* ------- main start ------- */
 main {
   flex-grow: 1;
   display: flex;
@@ -327,8 +329,9 @@ main {
 .actions button:hover {
   background-color: #029e58;
 }
+/* ------- main last ------- */
 
-/* table */
+/* ------- table start ------- */
 .todo-table {
   width: 100%;
   border-collapse: collapse;
@@ -382,8 +385,9 @@ main {
   color: #666;
   text-align: center;
 }
+/* ------- table last ------- */
 
-/* bulk bar */
+/* ------- bulk bar start ------- */
 .bulk-bar {
   position: fixed;
   bottom: 0;
@@ -432,6 +436,7 @@ main {
 .bulk-controls .danger:hover {
   background-color: #fdd;
 }
+/* ------- bulk bar last ------- */
 
 /* footer */
 .footer {
