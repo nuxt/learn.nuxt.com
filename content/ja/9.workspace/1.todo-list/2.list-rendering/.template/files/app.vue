@@ -4,6 +4,7 @@ import type { Todo } from './types'
 /**
  * Data
  */
+const userName = ref("Vue Fes Japan");
 const todos = ref<Todo[]>([
   {
     id: 1,
@@ -26,8 +27,11 @@ const todos = ref<Todo[]>([
   <div class="container">
     <header class="header">
       <div class="header-left">
-        <h1>📝 ToDoリスト - v-forでテーブル表示</h1>
-        <p>v-forを使って配列データを動的にレンダリングしてみましょう</p>
+        <h1>Vue TODO Application</h1>
+      </div>
+      <div class="header-right">
+        <img src="@/assets/person-gray.svg" alt="ユーザー" />
+        <span>{{ userName }}</span>
       </div>
     </header>
 
@@ -35,6 +39,14 @@ const todos = ref<Todo[]>([
       <table class="todo-table">
         <thead>
           <tr>
+            <th class="w-checkbox">
+              <input
+                v-model="allChecked"
+                type="checkbox"
+                aria-label="全てのタスクの選択"
+                @change="handleAllCheckedChange"
+              />
+            </th>
             <th class="w-status">完了</th>
             <th>タイトル</th>
             <th>メモ</th>
@@ -42,43 +54,56 @@ const todos = ref<Todo[]>([
           </tr>
         </thead>
         <tbody>
-          <!-- 
-            チャレンジ: ここに v-for を使ってToDoアイテムを表示してください！
-            
-            ヒント:
-            1. v-for="todo in todos" を使用
-            2. :key="todo.id" を必ず追加
-            3. 完了状態は todo.done ? '✅ 完了' : '⏳ 未完了' で表示
-            4. メモや期限が空の場合は '' か '-' を表示
-          -->
-          
-          <!-- 現在は固定のサンプル表示 - これを v-for に置き換えてください -->
-          <tr>
-            <td class="text-center">⏳ 未完了</td>
-            <td>サンプルタスク1</td>
-            <td><div class="multiline">これは固定のサンプルです</div></td>
-            <td>2025-08-01</td>
-          </tr>
-          <tr>
-            <td class="text-center">✅ 完了</td>
-            <td>サンプルタスク2</td>
-            <td><div class="multiline">v-forに置き換えてください</div></td>
-            <td>2025-08-15</td>
-          </tr>
+          <template v-if="filteredTodos.length > 0">
+            <!-- v-forを使って動的にレンダリング -->
+            <tr v-for="todo in filteredTodos" :key="todo.id">
+              <td>
+                <input
+                  v-model="checkedTaskIds"
+                  type="checkbox"
+                  :value="todo.id"
+                  :aria-label="`${todo.title}の選択`"
+                />
+              </td>
+              <td class="text-center">
+                <button
+                  v-if="todo.done"
+                  type="button"
+                  class="button-icon"
+                  aria-label="未完了にする"
+                  @click="todo.done = false"
+                >
+                  <img src="@/assets/check-circle-green.svg" alt="完了" />
+                </button>
+                <button
+                  v-else
+                  type="button"
+                  class="button-icon"
+                  aria-label="完了にする"
+                  @click="todo.done = true"
+                >
+                  <img src="@/assets/check-circle-gray.svg" alt="未完了" />
+                </button>
+              </td>
+              <td>{{ todo.title }}</td>
+              <td><div class="multiline">{{ todo.note }}</div></td>
+              <td>{{ todo.dueDate }}</td>
+            </tr>
+          </template>
+          <template v-else>
+            <tr>
+              <td colspan="5">
+                <p class="no-tasks">該当のタスクがありません。</p>
+              </td>
+            </tr>
+          </template>
         </tbody>
       </table>
-
-      <div class="hint-box">
-        <h3>💡 実装のヒント</h3>
-        <ul>
-          <li><code>v-for="todo in todos"</code> でループ処理</li>
-          <li><code>:key="todo.id"</code> で一意のキーを設定</li>
-          <li><code>{{ "{{ todo.title }}" }}</code> でタスク名を表示</li>
-          <li><code>{{ "{{ todo.done ? '✅ 完了' : '⏳ 未完了' }}" }}</code> で状態を表示</li>
-          <li>メモは <code>&lt;div class="multiline"&gt;{{ "{{ todo.note }}" }}&lt;/div&gt;</code> で表示</li>
-        </ul>
-      </div>
     </main>
+
+    <footer class="footer">
+      <p>Vue Fes Tokyo 2025</p>
+    </footer>
   </div>
 </template>
 
@@ -102,19 +127,27 @@ const todos = ref<Todo[]>([
 .header-left {
   flex-grow: 1;
 }
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
 
 .header h1 {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #2c3e50;
 }
 
-.header p {
-  font-size: 1rem;
-  color: #7f8c8d;
-  margin-top: 0.5rem;
+.header img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.header span {
+  font-size: 0.875rem;
 }
 /* ------- header last ------- */
+
 
 /* ------- main start ------- */
 main {
@@ -122,6 +155,53 @@ main {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.search-area {
+  flex-grow: 1;
+}
+
+.search-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  font-size: 0.875rem;
+  align-items: center;
+}
+
+.search-area input[type="search"] {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  width: 12rem;
+}
+
+.search-controls label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.actions button {
+  padding: 0.375rem 1rem;
+  border-radius: 0.375rem;
+  border: none;
+  font-size: 0.875rem;
+  background-color: #02C169;
+  color: #fff;
+  cursor: pointer;
+}
+
+.actions button:hover {
+  background-color: #029e58;
 }
 /* ------- main last ------- */
 
@@ -140,48 +220,101 @@ main {
   text-align: left;
 }
 
+.w-checkbox {
+  width: 16px;
+  text-align: center;
+}
+
 .w-status {
   width: 4rem;
   text-align: center;
 }
 
-.text-center {
-  text-align: center;
+.todo-table button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.todo-table button:hover {
+  opacity: 0.7;
+}
+
+.todo-table img {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .todo-table .multiline {
   white-space: pre-line;
 }
+
+.no-tasks {
+  padding: 2rem;
+  color: #666;
+  text-align: center;
+}
 /* ------- table last ------- */
 
-/* hint box */
-.hint-box {
-  background: #e8f4fd;
-  border: 1px solid #bee5eb;
-  border-radius: 8px;
-  padding: 20px;
-  margin-top: 2rem;
+/* ------- bulk bar start ------- */
+.bulk-bar {
+  position: fixed;
+  bottom: 0;
+  inset-inline: 0;
+  padding: 1rem;
+  background: #fff;
+  border-top: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.hint-box h3 {
-  margin-top: 0;
-  color: #0c5460;
+.bulk-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
 }
 
-.hint-box ul {
-  margin: 15px 0 0 20px;
+.bulk-controls ul {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.hint-box li {
-  margin-bottom: 8px;
-  color: #0c5460;
+.bulk-controls button {
+  padding: 0.375rem 1rem;
+  border-radius: 0.375rem;
+  border: none;
+  font-size: 0.875rem;
+  background-color: #02C169;
+  color: #fff;
+  cursor: pointer;
 }
 
-.hint-box code {
-  background: #d1ecf1;
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-family: 'Courier New', monospace;
-  color: #0c5460;
+.bulk-controls button:hover {
+  background-color: #029e58;
+}
+.bulk-controls .danger {
+  border: 1px solid #e3342f;
+  color: #e3342f;
+  background: none;
+}
+
+.bulk-controls .danger:hover {
+  background-color: #fdd;
+}
+/* ------- bulk bar last ------- */
+
+/* footer */
+.footer {
+  text-align: center;
+  color: #666;
 }
 </style>

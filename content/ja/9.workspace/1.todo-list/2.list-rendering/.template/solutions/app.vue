@@ -2,8 +2,9 @@
 import type { Todo } from './types'
 
 /**
- * サンプルのToDoデータ
+ * Data
  */
+const userName = ref("Vue Fes Japan");
 const todos = ref<Todo[]>([
   {
     id: 1,
@@ -16,238 +17,304 @@ const todos = ref<Todo[]>([
     id: 2,
     done: true,
     title: "Vue Fes Japan ボランティアスタッフに応募する",
-    note: "応募フォームから申し込み完了",
-    dueDate: "2025-08-15",
-  },
-  {
-    id: 3,
-    done: false,
-    title: "Nuxtの新機能を学習する",
-    note: "公式ドキュメントを読み、サンプルアプリを作成する",
-    dueDate: "2025-09-30",
-  },
-  {
-    id: 4,
-    done: true,
-    title: "TypeScriptの型定義を理解する",
-    note: "基本的な型から高度な型まで学習",
-    dueDate: "2025-07-20",
+    note: "",
+    dueDate: "",
   },
 ]);
 </script>
 
 <template>
-  <div class="todo-container">
+  <div class="container">
     <header class="header">
-      <h1>📝 ToDoリスト - v-forでテーブル表示 ✅</h1>
-      <p>配列データが動的にテーブルでレンダリングされています！</p>
+      <div class="header-left">
+        <h1>Vue TODO Application</h1>
+      </div>
+      <div class="header-right">
+        <img src="@/assets/person-gray.svg" alt="ユーザー" />
+        <span>{{ userName }}</span>
+      </div>
     </header>
 
-    <main class="main-content">
-      <div class="table-container">
-        <table class="todo-table">
-          <thead>
-            <tr>
-              <th>タスク</th>
-              <th>メモ</th>
-              <th>期限</th>
-              <th>状態</th>
-            </tr>
-          </thead>
-          <tbody>
+    <main>
+      <table class="todo-table">
+        <thead>
+          <tr>
+            <th class="w-checkbox">
+              <input
+                v-model="allChecked"
+                type="checkbox"
+                aria-label="全てのタスクの選択"
+                @change="handleAllCheckedChange"
+              />
+            </th>
+            <th class="w-status">完了</th>
+            <th>タイトル</th>
+            <th>メモ</th>
+            <th>期限</th>
+          </tr>
+        </thead>
+        <tbody>
+          <template v-if="filteredTodos.length > 0">
             <!-- v-forを使って動的にレンダリング -->
-            <tr v-for="todo in todos" :key="todo.id">
-              <td class="task-title">{{ todo.title }}</td>
-              <td class="task-note">{{ todo.note || '-' }}</td>
-              <td class="task-date">{{ todo.dueDate || '-' }}</td>
-              <td class="task-status" :class="{ 'completed': todo.done }">
-                {{ todo.done ? '✅ 完了' : '⏳ 未完了' }}
+            <tr v-for="todo in filteredTodos" :key="todo.id">
+              <td>
+                <input
+                  v-model="checkedTaskIds"
+                  type="checkbox"
+                  :value="todo.id"
+                  :aria-label="`${todo.title}の選択`"
+                />
+              </td>
+              <td class="text-center">
+                <button
+                  v-if="todo.done"
+                  type="button"
+                  class="button-icon"
+                  aria-label="未完了にする"
+                  @click="todo.done = false"
+                >
+                  <img src="@/assets/check-circle-green.svg" alt="完了" />
+                </button>
+                <button
+                  v-else
+                  type="button"
+                  class="button-icon"
+                  aria-label="完了にする"
+                  @click="todo.done = true"
+                >
+                  <img src="@/assets/check-circle-gray.svg" alt="未完了" />
+                </button>
+              </td>
+              <td>{{ todo.title }}</td>
+              <td><div class="multiline">{{ todo.note }}</div></td>
+              <td>{{ todo.dueDate }}</td>
+            </tr>
+          </template>
+          <template v-else>
+            <tr>
+              <td colspan="5">
+                <p class="no-tasks">該当のタスクがありません。</p>
               </td>
             </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="success-box">
-        <h3>🎉 素晴らしい！</h3>
-        <p>v-forを使って配列データを動的にレンダリングできました。</p>
-        <ul>
-          <li>✅ <code>v-for="todo in todos"</code> でループ処理</li>
-          <li>✅ <code>:key="todo.id"</code> で一意のキーを設定</li>
-          <li>✅ 各プロパティを適切に表示</li>
-          <li>✅ 条件分岐で完了状態を表示</li>
-        </ul>
-      </div>
-
-      <div class="next-steps">
-        <h3>🚀 次のステップ</h3>
-        <p>今度は以下の機能を追加してみましょう：</p>
-        <ul>
-          <li>検索機能（タスク名での絞り込み）</li>
-          <li>完了状態でのフィルタリング</li>
-          <li>新しいタスクの追加機能</li>
-          <li>タスクの編集・削除機能</li>
-        </ul>
-      </div>
+          </template>
+        </tbody>
+      </table>
     </main>
+
+    <footer class="footer">
+      <p>Vue Fes Tokyo 2025</p>
+    </footer>
   </div>
 </template>
 
 <style scoped>
-.todo-container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.container {
+  padding: 1rem 0 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  min-height: 100vh;
 }
 
+/* ------- header start ------- */
 .header {
-  text-align: center;
-  margin-bottom: 30px;
+  display: flex;
+  gap: 0.25rem;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.header-left {
+  flex-grow: 1;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .header h1 {
-  color: #27ae60;
-  margin-bottom: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
-.header p {
-  color: #2c3e50;
-  font-size: 16px;
-  font-weight: 500;
+.header img {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
-.main-content {
+.header span {
+  font-size: 0.875rem;
+}
+/* ------- header last ------- */
+
+
+/* ------- main start ------- */
+main {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 1rem;
 }
 
-.table-container {
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
 }
 
+.search-area {
+  flex-grow: 1;
+}
+
+.search-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  font-size: 0.875rem;
+  align-items: center;
+}
+
+.search-area input[type="search"] {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  width: 12rem;
+}
+
+.search-controls label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.actions button {
+  padding: 0.375rem 1rem;
+  border-radius: 0.375rem;
+  border: none;
+  font-size: 0.875rem;
+  background-color: #02C169;
+  color: #fff;
+  cursor: pointer;
+}
+
+.actions button:hover {
+  background-color: #029e58;
+}
+/* ------- main last ------- */
+
+/* ------- table start ------- */
 .todo-table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
 }
 
-.todo-table th {
-  background-color: #27ae60;
-  color: white;
-  padding: 15px;
-  text-align: left;
-  font-weight: 600;
-}
-
+.todo-table th,
 .todo-table td {
-  padding: 15px;
-  border-bottom: 1px solid #ecf0f1;
-  vertical-align: top;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #ccc;
+  vertical-align: middle;
+  text-align: left;
 }
 
-.todo-table tr:hover {
-  background-color: #f8f9fa;
+.w-checkbox {
+  width: 16px;
+  text-align: center;
 }
 
-.todo-table tr:last-child td {
-  border-bottom: none;
+.w-status {
+  width: 4rem;
+  text-align: center;
 }
 
-.task-title {
-  font-weight: 600;
-  color: #2c3e50;
+.todo-table button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.task-note {
-  color: #7f8c8d;
-  font-size: 14px;
+.todo-table button:hover {
+  opacity: 0.7;
+}
+
+.todo-table img {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.todo-table .multiline {
   white-space: pre-line;
 }
 
-.task-date {
-  color: #34495e;
-  font-weight: 500;
+.no-tasks {
+  padding: 2rem;
+  color: #666;
+  text-align: center;
+}
+/* ------- table last ------- */
+
+/* ------- bulk bar start ------- */
+.bulk-bar {
+  position: fixed;
+  bottom: 0;
+  inset-inline: 0;
+  padding: 1rem;
+  background: #fff;
+  border-top: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.task-status {
-  font-weight: 600;
+.bulk-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
 }
 
-.task-status.completed {
-  color: #27ae60;
+.bulk-controls ul {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.success-box {
-  background: #d4edda;
-  border: 1px solid #c3e6cb;
-  border-radius: 8px;
-  padding: 20px;
+.bulk-controls button {
+  padding: 0.375rem 1rem;
+  border-radius: 0.375rem;
+  border: none;
+  font-size: 0.875rem;
+  background-color: #02C169;
+  color: #fff;
+  cursor: pointer;
 }
 
-.success-box h3 {
-  margin-top: 0;
-  color: #155724;
+.bulk-controls button:hover {
+  background-color: #029e58;
+}
+.bulk-controls .danger {
+  border: 1px solid #e3342f;
+  color: #e3342f;
+  background: none;
 }
 
-.success-box p {
-  color: #155724;
+.bulk-controls .danger:hover {
+  background-color: #fdd;
 }
+/* ------- bulk bar last ------- */
 
-.success-box ul {
-  margin: 15px 0 0 20px;
-}
-
-.success-box li {
-  margin-bottom: 8px;
-  color: #155724;
-}
-
-.success-box code {
-  background: #c3e6cb;
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-family: 'Courier New', monospace;
-  color: #155724;
-}
-
-.next-steps {
-  background: #fff3cd;
-  border: 1px solid #ffeaa7;
-  border-radius: 8px;
-  padding: 20px;
-}
-
-.next-steps h3 {
-  margin-top: 0;
-  color: #856404;
-}
-
-.next-steps p {
-  color: #856404;
-}
-
-.next-steps ul {
-  margin: 15px 0 0 20px;
-}
-
-.next-steps li {
-  margin-bottom: 8px;
-  color: #856404;
-}
-
-/* レスポンシブ対応 */
-@media (max-width: 768px) {
-  .todo-table {
-    font-size: 14px;
-  }
-  
-  .todo-table th,
-  .todo-table td {
-    padding: 10px 8px;
-  }
+/* footer */
+.footer {
+  text-align: center;
+  color: #666;
 }
 </style>
