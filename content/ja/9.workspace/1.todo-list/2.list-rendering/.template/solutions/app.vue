@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { Todo } from './types'
 
 /**
  * Data
@@ -21,6 +20,17 @@ const todos = ref<Todo[]>([
     dueDate: "",
   },
 ]);
+
+/**
+ * Type
+ */
+type Todo = {
+  id: number;
+  done: boolean;
+  title: string;
+  note: string;
+  dueDate: string;
+};
 </script>
 
 <template>
@@ -39,64 +49,20 @@ const todos = ref<Todo[]>([
       <table class="todo-table">
         <thead>
           <tr>
-            <th class="w-checkbox">
-              <input
-                v-model="allChecked"
-                type="checkbox"
-                aria-label="全てのタスクの選択"
-                @change="handleAllCheckedChange"
-              />
-            </th>
-            <th class="w-status">完了</th>
+            <th>完了</th>
             <th>タイトル</th>
             <th>メモ</th>
             <th>期限</th>
           </tr>
         </thead>
         <tbody>
-          <template v-if="filteredTodos.length > 0">
-            <!-- v-forを使って動的にレンダリング -->
-            <tr v-for="todo in filteredTodos" :key="todo.id">
-              <td>
-                <input
-                  v-model="checkedTaskIds"
-                  type="checkbox"
-                  :value="todo.id"
-                  :aria-label="`${todo.title}の選択`"
-                />
-              </td>
-              <td class="text-center">
-                <button
-                  v-if="todo.done"
-                  type="button"
-                  class="button-icon"
-                  aria-label="未完了にする"
-                  @click="todo.done = false"
-                >
-                  <img src="@/assets/check-circle-green.svg" alt="完了" />
-                </button>
-                <button
-                  v-else
-                  type="button"
-                  class="button-icon"
-                  aria-label="完了にする"
-                  @click="todo.done = true"
-                >
-                  <img src="@/assets/check-circle-gray.svg" alt="未完了" />
-                </button>
-              </td>
+            <!-- v-for を使って動的にレンダリング -->
+            <tr v-for="todo in todos" :key="todo.id">
+              <td class="text-center">{{ todo.done }}</td>
               <td>{{ todo.title }}</td>
               <td><div class="multiline">{{ todo.note }}</div></td>
               <td>{{ todo.dueDate }}</td>
             </tr>
-          </template>
-          <template v-else>
-            <tr>
-              <td colspan="5">
-                <p class="no-tasks">該当のタスクがありません。</p>
-              </td>
-            </tr>
-          </template>
         </tbody>
       </table>
     </main>
