@@ -21,6 +21,7 @@
     "@webcontainer/api": "catalog:frontend",
     "@xterm/addon-fit": "catalog:frontend",
     "@xterm/xterm": "catalog:frontend",
+    "better-sqlite3": "^12.2.0",
     "birpc": "catalog:frontend",
     "floating-vue": "catalog:frontend",
     "fuse.js": "catalog:frontend",
