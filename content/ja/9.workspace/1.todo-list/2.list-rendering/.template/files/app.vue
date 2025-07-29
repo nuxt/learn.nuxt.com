@@ -58,17 +58,17 @@ type Todo = {
         <tbody>
           <!-- 1件目のデータを直接レンダリングしている（要変更） -->
           <tr>
-          <td class="text-center">{{ todos[0].done }}</td>
-          <td>{{ todos[0].title }}</td>
-          <td><div class="multiline">{{ todos[0].note }}</div></td>
-          <td>{{ todos[0].dueDate }}</td>
+            <td class="text-center">{{ todos[0].done }}</td>
+            <td>{{ todos[0].title }}</td>
+            <td><div class="multiline">{{ todos[0].note }}</div></td>
+            <td>{{ todos[0].dueDate }}</td>
           </tr>
           <!-- 2件目のデータを直接レンダリングしている（要変更） -->
           <tr>
-          <td class="text-center">{{ todos[1].done }}</td>
-          <td>{{ todos[1].title }}</td>
-          <td><div class="multiline">{{ todos[1].note }}</div></td>
-          <td>{{ todos[1].dueDate }}</td>
+            <td class="text-center">{{ todos[1].done }}</td>
+            <td>{{ todos[1].title }}</td>
+            <td><div class="multiline">{{ todos[1].note }}</div></td>
+            <td>{{ todos[1].dueDate }}</td>
           </tr>
         </tbody>
       </table>
