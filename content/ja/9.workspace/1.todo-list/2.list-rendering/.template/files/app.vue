@@ -40,7 +40,7 @@ type Todo = {
         <h1>Vue TODO Application</h1>
       </div>
       <div class="header-right">
-        <img src="@/assets/person-gray.svg" alt="ユーザー" />
+        👤
         <span>{{ userName }}</span>
       </div>
     </header>
@@ -84,17 +84,15 @@ type Todo = {
 
 /* ------- header start ------- */
 .header {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto;
   gap: 0.25rem;
   align-items: flex-end;
-  flex-wrap: wrap;
 }
 
-.header-left {
-  flex-grow: 1;
-}
 .header-right {
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
   align-items: center;
   gap: 0.25rem;
 }
@@ -118,28 +116,25 @@ type Todo = {
 /* ------- main start ------- */
 main {
   flex-grow: 1;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 1fr;
   gap: 1rem;
 }
 
 .actions {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto;
   gap: 0.5rem;
-  flex-wrap: wrap;
   align-items: flex-end;
 }
 
-.search-area {
-  flex-grow: 1;
-}
-
 .search-controls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1rem;
-  font-size: 0.875rem;
+  display: inline-grid;
+  grid-auto-flow: column;
   align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  justify-content: start;
 }
 
 .search-area input[type="search"] {
@@ -151,7 +146,8 @@ main {
 }
 
 .search-controls label {
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
   align-items: center;
   gap: 0.5rem;
 }
@@ -239,15 +235,16 @@ main {
 }
 
 .bulk-controls {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-auto-flow: column;
   gap: 1rem;
   justify-content: center;
   align-items: center;
 }
 
 .bulk-controls ul {
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
   gap: 1rem;
   list-style: none;
   margin: 0;
@@ -267,6 +264,7 @@ main {
 .bulk-controls button:hover {
   background-color: #029e58;
 }
+
 .bulk-controls .danger {
   border: 1px solid #e3342f;
   color: #e3342f;

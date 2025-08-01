@@ -73,7 +73,7 @@ watch(
         <h2>新規作成</h2>
 
         <button aria-label="ダイアログを閉じる" @click="emit('close')">
-          <img src="@/assets/close-gray.svg" alt="閉じる" />
+          ✕ 
         </button>
       </div>
 
@@ -115,8 +115,8 @@ watch(
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 1fr;
 }
 
 .dark .modal {
@@ -124,17 +124,18 @@ watch(
 }
 
 .modal-content {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 1fr;
   gap: 1.5rem;
   padding: 1rem;
 }
 
 .modal-header {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto;
   align-items: center;
 }
+
 .modal-header h2 {
   font-size: 1.125rem;
   font-weight: bold;
@@ -146,9 +147,8 @@ watch(
   padding: 0;
   margin: 0;
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-grid;
+  place-items: center;
 }
 
 .modal-header img {
@@ -156,16 +156,15 @@ watch(
 }
 
 form {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-auto-rows: min-content;
   gap: 1rem;
-  flex-grow: 1;
   font-size: 0.875rem;
+  height: 100%;
 }
 
 form > div {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 0.25rem;
 }
 

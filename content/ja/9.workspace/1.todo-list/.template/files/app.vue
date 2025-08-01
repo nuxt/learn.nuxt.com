@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Modal from './components/Modal.vue';
+import CreateTaskDrawer from './components/CreateTaskDrawer.vue';
 import type { Todo } from './types'
 
 /**
@@ -115,18 +115,18 @@ watch(showUnDoneOnly, (visibleOnly) => {
 <template>
   <div class="container">
     <header class="header">
-      <div class="header-left">
+      <div>
         <h1>Vue TODO Application</h1>
       </div>
       <div class="header-right">
-        <img src="@/assets/person-gray.svg" alt="ユーザー" />
+        👤
         <span>{{ userName }}</span>
       </div>
     </header>
 
     <main>
       <div class="actions">
-        <div class="search-area">
+        <div>
           <div class="search-controls">
             <div>
               <input
@@ -181,7 +181,7 @@ watch(showUnDoneOnly, (visibleOnly) => {
                   aria-label="未完了にする"
                   @click="todo.done = false"
                 >
-                  <img src="@/assets/check-circle-green.svg" alt="完了" />
+                  ✅
                 </button>
                 <button
                   v-else
@@ -190,7 +190,7 @@ watch(showUnDoneOnly, (visibleOnly) => {
                   aria-label="完了にする"
                   @click="todo.done = true"
                 >
-                  <img src="@/assets/check-circle-gray.svg" alt="未完了" />
+                  ⬜
                 </button>
               </td>
               <td>{{ todo.title }}</td>
@@ -220,7 +220,7 @@ watch(showUnDoneOnly, (visibleOnly) => {
       </div>
 
       <!-- 新規作成モーダル -->
-      <Modal
+      <CreateTaskDrawer
         :isOpen="isCreateDialogOpen"
         @close="isCreateDialogOpen = false"
         @submit="handleSubmitCreateTodo"
@@ -236,25 +236,23 @@ watch(showUnDoneOnly, (visibleOnly) => {
 <style scoped>
 .container {
   padding: 1rem 0 2.5rem;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
   gap: 2.5rem;
   min-height: 100vh;
 }
 
 /* ------- header start ------- */
 .header {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto;
   gap: 0.25rem;
   align-items: flex-end;
-  flex-wrap: wrap;
 }
 
-.header-left {
-  flex-grow: 1;
-}
 .header-right {
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
   align-items: center;
   gap: 0.25rem;
 }
@@ -278,28 +276,25 @@ watch(showUnDoneOnly, (visibleOnly) => {
 /* ------- main start ------- */
 main {
   flex-grow: 1;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 1fr;
   gap: 1rem;
 }
 
 .actions {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto;
   gap: 0.5rem;
-  flex-wrap: wrap;
   align-items: flex-end;
 }
 
-.search-area {
-  flex-grow: 1;
-}
-
 .search-controls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1rem;
-  font-size: 0.875rem;
+  display: inline-grid;
+  grid-auto-flow: column;
   align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  justify-content: start;
 }
 
 .search-area input[type="search"] {
@@ -311,7 +306,8 @@ main {
 }
 
 .search-controls label {
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
   align-items: center;
   gap: 0.5rem;
 }
@@ -399,15 +395,16 @@ main {
 }
 
 .bulk-controls {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-auto-flow: column;
   gap: 1rem;
   justify-content: center;
   align-items: center;
 }
 
 .bulk-controls ul {
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
   gap: 1rem;
   list-style: none;
   margin: 0;
@@ -427,6 +424,7 @@ main {
 .bulk-controls button:hover {
   background-color: #029e58;
 }
+
 .bulk-controls .danger {
   border: 1px solid #e3342f;
   color: #e3342f;
