@@ -58,18 +58,10 @@ type Todo = {
         <tbody>
           <tr v-for="todo in todos" :key="todo.id">
             <td class="text-center">
-              <button
-                v-if="todo.done"
-                type="button"
-                class="button-icon"
-              >
+              <button v-if="todo.done" type="button" class="button-icon">
                 ✅
               </button>
-              <button
-                v-else
-                type="button"
-                class="button-icon"
-              >
+              <button v-else type="button" class="button-icon">
                 ⬜
               </button>
             </td>
