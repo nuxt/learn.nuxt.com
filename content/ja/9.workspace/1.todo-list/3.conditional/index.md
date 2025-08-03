@@ -25,7 +25,7 @@ Vueでは `v-if` ディレクティブを使って、ブロックを条件に応
 
 ## 現在の実装の課題
 
-プレイグラウンドでは、ToDoリストの「完了」欄にボタンとアイコンを表示する部分で、まだ条件分岐ができていません：
+プレイグラウンドでは、ToDoリストの「完了」欄にボタンとアイコン（例として絵文字を使います）を表示する部分で、まだ条件分岐ができていません：
 
 ```vue
 <td class="text-center">
@@ -40,17 +40,17 @@ Vueでは `v-if` ディレクティブを使って、ブロックを条件に応
 
 `<td class="text-center">` 内に `v-if` と `v-else` を使って、完了状態（`todo.done`）に応じて異なるボタンとアイコンを表示してください：
 
-1. `todo.done` が `true` の場合：緑色のチェック付きアイコンを含むボタンを表示
-2. `todo.done` が `false` の場合：グレーの丸いアイコンを含むボタンを表示
+1. `todo.done` が `true` の場合：アイコン✅を含むボタンを表示
+2. `todo.done` が `false` の場合：アイコン⬜を含むボタンを表示
 3. 各ボタンには適切な `alt` 属性を設定してアクセシビリティを向上させます
 
 参考実装：
 ```vue
-<button v-if="todo.done" type="button" class="button-icon">
-  <img src="@/assets/check-circle-green.svg" alt="完了" />
+<button type="button" class="button-icon">
+  ✅
 </button>
-<button v-else type="button" class="button-icon">
-  <img src="@/assets/check-circle-gray.svg" alt="未完了" />
+<button type="button" class="button-icon">
+  ⬜
 </button>
 ```
 
