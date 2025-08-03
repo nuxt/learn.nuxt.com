@@ -13,8 +13,7 @@ Vue はデータの変更を監視して、変更された時に更新を自動�
 
 ```vue
 <script setup>
-// NOTE: Nuxt が Vueユーティリティを自動インポートしてくれるため不要
-// import { ref } from 'vue'
+import { ref } from 'vue'
 
 const userName = ref('')
 
