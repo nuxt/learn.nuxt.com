@@ -6,7 +6,6 @@ import type { Todo } from './types'
 /**
  * Data
  */
-const userName = ref("Vue Fes Japan");
 const todos = ref<Todo[]>([
   {
     id: 1,
@@ -121,7 +120,7 @@ watch(showUnDoneOnly, (visibleOnly) => {
       </div>
       <div class="header-right">
         👤
-        <span>{{ userName }}</span>
+        <span>Vue Fes Japan</span>
       </div>
     </header>
 
