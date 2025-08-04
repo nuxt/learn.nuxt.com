@@ -11,7 +11,7 @@ https://nuxt.com/docs/guide/concepts/auto-imports
 自動インポートは明示的にインポートすることなく、コンポーネント、コンポーザブル、および [Vue.js の API](https://vuejs.org/api/) をアプリケーション全体で使用できるように自動的にインポートする機能です。\
 従来のグローバル宣言とは異なり、Nuxt は型情報や IDE の補完、ヒントを保持し、本番コードで使用されているもののみを含めます。
 
-Nuxt のディレクトリ構造の規約おかげで、 `components/`、`composables/`、および `utils/` を自動的にインポートすることができます。\
+Nuxt のディレクトリ構造の規約のおかげで、 `components/`、`composables/`、および `utils/` を自動的にインポートすることができます。\
 この例では、`components` ディレクトリに定義された Counter.vue コンポーネントと、`composables` ディレクトリに定義された `useCounter.ts` を明示的なインポートなしで使用しています。\
 `app.vue` では Counter コンポーネントを使用し、`Counter.vue` では `useCounter()` を使用しています。
 
@@ -20,7 +20,7 @@ Nuxt のディレクトリ構造の規約おかげで、 `components/`、`compos
 他にも、データフェッチで利用する `useFetch()` コンポーザブルやランタイムの設定にアクセスする `useRuntimeConfig()` コンポーザブル、ページナビゲーションのための `navigateTo()` ユーティリティ関数などがあります。\
 たくさんあるので、そのほかのものは Nuxt 公式ドキュメントの [Components](https://nuxt.com/docs/api/components)、[Composables](https://nuxt.com/docs/api/composables)、[Utils](https://nuxt.com/docs/api/utils) のセクションを参照してください。
 
-また、Nuxt では明示的なインポートもサポートしており、この場合は `#import` からインポートすることが可能です。
+また、Nuxt では明示的なインポートもサポートしており、この場合は `#imports` からインポートすることが可能です。
 
 ```ts
 import { computed, ref } from '#imports'
