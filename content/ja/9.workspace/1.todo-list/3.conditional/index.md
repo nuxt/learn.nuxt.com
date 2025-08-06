@@ -12,10 +12,10 @@ Vueでは `v-if` ディレクティブを使って、ブロックを条件に応
 
 ```vue
 <button v-if="todo.done" type="button">
-  <img src="@/assets/check-circle-green.svg" alt="完了" />
+  ✅
 </button>
 <button v-else type="button">
-  <img src="@/assets/check-circle-gray.svg" alt="未完了" />
+  ⬜
 </button>
 ```
 

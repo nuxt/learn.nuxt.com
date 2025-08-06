@@ -150,8 +150,8 @@ function handleSendMessage(message: string) {
 
 ## 現在の実装の課題
 
-現在、プレイグラウンドのapp.vueに全てのコードがまとまっています。
-このままでも問題ありませんが、コンポーネント化することでコードの役割分担が明確になり、保守性や再利用性がに向上します。
+app.vueに定義されたtodosにTodoList.vueからアクセスすることができていません。
+`props` と `emit` を使用して、コンポーネント間でデータをやり取りできるようにしましょう。
 
 ## チャレンジ2
 
@@ -175,7 +175,9 @@ defineProps<{
 /*
  * Emit
  */
-const emit = defineEmits<{'update-done': [number, boolean]}>()
+const emit = defineEmits<{
+  'update-done': [number, boolean]
+}>()
 </script>
 ```
 
