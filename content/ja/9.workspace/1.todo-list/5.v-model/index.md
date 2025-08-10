@@ -77,7 +77,7 @@ Vueでは v-model ディレクティブを使うことで、フォーム要素�
 1. `<input>`の`@change`イベントを使い、ユーザーがチェックボックスをクリックしたタイミングで`showUnDoneOnly`の値を切り替えましょう。これにより、`showUnDoneOnly`が操作に連動して変更されるようになります。
 
 ```vue
-<input 
+<input
     :value="showUnDoneOnly" 
     type="checkbox" 
     @change="showUnDoneOnly = !showUnDoneOnly"
