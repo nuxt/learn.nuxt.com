@@ -4,7 +4,7 @@ export const meta: GuideMeta = {
   startingFile: 'app.vue',
   features: {
     terminal: false,
-    fileTree: false,
+    fileTree: true,
     navigation: false,
   },
 }

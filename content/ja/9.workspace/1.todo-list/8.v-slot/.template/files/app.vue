@@ -23,17 +23,16 @@ const todos = ref<Todo[]>([
 ]);
 const showUnDoneOnly = ref(false);
 const isCreateModalOpen = ref(false);
+// TODO: 各フォーム入力欄に対応するリアクティブ変数（`ref`）を用意する
 
 /**
  * Computed
  */
 const filteredTodos = computed(() => {
-  // チェックが外れている場合は全て表示
   if (!showUnDoneOnly.value) {
       return todos.value;
   }
 
-  // チェックが入っている場合は「未完了だけ」
   return todos.value.filter(todo => !todo.done);
 });
 
@@ -47,6 +46,8 @@ const updateDone = (id: number, done: boolean) => {
     targetTodo.done = done
   }
 }
+
+// TODO: 「登録」ボタンクリックイベントに渡す関数を用意し、新規Todoオブジェクトを追加する
 
 /**
  * Type
@@ -92,8 +93,11 @@ type Todo = {
 
 
       <!-- 新規作成モーダル -->
-      <!-- TODO: isCreateModalOpenを渡す  -->
-      <CreateModal v-if="isCreateModalOpen"/>
+       <!-- TODO: `CreateModal.vue`の`<slot>`に、新規todo入力フォームを差し込む -->
+      <CreateModal
+        v-if="isCreateModalOpen"
+        v-model="isCreateModalOpen"
+      />
     </main>
 
     <footer class="footer">
@@ -179,6 +183,29 @@ button:hover {
   background-color: #029E58;
 }
 /* ------- actions last ------- */
+
+/* ------- form start ------- */
+form {
+  display: grid;
+  grid-auto-rows: min-content;
+  gap: 1rem;
+  font-size: 0.875rem;
+  height: 100%;
+}
+
+form > div {
+  display: grid;
+  gap: 0.25rem;
+}
+
+input,
+textarea {
+  padding: 0.375rem 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+}
+
+/* ------- form last ------- */
 
 /* footer */
 .footer {

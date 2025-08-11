@@ -23,17 +23,18 @@ const todos = ref<Todo[]>([
 ]);
 const showUnDoneOnly = ref(false);
 const isCreateModalOpen = ref(false);
+const inputTitile = ref('')
+const inputNote = ref('')
+const inputDate = ref('')
 
 /**
  * Computed
  */
 const filteredTodos = computed(() => {
-  // チェックが外れている場合は全て表示
   if (!showUnDoneOnly.value) {
       return todos.value;
   }
 
-  // チェックが入っている場合は「未完了だけ」
   return todos.value.filter(todo => !todo.done);
 });
 
@@ -46,6 +47,21 @@ const updateDone = (id: number, done: boolean) => {
   if (targetTodo) {
     targetTodo.done = done
   }
+}
+
+const handleSubmit = () => {
+  const newTodo: Todo = {
+    id: Date.now(),
+    done: false,
+    title: inputTitile.value,
+    note: inputNote.value,
+    dueDate: inputDate.value
+  }
+
+  todos.value = [
+    newTodo,
+    ...todos.value
+  ]
 }
 
 /**
@@ -92,8 +108,31 @@ type Todo = {
 
 
       <!-- 新規作成モーダル -->
-      <!-- TODO: isCreateModalOpenを渡す  -->
-      <CreateModal v-if="isCreateModalOpen"/>
+      <CreateModal
+        v-if="isCreateModalOpen"
+        v-model="isCreateModalOpen"
+      >
+        <form>
+          <div>
+            <label for="title">タイトル</label>
+            <input id="title" v-model="inputTitile" type="text" required />
+          </div>
+
+          <div>
+            <label for="note">メモ</label>
+            <textarea id="note" v-model="inputNote" rows="2" />
+          </div>
+
+          <div>
+            <label for="dueDate">期限</label>
+            <input id="dueDate" v-model="inputDate" type="date" />
+          </div>
+
+          <div>
+            <button type="button" @click="handleSubmit">登録</button>
+          </div>
+        </form>
+      </CreateModal>
     </main>
 
     <footer class="footer">
@@ -179,6 +218,29 @@ button:hover {
   background-color: #029E58;
 }
 /* ------- actions last ------- */
+
+/* ------- form start ------- */
+form {
+  display: grid;
+  grid-auto-rows: min-content;
+  gap: 1rem;
+  font-size: 0.875rem;
+  height: 100%;
+}
+
+form > div {
+  display: grid;
+  gap: 0.25rem;
+}
+
+input,
+textarea {
+  padding: 0.375rem 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+}
+
+/* ------- form last ------- */
 
 /* footer */
 .footer {

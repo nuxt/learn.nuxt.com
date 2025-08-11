@@ -48,10 +48,6 @@ const updateDone = (id: number, done: boolean) => {
   }
 }
 
-const handleSubmitCreateTodo = (newTodo: Todo) => {
-  todos.value.unshift({ ...newTodo });
-}
-
 /**
  * Type
  */
