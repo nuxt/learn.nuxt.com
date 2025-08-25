@@ -4,10 +4,8 @@ ogImage: true
 
 # コンポーネント化 パート１
 
-
 Vue.js のコンポーネントは、UI を小さな再利用可能な部分に分割するための基本的な単位です。\
 特に Single File Components (SFC) を使うことで、HTML、CSS、および JavaScript を 1 つの `.vue` ファイルにまとめることができます。
-
 
 ## 基本的な SFC の構造
 
@@ -31,7 +29,6 @@ import Child from './Child.vue'
 </template>
 ```
 
-
 ## 現在の実装の課題
 
 現在、プレイグラウンドのapp.vueに全てのコードがまとまっています。
@@ -39,12 +36,13 @@ import Child from './Child.vue'
 
 ## チャレンジ1
 
-`app.vue`にある`<table></tabue>`を`components/TodoList.vue`に切り出してみましょう
+`app.vue`にある`<table></table>`を`components/TodoList.vue`に切り出してみましょう
 
-1. `app.vue`の`<table></tabue>`を`TodoList.vue`の`<template>`内に移動しましょう
+1. `app.vue`の`<table></table>`を`TodoList.vue`の`<template>`内に移動しましょう
 2. `app.vue`の`/* --- table start --- */`から`/* --- table last --- */`までを`TodoList.vue`の`<style scoped>`内に移動しましょう
 
 ## コンポーネント間のデータの受け渡し
+
 app.vueがすっきりとしました。
 
 ただこのままでは、TodoList.vue側でapp.vueに定義された値にアクセスすることができません。
@@ -163,6 +161,7 @@ app.vueに定義されたtodosにTodoList.vueからアクセスすることが�
 5. `app.vue`で`TodoList.vue`から受け取ったイベントを利用して`updateDone`を実行しましょう
 
 参考実装：
+
 ```vue
 <script setup lang="ts">
 /**
@@ -181,10 +180,10 @@ const emit = defineEmits<{
 </script>
 ```
 
-
 ## 実装後の効果
 
 コンポーネント化すると：
+
 - 関心ごと（表示とロジック）が分割され、コードの見通しが良くなる
 - 複数のコンポーネントで同じUIパーツを再利用できるようになる
 - 親子間のデータ受け渡し（props・emit）を通じて状態管理が整理され、チーム開発や拡張がしやすくなる
