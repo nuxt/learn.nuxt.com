@@ -24,7 +24,7 @@ const paddingLeft = computed(() => `${0.5 + props.level * 0.8}rem`)
 </script>
 
 <template>
-  <div class="content-nav-item">
+  <div v-if="resolved" class="content-nav-item">
     <template v-if="resolved.children?.length">
       <details :open="route.path.includes(resolved.path)">
         <summary>
@@ -33,8 +33,8 @@ const paddingLeft = computed(() => `${0.5 + props.level * 0.8}rem`)
             hover="text-primary bg-active"
             :style="{ paddingLeft }"
           >
-            <div class="caret" i-ph-caret-right-duotone text-sm op50 transition duration-400 />
-            <div i-ph-folder-simple-duotone />
+            <div class="caret" i-ph-caret-right-duotone flex-none text-sm op50 transition duration-400 />
+            <div i-ph-folder-simple-duotone flex-none />
             <div ml1>
               {{ resolved.title }}
             </div>
@@ -60,8 +60,8 @@ const paddingLeft = computed(() => `${0.5 + props.level * 0.8}rem`)
       hover="text-primary bg-active "
       @click="ui.isContentDropdownShown = false"
     >
-      <div i-ph-caret-right-duotone class="caret" text-sm op0 />
-      <div i-ph-file-duotone />
+      <div class="caret" i-ph-caret-right-duotone flex-none text-sm op0 />
+      <div i-ph-file-duotone flex-none />
       <div ml1>
         {{ resolved.title }}
       </div>

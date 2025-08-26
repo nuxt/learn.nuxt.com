@@ -68,7 +68,7 @@ const panelInitEditor = computed(() => isMounted.value || {
           border="b base dashed"
           bg-faded px4 py2
         >
-          <div i-ph-tree-structure-duotone />
+          <div i-ph-tree-structure-duotone flex-none />
           <span text-sm>{{ $t('files') }}</span>
         </div>
         <div py2>
