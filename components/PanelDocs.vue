@@ -100,7 +100,7 @@ router.beforeEach(() => {
 
 <template>
   <div grid="~ rows-[max-content_1fr]" relative h-full>
-    <div flex="~ gap-x-2 items-center wrap" border="b base dashed" bg-faded px4 py2>
+    <div flex="~ gap-x-2 gap-y-1 items-center wrap" border="b base dashed" bg-faded px4 py2>
       <div i-ph-book-duotone flex-none />
       <template v-for="bc, idx of breadcrumbs" :key="bc.path">
         <div v-if="idx !== 0" i-ph-caret-right mx--1 text-sm op50 />
@@ -109,7 +109,7 @@ router.beforeEach(() => {
         </NuxtLink>
       </template>
       <button
-        h-full flex-auto
+        h-1em flex-auto
         @click="ui.isContentDropdownShown = !ui.isContentDropdownShown"
       />
       <button

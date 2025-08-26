@@ -3,60 +3,60 @@ patchedDependencies:
   splitpanes@3.1.5: patches/splitpanes@3.1.5.patch
 catalogs:
   dev:
-    '@antfu/eslint-config': ^4.15.0
-    '@intlify/eslint-plugin-vue-i18n': ^4.0.1
-    '@unocss/eslint-plugin': ^66.2.3
-    eslint: ^9.29.0
+    '@antfu/eslint-config': ^5.2.1
+    '@intlify/eslint-plugin-vue-i18n': ^4.1.0
+    '@unocss/eslint-plugin': ^66.4.2
+    eslint: ^9.34.0
     eslint-plugin-format: ^1.0.1
     execa: ^9.6.0
     fast-glob: ^3.3.3
     rehype-external-links: ^3.0.0
-    typescript: ^5.8.3
-    vue-tsc: ^2.2.10
+    typescript: ^5.9.2
+    vue-tsc: ^3.0.6
   frontend:
-    '@shikijs/core': ^3.6.0
-    '@shikijs/monaco': ^3.6.0
-    '@volar/monaco': ~2.4.14
-    '@vue/language-service': ^2.2.10
+    '@shikijs/core': ^3.11.0
+    '@shikijs/monaco': ^3.11.0
+    '@volar/monaco': ~2.4.23
+    '@vue/language-service': ^3.0.6
     '@webcontainer/api': ^1.6.1
     '@xterm/addon-fit': ^0.10.0
     '@xterm/xterm': ^5.5.0
-    birpc: ^2.4.0
+    birpc: ^2.5.0
     floating-vue: ^5.2.2
     fuse.js: ^7.1.0
     jszip: ^3.10.1
-    monaco-editor: ^0.50.0
-    monaco-editor-core: ^0.50.0
+    monaco-editor: ^0.52.2
+    monaco-editor-core: ^0.52.2
     pathe: ^2.0.3
-    shiki: ^3.6.0
+    shiki: ^3.11.0
     splitpanes: 3.1.5
-    strip-json-comments: ^5.0.2
-    theme-vitesse: ^0.8.3
+    strip-json-comments: ^5.0.3
+    theme-vitesse: ^1.0.0
     vscode-uri: ^3.1.0
-    vue: ^3.5.17
+    vue: ^3.5.20
     vue-router: ^4.5.1
   icons:
-    '@iconify-json/carbon': ^1.2.9
-    '@iconify-json/catppuccin': ^1.2.11
-    '@iconify-json/logos': ^1.2.4
+    '@iconify-json/carbon': ^1.2.13
+    '@iconify-json/catppuccin': ^1.2.16
+    '@iconify-json/logos': ^1.2.9
     '@iconify-json/ph': ^1.2.2
-    '@iconify-json/svg-spinners': ^1.2.2
+    '@iconify-json/svg-spinners': ^1.2.4
   nuxt:
-    '@nuxt/content': ^3.6.0
-    '@nuxt/devtools': ^2.5.0
-    '@nuxt/eslint': ^1.4.1
-    '@nuxt/icon': ^1.14.0
-    '@nuxt/image': ^1.10.0
-    '@nuxt/kit': ^3.17.5
+    '@nuxt/content': ^3.6.3
+    '@nuxt/devtools': ^2.6.3
+    '@nuxt/eslint': ^1.9.0
+    '@nuxt/icon': ^2.0.0
+    '@nuxt/image': ^1.11.0
+    '@nuxt/kit': ^4.0.3
     '@nuxtjs/color-mode': ^3.5.2
-    '@nuxtjs/i18n': ^9.5.5
+    '@nuxtjs/i18n': ^10.0.6
     '@nuxtjs/seo': ^3.1.0
-    '@pinia/nuxt': ^0.11.1
-    '@unocss/extractor-mdc': ^66.2.3
-    '@unocss/nuxt': ^66.2.3
-    '@vueuse/nuxt': ^13.3.0
-    nuxi: ^3.25.1
-    nuxt: ^3.17.5
+    '@pinia/nuxt': ^0.11.2
+    '@unocss/extractor-mdc': ^66.4.2
+    '@unocss/nuxt': ^66.4.2
+    '@vueuse/nuxt': ^13.7.0
+    nuxi: ^3.28.0
+    nuxt: ^4.0.3
 onlyBuiltDependencies:
   - '@parcel/watcher'
   - better-sqlite3
