@@ -17,7 +17,7 @@ catalogs:
     '@shikijs/core': ^3.11.0
     '@shikijs/monaco': ^3.11.0
     '@volar/monaco': ~2.4.23
-    '@vue/language-service': ^3.0.6
+    '@vue/language-service': ^2.2.12
     '@webcontainer/api': ^1.6.1
     '@xterm/addon-fit': ^0.10.0
     '@xterm/xterm': ^5.5.0

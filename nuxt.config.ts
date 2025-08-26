@@ -141,7 +141,6 @@ export default defineNuxtConfig({
         file: 'ja.yaml',
       },
     ],
-    lazy: true,
     strategy: 'prefix',
     defaultLocale: 'en',
     detectBrowserLanguage: {
@@ -149,9 +148,7 @@ export default defineNuxtConfig({
       cookieKey: 'i18n_redirected',
       redirectOn: 'root',
     },
-    experimental: {
-      autoImportTranslationFunctions: true,
-    },
+    autoDeclare: true,
   },
 
   ogImage: {

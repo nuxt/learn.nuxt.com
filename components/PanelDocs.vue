@@ -40,7 +40,7 @@ interface BreadcrumbItem {
 
 function findNavItemFromPath(
   path: string,
-  items: ContentNavigationItem[] | null = navigation.value,
+  items: ContentNavigationItem[] | null | undefined = navigation.value,
 ): ContentNavigationItem | undefined {
   const item = items?.find(i => i.path === path)
   if (item)

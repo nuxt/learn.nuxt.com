@@ -34,7 +34,7 @@ function startDragging() {
 
 function endDragging(e: { size: number }[]) {
   ui.isPanelDragging = false
-  ui.panelFileTree = e[0].size
+  ui.panelFileTree = e[0]?.size || 0
 }
 
 // For panes size initialization on SSR
@@ -95,7 +95,7 @@ const panelInitEditor = computed(() => isMounted.value || {
           bg-faded px4 py2
         >
           <FileIcon :path="play.fileSelected?.filepath || ''" />
-          <span flex-auto text-sm>{{ play.fileSelected?.filepath || 'Editor' }}</span>
+          <span flex-auto text-sm>{{ play.fileSelected?.filepath || $t('editor') }}</span>
           <ButtonShowSolution
             my--1 mr--3 flex-none rounded px2 py1 text-sm op50
             hover="bg-active op100"
