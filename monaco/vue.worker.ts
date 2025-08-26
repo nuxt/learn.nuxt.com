@@ -85,8 +85,9 @@ self.onmessage = () => {
           asFileName,
         ),
       ],
-      languageServicePlugins: getFullLanguageServicePlugins(ts),
+      languageServicePlugins: getFullLanguageServicePlugins(ts) as any,
       setup({ project }) {
+        // @ts-expect-error missing types
         project.vue = { compilerOptions: vueCompilerOptions }
       },
     })

@@ -80,7 +80,9 @@ useEventListener('keydown', (e) => {
         e.preventDefault()
         return
       case 'Enter': {
-        runCommand(commands.commandsResult[selected.value])
+        const command = commands.commandsResult[selected.value]
+        if (command)
+          runCommand(command)
         e.preventDefault()
         break
       }

@@ -15,18 +15,24 @@ function startDragging() {
 
 function endDraggingVertical(e: { size: number }[]) {
   ui.isPanelDragging = false
-  ui.panelDocs = e[0].size
+  if (e) {
+    ui.panelDocs = e[0]?.size || 0
+  }
 }
 
 function endDraggingHorizontal(e: { size: number }[]) {
   ui.isPanelDragging = false
-  ui.panelEditor = e[0].size
-  ui.panelPreview = e[1].size
+  if (e) {
+    ui.panelEditor = e[0]?.size || 0
+    ui.panelPreview = e[1]?.size || 0
+  }
 }
 
 function draggingEmbeddedDocs(e: { size: number }[]) {
   ui.isPanelDragging = true
-  ui.panelDocs = e[0].size
+  if (e) {
+    ui.panelDocs = e[0]?.size || 0
+  }
 }
 
 const terminalPaneProps = computed(() => {
