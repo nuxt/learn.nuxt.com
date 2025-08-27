@@ -13,7 +13,11 @@ const { data: page } = useAsyncData(`${locale.value}-${route.path}`, () => {
     .first()
 })
 const { data: navigation } = useAsyncData(`${locale.value}-navigation`, () => {
-  return queryCollectionNavigation(collection.value)
+  return queryCollectionNavigation(collection.value, [
+    'title',
+    'meta',
+    'path',
+  ])
 })
 const { data: surroundings } = useAsyncData(`${locale.value}-${route.path}-surroundings`, () => {
   return queryCollectionItemSurroundings(collection.value, route.path, {
@@ -162,7 +166,13 @@ router.beforeEach(() => {
 
           absolute left-0 right-0 top-0 max-h-60vh overflow-y-auto bg-base py2 backdrop-blur-10 important-bg-opacity-80
         >
-          <ContentNavItem v-for="item of navigation" :key="item.path" :item="item" />
+          <ContentNavItem
+            v-for="item of navigation"
+            :key="item.path"
+            :item="item"
+            :current="route.path"
+            :level="1"
+          />
         </div>
       </Transition>
     </div>

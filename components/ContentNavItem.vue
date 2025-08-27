@@ -5,6 +5,7 @@ const props = withDefaults(
   defineProps<{
     item: ContentNavigationItem
     level?: number
+    current?: string
   }>(),
   {
     level: 0,
@@ -24,7 +25,7 @@ const paddingLeft = computed(() => `${0.5 + props.level * 0.8}rem`)
 </script>
 
 <template>
-  <div v-if="resolved" class="content-nav-item">
+  <div v-if="resolved && (!(resolved.meta as any)?.unlisted || current?.startsWith(resolved.path))" class="content-nav-item">
     <template v-if="resolved.children?.length">
       <details :open="route.path.includes(resolved.path)">
         <summary>
@@ -45,6 +46,7 @@ const paddingLeft = computed(() => `${0.5 + props.level * 0.8}rem`)
             v-for="child of resolved.children"
             :key="child.path"
             :item="child"
+            :current="current"
             :level="props.level + 1"
           />
         </div>
