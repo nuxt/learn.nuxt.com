@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { computed, ref } from 'vue'
 import TodoList from './components/TodoList.vue'
 
 /**
@@ -9,20 +9,20 @@ const todos = ref<Todo[]>([
   {
     id: 1,
     done: false,
-    title: "Vue Fes Japan 2025のチケット販売開始の宣伝をする",
-    note: "XとBlueskyで宣伝する。\n会社のslackでも宣伝する。",
-    dueDate: "2025-10-24",
+    title: 'Vue Fes Japan 2025のチケット販売開始の宣伝をする',
+    note: 'XとBlueskyで宣伝する。\n会社のslackでも宣伝する。',
+    dueDate: '2025-10-24',
   },
   {
     id: 2,
     done: true,
-    title: "Vue Fes Japan ボランティアスタッフに応募する",
-    note: "",
-    dueDate: "",
+    title: 'Vue Fes Japan ボランティアスタッフに応募する',
+    note: '',
+    dueDate: '',
   },
-]);
-const showUnDoneOnly = ref(false);
-const isCreateModalOpen = ref(false);
+])
+const showUnDoneOnly = ref(false)
+const isCreateModalOpen = ref(false)
 // TODO: 各フォーム入力欄に対応するリアクティブ変数（`ref`）を用意する
 
 /**
@@ -30,16 +30,16 @@ const isCreateModalOpen = ref(false);
  */
 const filteredTodos = computed(() => {
   if (!showUnDoneOnly.value) {
-      return todos.value;
+    return todos.value
   }
 
-  return todos.value.filter(todo => !todo.done);
-});
+  return todos.value.filter(todo => !todo.done)
+})
 
 /**
  * Methods
  */
-const updateDone = (id: number, done: boolean) => {
+function updateDone(id: number, done: boolean) {
   const targetTodo = todos.value.find(todo => todo.id === id)
 
   if (targetTodo) {
@@ -52,13 +52,13 @@ const updateDone = (id: number, done: boolean) => {
 /**
  * Type
  */
-type Todo = {
-  id: number;
-  done: boolean;
-  title: string;
-  note: string;
-  dueDate: string;
-};
+interface Todo {
+  id: number
+  done: boolean
+  title: string
+  note: string
+  dueDate: string
+}
 </script>
 
 <template>
@@ -81,19 +81,20 @@ type Todo = {
               <input
                 v-model="showUnDoneOnly"
                 type="checkbox"
-              />
+              >
               未完了のみ表示
             </label>
           </div>
         </div>
-        <button type="button" @click="isCreateModalOpen = true">新規作成</button>
+        <button type="button" @click="isCreateModalOpen = true">
+          新規作成
+        </button>
       </div>
 
-      <TodoList :todos="filteredTodos" @update-done="updateDone"/>
-
+      <TodoList :todos="filteredTodos" @update-done="updateDone" />
 
       <!-- 新規作成モーダル -->
-       <!-- TODO: `CreateModal.vue`の`<slot>`に、新規todo入力フォームを差し込む -->
+      <!-- TODO: `CreateModal.vue`の`<slot>`に、新規todo入力フォームを差し込む -->
       <CreateModal
         v-if="isCreateModalOpen"
         v-model="isCreateModalOpen"
@@ -174,13 +175,13 @@ button {
   border-radius: 0.375rem;
   border: none;
   font-size: 0.875rem;
-  background-color: #02C169;
+  background-color: #02c169;
   color: #fff;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #029E58;
+  background-color: #029e58;
 }
 /* ------- actions last ------- */
 

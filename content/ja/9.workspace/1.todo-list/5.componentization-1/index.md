@@ -175,7 +175,7 @@ defineProps<{
  * Emit
  */
 const emit = defineEmits<{
-  'update-done': [number, boolean]
+  updateDone: [number, boolean]
 }>()
 </script>
 ```

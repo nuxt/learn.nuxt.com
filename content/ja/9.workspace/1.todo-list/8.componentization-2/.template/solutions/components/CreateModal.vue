@@ -1,10 +1,8 @@
 <script setup lang="ts">
-
 /**
  * DefineModel
  */
 const isCreateModalOpen = defineModel()
-
 </script>
 
 <template>
@@ -61,18 +59,17 @@ const isCreateModalOpen = defineModel()
   font-weight: bold;
 }
 
-
 button {
   padding: 0.375rem 1rem;
   border-radius: 0.375rem;
   border: none;
   font-size: 0.875rem;
-  background-color: #02C169;
+  background-color: #02c169;
   color: #fff;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #029E58;
+  background-color: #029e58;
 }
 </style>

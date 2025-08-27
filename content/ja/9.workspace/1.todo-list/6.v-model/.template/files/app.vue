@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from 'vue'
 import TodoList from './components/TodoList.vue'
 
 /**
@@ -9,24 +9,24 @@ const todos = ref<Todo[]>([
   {
     id: 1,
     done: false,
-    title: "Vue Fes Japan 2025のチケット販売開始の宣伝をする",
-    note: "XとBlueskyで宣伝する。\n会社のslackでも宣伝する。",
-    dueDate: "2025-10-24",
+    title: 'Vue Fes Japan 2025のチケット販売開始の宣伝をする',
+    note: 'XとBlueskyで宣伝する。\n会社のslackでも宣伝する。',
+    dueDate: '2025-10-24',
   },
   {
     id: 2,
     done: true,
-    title: "Vue Fes Japan ボランティアスタッフに応募する",
-    note: "",
-    dueDate: "",
+    title: 'Vue Fes Japan ボランティアスタッフに応募する',
+    note: '',
+    dueDate: '',
   },
-]);
-const showUnDoneOnly = ref(false);
+])
+const showUnDoneOnly = ref(false)
 
 /**
  * Methods
  */
-const updateDone = (id: number, done: boolean) => {
+function updateDone(id: number, done: boolean) {
   const targetTodo = todos.value.find(todo => todo.id === id)
 
   if (targetTodo) {
@@ -37,13 +37,13 @@ const updateDone = (id: number, done: boolean) => {
 /**
  * Type
  */
-type Todo = {
-  id: number;
-  done: boolean;
-  title: string;
-  note: string;
-  dueDate: string;
-};
+interface Todo {
+  id: number
+  done: boolean
+  title: string
+  note: string
+  dueDate: string
+}
 </script>
 
 <template>
@@ -66,15 +66,15 @@ type Todo = {
             <label>
               <input
                 :value="showUnDoneOnly"
-                type="checkbox" 
-              />
+                type="checkbox"
+              >
               未完了のみ表示
             </label>
           </div>
         </div>
       </div>
 
-      <TodoList :todos="todos" @update-done="updateDone"/>
+      <TodoList :todos="todos" @update-done="updateDone" />
     </main>
 
     <footer class="footer">

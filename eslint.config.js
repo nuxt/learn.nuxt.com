@@ -40,6 +40,9 @@ export default antfu(
       files: ['content/**'],
       rules: {
         '@intlify/vue-i18n/no-raw-text': 'off',
+        'vue/valid-template-root': 'off',
+        'vue/valid-v-on': 'off',
+        'unused-imports/no-unused-vars': 'off',
       },
     },
   )

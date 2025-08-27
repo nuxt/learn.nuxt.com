@@ -17,11 +17,11 @@ import { ref } from 'vue'
 
 const userName = ref('')
 
-const setNameUser1 = () => {
+function setNameUser1() {
   userName.value = 'ユーザー１'
 }
 
-const setNameUser2 = () => {
+function setNameUser2() {
   userName.value = 'ユーザー２'
 }
 </script>
@@ -30,8 +30,12 @@ const setNameUser2 = () => {
   <div>
     <p>ユーザー名： {{ userName }}</p>
 
-    <button @click="setNameUser1">ユーザー１をセット</button>
-    <button @click="setNameUser2">ユーザー２をセット</button>
+    <button @click="setNameUser1">
+      ユーザー１をセット
+    </button>
+    <button @click="setNameUser2">
+      ユーザー２をセット
+    </button>
   </div>
 </template>
 ```
@@ -41,24 +45,27 @@ const setNameUser2 = () => {
 プレイグラウンドで`let userName`を用意し、「ユーザー名をセット」ボタンを押したら`userName`に任意のユーザー名が入るようにしています。
 
 ```vue
-  <script setup lang='ts'>
-    let userName = "No Name";
+<script setup lang='ts'>
+let userName = 'No Name'
 
-    const setUserName = () => {
-      userName = "Vue Fes Japan"
-    }
-  </script>
+function setUserName() {
+  userName = 'Vue Fes Japan'
+}
+</script>
 
-  <template>
-    <div class="header-right">
-      <button @click="setUserName">ユーザー名をセット</button>
-      👤
-      <span>{{ userName }}</span>
-    </div>
-  </template>
+<template>
+  <div class="header-right">
+    <button @click="setUserName">
+      ユーザー名をセット
+    </button>
+    👤
+    <span>{{ userName }}</span>
+  </div>
+</template>
 ```
 
 この方法では：
+
 - userNameがリアクティブではないため、値の変化をVueのリアクティブシステムが検知できない。
 - userName = 'Vue Fes Japan'のように値を変えても、画面への自動更新が起きない。
 
@@ -77,6 +84,7 @@ userNameを`ref`を使ってリアクティブな値にし、値の変化を検�
 ## 実装後の効果
 
 `ref` を使用すると：
+
 - データの変更をVueが自動で検知し、UIがリアルタイムに更新されるようになった
 - 変更を反映するための手動操作が不要になり、開発効率が向上した
 

@@ -8,7 +8,10 @@ Vueでは v-model ディレクティブを使うことで、フォーム要素�
 
 ```vue
 <input v-model="text" type="text" />
-<p>{{ text }}</p>
+
+<p>
+{{ text }}
+</p>
 ```
 
 この例では、入力欄（input）に文字を入力すると `text` データが即時に変更され、下の `<p>` に反映されます。`text` の値をJavaScriptから変更すると、input欄の表示も自動的に変わります。
@@ -19,22 +22,25 @@ Vueでは v-model ディレクティブを使うことで、フォーム要素�
 
 ```vue
 <input v-model="message" />
+
 <!-- と同じ -->
 <input :value="message" @input="message = $event.target.value" />
 ```
 
 フォームタイプごとにバインドされる属性やイベントが異なります：
 
-- テキスト・テキストエリア：`value` 属性と `input` イベント  
-- チェックボックス・ラジオ：`checked` 属性と `change` イベント  
-- セレクトボックス：`value` 属性と `change` イベント  
-
+- テキスト・テキストエリア：`value` 属性と `input` イベント
+- チェックボックス・ラジオ：`checked` 属性と `change` イベント
+- セレクトボックス：`value` 属性と `change` イベント
 
 たとえばテキスト入力フォームにはこう使います：
 
 ```vue
 <input v-model="newTodoText" type="text" placeholder="新しいタスクを入力" />
-<button @click="addTodo">追加</button>
+
+<button @click="addTodo">
+追加
+</button>
 ```
 
 `v-model="newTodoText"` で、入力内容が常に `newTodoText` 変数に格納されます。
@@ -49,23 +55,24 @@ Vueでは v-model ディレクティブを使うことで、フォーム要素�
 
 <!-- MyInput.vue（子コンポーネント） -->
 <script setup>
-    const modelValue = defineModel()
+const modelValue = defineModel()
 </script>
 
 <template>
-    <input v-model="modelValue" />
+  <input v-model="modelValue">
 </template>
 ```
 
 ## 注意点とコツ
 
-- `v-model`とHTMLの `value` を併用すると`value`は無効になります 
+- `v-model`とHTMLの `value` を併用すると`value`は無効になります
 - `v-model` とイベントハンドラ（例：`@change`）を併用すると動作に注意が必要
 - データの加工やカスタム検証が必要な場合は、「`v-bind`」と「`v-on`」で個別制御が便利
 
 ## チャレンジ
 
 今のプレイグラウンドでは、「未完了のみ」チェックボックスを実装しようとしています。
+
 ```vue
 <input :value="showUnDoneOnly" type="checkbox" />
 未完了のみ表示
@@ -78,20 +85,18 @@ Vueでは v-model ディレクティブを使うことで、フォーム要素�
 
 ```vue
 <input
-    :value="showUnDoneOnly" 
-    type="checkbox" 
+    :value="showUnDoneOnly"
+    type="checkbox"
     @change="showUnDoneOnly = !showUnDoneOnly"
 />
-
 ```
 
 2. 次に、`:valueをv-model`に切り替えて、`@change`イベントでの値の変更は削除しましょう。そうすることで、Vueの双方向バインディングによって値が自動的に同期されるようになります。
 
 ## 実装後の効果
 
-- 入力欄やチェックボックスとデータがリアルタイムに連動  
-- フォームの状態管理がシンプルかつ直感的に  
-- バリデーションやカスタムイベントも組み合わせて応用可能  
+- 入力欄やチェックボックスとデータがリアルタイムに連動
+- フォームの状態管理がシンプルかつ直感的に
+- バリデーションやカスタムイベントも組み合わせて応用可能
 
- 
 `v-model`を使って直感的にフォーム機能を使えるようになりました！

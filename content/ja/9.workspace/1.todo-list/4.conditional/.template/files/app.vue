@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-
+import { ref } from 'vue'
 
 /**
  * Data
@@ -9,29 +8,29 @@ const todos = ref<Todo[]>([
   {
     id: 1,
     done: false,
-    title: "Vue Fes Japan 2025のチケット販売開始の宣伝をする",
-    note: "XとBlueskyで宣伝する。\n会社のslackでも宣伝する。",
-    dueDate: "2025-10-24",
+    title: 'Vue Fes Japan 2025のチケット販売開始の宣伝をする',
+    note: 'XとBlueskyで宣伝する。\n会社のslackでも宣伝する。',
+    dueDate: '2025-10-24',
   },
   {
     id: 2,
     done: true,
-    title: "Vue Fes Japan ボランティアスタッフに応募する",
-    note: "",
-    dueDate: "",
+    title: 'Vue Fes Japan ボランティアスタッフに応募する',
+    note: '',
+    dueDate: '',
   },
-]);
+])
 
 /**
  * Type
  */
-type Todo = {
-  id: number;
-  done: boolean;
-  title: string;
-  note: string;
-  dueDate: string;
-};
+interface Todo {
+  id: number
+  done: boolean
+  title: string
+  note: string
+  dueDate: string
+}
 </script>
 
 <template>
@@ -57,15 +56,19 @@ type Todo = {
           </tr>
         </thead>
         <tbody>
-            <tr v-for="todo in todos" :key="todo.id">
-              <td class="text-center">
-                <!-- ここに v-if/v-else でアイコンを切り替える処理を追加 -->
-                {{ todo.done }}
-              </td>
-              <td>{{ todo.title }}</td>
-              <td><div class="multiline">{{ todo.note }}</div></td>
-              <td>{{ todo.dueDate }}</td>
-            </tr>
+          <tr v-for="todo in todos" :key="todo.id">
+            <td class="text-center">
+              <!-- ここに v-if/v-else でアイコンを切り替える処理を追加 -->
+              {{ todo.done }}
+            </td>
+            <td>{{ todo.title }}</td>
+            <td>
+              <div class="multiline">
+                {{ todo.note }}
+              </div>
+            </td>
+            <td>{{ todo.dueDate }}</td>
+          </tr>
         </tbody>
       </table>
     </main>
@@ -115,7 +118,6 @@ type Todo = {
 }
 /* ------- header last ------- */
 
-
 /* ------- main start ------- */
 main {
   flex-grow: 1;
@@ -140,7 +142,7 @@ main {
   justify-content: start;
 }
 
-.search-area input[type="search"] {
+.search-area input[type='search'] {
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
   border: 1px solid #ccc;
@@ -160,7 +162,7 @@ main {
   border-radius: 0.375rem;
   border: none;
   font-size: 0.875rem;
-  background-color: #02C169;
+  background-color: #02c169;
   color: #fff;
   cursor: pointer;
 }
@@ -259,7 +261,7 @@ main {
   border-radius: 0.375rem;
   border: none;
   font-size: 0.875rem;
-  background-color: #02C169;
+  background-color: #02c169;
   color: #fff;
   cursor: pointer;
 }

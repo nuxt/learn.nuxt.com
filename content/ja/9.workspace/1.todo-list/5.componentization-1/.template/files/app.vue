@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-
+import { ref } from 'vue'
 
 /**
  * Data
@@ -9,23 +8,23 @@ const todos = ref<Todo[]>([
   {
     id: 1,
     done: false,
-    title: "Vue Fes Japan 2025のチケット販売開始の宣伝をする",
-    note: "XとBlueskyで宣伝する。\n会社のslackでも宣伝する。",
-    dueDate: "2025-10-24",
+    title: 'Vue Fes Japan 2025のチケット販売開始の宣伝をする',
+    note: 'XとBlueskyで宣伝する。\n会社のslackでも宣伝する。',
+    dueDate: '2025-10-24',
   },
   {
     id: 2,
     done: true,
-    title: "Vue Fes Japan ボランティアスタッフに応募する",
-    note: "",
-    dueDate: "",
+    title: 'Vue Fes Japan ボランティアスタッフに応募する',
+    note: '',
+    dueDate: '',
   },
-]);
+])
 
 /**
  * Methods
  */
-const updateDone = (id: number, done: boolean) => {
+function updateDone(id: number, done: boolean) {
   const targetTodo = todos.value.find(todo => todo.id === id)
 
   if (targetTodo) {
@@ -36,13 +35,13 @@ const updateDone = (id: number, done: boolean) => {
 /**
  * Type
  */
-type Todo = {
-  id: number;
-  done: boolean;
-  title: string;
-  note: string;
-  dueDate: string;
-};
+interface Todo {
+  id: number
+  done: boolean
+  title: string
+  note: string
+  dueDate: string
+}
 </script>
 
 <template>
@@ -58,7 +57,7 @@ type Todo = {
     </header>
 
     <main>
-      <!-- TODO: TodoList.vueに移動-->
+      <!-- TODO: TodoList.vueに移動 -->
       <table class="todo-table">
         <thead>
           <tr>
@@ -71,17 +70,21 @@ type Todo = {
         <tbody>
           <tr v-for="todo in todos" :key="todo.id">
             <td class="text-center">
-              <button v-if="todo.done" type="button" class="button-icon" v-on:click="updateDone(todo.id, false)">
+              <button v-if="todo.done" type="button" class="button-icon" @click="updateDone(todo.id, false)">
                 ✅
               </button>
-              <button v-else type="button" class="button-icon" v-on:click="updateDone(todo.id, true)">
+              <button v-else type="button" class="button-icon" @click="updateDone(todo.id, true)">
                 ⬜
               </button>
             </td>
             <td>{{ todo.title }}</td>
-            <td><div class="multiline">{{ todo.note }}</div></td>
+            <td>
+              <div class="multiline">
+                {{ todo.note }}
+              </div>
+            </td>
             <td>{{ todo.dueDate }}</td>
-            </tr>
+          </tr>
         </tbody>
       </table>
     </main>

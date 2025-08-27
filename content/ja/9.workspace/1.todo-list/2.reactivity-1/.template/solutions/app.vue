@@ -1,16 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-
+import { ref } from 'vue'
 
 /**
  * Data
  */
-const userName = ref("No Name");
+const userName = ref('No Name')
 
 /**
  * Methods
  */
-const setUserName = () => {
+function setUserName() {
   userName.value = 'Vue Fes Japan'
 }
 </script>
@@ -22,7 +21,9 @@ const setUserName = () => {
         <h1>Vue TODO Application</h1>
       </div>
       <div class="header-right">
-        <button @click="setUserName">ユーザー名をセット</button>
+        <button @click="setUserName">
+          ユーザー名をセット
+        </button>
         👤
         <span>{{ userName }}</span>
       </div>
@@ -38,8 +39,7 @@ const setUserName = () => {
             <th>期限</th>
           </tr>
         </thead>
-        <tbody>
-        </tbody>
+        <tbody />
       </table>
     </main>
 
@@ -88,7 +88,6 @@ const setUserName = () => {
 }
 /* ------- header last ------- */
 
-
 /* ------- main start ------- */
 main {
   flex-grow: 1;
@@ -113,7 +112,7 @@ main {
   justify-content: start;
 }
 
-.search-area input[type="search"] {
+.search-area input[type='search'] {
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
   border: 1px solid #ccc;
@@ -133,7 +132,7 @@ main {
   border-radius: 0.375rem;
   border: none;
   font-size: 0.875rem;
-  background-color: #02C169;
+  background-color: #02c169;
   color: #fff;
   cursor: pointer;
 }
@@ -232,7 +231,7 @@ main {
   border-radius: 0.375rem;
   border: none;
   font-size: 0.875rem;
-  background-color: #02C169;
+  background-color: #02c169;
   color: #fff;
   cursor: pointer;
 }

@@ -14,12 +14,14 @@ Vueでは `v-if` ディレクティブを使って、ブロックを条件に応
 <button v-if="todo.done" type="button">
   ✅
 </button>
+
 <button v-else type="button">
   ⬜
 </button>
 ```
 
 重要なポイント：
+
 - `v-else` 要素は、`v-if` 要素の直後になければなりません
 - 条件の式が真の場合のみ、該当する要素がレンダリングされます
 
@@ -45,10 +47,12 @@ Vueでは `v-if` ディレクティブを使って、ブロックを条件に応
 3. 各ボタンには適切な `alt` 属性を設定してアクセシビリティを向上させます
 
 参考実装：
+
 ```vue
 <button type="button" class="button-icon">
   ✅
 </button>
+
 <button type="button" class="button-icon">
   ⬜
 </button>
@@ -61,6 +65,7 @@ Vueでは `v-if` ディレクティブを使って、ブロックを条件に応
 ## 実装後の効果
 
 `v-if` と `v-else` を実装すると：
+
 - 各ToDoの完了状態に応じてアイコンが切り替わります
 - 条件付きレンダリングの基本概念が理解できます
 - より動的で視覚的に分かりやすいUIになります

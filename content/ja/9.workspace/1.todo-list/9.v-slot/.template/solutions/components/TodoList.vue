@@ -10,56 +10,60 @@ defineProps<{
  * Emit
  */
 const emit = defineEmits<{
-  'update-done': [number, boolean]
+  updateDone: [number, boolean]
 }>()
 
 /**
  * Types
  */
-type Todo = {
-  id: number;
-  done: boolean;
-  title: string;
-  note: string;
-  dueDate: string;
-};
+interface Todo {
+  id: number
+  done: boolean
+  title: string
+  note: string
+  dueDate: string
+}
 </script>
 
 <template>
-    <table class="todo-table">
-        <thead>
-            <tr>
-            <th>完了</th>
-            <th>タイトル</th>
-            <th>メモ</th>
-            <th>期限</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="todo in todos" :key="todo.id">
-            <td class="text-center">
-                <button
-                    v-if="todo.done" type="button"
-                    class="button-icon"
-                    @click="emit('update-done', todo.id, false)"
-                >
-                ✅
-                </button>
-                <button
-                    v-else
-                    type="button"
-                    class="button-icon"
-                    @click="emit('update-done', todo.id, true)"
-                >
-                ⬜
-                </button>
-            </td>
-            <td>{{ todo.title }}</td>
-            <td><div class="multiline">{{ todo.note }}</div></td>
-            <td>{{ todo.dueDate }}</td>
-            </tr>
-        </tbody>
-    </table>
+  <table class="todo-table">
+    <thead>
+      <tr>
+        <th>完了</th>
+        <th>タイトル</th>
+        <th>メモ</th>
+        <th>期限</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="todo in todos" :key="todo.id">
+        <td class="text-center">
+          <button
+            v-if="todo.done" type="button"
+            class="button-icon"
+            @click="emit('updateDone', todo.id, false)"
+          >
+            ✅
+          </button>
+          <button
+            v-else
+            type="button"
+            class="button-icon"
+            @click="emit('updateDone', todo.id, true)"
+          >
+            ⬜
+          </button>
+        </td>
+        <td>{{ todo.title }}</td>
+        <td>
+          <div class="multiline">
+            {{ todo.note }}
+          </div>
+        </td>
+        <td>{{ todo.dueDate }}</td>
+      </tr>
+    </tbody>
+  </table>
 </template>
 
 <style scoped>
