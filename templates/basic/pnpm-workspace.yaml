@@ -1,2 +1,6 @@
 packages:
   - ./.layer-playground
+
+shamefullyHoist: true
+
+autoInstallPeers: false

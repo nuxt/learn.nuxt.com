@@ -2,7 +2,7 @@
   "name": "learn.nuxt.com",
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@10.15.0",
+  "packageManager": "pnpm@10.15.1",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",

@@ -1,6 +1,6 @@
 {
   "private": true,
-  "packageManager": "pnpm@9.15.4",
+  "packageManager": "pnpm@10.15.1",
   "scripts": {
     "dev": "nuxt dev",
     "prepare": "nuxt prepare"
@@ -9,5 +9,10 @@
     "nuxt": "latest",
     "typescript": "latest",
     "vue": "latest"
+  },
+  "pnpm": {
+    "neverBuiltDependencies": [
+      "@parcel/watcher"
+    ]
   }
 }
