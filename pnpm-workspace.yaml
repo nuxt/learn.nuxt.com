@@ -1,11 +1,13 @@
 packages: []
+
 patchedDependencies:
   splitpanes@3.1.5: patches/splitpanes@3.1.5.patch
+
 catalogs:
   dev:
     '@antfu/eslint-config': ^5.3.0
     '@intlify/eslint-plugin-vue-i18n': ^4.1.0
-    '@unocss/eslint-plugin': ^66.5.1
+    '@unocss/eslint-plugin': ~66.4
     eslint: ^9.35.0
     eslint-plugin-format: ^1.0.1
     execa: ^9.6.0
@@ -52,8 +54,8 @@ catalogs:
     '@nuxtjs/i18n': ^10.1.0
     '@nuxtjs/seo': ^3.1.0
     '@pinia/nuxt': ^0.11.2
-    '@unocss/extractor-mdc': ^66.5.1
-    '@unocss/nuxt': ^66.5.1
+    '@unocss/extractor-mdc': ~66.4
+    '@unocss/nuxt': ~66.4
     '@vueuse/nuxt': ^13.9.0
     nuxi: ^3.28.0
     nuxt: ^4.1.1

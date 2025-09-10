@@ -9,7 +9,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "typecheck": "nuxt typecheck",
-    "prepare": "nuxt prepare && pnpm -C ./templates/basic install && pnpm -C ./templates/basic prepare",
+    "prepare": "nuxt prepare",
     "lint": "eslint .",
     "format": "eslint . --fix"
   },

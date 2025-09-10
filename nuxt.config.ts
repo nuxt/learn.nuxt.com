@@ -30,9 +30,11 @@ export default defineNuxtConfig({
       ],
     },
   },
+
   site: {
     url: 'https://learn.nuxt.com',
   },
+
   colorMode: {
     classSuffix: '',
   },

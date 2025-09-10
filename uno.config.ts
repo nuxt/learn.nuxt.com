@@ -4,8 +4,8 @@ import {
   presetAttributify,
   presetIcons,
   presetTypography,
-  presetUno,
   presetWebFonts,
+  presetWind3,
   transformerDirectives,
 } from 'unocss'
 
@@ -36,7 +36,7 @@ export default defineConfig({
     },
   },
   presets: [
-    presetUno(),
+    presetWind3(),
     presetIcons(),
     presetAttributify(),
     presetWebFonts({
