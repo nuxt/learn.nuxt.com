@@ -8,7 +8,6 @@ export const vue: languages.LanguageConfiguration = {
     ['<!--', '-->'],
     ['<', '>'],
     ['{', '}'],
-    ['[', ']'],
     ['(', ')'],
   ],
   autoClosingPairs: [
@@ -21,6 +20,7 @@ export const vue: languages.LanguageConfiguration = {
     { open: '`', close: '`', notIn: ['string', 'comment'] },
     { open: '/**', close: ' */', notIn: ['string'] },
   ],
+  autoCloseBefore: ';:.,=}])><`\'" \n\t',
   surroundingPairs: [
     { open: '\'', close: '\'' },
     { open: '"', close: '"' },
@@ -52,6 +52,7 @@ export const ts: languages.LanguageConfiguration = {
     { open: '`', close: '`', notIn: ['string', 'comment'] },
     { open: '/**', close: ' */', notIn: ['string'] },
   ],
+  autoCloseBefore: ';:.,=}])>` \n\t',
   surroundingPairs: [
     { open: '\'', close: '\'' },
     { open: '"', close: '"' },
