@@ -7,6 +7,8 @@ import htmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker'
 import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker'
 
 import { reloadLanguageTools } from './env'
+import * as languageConfigs from './language-configs'
+
 import vueWorker from './vue.worker?worker'
 
 export function initMonaco(ctx: PlaygroundStore) {
@@ -42,6 +44,11 @@ export function initMonaco(ctx: PlaygroundStore) {
   monaco.languages.register({ id: 'typescript', extensions: ['.ts'] })
   monaco.languages.register({ id: 'json', extensions: ['.json'] })
   monaco.languages.register({ id: 'html', extensions: ['.html'] })
+
+  // set language configurations
+  monaco.languages.setLanguageConfiguration('vue', languageConfigs.vue)
+  monaco.languages.setLanguageConfiguration('javascript', languageConfigs.ts)
+  monaco.languages.setLanguageConfiguration('typescript', languageConfigs.ts)
 
   monaco.languages.onLanguage('vue', () => reloadLanguageTools(ctx))
 }
