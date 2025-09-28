@@ -155,10 +155,10 @@ app.vueに定義されたtodosにTodoList.vueからアクセスすることが�
 
 `props` と `emit` を使用して親子間でデータのやり取りをできるようにしましょう：
 
-2. `TodoList.vue`で`defineProps`を使用して親から`todos`を受け取れるようにしましょう
-3. `app.vue`に`<TodoList />`を配置して、todosを渡してみましょう。
-4. `TodoList.vue`で`defineEmits`を使用してアイコンのクリックイベントを親に伝えられるようにしましょう
-5. `app.vue`で`TodoList.vue`から受け取ったイベントを利用して`updateDone`を実行しましょう
+1. `TodoList.vue`で`defineProps`を使用して親から`todos`を受け取れるようにしましょう
+2. `app.vue`に`<TodoList />`を配置して、todosを渡してみましょう。
+3. `TodoList.vue`で`defineEmits`を使用してアイコンのクリックイベントを親に伝えられるようにしましょう
+4. `app.vue`で`TodoList.vue`から受け取ったイベントを利用して`updateDone`を実行しましょう
 
 参考実装：
 
