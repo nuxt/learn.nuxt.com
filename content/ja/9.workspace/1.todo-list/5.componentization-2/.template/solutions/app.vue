@@ -58,7 +58,7 @@ interface Todo {
     </header>
 
     <main>
-      <TodoList />
+      <TodoList :todos="todos" @update-done="updateDone" />
     </main>
 
     <footer class="footer">

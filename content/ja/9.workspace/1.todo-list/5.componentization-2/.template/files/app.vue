@@ -58,6 +58,7 @@ interface Todo {
     </header>
 
     <main>
+      <!-- TODO: TodoListコンポーネントにtodosをpropsとして渡す -->
       <TodoList />
     </main>
 

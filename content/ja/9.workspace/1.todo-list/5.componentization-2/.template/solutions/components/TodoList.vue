@@ -1,5 +1,19 @@
 <script setup lang="ts">
 /**
+ * Props
+ */
+defineProps<{
+  todos: Todo[]
+}>()
+
+/**
+ * Emit
+ */
+const emit = defineEmits<{
+  updateDone: [number, boolean]
+}>()
+
+/**
  * Types
  */
 interface Todo {
@@ -24,10 +38,19 @@ interface Todo {
     <tbody>
       <tr v-for="todo in todos" :key="todo.id">
         <td class="text-center">
-          <button v-if="todo.done" type="button" class="button-icon" @click="updateDone(todo.id, false)">
+          <button
+            v-if="todo.done" type="button"
+            class="button-icon"
+            @click="emit('updateDone', todo.id, false)"
+          >
             ✅
           </button>
-          <button v-else type="button" class="button-icon" @click="updateDone(todo.id, true)">
+          <button
+            v-else
+            type="button"
+            class="button-icon"
+            @click="emit('updateDone', todo.id, true)"
+          >
             ⬜
           </button>
         </td>
