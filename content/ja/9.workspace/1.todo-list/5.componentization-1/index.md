@@ -40,7 +40,7 @@ import Child from './Child.vue'
 
 1. `app.vue`の`<table></table>`を`TodoList.vue`の`<template>`内に移動しましょう
 2. `app.vue`の`/* --- table start --- */`から`/* --- table last --- */`までを`TodoList.vue`の`<style scoped>`内に移動しましょう
-3. `app.vue`で、`components/TodoList.vue``を`Todolist`として`import`し、`<template>`内に`<Todolist />`を作成しましょう。
+3. `app.vue`で`import`構文を使って`components/TodoList.vue`を読み込み、`<template>`内で`<TodoList />`として使用しましょう。
 
 もし行き詰まったら、以下のボタンをクリックして解答を見ることができます。
 
