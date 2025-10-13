@@ -105,9 +105,9 @@ const doubled = computed({
 
 というリアクティブな値を、 `computed` を使って `filteredTodos` という命名で実装してみましょう。
 
-1. `<script setup>`の中で、新しく `filteredTodos` という算出プロパティ（ `computed` ）を定義しましょう。この中で、`showUnDoneOnly` の値によって表示するTodoリストを切り替えるロジックを書きます。
+1. `<script setup>` の中で、新しく `filteredTodos` という算出プロパティ（ `computed` ）を定義しましょう。この中で、`showUnDoneOnly` の値によって表示するTodoリストを切り替えるロジックを書きます。
 
-2. `showUnDoneOnly`が`true`の場合は「`done: false` のTodoのみ」を返し、`showUnDoneOnly`が`false`の場合は「すべてのTodo」を返すようにコードを組みましょう。
+2. `showUnDoneOnly` が `true` の場合は「 `done: false` のTodoのみ」を返し、 `showUnDoneOnly` が `false` の場合は「すべてのTodo」を返すようにコードを組みましょう。
 
 3. 今までは `:todos="todos"` で直接全てのリストを渡していましたが、
    実装した `filteredTodos` を `TodoList` コンポーネントに渡してみましょう。
