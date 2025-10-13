@@ -23,9 +23,10 @@ Vueでは [`v-model`](https://ja.vuejs.org/api/built-in-directives.html#v-model)
 ```vue
 <!-- template -->
 <!-- :value がバインド、 @input がイベント監視 -->
-<input :value="message" @input="message = $event.target.value" />
+<input :value="message" @input="message = $event.target.value" type="text" />
+
 <!-- 上と同じ -->
-<input v-model="message" />
+<input v-model="message" type="text" />
 ```
 
 フォームタイプごとにバインドされる属性やイベントが異なります：
