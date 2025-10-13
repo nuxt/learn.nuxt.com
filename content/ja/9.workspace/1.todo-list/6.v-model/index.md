@@ -54,10 +54,14 @@ Vueでは [`v-model`](https://ja.vuejs.org/api/built-in-directives.html#v-model)
 
 ## チャレンジ
 
-今のプレイグラウンドでは、「未完了のみ」チェックボックスを実装しようとしています。
+今のプレイグラウンドで、「未完了のみ」チェックボックスを実装しようとしています。
 
 ```vue
-<input :value="showUnDoneOnly" type="checkbox" />
+<!-- template -->
+<input
+  :value="showUnDoneOnly"
+  type="checkbox"
+>
 未完了のみ表示
 ```
 
