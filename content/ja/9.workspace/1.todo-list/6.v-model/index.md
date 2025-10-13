@@ -34,17 +34,29 @@ Vueでは [`v-model`](https://ja.vuejs.org/api/built-in-directives.html#v-model)
 - チェックボックス・ラジオ：`checked` 属性と `change` イベント
 - セレクトボックス：`value` 属性と `change` イベント
 
-たとえばテキスト入力フォームにはこう使います：
+例えば、テキストエリア、ラジオボックス、セレクトボックスでは、このように使います：
 
 ```vue
-<input v-model="newTodoText" type="text" placeholder="新しいタスクを入力" />
+<script setup lang="ts">
+const memo = ref('')
+const isDone = ref(true)
+const showUnDoneOnly = ref(false)
+</script>
 
-<button @click="addTodo">
-追加
-</button>
+<template>
+  <textarea v-model="memo" placeholder="メモを入力"></textarea>
+
+  <input v-model="isDone" :value="true" type="radio" />完了
+  <input v-model="isDone" :value="false" type="radio" />未完了
+
+  <select v-model="showUnDoneOnly">
+    <option :value="false">すべてのタスクを表示</option>
+    <option :value="true">未完了のみ表示</option>
+  </select>
+</template>
 ```
 
-`v-model="newTodoText"` で、入力内容が常に `newTodoText` 変数に格納されます。
+それぞれの入力内容が常に `v-model` の値の変数に格納されます。
 
 ## 注意点とコツ
 
