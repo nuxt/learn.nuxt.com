@@ -9,24 +9,23 @@ Vueでは [`v-model`](https://ja.vuejs.org/api/built-in-directives.html#v-model)
 `v-model` ディレクティブは、Vueインスタンスのデータとフォーム要素の値を自動的に同期します。テキスト欄・チェックボックス・ラジオボタン・セレクトボックスはもちろん、独自コンポーネントにも対応しています。
 
 ```vue
+<!-- template -->
 <input v-model="text" type="text" />
-
-<p>
-{{ text }}
-</p>
+<p>{{ text }}</p>
 ```
 
 この例では、入力欄（input）に文字を入力すると `text` データが即時に変更され、下の `<p>` に反映されます。`text` の値をJavaScriptから変更すると、input欄の表示も自動的に変わります。
 
-## 仕組み
+## `v-model` の仕組み
 
 `v-model` は実際には「バインド」と「イベント監視」を合わせた“糖衣構文”です：
 
 ```vue
-<input v-model="message" />
-
-<!-- と同じ -->
+<!-- template -->
+<!-- :value がバインド、 @input がイベント監視 -->
 <input :value="message" @input="message = $event.target.value" />
+<!-- 上と同じ -->
+<input v-model="message" />
 ```
 
 フォームタイプごとにバインドされる属性やイベントが異なります：
