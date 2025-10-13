@@ -59,7 +59,7 @@ const showUnDoneOnly = ref(false)
 
 それぞれの入力内容が常に `v-model` の値の変数に格納されます。
 
-## 注意点とコツ
+## 💡Tips
 
 - `v-model`とHTMLの `value` を併用すると`value`は無効になります
 - `v-model` とイベントハンドラ（例：`@change`）を併用すると動作に注意が必要
