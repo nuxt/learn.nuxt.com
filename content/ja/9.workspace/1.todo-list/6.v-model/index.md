@@ -1,6 +1,8 @@
 # フォーム入力バインディング
 
-Vueでは v-model ディレクティブを使うことで、フォーム要素やカスタムコンポーネントと「双方向データバインディング」を簡潔に実現できます。ユーザーの入力とVueのデータが常に同期され、フォーム制御が直感的になります。
+Vueでは [`v-model`](https://ja.vuejs.org/api/built-in-directives.html#v-model) ディレクティブを使うことで、フォーム要素やカスタムコンポーネントと「双方向データバインディング」を簡潔に実現できます。ユーザーの入力とVueのデータが常に同期され、フォーム制御が直感的になります。  
+ここでは、フォーム要素の `v-model` の利用方法について学習します。  
+※カスタムコンポーネントの `v-model` は、[独自コンポーネントでの v-model](componentization-3)で学習します。
 
 ## `v-model` の基本
 
@@ -44,24 +46,6 @@ Vueでは v-model ディレクティブを使うことで、フォーム要素�
 ```
 
 `v-model="newTodoText"` で、入力内容が常に `newTodoText` 変数に格納されます。
-
-## コンポーネントとの連携
-
-独自コンポーネントでも `v-model` は使えます。Vue 3.4以降なら `defineModel()` マクロにより、親子間の値・イベント同期が一層シンプルに書けます。（こちらは、[コンポーネント化 パート２](componentization-2)でで学習します。）
-
-```vue
-<!-- 親コンポーネント -->
-<MyInput v-model="searchTerm" />
-
-<!-- MyInput.vue（子コンポーネント） -->
-<script setup>
-const modelValue = defineModel()
-</script>
-
-<template>
-  <input v-model="modelValue">
-</template>
-```
 
 ## 注意点とコツ
 
