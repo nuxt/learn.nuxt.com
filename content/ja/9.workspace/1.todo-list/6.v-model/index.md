@@ -80,10 +80,11 @@ Vueでは [`v-model`](https://ja.vuejs.org/api/built-in-directives.html#v-model)
 
 ```vue
 <input
-    :value="showUnDoneOnly"
-    type="checkbox"
-    @change="showUnDoneOnly = !showUnDoneOnly"
-/>
+  :value="showUnDoneOnly"
+  type="checkbox"
+  @change="showUnDoneOnly = $event.target.checked"
+>
+未完了のみ表示
 ```
 
 ### 2. `v-model` による値の同期
