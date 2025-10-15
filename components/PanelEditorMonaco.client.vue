@@ -65,11 +65,23 @@ function getModel(filepath: string) {
   return model
 }
 
+let cleanups: (() => void)[] = []
+
+onUnmounted(() => {
+  cleanups.forEach(cleanup => cleanup())
+  cleanups = []
+  models.forEach(model => model.dispose())
+  models.clear()
+})
+
 watch(
   () => el.value,
   async (value) => {
     if (!value)
       return
+
+    cleanups.forEach(cleanup => cleanup())
+    cleanups = []
 
     const shiki = await getShiki()
     shikiToMonaco(shiki, monaco)
@@ -100,6 +112,10 @@ watch(
       },
     )
 
+    cleanups.push(() => {
+      editor.dispose()
+    })
+
     editor.onDidChangeModelContent(() => {
       const value = editor.getValue()
       emit('update:modelValue', value)
@@ -108,14 +124,14 @@ watch(
 
     editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, () => {})
 
-    watch(
+    cleanups.push(watch(
       () => props.filepath,
       () => {
         editor.setModel(getModel(props.filepath))
       },
-    )
+    ))
 
-    watch(
+    cleanups.push(watch(
       () => props.modelValue,
       (value) => {
         if (value === editor.getValue())
@@ -126,18 +142,18 @@ watch(
         if (selections)
           editor.setSelections(selections)
       },
-    )
+    ))
 
     // Restart language tools when dependencies install finished
-    watch(
+    cleanups.push(watch(
       () => play.status,
       (s) => {
         if (s === 'ready')
           reloadLanguageTools(play)
       },
-    )
+    ))
 
-    watch(theme, () => monaco.editor.setTheme(theme.value))
+    cleanups.push(watch(theme, () => monaco.editor.setTheme(theme.valu   ))
   },
 )
 </script>
