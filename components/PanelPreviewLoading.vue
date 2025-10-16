@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const play = usePlaygroundStore()
+const ui = useUiState()
 
 function getStep(status: PlaygroundStatus) {
   if (status === 'error' || play.status === 'error')
@@ -70,7 +71,17 @@ function getTextClass(status: PlaygroundStatus) {
       <div :class="getStatusIcon('mount')" />
       <span :class="getTextClass('mount')">{{ $t('steps.mounting-files') }}</span>
       <div :class="getStatusIcon('install')" />
-      <span :class="getTextClass('install')">{{ $t('steps.installing-dependencies') }}</span>
+      <span :class="getTextClass('install')" flex="~ gap-1 items-center">
+        {{ $t('steps.installing-dependencies') }}
+        <button
+          :class="getStep('install') === 'current' ? '' : 'op0 pointer-events-none'"
+          hover="bg-active" my--1 rounded p1
+          :title="$t('terminal.toggle')"
+          @click="ui.toggleTerminal()"
+        >
+          <div i-ph-terminal-window-duotone text-xl />
+        </button>
+      </span>
       <div :class="getStatusIcon('start')" />
       <span :class="getTextClass('start')">{{ $t('steps.starting-nuxt-server') }}</span>
       <div :class="getStatusIcon('polling')" />
