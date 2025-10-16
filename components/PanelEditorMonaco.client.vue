@@ -153,7 +153,7 @@ watch(
       },
     ))
 
-    cleanups.push(watch(theme, () => monaco.editor.setTheme(theme.valu   ))
+    cleanups.push(watch(theme, () => monaco.editor.setTheme(theme.value)))
   },
 )
 </script>
