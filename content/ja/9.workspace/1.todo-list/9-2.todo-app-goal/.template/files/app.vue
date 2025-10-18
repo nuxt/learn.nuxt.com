@@ -47,7 +47,7 @@ function updateDone(id: number, done: boolean) {
   }
 }
 
-// TODO: 「登録」ボタンクリックイベントに渡す関数を用意し、新規Todoオブジェクトを追加する
+// TODO: フォーム submitイベントに渡す関数を用意し、新規Todoオブジェクトを追加する
 
 /**
  * Type

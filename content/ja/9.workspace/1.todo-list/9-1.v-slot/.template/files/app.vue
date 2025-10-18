@@ -47,8 +47,6 @@ function updateDone(id: number, done: boolean) {
   }
 }
 
-// TODO: 「登録」ボタンクリックイベントに渡す関数を用意し、新規Todoオブジェクトを追加する
-
 /**
  * Type
  */
@@ -94,7 +92,10 @@ interface Todo {
       <TodoList :todos="filteredTodos" @update-done="updateDone" />
 
       <!-- 新規作成モーダル -->
-      <!-- TODO: `CreateModal.vue`の`<slot>`に、新規todo入力フォームを差し込む -->
+      <!--
+        TODO: `CreateModal.vue`の`<slot name="title">`にモーダルタイトルを差し込む
+              `<slot>`に、新規todo入力フォームを差し込む
+      -->
       <CreateModal
         v-if="isCreateModalOpen"
         v-model="isCreateModalOpen"
