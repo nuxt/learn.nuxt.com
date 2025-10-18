@@ -208,7 +208,7 @@ const emit = defineEmits<{
 
 ## 現在の実装の課題
 TODOリストに、新規タスクを追加するために、
-- 新規作成モーダルコンポーネント（CreateModal.vue）
+- 新規作成モーダルコンポーネント（AppModal.vue）
 - 新規作成ボタン
 
 の2つを用意しました。
