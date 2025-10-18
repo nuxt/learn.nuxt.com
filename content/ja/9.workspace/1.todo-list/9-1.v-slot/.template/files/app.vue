@@ -23,7 +23,6 @@ const todos = ref<Todo[]>([
 ])
 const showUnDoneOnly = ref(false)
 const isCreateModalOpen = ref(false)
-// TODO: 各フォーム入力欄に対応するリアクティブ変数（`ref`）を用意する
 
 /**
  * Computed

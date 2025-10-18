@@ -94,11 +94,13 @@ interface Todo {
       <TodoList :todos="filteredTodos" @update-done="updateDone" />
 
       <!-- 新規作成モーダル -->
-      <!-- TODO: `CreateModal.vue`の`<slot>`に、新規todo入力フォームを差し込む -->
       <CreateModal
         v-if="isCreateModalOpen"
         v-model="isCreateModalOpen"
       >
+        <template #title><h2>タスクの新規作成</h2></template>
+
+        <!-- TODO: フォーム入力を、v-model でリアクティブ変数と同期させる -->
         <form>
           <div>
             <label for="title">タイトル</label>

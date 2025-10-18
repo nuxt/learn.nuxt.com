@@ -115,6 +115,8 @@ interface Todo {
         v-if="isCreateModalOpen"
         v-model="isCreateModalOpen"
       >
+        <template #title><h2>タスクの新規作成</h2></template>
+
         <form @submit="handleSubmit">
           <div>
             <label for="title">タイトル</label>
