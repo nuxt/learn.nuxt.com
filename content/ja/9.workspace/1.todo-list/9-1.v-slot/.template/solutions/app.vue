@@ -23,7 +23,6 @@ const todos = ref<Todo[]>([
 ])
 const showUnDoneOnly = ref(false)
 const isCreateModalOpen = ref(false)
-// TODO: 各フォーム入力欄に対応するリアクティブ変数（`ref`）を用意する
 
 /**
  * Computed
@@ -46,8 +45,6 @@ function updateDone(id: number, done: boolean) {
     targetTodo.done = done
   }
 }
-
-// TODO: 「登録」ボタンクリックイベントに渡す関数を用意し、新規Todoオブジェクトを追加する
 
 /**
  * Type
@@ -94,11 +91,33 @@ interface Todo {
       <TodoList :todos="filteredTodos" @update-done="updateDone" />
 
       <!-- 新規作成モーダル -->
-      <!-- TODO: `CreateModal.vue`の`<slot>`に、新規todo入力フォームを差し込む -->
       <CreateModal
         v-if="isCreateModalOpen"
         v-model="isCreateModalOpen"
-      />
+      >
+        <template #title><h2>タスクの新規作成</h2></template>
+
+        <form>
+          <div>
+            <label for="title">タイトル</label>
+            <input id="title" type="text" required />
+          </div>
+
+          <div>
+            <label for="note">メモ</label>
+            <textarea id="note" rows="2" />
+          </div>
+
+          <div>
+            <label for="dueDate">期限</label>
+            <input id="dueDate" type="date" />
+          </div>
+
+          <div>
+            <button type="submit">登録</button>
+          </div>
+        </form>
+      </CreateModal>
     </main>
 
     <footer class="footer">

@@ -49,7 +49,9 @@ function updateDone(id: number, done: boolean) {
   }
 }
 
-function handleSubmit() {
+function handleSubmit(e: Event) {
+  e.preventDefault()
+
   const newTodo: Todo = {
     id: Date.now(),
     done: false,
@@ -113,7 +115,9 @@ interface Todo {
         v-if="isCreateModalOpen"
         v-model="isCreateModalOpen"
       >
-        <form>
+        <template #title><h2>タスクの新規作成</h2></template>
+
+        <form @submit="handleSubmit">
           <div>
             <label for="title">タイトル</label>
             <input id="title" v-model="inputTitile" type="text" required>
@@ -130,7 +134,7 @@ interface Todo {
           </div>
 
           <div>
-            <button type="button" @click="handleSubmit">
+            <button type="submit">
               登録
             </button>
           </div>
