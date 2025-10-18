@@ -1,4 +1,4 @@
-# 独自コンポーネントでの v-slot
+# コンポーネントの v-slot
 
 [`v-slot`](https://ja.vuejs.org/guide/components/slots.html#slot-content-and-outlet) は、親コンポーネントから子コンポーネントの特定の場所にテンプレートを差し込むための仕組みです。
 コンポーネントを「箱」として使い、その中に好きなHTMLや部品を入れることができます。
