@@ -65,7 +65,7 @@ interface Todo {
           <div class="search-controls">
             <label>
               <input
-                :value="showUnDoneOnly"
+                :checked="showUnDoneOnly"
                 type="checkbox"
               >
               未完了のみ表示
