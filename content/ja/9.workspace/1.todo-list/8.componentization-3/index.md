@@ -1,77 +1,110 @@
 # 独自コンポーネントでの v-model
 
-[双方向データバインディング](v-model)で紹介したように、`v-model`はフォーム入力欄とVueのデータを自動で同期してくれる仕組みです。
-この`v-model`は、独自のコンポーネントでも同じように使うことができます。
+[フォーム入力バインディング](v-model)で紹介したように、 `v-model` はフォーム入力欄とVueのデータを自動で同期してくれる仕組みです。  
+この `v-model` は、独自のコンポーネントでも同じように使うことができます。
 
 ```vue
-<!-- 親コンポーネント -->
-<script setup>
-const count = ref(10)
+<script setup lang="ts">
+const showUnDoneOnly = ref(true)
 </script>
 
 <template>
-  <ClearButton v-model="count" />
+  <IncompleteOnlyToggle v-model="showUnDoneOnly" />
 </template>
 ```
 
 ### どうやってつながっているの？
 
-`v-model`は、親と子の間で「親から子へ値を渡し、子で変更があれば親に返す」というやり取りをできるようにしてくれる仕組みです。
-具体的には次の動きができるようになります。
+値が同期する仕組みは、[フォーム入力バインディング](v-model)で説明したとおり、
+「バインド」と「イベント監視」を組み合わせた“糖衣構文”になっています。
 
-- 親から子へ、変更可能な値を`props`で渡します（`props`名は自動的に`modelValue`になります）
-- 子で値を変更するために、emit を使って親に通知します（イベント名は自動で`update:modelValue`になります）
-
-こうすることで、親と子のデータが常に同期されるようになります。
-
----
-
-この仕組みを子コンポーネントで使うときは、`props`と`emits`を明示的に定義します。
+上記のコードの例で `v-model` を利用せずに、親子で値を同期するには、以下のコードとなります。
 
 ```vue
-<script setup>
-const props = defineProps(['modelValue']) // 親から値を受け取る
-const emit = defineEmits(['update:modelValue']) // 変更を親に通知する
+<!-- 親コンポーネント -->
+<script setup lang="ts">
+const showUnDoneOnly = ref(true)
 </script>
 
 <template>
-  <button @click="emit('update:modelValue', 0)">
-    カウントリセット
-  </button>
+  <IncompleteOnlyToggle
+    :model-value="showUnDoneOnly"
+    @update:modelValue="showUnDoneOnly = $event"
+  />
 </template>
 ```
 
----
+```vue
+<!-- IncompleteOnlyToggle: 子コンポーネント -->
+<script setup lang="ts">
+// Props
+defineProps<{
+  modelValue: boolean
+}>()
+// Emit
+const emit = defineEmits<{
+  'update:modelValue': [boolean]
+}>()
+</script>
 
-## Vue 3.4以降の新しい書き方：`defineModel()`
+<template>
+  <label>
+    <input
+      :checked="modelValue"
+      type="checkbox"
+      @change="emit('update:modelValue', $event.target.checked)"
+    >
+    未完了のみ表示
+  </label>
+</template>
+```
 
-Vue 3.4以降なら `defineModel()` マクロにより、親子間の値・イベント同期が一層シンプルに書けます。
+親から `props` `modelValue` で、値を受け取り、  
+子は `emit` で `update:modelValue` で、更新後の値を送信し、  
+親が、 `v-on` `update:modelValue` で、子が送信した値を受け取り、状態を更新
+
+をすることで、親子の値の同期ができますが、これらをシンプルにしたのが `v-model` です。
+
+コンポーネントで `v-model` を利用する場合、子コンポーネントでは、
+- `props` に `modelValue` を定義
+- `emit` に `update:modelValue` を定義
+
+する必要があります。
+
+## `defineModel()`
+
+Vue 3.4以降では [`defineModel()`](https://ja.vuejs.org/api/sfc-script-setup.html#definemodel) マクロにより、親子間の値同期がさらにシンプルに書けます。
+
 子コンポーネント側で `modelValue` を変更するだけで値の更新ができます（内部的には従来と同じprops/emitが自動的に使われています）。
 なお、内部的には `modelValue` という名前が使われていますが、変数名は子側で自由に変更できます。
 
 ```vue
-<!-- 親コンポーネント -->
-<script setup>
-const count = ref(0)
+<!-- IncompleteOnlyToggle: 子コンポーネント -->
+<script setup lang="ts">
+const checked = defineModel()
 </script>
 
 <template>
-  <ClearButton v-model="count" />
+  <label>
+    <input
+      v-model="checked"
+      type="checkbox"
+    >
+    <!--
+    上記の input は、以下の置き換えです
+    <input
+      :checked="checked"
+      type="checkbox"
+      @change="checked = $event.target.checked"
+    >
+    -->
+    未完了のみ表示
+  </label>
 </template>
 ```
 
-```vue
-<!-- 子コンポーネント -->
-<script setup>
-const count = defineModel()
-</script>
-
-<template>
-  <button @click="count = 0">
-    カウントリセット
-  </button>
-</template>
-```
+上記コードは、 `v-model` の `defineModel()` 値を、変数 `checked` に代入しています。
+変数 `checked` は、任意の変数名に変更できます。
 
 **ポイント**
 
@@ -80,87 +113,123 @@ const count = defineModel()
 
 ---
 
-## 複数の v-model（名前付き v-model）
+## 複数の v-model / 名前付き v-model
 
-`v-model`は、ひとつの値だけでなく、**名前を付けて複数の値を同時に**親子でやりとりすることもできます。
+`v-model` は、ひとつの値だけでなく、**名前を付けて複数の値を同時に**親子でやりとりすることもできます。
 複雑なフォームの時にとても便利です。
 
 ```vue
 <!-- 親コンポーネント -->
+<script setup lang="ts">
+const showUnDone = ref(true)
+const isExpired = ref(true)
+</script>
+
 <template>
-  <BookEditor
-    v-model:title="bookTitle"
-    v-model:author="bookAuthor"
+  <TaskFilter
+    v-model:is-show-un-done="showUnDone"
+    v-model:is-show-expired="isExpired"
   />
 </template>
 ```
 
 ```vue
-<!-- 子コンポーネント（difneModel使用） -->
+<!-- TaskFilter: 子コンポーネント -->
 <script setup>
-const title = defineModel('title')
-const author = defineModel('author')
+const unDone = defineModel('isShowUnDone')
+const expired = defineModel('isShowExpired')
 </script>
 
 <template>
-  <input v-model="title" placeholder="タイトル">
-  <input v-model="author" placeholder="著者">
+  <label>
+    <input v-model="unDone" type="checkbox">
+    未完了を表示
+  </label>
+  <label>
+    <input v-model="expired" type="checkbox">
+    期限切れを表示
+  </label>
 </template>
 ```
 
+Vue3.4未満の場合、props/emitで置き換える必要がありますが、
+その場合は、以下のようなコードになります。
+
 ```vue
-<!-- 子コンポーネント（props, emitをを明示的に定義） -->
+<!-- TaskFilter: 子コンポーネント -->
 <script setup>
-const props = defineProps([
-  'title',
-  'author'
-])
-const emit = defineEmits([
-  'update:title',
-  'update:author'
-])
+// Props
+defineProps<{
+  isShowUnDone: boolean
+  isShowExpired: boolean
+}>()
+// Emit
+const emit = defineEmits<{
+  'update:isShowUnDone': [boolean]
+  'update:isShowExpired': [boolean]
+}>()
+
 </script>
 
 <template>
-  <input
-    :value="props.title"
-    @input="emit('update:title', $event.target.value)"
-  >
-  <input
-    :value="props.author"
-    @input="emit('update:author', $event.target.value)"
-  >
+  <label>
+    <input
+      :checked="isShowUnDone"
+      type="checkbox"
+      @change="emit('update:isShowUnDone', $event.target.checked)"
+    >
+    未完了を表示
+  </label>
+  <label>
+    <input
+      :checked="isShowExpired"
+      type="checkbox"
+      @change="emit('update:isShowExpired', $event.target.checked)"
+    >
+    期限切れを表示
+  </label>
 </template>
+
 ```
 
 **ポイント**
 
-- 親は `v-model:名前` でいくつでも決められる
-- 子は `defineModel('名前')` で対応できる
-- Vue 3.4未満なら、props/emitsを一つずつ定義する必要あり
+- 親は `v-model:子のprops名` で、いくつでも値の同期対象を指定できる
+- 子は `defineModel('props名')` で対応できる
 
 ---
 
 ## まとめ
 
-- `v-model`は **propsで値を渡し、emitで変更を返す** 仕組みをまとめた構文
+- `v-model` は、独自コンポーネントでも利用できる
+- `v-model` は **propsで値を渡し、emitで変更を返す** 仕組みをまとめた構文
 - Vue 3.4以降は `defineModel()`で記述がさらに簡単
 - 複数の値や名前付きも、同じ構文でシンプルに扱える
-- 従来のフォーム要素と同じ感覚で、独自コンポーネントでも使える
+
+## 現在の実装の課題
+TODOリストに、新規タスクを追加するために、
+- 新規作成モーダルコンポーネント（CreateModal.vue）
+- 新規作成ボタン
+
+の2つを用意しました。
+
+新規作成ボタンをクリックで、新規作成モーダルを開くことができますが、  
+新規作成モーダルの「閉じる」ボタンをクリックしても、モーダルを閉じることができません。
+
 
 ## チャレンジ
 
-新規 TODO を追加するモーダルコンポーネント（CreateModal.vue）を作成しましょう。
-app.vue では isCreateModalOpen という状態を用意していて、「新規作成」ボタンを押すとモーダルが開くようになっています。
-ここでは、モーダルの「閉じる」ボタンでモーダルを閉じられるようにするのが目標です。
+新規作成モーダル内の「閉じる」ボタンをクリックしたら、新規作成モーダルを閉じるように修正しましょう。
+
+`app.vue` の `isCreateModalOpen` の状態が、新規作成モーダルの表示を制御していますので、
+`isCreateModalOpen` を `v-model` で同期させることがゴールです。
 
 1. 子コンポーネントで `defineModel()` を使って、`modelValue`（または任意の名前）を定義する
-2. `v-if` を使って、その値が `true` のときだけモーダルを表示するようにする
-3. モーダルの「閉じる」ボタンをクリックすると、この値が `false` になるようにする
-4. 親コンポーネントから `v-model` で `isCreateModalOpen` を子に渡して動作を確認する
+2. モーダルの「閉じる」ボタンをクリックしたら、この値が `false` になるようにする
+3. 親コンポーネントから `v-model` で `isCreateModalOpen` を子に渡して動作を確認する
 
 もし行き詰まったら、以下のボタンをクリックして解答を見ることができます。
 
 :ButtonShowSolution
 
-親・子コンポーネント間で isCreateModalOpen を双方向に同期できるようになりました！
+親・子コンポーネント間で `isCreateModalOpen` を双方向に同期できるようになりました！
