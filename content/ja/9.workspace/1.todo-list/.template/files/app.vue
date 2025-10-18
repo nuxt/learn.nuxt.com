@@ -109,7 +109,7 @@ interface Todo {
       <TodoList :todos="filteredTodos" @update-done="updateDone" />
 
       <!-- 新規作成モーダル -->
-      <CreateModal
+      <AppModal
         v-if="isCreateModalOpen"
         v-model="isCreateModalOpen"
       >
@@ -135,7 +135,7 @@ interface Todo {
             </button>
           </div>
         </form>
-      </CreateModal>
+      </AppModal>
     </main>
 
     <footer class="footer">

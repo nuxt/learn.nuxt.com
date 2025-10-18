@@ -93,7 +93,7 @@ interface Todo {
       <TodoList :todos="filteredTodos" @update-done="updateDone" />
 
       <!-- 新規作成モーダル -->
-      <CreateModal
+      <AppModal
         v-if="isCreateModalOpen"
         v-model="isCreateModalOpen"
       />

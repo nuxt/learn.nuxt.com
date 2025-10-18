@@ -151,21 +151,21 @@
 
 ## チャレンジ
 
-### 1. CreateModal.vue に slot を追加
+### 1. AppModal.vue に slot を追加
 
-`CreateModal.vue` に、
+`AppModal.vue` に、
 - モーダルのタイトル
 - モーダルのコンテンツ
 
 が差し込みできるよう、 `slot` を追加してみましょう。
 
-1. `CreateModal.vue` の `<h2>新規作成モーダル</h2>` を削除して `<slot name="title" />` を追加
-2. `CreateModal.vue` に、モーダルコンテンツを追加するための `<slot />` を追加
+1. `AppModal.vue` の `<h2>新規作成モーダル</h2>` を削除して `<slot name="title" />` を追加
+2. `AppModal.vue` に、モーダルコンテンツを追加するための `<slot />` を追加
 
 ### 1. モーダルに、モーダルタイトルと新規作成フォームを表示
 
-1. `app.vue` 側で `CreateModal.vue` に表示する、モーダルタイトル `<h2>タスクの新規作成</h2>`を追加
-1. `app.vue` 側で `CreateModal.vue` に表示する、以下のHTMLを追加
+1. `app.vue` 側で `AppModal.vue` に表示する、モーダルタイトル `<h2>タスクの新規作成</h2>`を追加
+1. `app.vue` 側で `AppModal.vue` に表示する、以下のHTMLを追加
 
 ```html
 <form>

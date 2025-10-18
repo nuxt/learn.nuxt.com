@@ -2,7 +2,7 @@
 /**
  * DefineModel
  */
-const isCreateModalOpen = defineModel()
+const isOpen = defineModel()
 </script>
 
 <template>
@@ -12,7 +12,7 @@ const isCreateModalOpen = defineModel()
         <!-- TODO: `<slot name="title">`でコンテンツを受け取れるようにする -->
         <h2>新規作成モーダル</h2>
 
-        <button aria-label="ダイアログを閉じる" @click="isCreateModalOpen = false">
+        <button aria-label="ダイアログを閉じる" @click="isOpen = false">
           閉じる
         </button>
       </div>

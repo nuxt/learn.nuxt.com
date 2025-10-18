@@ -94,7 +94,7 @@ interface Todo {
       <TodoList :todos="filteredTodos" @update-done="updateDone" />
 
       <!-- 新規作成モーダル -->
-      <CreateModal
+      <AppModal
         v-if="isCreateModalOpen"
         v-model="isCreateModalOpen"
       >
@@ -121,7 +121,7 @@ interface Todo {
             <button type="submit">登録</button>
           </div>
         </form>
-      </CreateModal>
+      </AppModal>
     </main>
 
     <footer class="footer">

@@ -92,10 +92,10 @@ interface Todo {
 
       <!-- 新規作成モーダル -->
       <!--
-        TODO: `CreateModal.vue`の`<slot name="title">`にモーダルタイトルを差し込む
+        TODO: `AppModal.vue`の`<slot name="title">`にモーダルタイトルを差し込む
               `<slot>`に、新規todo入力フォームを差し込む
       -->
-      <CreateModal
+      <AppModal
         v-if="isCreateModalOpen"
         v-model="isCreateModalOpen"
       />
