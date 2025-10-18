@@ -92,6 +92,7 @@ const showUnDoneOnly = ref(false)
 `<input>`の`@change`イベントを使い、ユーザーがチェックボックスを変更したタイミングで`showUnDoneOnly`の値を切り替えましょう。これにより、`showUnDoneOnly`がユーザー操作に連動して変更されるようになります。
 
 ```vue
+<!-- template -->
 <input
   :checked="showUnDoneOnly"
   type="checkbox"
