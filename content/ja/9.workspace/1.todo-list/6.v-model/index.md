@@ -2,7 +2,7 @@
 
 Vueでは [`v-model`](https://ja.vuejs.org/api/built-in-directives.html#v-model) ディレクティブを使うことで、フォーム要素やカスタムコンポーネントと「双方向データバインディング」を簡潔に実現できます。ユーザーの入力とVueのデータが常に同期され、フォーム制御が直感的になります。  
 ここでは、フォーム要素の `v-model` の利用方法について学習します。  
-※カスタムコンポーネントの `v-model` は、[コンポーネントでの v-model](componentization-3)で学習します。
+※コンポーネントの `v-model` は、[コンポーネントの v-model](componentization-3)で学習します。
 
 ## `v-model` の基本
 
