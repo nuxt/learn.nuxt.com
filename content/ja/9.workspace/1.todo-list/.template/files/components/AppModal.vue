@@ -9,7 +9,7 @@ const isOpen = defineModel()
   <div class="modal">
     <div class="modal-content">
       <div class="modal-header">
-        <h2>新規作成モーダル</h2>
+        <slot name="title" />
 
         <button aria-label="ダイアログを閉じる" @click="isOpen = false">
           閉じる

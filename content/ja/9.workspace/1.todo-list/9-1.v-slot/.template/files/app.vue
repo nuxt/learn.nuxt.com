@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import TodoList from './components/TodoList.vue'
+import AppModal from './components/AppModal.vue'
 
 /**
  * Data

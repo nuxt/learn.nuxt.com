@@ -57,7 +57,7 @@ function handleSubmit(e: Event) {
 - `props` と `emit`（親子コンポーネント間のデータ受け渡しとイベント通知）
 - `v-model` と `defineModel`（親子での双方向データバインディング）
 - `computed`（計算されたリアクティブデータ）
-- `v-slot`（親から子へのテンプレート差し込み）
+- `slot` と `v-slot`（親から子へのテンプレート差し込み）
 
 ---
 
@@ -66,12 +66,12 @@ function handleSubmit(e: Event) {
 今回の学習には含まれていませんが、Vue.js では他にも便利な機能や大事な考え方がいろいろあります。
 いくつか紹介しますので、興味があれば学習してみてください。
 
-- `watch`（リアクティブデータの変化を監視して、何か処理を実行する）
-- ライフサイクルフック（コンポーネントの状態に応じた処理のタイミング）
-- Composables（ロジックや状態を関数として切り出し、複数コンポーネントで再利用する仕組み）
-- Vue Router（画面遷移の管理）
-- Vuex / Pinia（状態管理ライブラリ）
-- カスタムディレクティブ（独自のDOM操作機能を作る）
+- [`watch`](https://ja.vuejs.org/guide/essentials/watchers.html)（リアクティブデータの変化を監視して、何か処理を実行する）
+- [ライフサイクルフック](https://ja.vuejs.org/guide/essentials/lifecycle.html)（コンポーネントの状態に応じた処理のタイミング）
+- [Composables](https://ja.vuejs.org/guide/reusability/composables.html)（ロジックや状態を関数として切り出し、複数コンポーネントで再利用する仕組み）
+- [Vue Router](https://router.vuejs.org/)（画面遷移の管理）
+- [Pinia](https://pinia.vuejs.org/) / [Vuex](https://vuex.vuejs.org/ja/)（状態管理ライブラリ）
+- [カスタムディレクティブ](https://ja.vuejs.org/guide/reusability/custom-directives.html)（独自のDOM操作機能を作る）
 
 これらの機能は、より複雑で実践的なWebアプリケーション作りに役立ちます。
 Vue.jsの基礎が固まったら、少しずつ広げていくのがおすすめです。
