@@ -52,7 +52,7 @@ const emit = defineEmits<{
     <input
       :checked="modelValue"
       type="checkbox"
-      @change="emit('update:modelValue', $event.target.checked)"
+      @change="(event) => emit('update:modelValue', event.target.checked)"
     >
     未完了のみ表示
   </label>
@@ -96,7 +96,7 @@ const checked = defineModel()
     <input
       :checked="checked"
       type="checkbox"
-      @change="checked = $event.target.checked"
+      @change="(event) => checked = event.target.checked"
     >
     -->
     未完了のみ表示
@@ -176,7 +176,7 @@ const emit = defineEmits<{
     <input
       :checked="isShowUnDone"
       type="checkbox"
-      @change="emit('update:isShowUnDone', $event.target.checked)"
+      @change="(event) => emit('update:isShowUnDone', event.target.checked)"
     >
     未完了を表示
   </label>
@@ -184,7 +184,7 @@ const emit = defineEmits<{
     <input
       :checked="isShowExpired"
       type="checkbox"
-      @change="emit('update:isShowExpired', $event.target.checked)"
+      @change="(event) => emit('update:isShowExpired', event.target.checked)"
     >
     期限切れを表示
   </label>
