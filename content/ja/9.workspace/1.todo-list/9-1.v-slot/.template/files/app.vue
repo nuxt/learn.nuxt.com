@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import AppModal from './components/AppModal.vue'
 import TodoList from './components/TodoList.vue'
 
 /**
@@ -23,7 +24,6 @@ const todos = ref<Todo[]>([
 ])
 const showUnDoneOnly = ref(false)
 const isCreateModalOpen = ref(false)
-// TODO: 各フォーム入力欄に対応するリアクティブ変数（`ref`）を用意する
 
 /**
  * Computed
@@ -46,8 +46,6 @@ function updateDone(id: number, done: boolean) {
     targetTodo.done = done
   }
 }
-
-// TODO: 「登録」ボタンクリックイベントに渡す関数を用意し、新規Todoオブジェクトを追加する
 
 /**
  * Type
@@ -94,8 +92,11 @@ interface Todo {
       <TodoList :todos="filteredTodos" @update-done="updateDone" />
 
       <!-- 新規作成モーダル -->
-      <!-- TODO: `CreateModal.vue`の`<slot>`に、新規todo入力フォームを差し込む -->
-      <CreateModal
+      <!--
+        TODO: `AppModal.vue`の`<slot name="title">`にモーダルタイトルを差し込む
+              `<slot>`に、新規todo入力フォームを差し込む
+      -->
+      <AppModal
         v-if="isCreateModalOpen"
         v-model="isCreateModalOpen"
       />

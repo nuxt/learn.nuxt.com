@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import AppModal from './components/AppModal.vue'
 import TodoList from './components/TodoList.vue'
 
 /**
@@ -22,6 +23,18 @@ const todos = ref<Todo[]>([
   },
 ])
 const showUnDoneOnly = ref(false)
+const isCreateModalOpen = ref(false)
+
+/**
+ * Computed
+ */
+const filteredTodos = computed(() => {
+  if (!showUnDoneOnly.value) {
+    return todos.value
+  }
+
+  return todos.value.filter(todo => !todo.done)
+})
 
 /**
  * Methods
@@ -59,22 +72,57 @@ interface Todo {
     </header>
 
     <main>
-      <p>showUnDoneOnly の値 : {{ showUnDoneOnly }}</p>
       <div class="actions">
         <div>
           <div class="search-controls">
             <label>
               <input
-                :checked="showUnDoneOnly"
+                v-model="showUnDoneOnly"
                 type="checkbox"
               >
               未完了のみ表示
             </label>
           </div>
         </div>
+        <button type="button" @click="isCreateModalOpen = true">
+          新規作成
+        </button>
       </div>
 
-      <TodoList :todos="todos" @update-done="updateDone" />
+      <TodoList :todos="filteredTodos" @update-done="updateDone" />
+
+      <!-- 新規作成モーダル -->
+      <AppModal
+        v-if="isCreateModalOpen"
+        v-model="isCreateModalOpen"
+      >
+        <template #title>
+          <h2>タスクの新規作成</h2>
+        </template>
+
+        <form>
+          <div>
+            <label for="title">タイトル</label>
+            <input id="title" type="text" required>
+          </div>
+
+          <div>
+            <label for="note">メモ</label>
+            <textarea id="note" rows="2" />
+          </div>
+
+          <div>
+            <label for="dueDate">期限</label>
+            <input id="dueDate" type="date">
+          </div>
+
+          <div>
+            <button type="submit">
+              登録
+            </button>
+          </div>
+        </form>
+      </AppModal>
     </main>
 
     <footer class="footer">
@@ -145,7 +193,44 @@ interface Todo {
   align-items: center;
   gap: 0.5rem;
 }
+
+button {
+  padding: 0.375rem 1rem;
+  border-radius: 0.375rem;
+  border: none;
+  font-size: 0.875rem;
+  background-color: #02c169;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #029e58;
+}
 /* ------- actions last ------- */
+
+/* ------- form start ------- */
+form {
+  display: grid;
+  grid-auto-rows: min-content;
+  gap: 1rem;
+  font-size: 0.875rem;
+  height: 100%;
+}
+
+form > div {
+  display: grid;
+  gap: 0.25rem;
+}
+
+input,
+textarea {
+  padding: 0.375rem 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+}
+
+/* ------- form last ------- */
 
 /* footer */
 .footer {

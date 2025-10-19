@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import AppModal from './components/AppModal.vue'
 import TodoList from './components/TodoList.vue'
 
 /**
@@ -94,7 +95,7 @@ interface Todo {
 
       <!-- 新規作成モーダル -->
       <!-- TODO: isCreateModalOpenを渡す  -->
-      <CreateModal v-if="isCreateModalOpen" />
+      <AppModal v-if="isCreateModalOpen" />
     </main>
 
     <footer class="footer">
