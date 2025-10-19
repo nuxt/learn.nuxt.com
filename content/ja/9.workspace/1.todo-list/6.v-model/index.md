@@ -48,7 +48,7 @@ const showUnDoneOnly = ref(false)
 </script>
 
 <template>
-  <textarea v-model="memo" placeholder="メモを入力" />
+  <textarea v-model="note" placeholder="メモを入力" />
 
   <input v-model="isDone" :value="true" type="radio">完了
   <input v-model="isDone" :value="false" type="radio">未完了
