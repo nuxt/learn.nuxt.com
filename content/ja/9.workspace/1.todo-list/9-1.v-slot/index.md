@@ -140,7 +140,7 @@
 <template>
   <AppModal>
     <template #title>
-      <!-- v-slot. 左のように # で省略表記ができます -->
+      <!-- v-slot. 上のように # で省略表記ができます -->
       <!-- ↓ titleという名前の スロットコンテンツ -->
       <span>✏️</span>
       <span class="padding-start-1">タスクの編集</span>
