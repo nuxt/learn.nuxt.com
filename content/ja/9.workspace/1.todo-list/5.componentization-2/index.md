@@ -110,7 +110,7 @@ function handleSendMessage(message: string) {
 app.vueに定義されたtodosにTodoList.vueからアクセスすることができていません。
 `props` と `emit` を使用して、コンポーネント間でデータをやり取りできるようにしましょう。
 
-## チャレンジ2
+## チャレンジ
 
 `props` と `emit` を使用して親子間でデータの受け渡しをできるようにしましょう：
 
