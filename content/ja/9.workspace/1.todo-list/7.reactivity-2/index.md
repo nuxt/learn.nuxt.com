@@ -25,11 +25,11 @@ const color = computed(() => grade.value === 'A' ? '#ff0000' : 'inherit')
 </template>
 ```
 
-`score` が変わると自動で `grade` が自動で再計算されます。
+`score` が変わると自動で `grade` が再計算されます。
 逆に `score` が変わらない限り、何度使っても前回の計算結果を使います。
 
 変数 `color` に注目してください。依存データに `computed` を利用することもできます。
-`grade` が変わると、 `<p>` のstyle属性 `color` プロパティ値がリアクティブに変更されます。
+`grade` が変わると、 `<p>` 要素のstyle属性 `color` プロパティ値がリアクティブに変更されます。
 
 ::note
 値は `ref` と同じく `.value` を通してアクセスすることができます。

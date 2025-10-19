@@ -33,6 +33,10 @@ const showUnDoneOnly = ref(true)
   />
 </template>
 ```
+::note
+[`$event`](https://ja.vuejs.org/guide/essentials/event-handling.html#accessing-event-argument-in-inline-handlers) は、「その場で起きたイベントそのもの」を受け取るためのプレースホルダーです。
+上記コードの `v-on` は、 `@update:model-value="(event) => showUnDoneOnly = event"` と置き換えることができます。
+::
 
 ```vue
 <!-- IncompleteOnlyToggle: 子コンポーネント -->
@@ -59,9 +63,9 @@ const emit = defineEmits<{
 </template>
 ```
 
-親から `props` `modelValue` で、値を受け取り、
-子は `emit` で `update:modelValue` で、更新後の値を送信し、
-親が、 `v-on` `update:modelValue` で、子が送信した値を受け取り、状態を更新
+- 親から `props` `modelValue` で、値を受け取り、
+- 子は `emit` で `update:modelValue` で、更新後の値を送信し、
+- 親が、 `v-on` `update:modelValue` で、子が送信した値を受け取り、状態を更新
 
 をすることで、親子の値の同期ができますが、これらをシンプルにしたのが `v-model` です。
 
