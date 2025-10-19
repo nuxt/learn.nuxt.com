@@ -1,7 +1,7 @@
 # フォーム入力バインディング
 
-Vueでは [`v-model`](https://ja.vuejs.org/api/built-in-directives.html#v-model) ディレクティブを使うことで、フォーム要素やコンポーネントと「双方向データバインディング」を簡潔に実現できます。ユーザーの入力とVueのデータが常に同期され、フォーム制御が直感的になります。  
-ここでは、フォーム要素の `v-model` の利用方法について学習します。  
+Vueでは [`v-model`](https://ja.vuejs.org/api/built-in-directives.html#v-model) ディレクティブを使うことで、フォーム要素やコンポーネントと「双方向データバインディング」を簡潔に実現できます。ユーザーの入力とVueのデータが常に同期され、フォーム制御が直感的になります。
+ここでは、フォーム要素の `v-model` の利用方法について学習します。
 ※コンポーネントの `v-model` は、[コンポーネントの v-model](componentization-3)で学習します。
 
 ## `v-model` の基本
@@ -11,7 +11,10 @@ Vueでは [`v-model`](https://ja.vuejs.org/api/built-in-directives.html#v-model)
 ```vue
 <!-- template -->
 <input v-model="text" type="text" />
-<p>{{ text }}</p>
+
+<p>
+{{ text }}
+</p>
 ```
 
 この例では、入力欄（input）に文字を入力すると `text` データが即時に変更され、下の `<p>` 要素に反映されます。`text` の値をJavaScriptから変更すると、入力欄（input）の表示も自動的に変わります。
@@ -45,14 +48,18 @@ const showUnDoneOnly = ref(false)
 </script>
 
 <template>
-  <textarea v-model="memo" placeholder="メモを入力"></textarea>
+  <textarea v-model="memo" placeholder="メモを入力" />
 
-  <input v-model="isDone" :value="true" type="radio" />完了
-  <input v-model="isDone" :value="false" type="radio" />未完了
+  <input v-model="isDone" :value="true" type="radio">完了
+  <input v-model="isDone" :value="false" type="radio">未完了
 
   <select v-model="showUnDoneOnly">
-    <option :value="false">すべてのタスクを表示</option>
-    <option :value="true">未完了のみ表示</option>
+    <option :value="false">
+      すべてのタスクを表示
+    </option>
+    <option :value="true">
+      未完了のみ表示
+    </option>
   </select>
 </template>
 ```

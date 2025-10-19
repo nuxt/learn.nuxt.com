@@ -42,10 +42,10 @@
   <rect x="60" y="60" width="300" height="180" rx="8" ry="8" fill="none" stroke="#9c89ff" stroke-dasharray="4 4" />
   <text x="70" y="50" font-size="16" fill="#9c89ff" font-weight="bold">parent template</text>
 
-  <text x="90" y="110" font-size="18" fill="#42b883">&lt;AppButton&gt;</text>
-  <rect x="120" y="125" width="200" height="40" rx="6" ry="6" fill="#ff6b6b" />
-  <text x="140" y="150" font-size="18" fill="#fff">✅ すべて完了にする</text>
-  <text x="90" y="190" font-size="18" fill="#42b883">&lt;/AppButton&gt;</text>
+<text x="90" y="110" font-size="18" fill="#42b883">&lt;AppButton&gt;</text>
+<rect x="120" y="125" width="200" height="40" rx="6" ry="6" fill="#ff6b6b" />
+<text x="140" y="150" font-size="18" fill="#fff">✅ すべて完了にする</text>
+<text x="90" y="190" font-size="18" fill="#42b883">&lt;/AppButton&gt;</text>
 
   <!-- Slot content label -->
   <circle cx="160" cy="225" r="8" fill="#ff6b6b" />
@@ -57,7 +57,7 @@
 
   <!-- Arrowhead definition -->
   <defs>
-    <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+    <marker id="arrowhead" markerWidth="10" markerHeight="7"
             refX="10" refY="3.5" orient="auto">
       <polygon points="0 0, 10 3.5, 0 7" fill="#ff6b6b" />
     </marker>
@@ -67,19 +67,19 @@
   <rect x="600" y="60" width="300" height="180" rx="8" ry="8" fill="none" stroke="#9c89ff" stroke-dasharray="4 4" />
   <text x="610" y="50" font-size="16" fill="#9c89ff" font-weight="bold">&lt;AppButton&gt; template</text>
 
-  <text x="630" y="110" font-size="18" fill="#42b883">&lt;button&gt;</text>
-  <rect x="660" y="125" width="120" height="40" rx="6" ry="6" fill="#4c6fff" />
-  <text x="680" y="150" font-size="18" fill="#fff">&lt;slot/&gt;</text>
-  <text x="630" y="190" font-size="18" fill="#42b883">&lt;/button&gt;</text>
+<text x="630" y="110" font-size="18" fill="#42b883">&lt;button&gt;</text>
+<rect x="660" y="125" width="120" height="40" rx="6" ry="6" fill="#4c6fff" />
+<text x="680" y="150" font-size="18" fill="#fff">&lt;slot/&gt;</text>
+<text x="630" y="190" font-size="18" fill="#42b883">&lt;/button&gt;</text>
 
   <!-- Slot outlet label -->
   <circle cx="710" cy="225" r="8" fill="#4c6fff" />
   <text x="725" y="230" font-size="16" fill="#4c6fff">slot outlet</text>
 </svg>
 
-
 ## フォールバックコンテンツ（デフォルト）
-親から `slot` が渡されなかった場合に、フォールバック（つまりデフォルト）を設定することもできます。  
+
+親から `slot` が渡されなかった場合に、フォールバック（つまりデフォルト）を設定することもできます。
 やり方は、 `slot` タグの間にフォールバックコンテンツを設定します。
 
 ```vue
@@ -92,7 +92,9 @@
   </button>
 </template>
 
-<style scoped>/* 省略 */</style>
+<style scoped>
+/* 省略 */
+</style>
 ```
 
 ```vue
@@ -111,7 +113,7 @@
 
 スロットに名前を付けると、1つのコンポーネントに複数の差し込み場所（スロットアウトレット）が作れます。
 
-名前付きのスロットコンテンツを渡すためには、 `v-slot` を利用します。（例: `<template v-slot:title>`）  
+名前付きのスロットコンテンツを渡すためには、 `v-slot` を利用します。（例: `<template v-slot:title>`）
 `v-slot` は `#` で省略表記ができます。（例: `<template #:title>`）
 
 ```vue
@@ -137,7 +139,8 @@
 <!-- 親コンポーネント -->
 <template>
   <AppModal>
-    <template #title> <!-- v-slot. 左のように # で省略表記ができます -->
+    <template #title>
+      <!-- v-slot. 左のように # で省略表記ができます -->
       <!-- ↓ titleという名前の スロットコンテンツ -->
       <span>✏️</span>
       <span class="padding-start-1">タスクの編集</span>
@@ -156,7 +159,6 @@
 
 名前なし（`name` を持たない）スロットは、暗黙的に `default` という `name` を持つものとされますので、
 以下のようにも記述できます。
-
 
 ```vue
 <!-- 親コンポーネント -->
@@ -204,6 +206,7 @@
 ### 1. AppModal.vue に slot を追加
 
 `AppModal.vue` に、
+
 - モーダルのタイトル
 - モーダルのコンテンツ
 

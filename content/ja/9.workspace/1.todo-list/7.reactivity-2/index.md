@@ -1,11 +1,11 @@
 # リアクティビティー パート２
 
-[リアクティビティー パート１](reactivity-1)で、データの変更を監視して、変更時に更新を自動的にトリガーする [優れたリアクティビティシステム](https://ja.vuejs.org/guide/essentials/reactivity-fundamentals) の`ref`について学習しました。  
+[リアクティビティー パート１](reactivity-1)で、データの変更を監視して、変更時に更新を自動的にトリガーする [優れたリアクティビティシステム](https://ja.vuejs.org/guide/essentials/reactivity-fundamentals) の`ref`について学習しました。
 ここでは、`computed`について学習しましょう。
 
 ## `computed` の基本
 
-Vue には **算出プロパティ** ([`computed`](https://ja.vuejs.org/api/reactivity-core.html#computed)) という仕組みがあります。  
+Vue には **算出プロパティ** ([`computed`](https://ja.vuejs.org/api/reactivity-core.html#computed)) という仕組みがあります。
 `computed` は、依存するデータの値から自動的に導出されるリアクティブなプロパティです。
 依存するリアクティブデータの値が変わらない限り結果がキャッシュされ、無駄な再計算を防ぐのでパフォーマンス良く利用することができます。
 
@@ -19,7 +19,9 @@ const color = computed(() => grade.value === 'A' ? '#ff0000' : 'inherit')
 </script>
 
 <template>
-  <p :style="{ color }">成績：{{ grade }}</p>
+  <p :style="{ color }">
+    成績：{{ grade }}
+  </p>
 </template>
 ```
 
@@ -30,7 +32,7 @@ const color = computed(() => grade.value === 'A' ? '#ff0000' : 'inherit')
 `grade` が変わると、 `<p>` のstyle属性 `color` プロパティ値がリアクティブに変更されます。
 
 ::note
-値は `ref` と同じく `.value` を通してアクセスすることができます。  
+値は `ref` と同じく `.value` を通してアクセスすることができます。
 ただし `<template>` 内では自動的に `.value` がアンラップされるため、 `{{ grade }}` と書くだけでOKです。
 ::
 
@@ -55,7 +57,7 @@ const color = computed(() => grade.value === 'A' ? '#ff0000' : 'inherit')
 
 ## 書き込み可能な算出関数
 
-`computed` は、デフォルトでは getter 関数のみです。  
+`computed` は、デフォルトでは getter 関数のみです。
 getterのみの `computed` に新しい値を代入しようとすると、ランタイム警告が表示されます。
 
 ```vue
@@ -73,7 +75,7 @@ const doubled = computed(() => count.value * 2)
 </template>
 ```
 
-`computed` は **getter** だけでなく **setter** も定義できます。  
+`computed` は **getter** だけでなく **setter** も定義できます。
 これにより、算出値を書き換えたときに元のデータに反映できます。
 
 ```vue
@@ -102,10 +104,10 @@ const doubled = computed({
 前回の学習では、「未完了のみ表示」チェックボックスを実装し、`showUnDoneOnly` と値が同期されるようにしました。
 ですが、「未完了のみ表示」チェックボックスにチェックを入れても、未完了タスクで絞り込みがされていません。
 
-
 ## チャレンジ
 
 `computed` を使って、以下のリアクティブな値を、 `filteredTodos` という命名で実装してみましょう。
+
 - 「未完了のみ表示」がチェック状態の時は、 **`done` が `false`** の Todo のみを表示
 - 「未完了のみ表示」のチェックが外れている時は、 **すべての Todo** を表示
 
@@ -126,6 +128,5 @@ const doubled = computed({
 - 依存するリアクティブデータが変わった時だけ自動で再計算される
 - 計算結果がキャッシュされ、無駄な処理を減らせる
 - 加工や条件分岐のロジックをまとめられ、テンプレートがすっきりする
-
 
 チェックボックスを切り替えた時に、表示されるTodoが正しく絞り込まれるようになりました！

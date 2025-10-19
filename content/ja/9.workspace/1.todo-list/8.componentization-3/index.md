@@ -1,6 +1,6 @@
 # コンポーネントの v-model
 
-[フォーム入力バインディング](v-model)で紹介したように、 `v-model` はフォーム入力欄とVueのデータを自動で同期してくれる仕組みです。  
+[フォーム入力バインディング](v-model)で紹介したように、 `v-model` はフォーム入力欄とVueのデータを自動で同期してくれる仕組みです。
 この `v-model` は、コンポーネントでも同じように使うことができます。
 
 ```vue
@@ -29,7 +29,7 @@ const showUnDoneOnly = ref(true)
 <template>
   <IncompleteOnlyToggle
     :model-value="showUnDoneOnly"
-    @update:modelValue="showUnDoneOnly = $event"
+    @update:model-value="showUnDoneOnly = $event"
   />
 </template>
 ```
@@ -59,13 +59,14 @@ const emit = defineEmits<{
 </template>
 ```
 
-親から `props` `modelValue` で、値を受け取り、  
-子は `emit` で `update:modelValue` で、更新後の値を送信し、  
+親から `props` `modelValue` で、値を受け取り、
+子は `emit` で `update:modelValue` で、更新後の値を送信し、
 親が、 `v-on` `update:modelValue` で、子が送信した値を受け取り、状態を更新
 
 をすることで、親子の値の同期ができますが、これらをシンプルにしたのが `v-model` です。
 
 コンポーネントで `v-model` を利用する場合、子コンポーネントでは、
+
 - `props` に `modelValue` を定義
 - `emit` に `update:modelValue` を定義
 
@@ -168,7 +169,6 @@ const emit = defineEmits<{
   'update:isShowUnDone': [boolean]
   'update:isShowExpired': [boolean]
 }>()
-
 </script>
 
 <template>
@@ -189,7 +189,6 @@ const emit = defineEmits<{
     期限切れを表示
   </label>
 </template>
-
 ```
 
 **ポイント**
@@ -207,15 +206,16 @@ const emit = defineEmits<{
 - 複数の値や名前付きも、同じ構文でシンプルに扱える
 
 ## 現在の実装の課題
+
 TODOリストに、新規タスクを追加するために、
+
 - モーダルコンポーネント（AppModal.vue）
 - 新規作成ボタン
 
 の2つを用意しました。
 
-新規作成ボタンをクリックで、モーダルを開くことができますが、  
+新規作成ボタンをクリックで、モーダルを開くことができますが、
 モーダル内の「閉じる」ボタンをクリックしても、モーダルを閉じることができません。
-
 
 ## チャレンジ
 

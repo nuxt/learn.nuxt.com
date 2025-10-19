@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import TodoList from './components/TodoList.vue'
 import AppModal from './components/AppModal.vue'
+import TodoList from './components/TodoList.vue'
 
 /**
  * Data
@@ -99,13 +99,15 @@ interface Todo {
         v-if="isCreateModalOpen"
         v-model="isCreateModalOpen"
       >
-        <template #title><h2>タスクの新規作成</h2></template>
+        <template #title>
+          <h2>タスクの新規作成</h2>
+        </template>
 
         <!-- TODO: フォーム入力を、v-model でリアクティブ変数と同期させる -->
         <form>
           <div>
             <label for="title">タイトル</label>
-            <input id="title" type="text" required />
+            <input id="title" type="text" required>
           </div>
 
           <div>
@@ -115,11 +117,13 @@ interface Todo {
 
           <div>
             <label for="dueDate">期限</label>
-            <input id="dueDate" type="date" />
+            <input id="dueDate" type="date">
           </div>
 
           <div>
-            <button type="submit">登録</button>
+            <button type="submit">
+              登録
+            </button>
           </div>
         </form>
       </AppModal>
