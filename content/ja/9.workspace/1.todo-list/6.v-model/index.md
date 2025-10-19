@@ -96,7 +96,7 @@ const showUnDoneOnly = ref(false)
 
 ### 1. `:checked` と `@change` による値の同期
 
-`<input>`の`@change`イベントを使い、ユーザーがチェックボックスを変更したタイミングで`showUnDoneOnly`の値を切り替えましょう。これにより、`showUnDoneOnly`がユーザー操作に連動して変更されるようになります。
+`<input>` の `@change` イベントを使い、ユーザーがチェックボックスを変更したタイミングで `showUnDoneOnly` の値を切り替えましょう。これにより、 `showUnDoneOnly` がユーザー操作に連動して変更されるようになります。
 
 ```vue
 <!-- app.vue: template -->
@@ -110,7 +110,7 @@ const showUnDoneOnly = ref(false)
 
 ### 2. `v-model` による値の同期
 
-次に、`:checked` を `v-model`に切り替えて、 `@change` の値変更のコードを削除しましょう。
+次に、 `<input>` の `:checked` を `v-model`に切り替えて、 `@change` の値変更のコードを削除しましょう。
 そうすることで、 `v-model` だけで、バインドとイベント監視の指定がなくても、値が自動的に同期されるようになります。
 
 もし行き詰まったら、以下のボタンをクリックして解答を見ることができます。

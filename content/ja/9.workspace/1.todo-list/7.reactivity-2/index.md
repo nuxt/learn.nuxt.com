@@ -113,12 +113,14 @@ const doubled = computed({
 
 次の手順に沿って実装してみましょう。
 
-1. `<script setup>` の中で、新しく `filteredTodos` という算出プロパティ（ `computed` ）を定義しましょう。この中で、`showUnDoneOnly` の値によって表示するTodoリストを切り替えるロジックを書きます。
+1. `<script setup>` の中で、新しく `filteredTodos` という算出プロパティ（ `computed` ）を定義しましょう。
 
-2. `showUnDoneOnly` が `true` の場合は「 `done: false` のTodoのみ」を返し、 `showUnDoneOnly` が `false` の場合は「すべてのTodo」を返すようにコードを組みましょう。
+2. `filteredTodos` の実装をしましょう。`showUnDoneOnly` の値によって、 `todos` の絞り込みをします。
+  - `showUnDoneOnly` が `true` の場合は、 `done: false` のTodoのみを返します
+  - `showUnDoneOnly` が `false` の場合は、すべてのTodoを返します
 
-3. 今までは `:todos="todos"` で直接全てのリストを渡していましたが、
-   実装した `filteredTodos` を `TodoList` コンポーネントに渡してみましょう。
+3. `TodoList` コンポーネントに `:todos="todos"` で、全てのリストを渡していましたが、
+   1,2 で実装した `filteredTodos` を `TodoList` コンポーネントの `todos` propsに渡してみましょう。
 
 もし行き詰まったら、以下のボタンをクリックして解答を見ることができます。
 :ButtonShowSolution
