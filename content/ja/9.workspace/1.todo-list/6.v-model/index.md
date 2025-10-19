@@ -42,7 +42,7 @@ Vueでは [`v-model`](https://ja.vuejs.org/api/built-in-directives.html#v-model)
 
 ```vue
 <script setup lang="ts">
-const memo = ref('')
+const note = ref('')
 const isDone = ref(true)
 const showUnDoneOnly = ref(false)
 </script>
