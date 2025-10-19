@@ -113,7 +113,7 @@ const doubled = computed({
 
 次の手順に沿って実装してみましょう。
 
-1. `<script setup>` の中で、新しく `filteredTodos` という算出プロパティ（ `computed` ）を定義しましょう。
+1. `<script setup>` の中で、 `filteredTodos` という算出プロパティ（ `computed` ）を定義しましょう。
 
 2. `filteredTodos` の実装をしましょう。`showUnDoneOnly` の値によって、 `todos` の絞り込みをします。
   - `showUnDoneOnly` が `true` の場合は、 `done: false` のTodoのみを返します
