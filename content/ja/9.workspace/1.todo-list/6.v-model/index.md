@@ -103,7 +103,7 @@ const showUnDoneOnly = ref(false)
 <input
   :checked="showUnDoneOnly"
   type="checkbox"
-  @change="showUnDoneOnly = $event.target.checked"
+  @change="(event) => showUnDoneOnly = event.target.checked"
 >
 未完了のみ表示
 ```
