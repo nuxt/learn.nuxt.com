@@ -203,7 +203,7 @@
 
 ## チャレンジ
 
-### 1. AppModal.vue に slot を追加
+### 1. `AppModal.vue` に `<slot>` を追加
 
 `AppModal.vue` に、
 
@@ -212,13 +212,13 @@
 
 が差し込みできるよう、 `<slot>` を追加してみましょう。
 
-1. `AppModal.vue` の `<h2>新規作成モーダル</h2>` を削除して `<slot name="title" />` を追加
-2. `AppModal.vue` に、モーダルコンテンツを追加するための `<slot />` を追加
+1. `AppModal.vue` の `<h2>新規作成モーダル</h2>` を削除して `<slot name="title" />` を追加しましょう。
+2. `AppModal.vue` に、モーダルコンテンツを追加するための `<slot />` を追加しましょう。
 
-### 1. モーダルに、モーダルタイトルと新規作成フォームを表示
+### 2. `AppModal` コンポーネントに、モーダルタイトルと新規作成フォームの `v-slot` を追加
 
-1. `app.vue` 側で `AppModal.vue` に表示する、モーダルタイトル `<h2>タスクの新規作成</h2>`を追加
-1. `app.vue` 側で `AppModal.vue` に表示する、以下のHTMLを追加
+1. `app.vue` で `AppModal` コンポーネントに、モーダルタイトルの `v-slot` `<template #title><h2>タスクの新規作成</h2></template>` を追加しましょう。
+1. `app.vue` で `AppModal` コンポーネントに、 `v-slot` （名前なし）に、以下のHTMLを追加しましょう。
 
 ```html
 <form>

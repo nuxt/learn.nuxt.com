@@ -226,7 +226,7 @@ TODOリストに、新規タスクを追加するために、
 
 1. `AppModal.vue`（子コンポーネント）に `defineModel()` で `modelValue` を定義しましょう。
    `defineModel()` 返り値は、変数 `isOpen` に格納します。
-2. `AppModal.vue` の「閉じる」ボタンをクリックしたら、`isOpen` の値を `false` にしましょう。
+2. `AppModal.vue` の「閉じる」ボタンをクリックしたら、`isOpen` （`modelValue`）の値を `false` にしましょう。
 3. `app.vue`（親コンポーネント）で `AppModal` コンポーネントへ `v-model` で `isCreateModalOpen` を渡しましょう。
 
 もし行き詰まったら、以下のボタンをクリックして解答を見ることができます。
