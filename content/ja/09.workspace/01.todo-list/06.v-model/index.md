@@ -26,10 +26,10 @@ Vueでは [`v-model`](https://ja.vuejs.org/api/built-in-directives.html#v-model)
 ```vue
 <!-- template -->
 <!-- :value がバインド、 @input がイベント監視 -->
-<input :value="message" @input="message = $event.target.value" type="text" />
+<input :value="text" @input="(event) => text = event.target.value" type="text" />
 
 <!-- 上と同じ -->
-<input v-model="message" type="text" />
+<input v-model="text" type="text" />
 ```
 
 フォームタイプごとにバインドされる属性やイベントが異なります：
@@ -42,13 +42,13 @@ Vueでは [`v-model`](https://ja.vuejs.org/api/built-in-directives.html#v-model)
 
 ```vue
 <script setup lang="ts">
-const memo = ref('')
+const note = ref('')
 const isDone = ref(true)
 const showUnDoneOnly = ref(false)
 </script>
 
 <template>
-  <textarea v-model="memo" placeholder="メモを入力" />
+  <textarea v-model="note" placeholder="メモを入力" />
 
   <input v-model="isDone" :value="true" type="radio">完了
   <input v-model="isDone" :value="false" type="radio">未完了
@@ -92,26 +92,26 @@ const showUnDoneOnly = ref(false)
 ## チャレンジ
 
 次の手順に沿って、まずは `:checked` バインディングと `@change` イベント監視で、値が同期されるよう修正し、
-次に `v-model` で、値が同期されるよう修正して、 `v-model` の使い方を学びましょう。
+次に `v-model` で、値が同期されるよう修正しましょう。
 
 ### 1. `:checked` と `@change` による値の同期
 
-`<input>`の`@change`イベントを使い、ユーザーがチェックボックスを変更したタイミングで`showUnDoneOnly`の値を切り替えましょう。これにより、`showUnDoneOnly`がユーザー操作に連動して変更されるようになります。
+`<input>` の `@change` イベントを使い、ユーザーがチェックボックスを変更したタイミングで `showUnDoneOnly` の値を切り替えましょう。これにより、 `showUnDoneOnly` がユーザー操作に連動して変更されるようになります。
 
 ```vue
-<!-- template -->
+<!-- app.vue: template -->
 <input
   :checked="showUnDoneOnly"
   type="checkbox"
-  @change="showUnDoneOnly = $event.target.checked"
+  @change="(event) => showUnDoneOnly = event.target.checked"
 >
 未完了のみ表示
 ```
 
 ### 2. `v-model` による値の同期
 
-次に、`:checked` を `v-model`に切り替えて、 `@change` の値変更のコードを削除しましょう。
-そうすることで、 `v-model` の双方向データバインディングによって、バインドとイベント監視の指定がなくても、値が自動的に同期されるようになります。
+次に、 `<input>` の `:checked` を `v-model`に切り替えて、 `@change` の値変更のコードを削除しましょう。
+そうすることで、 `v-model` だけで、バインドとイベント監視の指定がなくても、値が自動的に同期されるようになります。
 
 もし行き詰まったら、以下のボタンをクリックして解答を見ることができます。
 :ButtonShowSolution
