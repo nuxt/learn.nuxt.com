@@ -37,7 +37,7 @@ function handleSubmit(e: Event) {
   const newTodo: Todo = {
     id: Date.now(),
     done: false,
-    title: inputTitile.value,
+    title: inputTitle.value,
     note: inputNote.value,
     dueDate: inputDate.value
   }

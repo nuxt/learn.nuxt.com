@@ -155,7 +155,7 @@ ogImage: true
     <form>
       <div>
         <label for="title">タイトル</label>
-        <input id="title" v-model="inputTitile" type="text" required>
+        <input id="title" v-model="inputTitle" type="text" required>
       </div>
     </form>
   </AppModal>
@@ -178,7 +178,7 @@ ogImage: true
       <form>
         <div>
           <label for="title">タイトル</label>
-          <input id="title" v-model="inputTitile" type="text" required>
+          <input id="title" v-model="inputTitle" type="text" required>
         </div>
       </form>
     </template>

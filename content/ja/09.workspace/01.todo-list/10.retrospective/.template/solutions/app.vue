@@ -24,7 +24,7 @@ const todos = ref<Todo[]>([
 ])
 const showUnDoneOnly = ref(false)
 const isCreateModalOpen = ref(false)
-const inputTitile = ref('')
+const inputTitle = ref('')
 const inputNote = ref('')
 const inputDate = ref('')
 
@@ -56,7 +56,7 @@ function handleSubmit(e: Event) {
   const newTodo: Todo = {
     id: Date.now(),
     done: false,
-    title: inputTitile.value,
+    title: inputTitle.value,
     note: inputNote.value,
     dueDate: inputDate.value,
   }
@@ -123,7 +123,7 @@ interface Todo {
         <form @submit="handleSubmit">
           <div>
             <label for="title">タイトル</label>
-            <input id="title" v-model="inputTitile" type="text" required>
+            <input id="title" v-model="inputTitle" type="text" required>
           </div>
 
           <div>
