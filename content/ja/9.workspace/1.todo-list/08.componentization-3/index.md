@@ -33,6 +33,7 @@ const showUnDoneOnly = ref(true)
   />
 </template>
 ```
+
 ::note
 [`$event`](https://ja.vuejs.org/guide/essentials/event-handling.html#accessing-event-argument-in-inline-handlers) は、「その場で起きたイベントそのもの」を受け取るためのプレースホルダーです。
 上記コードの `v-on` は、 `@update:model-value="(event) => showUnDoneOnly = event"` と置き換えることができます。

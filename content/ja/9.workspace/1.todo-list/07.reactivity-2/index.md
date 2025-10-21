@@ -116,8 +116,9 @@ const doubled = computed({
 1. `<script setup>` の中で、 `filteredTodos` という算出プロパティ（ `computed` ）を定義しましょう。
 
 2. `filteredTodos` の実装をしましょう。`showUnDoneOnly` の値によって、 `todos` の絞り込みをします。
-  - `showUnDoneOnly` が `true` の場合は、 `done: false` のTodoのみを返します
-  - `showUnDoneOnly` が `false` の場合は、すべてのTodoを返します
+
+- `showUnDoneOnly` が `true` の場合は、 `done: false` のTodoのみを返します
+- `showUnDoneOnly` が `false` の場合は、すべてのTodoを返します
 
 3. `TodoList` コンポーネントに `:todos="todos"` で、全てのリストを渡していましたが、
    1,2 で実装した `filteredTodos` を `TodoList` コンポーネントの `todos` propsに渡してみましょう。
