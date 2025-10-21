@@ -1,3 +1,7 @@
+---
+ogImage: true
+---
+
 # リアクティビティー パート２
 
 [リアクティビティー パート１](reactivity-1)で、データの変更を監視して、変更時に更新を自動的にトリガーする [優れたリアクティビティシステム](https://ja.vuejs.org/guide/essentials/reactivity-fundamentals) の`ref`について学習しました。

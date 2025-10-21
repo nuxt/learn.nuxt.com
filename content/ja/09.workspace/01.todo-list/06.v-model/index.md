@@ -1,3 +1,7 @@
+---
+ogImage: true
+---
+
 # フォーム入力バインディング
 
 Vueでは [`v-model`](https://ja.vuejs.org/api/built-in-directives.html#v-model) ディレクティブを使うことで、フォーム要素やコンポーネントと「双方向データバインディング」を簡潔に実現できます。ユーザーの入力とVueのデータが常に同期され、フォーム制御が直感的になります。
@@ -32,11 +36,11 @@ Vueでは [`v-model`](https://ja.vuejs.org/api/built-in-directives.html#v-model)
 <input v-model="text" type="text" />
 ```
 
-フォームタイプごとにバインドされる属性やイベントが異なります：
+フォームタイプごとにバインドされるプロパティやイベントが異なります：
 
-- テキスト・テキストエリア：`value` 属性と `input` イベント
-- チェックボックス・ラジオ：`checked` 属性と `change` イベント
-- セレクトボックス：`value` 属性と `change` イベント
+- テキスト・テキストエリア：`value` プロパティと `input` イベント
+- チェックボックス・ラジオ：`checked` プロパティと `change` イベント
+- セレクトボックス：`value` プロパティと `change` イベント
 
 例えば、テキストエリア、ラジオボックス、セレクトボックスでは、このように使います：
 

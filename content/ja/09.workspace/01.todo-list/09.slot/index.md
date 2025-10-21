@@ -1,3 +1,7 @@
+---
+ogImage: true
+---
+
 # スロット
 
 [スロット](https://ja.vuejs.org/guide/components/slots.html#slot-content-and-outlet) は、親コンポーネントから子コンポーネントの特定の場所にテンプレートを差し込むための仕組みです。
@@ -115,7 +119,7 @@
 
 名前付きのスロットコンテンツを渡すためには、 `v-slot` を利用します。（例: `<template v-slot:title>`）
 
-`v-slot` は `#` で省略表記ができます。（例: `<template #:title>`）
+`v-slot` は `#` で省略表記ができます。（例: `<template #title>`）
 
 ```vue
 <!-- AppModal: 子コンポーネント -->
@@ -151,7 +155,7 @@
     <form>
       <div>
         <label for="title">タイトル</label>
-        <input id="title" v-model="inputTitile" type="text" required>
+        <input id="title" v-model="inputTitle" type="text" required>
       </div>
     </form>
   </AppModal>
@@ -174,7 +178,7 @@
       <form>
         <div>
           <label for="title">タイトル</label>
-          <input id="title" v-model="inputTitile" type="text" required>
+          <input id="title" v-model="inputTitle" type="text" required>
         </div>
       </form>
     </template>

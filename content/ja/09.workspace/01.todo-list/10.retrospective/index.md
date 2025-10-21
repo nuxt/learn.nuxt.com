@@ -1,3 +1,7 @@
+---
+ogImage: true
+---
+
 # 復習・まとめ
 
 TODOリストの作成を通して学べる、基本的なVue.jsの機能の説明は以上になります。
@@ -33,7 +37,7 @@ function handleSubmit(e: Event) {
   const newTodo: Todo = {
     id: Date.now(),
     done: false,
-    title: inputTitile.value,
+    title: inputTitle.value,
     note: inputNote.value,
     dueDate: inputDate.value
   }
