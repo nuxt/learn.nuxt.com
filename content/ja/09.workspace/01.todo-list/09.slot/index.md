@@ -115,7 +115,7 @@
 
 名前付きのスロットコンテンツを渡すためには、 `v-slot` を利用します。（例: `<template v-slot:title>`）
 
-`v-slot` は `#` で省略表記ができます。（例: `<template #:title>`）
+`v-slot` は `#` で省略表記ができます。（例: `<template #title>`）
 
 ```vue
 <!-- AppModal: 子コンポーネント -->
