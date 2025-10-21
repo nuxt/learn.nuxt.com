@@ -1,3 +1,7 @@
+---
+ogImage: true
+---
+
 # スロット
 
 [スロット](https://ja.vuejs.org/guide/components/slots.html#slot-content-and-outlet) は、親コンポーネントから子コンポーネントの特定の場所にテンプレートを差し込むための仕組みです。

@@ -1,3 +1,7 @@
+---
+ogImage: true
+---
+
 # フォーム入力バインディング
 
 Vueでは [`v-model`](https://ja.vuejs.org/api/built-in-directives.html#v-model) ディレクティブを使うことで、フォーム要素やコンポーネントと「双方向データバインディング」を簡潔に実現できます。ユーザーの入力とVueのデータが常に同期され、フォーム制御が直感的になります。
