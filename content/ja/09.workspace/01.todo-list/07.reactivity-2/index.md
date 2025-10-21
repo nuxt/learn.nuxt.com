@@ -25,11 +25,11 @@ const color = computed(() => grade.value === 'A' ? '#ff0000' : 'inherit')
 </template>
 ```
 
-`score` が変わると自動で `grade` が自動で再計算されます。
+`score` が変わると自動で `grade` が再計算されます。
 逆に `score` が変わらない限り、何度使っても前回の計算結果を使います。
 
 変数 `color` に注目してください。依存データに `computed` を利用することもできます。
-`grade` が変わると、 `<p>` のstyle属性 `color` プロパティ値がリアクティブに変更されます。
+`grade` が変わると、 `<p>` 要素のstyle属性 `color` プロパティ値がリアクティブに変更されます。
 
 ::note
 値は `ref` と同じく `.value` を通してアクセスすることができます。
@@ -113,12 +113,15 @@ const doubled = computed({
 
 次の手順に沿って実装してみましょう。
 
-1. `<script setup>` の中で、新しく `filteredTodos` という算出プロパティ（ `computed` ）を定義しましょう。この中で、`showUnDoneOnly` の値によって表示するTodoリストを切り替えるロジックを書きます。
+1. `<script setup>` の中で、 `filteredTodos` という算出プロパティ（ `computed` ）を定義しましょう。
 
-2. `showUnDoneOnly` が `true` の場合は「 `done: false` のTodoのみ」を返し、 `showUnDoneOnly` が `false` の場合は「すべてのTodo」を返すようにコードを組みましょう。
+2. `filteredTodos` の実装をしましょう。`showUnDoneOnly` の値によって、 `todos` の絞り込みをします。
 
-3. 今までは `:todos="todos"` で直接全てのリストを渡していましたが、
-   実装した `filteredTodos` を `TodoList` コンポーネントに渡してみましょう。
+- `showUnDoneOnly` が `true` の場合は、 `done: false` のTodoのみを返します
+- `showUnDoneOnly` が `false` の場合は、すべてのTodoを返します
+
+3. `TodoList` コンポーネントに `:todos="todos"` で、全てのリストを渡していましたが、
+   1,2 で実装した `filteredTodos` を `TodoList` コンポーネントの `todos` propsに渡してみましょう。
 
 もし行き詰まったら、以下のボタンをクリックして解答を見ることができます。
 :ButtonShowSolution
