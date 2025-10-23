@@ -6,8 +6,8 @@
 </script>
 
 <template>
-  <div class="rounded border border-green-300 bg-green-50 p-4">
-    <p class="mb-2 font-bold text-green-700">
+  <div class="border border-green-300 rounded bg-green-50 p-4">
+    <p class="mb-2 text-green-700 font-bold">
       ✅ ハイドレーションエラーが修正されました！
     </p>
     <!-- TODO: タイムスタンプを表示 -->

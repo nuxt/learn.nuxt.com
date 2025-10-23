@@ -8,9 +8,9 @@
 
 ReactのuseEffectに相当する機能ですが、より明確に分かれています：
 
-| React | Vue |
-|-------|-----|
-| `useEffect(() => {}, [])` | `onMounted(() => {})` |
+| React                                     | Vue                     |
+| ----------------------------------------- | ----------------------- |
+| `useEffect(() => {}, [])`                 | `onMounted(() => {})`   |
 | `useEffect(() => { return cleanup }, [])` | `onUnmounted(() => {})` |
 
 Vueでは「何をするか」で関数が分かれているため、意図が明確になります。
@@ -20,47 +20,53 @@ Vueでは「何をするか」で関数が分かれているため、意図が�
 ## 主なライフサイクルフック
 
 ### 1. onBeforeMount
+
 コンポーネントがDOMにマウントされる**直前**に実行されます。
 
 ### 2. onMounted
+
 コンポーネントがDOMにマウントされた**後**に実行されます。
 
 **例：DOM要素へのアクセス**
 
 ```vue
 <script setup lang="ts">
-  const el = ref(null)
+const el = ref(null)
 
-  onMounted(() => {
-    console.log('マウントされました！')
-    console.log(el.value)
-  })
+onMounted(() => {
+  console.log('マウントされました！')
+  console.log(el.value)
+})
 </script>
 
 <template>
-  <div ref="el">Hello</div>
+  <div ref="el">
+    Hello
+  </div>
 </template>
 ```
 
 ### 3. onBeforeUnmount
+
 コンポーネントが破棄される**直前**に実行されます。
 
 ### 4. onUnmounted
+
 コンポーネントが破棄された**後**に実行されます。
 
 **例：タイマーのクリーンアップ**
 
 ```vue
 <script setup lang="ts">
-  onMounted(() => {
-    const timer = setInterval(() => {
-      console.log('tick')
-    }, 1000)
-  })
+onMounted(() => {
+  const timer = setInterval(() => {
+    console.log('tick')
+  }, 1000)
+})
 
-  onUnmounted(() => {
-    clearInterval(timer)
-  })
+onUnmounted(() => {
+  clearInterval(timer)
+})
 </script>
 ```
 
@@ -84,7 +90,7 @@ SSRについては、後ほど「ハイドレーション」のセクション�
 
 ```vue
 <script setup>
-  const width = window.innerWidth
+const width = window.innerWidth
 </script>
 ```
 
@@ -92,11 +98,11 @@ SSRについては、後ほど「ハイドレーション」のセクション�
 
 ```vue
 <script setup>
-  const width = ref(0)
+const width = ref(0)
 
-  onMounted(() => {
-    width.value = window.innerWidth
-  })
+onMounted(() => {
+  width.value = window.innerWidth
+})
 </script>
 ```
 

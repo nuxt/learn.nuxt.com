@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const timestamp = Date.now()  // ❌ これが問題！サーバーとクライアントで異なる値になる
+const timestamp = Date.now() // ❌ これが問題！サーバーとクライアントで異なる値になる
 
 console.log('timestamp:', timestamp)
 </script>
@@ -10,8 +10,8 @@ console.log('timestamp:', timestamp)
       ハイドレーションの確認
     </h1>
 
-    <div class="mb-4 rounded border border-red-300 bg-red-50 p-4">
-      <p class="mb-2 font-bold text-red-700">
+    <div class="mb-4 border border-red-300 rounded bg-red-50 p-4">
+      <p class="mb-2 text-red-700 font-bold">
         ⚠️ ハイドレーションエラーが発生しています
       </p>
       <p class="text-sm text-red-600">
@@ -19,7 +19,7 @@ console.log('timestamp:', timestamp)
       </p>
     </div>
 
-    <div class="mb-4 rounded border border-gray-300 bg-gray-50 p-4">
+    <div class="mb-4 border border-gray-300 rounded bg-gray-50 p-4">
       <p class="mb-2 font-bold">
         現在のタイムスタンプ
       </p>
