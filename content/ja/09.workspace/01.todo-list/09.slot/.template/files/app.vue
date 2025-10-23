@@ -24,9 +24,6 @@ const todos = ref<Todo[]>([
 ])
 const showUnDoneOnly = ref(false)
 const isCreateModalOpen = ref(false)
-const inputTitle = ref('')
-const inputNote = ref('')
-const inputDate = ref('')
 
 /**
  * Computed
@@ -48,23 +45,6 @@ function updateDone(id: number, done: boolean) {
   if (targetTodo) {
     targetTodo.done = done
   }
-}
-
-function handleSubmit(e: Event) {
-  e.preventDefault()
-
-  const newTodo: Todo = {
-    id: Date.now(),
-    done: false,
-    title: inputTitle.value,
-    note: inputNote.value,
-    dueDate: inputDate.value,
-  }
-
-  todos.value = [
-    newTodo,
-    ...todos.value,
-  ]
 }
 
 /**
@@ -112,37 +92,14 @@ interface Todo {
       <TodoList :todos="filteredTodos" @update-done="updateDone" />
 
       <!-- 新規作成モーダル -->
+      <!--
+        TODO: `AppModal.vue`の`<slot name="title">`にモーダルタイトルを差し込む
+              `<slot>`に、新規todo入力フォームを差し込む
+      -->
       <AppModal
         v-if="isCreateModalOpen"
         v-model="isCreateModalOpen"
-      >
-        <template #title>
-          <h2>タスクの新規作成</h2>
-        </template>
-
-        <form @submit="handleSubmit">
-          <div>
-            <label for="title">タイトル</label>
-            <input id="title" v-model="inputTitle" type="text" required>
-          </div>
-
-          <div>
-            <label for="note">メモ</label>
-            <textarea id="note" v-model="inputNote" rows="2" />
-          </div>
-
-          <div>
-            <label for="dueDate">期限</label>
-            <input id="dueDate" v-model="inputDate" type="date">
-          </div>
-
-          <div>
-            <button type="submit">
-              登録
-            </button>
-          </div>
-        </form>
-      </AppModal>
+      />
     </main>
 
     <footer class="footer">

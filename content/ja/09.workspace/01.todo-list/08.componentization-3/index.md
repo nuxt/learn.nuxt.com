@@ -1,3 +1,7 @@
+---
+ogImage: true
+---
+
 # コンポーネントの v-model
 
 [フォーム入力バインディング](v-model)で紹介したように、 `v-model` はフォーム入力欄とVueのデータを自動で同期してくれる仕組みです。
@@ -34,6 +38,11 @@ const showUnDoneOnly = ref(true)
 </template>
 ```
 
+::note
+[`$event`](https://ja.vuejs.org/guide/essentials/event-handling.html#accessing-event-argument-in-inline-handlers) は、「その場で起きたイベントそのもの」を受け取るためのプレースホルダーです。
+上記コードの `v-on` は、 `@update:model-value="(event) => showUnDoneOnly = event"` と置き換えることができます。
+::
+
 ```vue
 <!-- IncompleteOnlyToggle: 子コンポーネント -->
 <script setup lang="ts">
@@ -52,16 +61,16 @@ const emit = defineEmits<{
     <input
       :checked="modelValue"
       type="checkbox"
-      @change="emit('update:modelValue', $event.target.checked)"
+      @change="(event) => emit('update:modelValue', event.target.checked)"
     >
     未完了のみ表示
   </label>
 </template>
 ```
 
-親から `props` `modelValue` で、値を受け取り、
-子は `emit` で `update:modelValue` で、更新後の値を送信し、
-親が、 `v-on` `update:modelValue` で、子が送信した値を受け取り、状態を更新
+- 親から `props` `modelValue` で、値を受け取り、
+- 子は `emit` で `update:modelValue` で、更新後の値を送信し、
+- 親が、 `v-on` `update:modelValue` で、子が送信した値を受け取り、状態を更新
 
 をすることで、親子の値の同期ができますが、これらをシンプルにしたのが `v-model` です。
 
@@ -96,7 +105,7 @@ const checked = defineModel()
     <input
       :checked="checked"
       type="checkbox"
-      @change="checked = $event.target.checked"
+      @change="(event) => checked = event.target.checked"
     >
     -->
     未完了のみ表示
@@ -176,7 +185,7 @@ const emit = defineEmits<{
     <input
       :checked="isShowUnDone"
       type="checkbox"
-      @change="emit('update:isShowUnDone', $event.target.checked)"
+      @change="(event) => emit('update:isShowUnDone', event.target.checked)"
     >
     未完了を表示
   </label>
@@ -184,7 +193,7 @@ const emit = defineEmits<{
     <input
       :checked="isShowExpired"
       type="checkbox"
-      @change="emit('update:isShowExpired', $event.target.checked)"
+      @change="(event) => emit('update:isShowExpired', event.target.checked)"
     >
     期限切れを表示
   </label>
@@ -224,9 +233,10 @@ TODOリストに、新規タスクを追加するために、
 `app.vue` の `isCreateModalOpen` の状態が、モーダルの表示を制御していますので、
 `isCreateModalOpen` を `v-model` で同期させることがゴールです。
 
-1. 子コンポーネントで `defineModel()` を使って、`modelValue`（または任意の名前）を定義する
-2. モーダルの「閉じる」ボタンをクリックしたら、この値が `false` になるようにする
-3. 親コンポーネントから `v-model` で `isCreateModalOpen` を子に渡して動作を確認する
+1. `AppModal.vue`（子コンポーネント）に `defineModel()` で `modelValue` を定義しましょう。
+   `defineModel()` 返り値は、変数 `isOpen` に格納します。
+2. `AppModal.vue` の「閉じる」ボタンをクリックしたら、`isOpen` （`modelValue`）の値を `false` にしましょう。
+3. `app.vue`（親コンポーネント）で `AppModal` コンポーネントへ `v-model` で `isCreateModalOpen` を渡しましょう。
 
 もし行き詰まったら、以下のボタンをクリックして解答を見ることができます。
 

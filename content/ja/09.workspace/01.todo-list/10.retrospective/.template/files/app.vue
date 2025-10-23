@@ -24,9 +24,7 @@ const todos = ref<Todo[]>([
 ])
 const showUnDoneOnly = ref(false)
 const isCreateModalOpen = ref(false)
-const inputTitle = ref('')
-const inputNote = ref('')
-const inputDate = ref('')
+// TODO: 各フォーム入力欄に対応するリアクティブ変数（`ref`）を用意する
 
 /**
  * Computed
@@ -50,22 +48,7 @@ function updateDone(id: number, done: boolean) {
   }
 }
 
-function handleSubmit(e: Event) {
-  e.preventDefault()
-
-  const newTodo: Todo = {
-    id: Date.now(),
-    done: false,
-    title: inputTitle.value,
-    note: inputNote.value,
-    dueDate: inputDate.value,
-  }
-
-  todos.value = [
-    newTodo,
-    ...todos.value,
-  ]
-}
+// TODO: フォーム submitイベントに渡す関数を用意し、新規Todoオブジェクトを追加する
 
 /**
  * Type
@@ -120,20 +103,21 @@ interface Todo {
           <h2>タスクの新規作成</h2>
         </template>
 
-        <form @submit="handleSubmit">
+        <!-- TODO: フォーム入力を、v-model でリアクティブ変数と同期させる -->
+        <form>
           <div>
             <label for="title">タイトル</label>
-            <input id="title" v-model="inputTitle" type="text" required>
+            <input id="title" type="text" required>
           </div>
 
           <div>
             <label for="note">メモ</label>
-            <textarea id="note" v-model="inputNote" rows="2" />
+            <textarea id="note" rows="2" />
           </div>
 
           <div>
             <label for="dueDate">期限</label>
-            <input id="dueDate" v-model="inputDate" type="date">
+            <input id="dueDate" type="date">
           </div>
 
           <div>
