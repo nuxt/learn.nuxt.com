@@ -5,25 +5,25 @@ console.log('timestamp:', timestamp)
 </script>
 
 <template>
-  <div class="p-4">
-    <h1 class="mb-4 text-2xl font-bold">
+  <div>
+    <h1>
       ハイドレーションの確認
     </h1>
 
-    <div class="mb-4 border border-red-300 rounded bg-red-50 p-4">
-      <p class="mb-2 text-red-700 font-bold">
+    <div>
+      <p>
         ⚠️ ハイドレーションエラーが発生しています
       </p>
-      <p class="text-sm text-red-600">
+      <p>
         ブラウザの開発者ツール（F12）→ Consoleタブで警告を確認してください
       </p>
     </div>
 
-    <div class="mb-4 border border-gray-300 rounded bg-gray-50 p-4">
-      <p class="mb-2 font-bold">
+    <div>
+      <p>
         現在のタイムスタンプ
       </p>
-      <p class="text-sm text-gray-600">
+      <p>
         Timestamp: {{ timestamp }}
       </p>
     </div>

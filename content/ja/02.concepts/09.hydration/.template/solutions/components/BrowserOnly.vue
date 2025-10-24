@@ -9,11 +9,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="border border-green-300 rounded bg-green-50 p-4">
-    <p class="mb-2 text-green-700 font-bold">
+  <div>
+    <p>
       ✅ ハイドレーションエラーが修正されました！
     </p>
-    <p class="text-sm text-green-600">
+    <p>
       Timestamp: {{ timestamp }}
     </p>
   </div>
