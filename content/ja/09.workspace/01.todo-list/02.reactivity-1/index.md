@@ -11,6 +11,14 @@ Vue はデータの変更を監視して、変更された時に更新を自動�
 
 [`ref()`](https://ja.vuejs.org/api/reactivity-core#ref) は単一の値を保持するためのコンテナを作成し、値が変更された時に自動的に追跡できるようにします。値は `.value` を通してアクセスすることができます。
 
+::note
+`@click`は、[`v-on`](https://ja.vuejs.org/guide/essentials/event-handling) ディレクティブで、
+DOMイベントを監視し、イベントが発生したときに関数を実行する仕組みです。
+`v-on:イベント名="ハンドラー"` という形式で使用します。
+ハンドラーには、 `メソッド名: @click="myMethod"` または `インラインの式: @click="count++"` で指定します。
+`v-on` ディレクティブは、`@` を使うことで省略記法を使えます。
+::
+
 ```vue
 <script setup>
 import { ref } from 'vue'
