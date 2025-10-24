@@ -1,4 +1,0 @@
-<template>
-  <CounterA />
-  <CounterB />
-</template>

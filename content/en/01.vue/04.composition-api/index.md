@@ -1,3 +1,0 @@
-# Vue Composition API
-
-// TODO:
