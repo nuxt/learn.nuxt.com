@@ -118,7 +118,7 @@ const showUnDoneOnly = ref(false)
 そうすることで、 `v-model` だけで、バインドとイベント監視の指定がなくても、値が自動的に同期されるようになります。
 
 もし行き詰まったら、以下のボタンをクリックして解答を見ることができます。
-:ButtonShowSolution
+:ButtonShowSolution{.bg-faded.px4.py2.mb3.rounded.border.border-base.hover:bg-active.hover:text-primary.hover:border-primary:50}
 
 ## 実装後の効果
 

@@ -44,7 +44,7 @@ import Child from './Child.vue'
 
 もし行き詰まったら、以下のボタンをクリックして解答を見ることができます。
 
-:ButtonShowSolution
+:ButtonShowSolution{.bg-faded.px4.py2.mb3.rounded.border.border-base.hover:bg-active.hover:text-primary.hover:border-primary:50}
 
 app.vueがすっきりとしました。
 

@@ -128,7 +128,7 @@ const doubled = computed({
    1,2 で実装した `filteredTodos` を `TodoList` コンポーネントの `todos` propsに渡してみましょう。
 
 もし行き詰まったら、以下のボタンをクリックして解答を見ることができます。
-:ButtonShowSolution
+::ButtonShowSolution{.bg-faded.px4.py2.mb3.rounded.border.border-base.hover:bg-active.hover:text-primary.hover:border-primary:50}
 
 ## 実装後の効果
 
