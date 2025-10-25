@@ -71,6 +71,6 @@ Vueでは `v-if` ディレクティブを使って、ブロックを条件に応
 
 もし行き詰まったら、以下のボタンをクリックして解答を見ることができます。
 
-:ButtonShowSolution
+:ButtonShowSolution{.bg-faded.px4.py2.mb3.rounded.border.border-base.hover:bg-active.hover:text-primary.hover:border-primary:50}
 
 `v-if` と `v-else` を使うことで、状態に応じた柔軟なUIが実現できます！

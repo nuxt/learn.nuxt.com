@@ -61,6 +61,6 @@ Vueでは `v-for` ディレクティブを使って配列に基づいて項目�
 
 もし行き詰まったら、以下のボタンをクリックして解答を見ることができます。
 
-:ButtonShowSolution
+:ButtonShowSolution{.bg-faded.px4.py2.mb3.rounded.border.border-base.hover:bg-active.hover:text-primary.hover:border-primary:50}
 
 `v-for` を使うことで動的なデータ表示がとても簡単になりましたね！
