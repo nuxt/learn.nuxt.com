@@ -45,7 +45,7 @@ catalogs:
     '@iconify-json/svg-spinners': ^1.2.4
   nuxt:
     '@nuxt/content': ^3.6.3
-    '@nuxt/devtools': ^2.6.3
+    '@nuxt/devtools': ^2.6.4
     '@nuxt/eslint': ^1.9.0
     '@nuxt/icon': ^2.0.0
     '@nuxt/image': ^1.11.0
