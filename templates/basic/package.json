@@ -6,7 +6,7 @@
     "prepare": "nuxt prepare"
   },
   "devDependencies": {
-    "nuxt": "~3.15.4",
+    "nuxt": "~3.19.0",
     "typescript": "latest",
     "vue": "latest"
   }
